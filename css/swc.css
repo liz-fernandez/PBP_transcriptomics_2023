@@ -162,7 +162,7 @@ body {
 }
 
 body.workshop, body.lesson {
-	background-color: #22D68D;
+	background-color: #BBF0A1; /* Changed color for BI class */
 	margin: 20px 0;
 }
 
