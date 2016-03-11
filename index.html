@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="generator" content="pandoc">
-    <title>Software Carpentry: Version Control with Git</title>
+    <title>Software Carpentry: Control de versiones usando Git</title>
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css" />
@@ -26,15 +26,15 @@
       <article>
       <div class="row">
         <div class="col-md-10 col-md-offset-1">
-                    <h1 class="title">Version Control with Git</h1>
+                    <h1 class="title">Control de versiones usando Git</h1>
           <p>Billy y Mandy han sido contratados para investigar si es posible enviar un robot a la superficie de Marte. Quieren trabajar de manera conjunta en los planes, pero han tenido problemas para editar sus notas simultáneamente en proyectos previos. Si deciden tomar turnos, cada uno pasará mucho tiempo esperando a que el otro termine, pero si trabajan simultaneamente en su copia individual del reporte y mandan correos para enviarse cambios entre sí siempre hay cambios que se pierden, se sobre escriben o se duplican.</p>
 <p>Un colega les sugiere utilizar <a href="reference.html#version-control">control de versiones</a> para manejar su trabajo. El control de versiones es mejor que enviar versiones por correo electrónico ya que:</p>
 <ul>
 <li><p>Ningún cambio que haya sido confirmado (commited) al sistema de control de versiones se pierde. Dado que todas la versiones anteriores de los archivos están guardadas, siempre es posible regresar en el tiempo y ver exactamente quien escribió que en un día en particular, o que versiones de que programa fueron utilizadas para generar ciertos resultados.</p></li>
-<li><p>Ya que tenemos un registor de quien hizo que cambios y cuando los realizo, sabemos a quien preguntar si tenemos preguntas acerca de estos cambios en el futuro, y, de ser necesario, revertirlos a una versión previa, similar a la función “deshacer” en un editor de texto.</p></li>
+<li><p>Ya que tenemos un registro de quien hizo que cambios y cuando los realizó, sabemos a quien preguntar si tenemos preguntas acerca de estos cambios en el futuro, y, de ser necesario, revertirlos a una versión previa, similar a la función “deshacer” en un editor de texto.</p></li>
 <li><p>Cuando varias personas colaboran en un mismo proyectos, es probable que ignoren o sobre escriban los cambios de otro colaborador de forma accidental. El sistema de control de versiones automáticamente notifica a los usuarios cada vez que se detecta un conflicto entre los cambios propuestos por dos colaboradores.</p></li>
 </ul>
-<p>El sistema de control de versiones no es solo útil para trabajos en grupo: investigadores individuales se pueden beneficiar inmensamente de sus capacidades. Mantener un registro de que ha cambiado, cuando y porque es extremadamente práctico y útil para los investigadores en caso de que requieran regresar a ese proyecto (por ejemplo después de un año, cuando la memoria ya no está fresca).</p>
+<p>El sistema de control de versiones no es solo útil para trabajos en grupo: investigadores individuales se pueden beneficiar inmensamente de sus capacidades. Mantener un registro de que ha cambiado, cuando y porque es extremadamente práctico y útil en casos en los que se requieran regresar a un proyecto después de mucho tiempo (por ejemplo después de un año o más, cuando la memoria ya no está fresca).</p>
 <p>El sistema de control de versiones es la bitácora de laboratorio del mundo digital: Es lo que utilizan los profesionales para mantener un registro de lo que han hecho así como para colaborar con otras personas. Cada proyecto de desarrollo de software a gran escala depende de este sistema, y muchos programadores lo utilizan también para proyectos pequeños. Y no solo se utiliza para software: libros, artículos, sets de datos pequeños y cualquier otra entidad de datos sobre la que se realizan cambios a través de tiempo o tiene que ser compartida puede y debe ser almacenada utilizando un sistema de control de versiones.</p>
 <section class="prereq panel panel-warning">
 <div class="panel-heading">

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="generator" content="pandoc">
-    <title>Software Carpentry: Version Control with Git</title>
+    <title>Software Carpentry: Control de versiones usando Git</title>
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css" />
@@ -26,11 +26,11 @@
       <article>
       <div class="row">
         <div class="col-md-10 col-md-offset-1">
-                    <a href="index.html"><h1 class="title">Version Control with Git</h1></a>
-          <h2 class="subtitle">Creating a Repository</h2>
+                    <a href="index.html"><h1 class="title">Control de versiones usando Git</h1></a>
+          <h2 class="subtitle">Creando un repositorio</h2>
           <section class="objectives panel panel-warning">
 <div class="panel-heading">
-<h2><span class="glyphicon glyphicon-certificate"></span>Learning Objectives</h2>
+<h2 id="objetivos-de-aprendizaje"><span class="glyphicon glyphicon-certificate"></span>Objetivos de aprendizaje</h2>
 </div>
 <div class="panel-body">
 <ul>
@@ -38,19 +38,19 @@
 </ul>
 </div>
 </section>
-<p>Once Git is configured, we can start using it. Let’s create a directory for our work and then move into that directory:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">mkdir</span> planets
-$ <span class="kw">cd</span> planets</code></pre>
-<p>Then we tell Git to make <code>planets</code> a <a href="reference.html#repository">repository</a>—a place where Git can store versions of our files:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> init</code></pre>
-<p>If we use <code>ls</code> to show the directory’s contents, it appears that nothing has changed:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">ls</span></code></pre>
-<p>But if we add the <code>-a</code> flag to show everything, we can see that Git has created a hidden directory within <code>planets</code> called <code>.git</code>:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">ls</span> -a</code></pre>
+<p>Una vez que Git esta configurado podemos comenzar a usarlo. Creemos un directorio que contenga nuestro trabajo y entremos a ese directorio:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">mkdir</span> planets
+$ <span class="kw">cd</span> planets</code></pre></div>
+<p>Una vez dentro, digámosle a Git que cree un <a href="reference.html#repository">repository</a>&amp;mdash llamado <code>planets</code> ; un lugar en donde Git pueda almacenar versiones de nuestros archivos:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> init</code></pre></div>
+<p>Si utilizamos el comando <code>ls</code> para mostrar el contenido del directorio, pareciera que nada a cambiado:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">ls</span></code></pre></div>
+<p>Pero si agregamos la bandera <code>-a</code> para mostrarlo todo, podemos ver que Git genera un directorio oculto dentro de <code>planets</code> llamado <code>.git</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">ls</span> -a</code></pre></div>
 <pre class="output"><code>.   ..  .git</code></pre>
-<p>Git stores information about the project in this special sub-directory. If we ever delete it, we will lose the project’s history.</p>
-<p>We can check that everything is set up correctly by asking Git to tell us the status of our project:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> status</code></pre>
+<p>Git almacena información del proyecto en el este subdirectorio especial. Si alguna vez lo borramos perderemos todo el historial de ese proyecto.</p>
+<p>Podemos revisar que todo está configurado correctamente pidiéndole a Git que nos indique el estado (status) actual del nuestro proyecto:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> status</code></pre></div>
 <pre class="output"><code># On branch master
 #
 # Initial commit
@@ -58,27 +58,27 @@ $ <span class="kw">cd</span> planets</code></pre>
 nothing to commit (create/copy files and use &quot;git add&quot; to track)</code></pre>
 <section class="challenge panel panel-success">
 <div class="panel-heading">
-<h2><span class="glyphicon glyphicon-pencil"></span>Places to Create Git Repositories</h2>
+<h2 id="lugares-para-crear-repositorios-de-git"><span class="glyphicon glyphicon-pencil"></span>Lugares para crear repositorios de Git</h2>
 </div>
 <div class="panel-body">
-<p>Dracula starts a new project, <code>moons</code>, related to his <code>planets</code> project. Despite Wolfman’s concerns, he enters the following sequence of commands to create one Git repository inside another:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cd</span>             <span class="co"># return to home directory</span>
+<p>Mandy comienza un nuevo proyecto llamado <code>moons</code>, relacionado a su proyecto <code>planets</code>. A pesar de las advertencias de Billy, ejecuta la siguiente secuencia de comandos para crear un repositorio de Git dentro de otro:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cd</span>             <span class="co"># return to home directory</span>
 <span class="kw">mkdir</span> planets  <span class="co"># make a new directory planets</span>
 <span class="kw">cd</span> planets     <span class="co"># go into planets</span>
 <span class="kw">git</span> init       <span class="co"># make the planets directory a Git repository</span>
 <span class="kw">mkdir</span> moons    <span class="co"># make a sub-directory planets/moons</span>
 <span class="kw">cd</span> moons       <span class="co"># go into planets/moons</span>
-<span class="kw">git</span> init       <span class="co"># make the moons sub-directory a Git repository</span></code></pre>
-<p>Why is it a bad idea to do this? How can Dracula “undo” his last <code>git init</code>?</p>
+<span class="kw">git</span> init       <span class="co"># make the moons sub-directory a Git repository</span></code></pre></div>
+<p>¿Porqué es una mala idea hacer esto? ¿Cómo puede Mandy “deshacer” su último <code>git init</code>?</p>
 </div>
 </section>
         </div>
       </div>
       </article>
       <div class="footer">
-                    <h4 class="title">Curso basado en material generado por:</h4>
+        <h5 class="title">Curso basado en material generado por:</h5>
         <a href="http://software-carpentry.org" title="Software Carpentry">
-          <img alt="Software Carpentry banner" src="img/software-carpentry-banner.png" style="width: 120px" />
+        <img alt="Software Carpentry banner" src="img/software-carpentry-banner.png" style="width: 120px" />
         <a class="label swc-blue-bg" href="https://github.com/swcarpentry/git-novice">Fuente Original</a>
         <a class="label swc-blue-bg" href="mailto:selene.fernandez.valverde@gmail.com">Contacto</a>
         <a class="label swc-blue-bg" href="LICENSE.html">Licencia</a>
@@ -87,5 +87,6 @@ nothing to commit (create/copy files and use &quot;git add&quot; to track)</code
     <!-- Javascript placed at the end of the document so the pages load faster -->
     <script src="http://software-carpentry.org/v5/js/jquery-1.9.1.min.js"></script>
     <script src="css/bootstrap/bootstrap-js/bootstrap.js"></script>
+    <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
   </body>
 </html>
