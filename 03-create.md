@@ -1,38 +1,37 @@
 ---
 layout: page
-title: Version Control with Git
-subtitle: Creating a Repository
+title: Control de versiones usando Git
+subtitle: Creando un repositorio
 minutes: 10
 ---
-> ## Learning Objectives {.objectives}
+> ## Objetivos de aprendizaje {.objectives}
 > 
 > *   Create a local Git repository.
 
-Once Git is configured,
-we can start using it.
-Let's create a directory for our work and then move into that directory:
+Una vez que Git esta configurado podemos comenzar a usarlo. 
+Creemos un directorio que contenga nuestro trabajo y entremos 
+a ese directorio:
 
 ~~~ {.bash}
 $ mkdir planets
 $ cd planets
 ~~~
 
-Then we tell Git to make `planets` a [repository](reference.html#repository)&mdash;a place where
-Git can store versions of our files:
+Una vez dentro, digámosle a Git que cree un [repository](reference.html#repository)&mdash llamado `planets` ; un lugar en donde Git pueda almacenar versiones de nuestros archivos:
 
 ~~~ {.bash}
 $ git init
 ~~~
 
-If we use `ls` to show the directory's contents,
-it appears that nothing has changed:
+Si utilizamos el comando `ls` para mostrar el contenido del directorio,
+pareciera que nada a cambiado:
 
 ~~~ {.bash}
 $ ls
 ~~~
 
-But if we add the `-a` flag to show everything,
-we can see that Git has created a hidden directory within `planets` called `.git`:
+Pero si agregamos la bandera `-a` para mostrarlo todo,
+podemos ver que Git genera un directorio oculto dentro de `planets` llamado `.git`:
 
 ~~~ {.bash}
 $ ls -a
@@ -41,12 +40,11 @@ $ ls -a
 .	..	.git
 ~~~
 
-Git stores information about the project in this special sub-directory.
-If we ever delete it,
-we will lose the project's history.
+Git almacena información del proyecto en el este subdirectorio especial. 
+Si alguna vez lo borramos perderemos todo el historial de ese proyecto. 
 
-We can check that everything is set up correctly
-by asking Git to tell us the status of our project:
+Podemos revisar que todo está configurado correctamente pidiéndole a Git 
+que nos indique el estado (status) actual del nuestro proyecto:
 
 ~~~ {.bash}
 $ git status
@@ -59,11 +57,11 @@ $ git status
 nothing to commit (create/copy files and use "git add" to track)
 ~~~
 
-> ## Places to Create Git Repositories {.challenge}
+> ## Lugares para crear repositorios de Git {.challenge}
 >
-> Dracula starts a new project, `moons`, related to his `planets` project.
-> Despite Wolfman's concerns, he enters the following sequence of commands to
-> create one Git repository inside another:
+> Mandy comienza un nuevo proyecto llamado `moons`, relacionado a su proyecto `planets`.
+> A pesar de las advertencias de Billy, ejecuta la siguiente secuencia de comandos 
+> para crear un repositorio de Git dentro de otro:
 > 
 > ~~~ {.bash}
 > cd             # return to home directory
@@ -75,5 +73,5 @@ nothing to commit (create/copy files and use "git add" to track)
 > git init       # make the moons sub-directory a Git repository
 > ~~~
 > 
-> Why is it a bad idea to do this?
-> How can Dracula "undo" his last `git init`?
+> ¿Porqué es una mala idea hacer esto?
+> ¿Cómo puede Mandy "deshacer" su último `git init`?

@@ -1,31 +1,32 @@
 ---
 layout: page
-title: Version Control with Git
-subtitle: Tracking Changes
+title: Control de versiones usando Git
+subtitle: Seguimiento de los cambios
 minutes: 20
 ---
-> ## Learning Objectives {.objectives}
+> ## Objetivos de aprendizaje {.objectives}
 > 
-> *   Go through the modify-add-commit cycle for a single file.
-> *   Explain where information is stored at each stage of Git commit workflow.
+> *   Realizar el ciclo modificar-añadir-confirmar (modify-add-commit) para un solo archivo.
+> *   Explicar donde se almacena la información en cada etapa del ciclo de Git.
 
-Let's create a file called `mars.txt` that contains some notes
-about the Red Planet's suitability as a base.
-(We'll use `nano` to edit the file;
-you can use whatever editor you like.
-In particular, this does not have to be the `core.editor` you set globally earlier.)
+Creemos un archivo llamado `mars.txt` que contenga algunas notas
+acerca de las posibilidades de utilizar el planeta rojo como base espacial.  
+(Para el ejercicio utilizaremos el editor `nano` para editar el archivo;
+puedes utilizar tu editor de texto preferido si así lo deseas. Mantén en mente 
+que este no tiene que ser el `core.editor` que asignamos como editor global 
+previamente.)
 
 ~~~ {.bash}
 $ nano mars.txt
 ~~~
 
-Type the text below into the `mars.txt` file:
+Escribe el siguiente texto dentro del archivo `mars.txt`:
 
 ~~~ {.output}
 Cold and dry, but everything is my favorite color
 ~~~
 
-`mars.txt` now contains a single line, which we can see by running:
+`mars.txt` ahora contiene una sola línea, la cual podemos ver ejecutando:
 
 ~~~ {.bash}
 $ ls
@@ -40,8 +41,8 @@ $ cat mars.txt
 Cold and dry, but everything is my favorite color
 ~~~
 
-If we check the status of our project again,
-Git tells us that it's noticed the new file:
+Si revisamos de nuevo el estado del proyecto,
+Git nos dice que ha encontrado el nuevo archivo:
 
 ~~~ {.bash}
 $ git status
@@ -58,15 +59,15 @@ $ git status
 nothing added to commit but untracked files present (use "git add" to track)
 ~~~
 
-The "untracked files" message means that there's a file in the directory
-that Git isn't keeping track of.
-We can tell Git to track a file using `git add`:
+El mensaje notificándonos de archivos no rastreados "untracked files" nos indica
+que hay un archivo que Git no está rastreando:
+Le podemos decir a Git que rastree este archivo utilizando `git add`:
 
 ~~~ {.bash}
 $ git add mars.txt
 ~~~
 
-and then check that the right thing happened:
+y revisar que el cambio se efectuó correctamente:
 
 ~~~ {.bash}
 $ git status
@@ -83,10 +84,9 @@ $ git status
 #
 ~~~
 
-Git now knows that it's supposed to keep track of `mars.txt`,
-but it hasn't recorded these changes as a commit yet.
-To get it to do that,
-we need to run one more command:
+Git ahora sabe que debe rastrear cambios en el archivo `mars.txt`,
+pero no ha registrado estos cambios como confirmados en un "commit". 
+Para lograr que lo haga, tenemos que ejecutar un comando más:
 
 ~~~ {.bash}
 $ git commit -m "Start notes on Mars as a base"
@@ -97,25 +97,26 @@ $ git commit -m "Start notes on Mars as a base"
  create mode 100644 mars.txt
 ~~~
 
-When we run `git commit`,
-Git takes everything we have told it to save by using `git add`
-and stores a copy permanently inside the special `.git` directory.
-This permanent copy is called a [commit](reference.html#commit)
-(or [revision](reference.html#revision)) and its short identifier is `f22b25e`
-(Your commit may have another identifier.)
+Cuando ejecutamos `git commit`,
+Git toma todo lo que le hemos indicado agregar usando `git add`
+y almacena una copia permanentemente dentro del directorio especial `.git`.
+Esta copia permanente se llama un [commit](reference.html#commit)
+(o [revision](reference.html#revision)) y su código de identificación corto 
+es `f22b25e`. (Tu commit puede tener otro identificador). 
 
-We use the `-m` flag (for "message")
-to record a short, descriptive, and specific comment that will help us remember later on what we did and why.
-If we just run `git commit` without the `-m` option,
-Git will launch `nano` (or whatever other editor we configured as `core.editor`)
-so that we can write a longer message.
+Utilizamos la bandera `-m` (de "mensaje")
+para guardar un mensaje específico, corto y descriptivo que nos permita
+recordar que cambios hicimos y porque. 
+Si solo ejecutamos el comando `git commit` sin la opción `-m`,  
+Git iniciará `nano` (o cualquier otro editor que hayamos asignado como `core.editor`)
+para permitirnos escribir un mensaje más largo. 
 
-[Good commit messages][commit-messages] start with a brief (<50 characters) summary of
-changes made in the commit.  If you want to go into more detail, add
-a blank line between the summary line and your additional notes.
+Los [mensajes buenos en un commit][commit-messages] comienzan con un pequeño resumen 
+(menos de 50 caracteres) de los cambios hechos como parte del commit. 
+Si deseas agregar detalles más descriptivos puedes añadir una línea vacía
+entre la línea de resumen y otros notas adicionales. 
 
-
-If we run `git status` now:
+Si después de esto ejecutamos `git status`:
 
 ~~~ {.bash}
 $ git status
@@ -125,9 +126,10 @@ $ git status
 nothing to commit, working directory clean
 ~~~
 
-it tells us everything is up to date.
-If we want to know what we've done recently,
-we can ask Git to show us the project's history using `git log`:
+Git nos informa que todo está actualizado. 
+Si queremos saber que cambios se han hecho recientemente,
+podemos pedirle a Git que nos muestre el historial reciente
+del proyecto utilizando el comando `git log`:
 
 ~~~ {.bash}
 $ git log
@@ -140,26 +142,24 @@ Date:   Thu Aug 22 09:51:46 2013 -0400
     Start notes on Mars as a base
 ~~~
 
-`git log` lists all commits  made to a repository in reverse chronological order.
-The listing for each commit includes
-the commit's full identifier
-(which starts with the same characters as
-the short identifier printed by the `git commit` command earlier),
-the commit's author,
-when it was created,
-and the log message Git was given when the commit was created.
+`git log` lista todos los commits realizados en ese repositorio en ordern cronológico
+inverso. El listado de cada commit incluye el identificador (el cual comienza
+con los mismo caracteres que el identificador corto impreso por el comando 
+`git commit` que ejecutamos previamente), el autor del commit, cuando fue creado, 
+y el mensaje de registro (log) que le otorgamos a Git cuando creamos el commit. 
 
-> ## Where Are My Changes? {.callout}
+> ## ¿Dónde están mis cambios? {.callout}
 >
-> If we run `ls` at this point, we will still see just one file called `mars.txt`.
-> That's because Git saves information about files' history
-> in the special `.git` directory mentioned earlier
-> so that our filesystem doesn't become cluttered
-> (and so that we can't accidentally edit or delete an old version).
+> Si ejecutamos `ls` en este momento, aún veremos un solo archivo llamado `mars.txt`.
+> Esto se debe a que Git guarda información acerca del historial de cada archivo 
+> en el directorio especial llamado `.git` de modo que nuestro espacio de 
+> trabajo o filesystem no se llene con otros archivos (así como para prevenir
+> que accidentalmente editemos o borremos una versión previa). 
 
-Now suppose Dracula adds more information to the file.
-(Again, we'll edit with `nano` and then `cat` the file to show its contents;
-you may use a different editor, and don't need to `cat`.)
+Ahora supongamos que Mandy quiere añadir más información al archivo. 
+(Lo editaremos de nuevo usando `nano` seguido por el comando `cat` para mostrar
+el contenido del archivo. Puedes utilizar otro editor y alternativas a `cat`
+si lo prefieres). 
 
 ~~~ {.bash}
 $ nano mars.txt
@@ -167,11 +167,11 @@ $ cat mars.txt
 ~~~
 ~~~ {.output}
 Cold and dry, but everything is my favorite color
-The two moons may be a problem for Wolfman
+The two moons may be a problem for Mandy
 ~~~
 
-When we run `git status` now,
-it tells us that a file it already knows about has been modified:
+Ahora, si ejecutamos `git status`
+nos informa que un archivo que ya conoce ha sido modificado:
 
 ~~~ {.bash}
 $ git status
@@ -187,16 +187,17 @@ $ git status
 no changes added to commit (use "git add" and/or "git commit -a")
 ~~~
 
-The last line is the key phrase:
+La última linea proporciona la frase clave:
 "no changes added to commit".
-We have changed this file,
-but we haven't told Git we will want to save those changes
-(which we do with `git add`)
-nor have we saved them (which we do with `git commit`).
-So let's do that now. It is good practice to always review
-our changes before saving them. We do this using `git diff`.
-This shows us the differences between the current state
-of the file and the most recently saved version:
+Hemos modificado este archivo, 
+pero no le hemos dicho a Git que queremos agregar estos cambios
+(lo cual hacemos con el comando `git add`)
+como tampoco los hemos guardado permanentemente (lo que hacemos usando `git commit`).
+Hagámoslo ahora. Es un buen hábito siempre revisar nuestros cambios
+antes de guardarlos. Hacemos esto utilizando `git diff`. 
+Este comando nos muestra las diferencias entre el estado actual del
+archivo y la última versión guardada:
+
 
 ~~~ {.bash}
 $ git diff
@@ -208,29 +209,30 @@ index df0654a..315bf3a 100644
 +++ b/mars.txt
 @@ -1 +1,2 @@
  Cold and dry, but everything is my favorite color
-+The two moons may be a problem for Wolfman
++The two moons may be a problem for Mandy
 ~~~
 
-The output is cryptic because
-it is actually a series of commands for tools like editors and `patch`
-telling them how to reconstruct one file given the other.
-If we break it down into pieces:
+El texto de salida es críptico ya que
+es una serie de comandos para herramientas tales como editores y `patch`
+indicándoles como reconstruir un archivo dado los cambios en el otro. 
+Si lo dividimos en partes:
 
-1.  The first line tells us that Git is producing output similar to the Unix `diff` command
-    comparing the old and new versions of the file.
-2.  The second line tells exactly which versions of the file
-    Git is comparing;
-    `df0654a` and `315bf3a` are unique computer-generated labels for those versions.
-3.  The third and fourth lines once again show the name of the file being changed.
-4.  The remaining lines are the most interesting, they show us the actual differences
-    and the lines on which they occur.
-    In particular,
-    the `+` markers in the first column show where we have added lines.
+1.  La primera linea nos indica que Git esta imprimiendo un resultado similar al del
+	commando `diff` al comparar la versión antigua y nueva del archivo.
+2.  La segunda línea nos dice exactamente que versiones del archivo está comparando
+    Git;
+    `df0654a` y `315bf3a` son etiquetas únicas generadas por la computadora para 
+    cada una de esas versiones.
+3.  La tercera y cuarta línea muestran el nombre del archivo que cambiamos.
+4.  Las líneas restantes son las más interesantes, ya que nos muestras las 
+    diferencias en sí así como las líneas en las que ocurrieron estos cambios. 
+    En particular, los símbolos de `+` en la primera columna muestras donde se
+    han añadido líneas.
 
-After reviewing our change, it's time to commit it:
+Después de revisar estos cambios ha llegado el momento de aprobarlos a través de un commit:
 
 ~~~ {.bash}
-$ git commit -m "Add concerns about effects of Mars' moons on Wolfman"
+$ git commit -m "Add concerns about effects of Mars' moons on Mandy"
 $ git status
 ~~~
 ~~~ {.output}
@@ -245,61 +247,57 @@ no changes added to commit (use "git add" and/or "git commit -a")
 ~~~
 
 Whoops:
-Git won't commit because we didn't use `git add` first.
-Let's fix that:
+Git no acepta el commit ya que no utilizamos `git add` primero.
+Arreglémoslo:
 
 ~~~ {.bash}
 $ git add mars.txt
-$ git commit -m "Add concerns about effects of Mars' moons on Wolfman"
+$ git commit -m "Add concerns about effects of Mars' moons on Mandy"
 ~~~
 ~~~ {.output}
-[master 34961b1] Add concerns about effects of Mars' moons on Wolfman
+[master 34961b1] Add concerns about effects of Mars' moons on Mandy
  1 file changed, 1 insertion(+)
 ~~~
 
-Git insists that we add files to the set we want to commit
-before actually committing anything
-because we may not want to commit everything at once.
-For example,
-suppose we're adding a few citations to our supervisor's work
-to our thesis.
-We might want to commit those additions,
-and the corresponding addition to the bibliography,
-but *not* commit the work we're doing on the conclusion
-(which we haven't finished yet).
+Git insiste en que agreguemos archivos que hemos cambiado antes
+de aprobarlos usando commit ya que puede ser que no queramos aprobar
+todos los cambios al mismo tiempo.
+Por ejemplo, 
+supongamos que agregamos algunas referencias a nuestro trabajo de tesis. 
+Tal vez queramos aprobar esos cambios y añadir estas a la bibliografía, 
+pero *sin* aprobar (commit) los cambios que realizamos a la conclusión 
+(los cuales aún no hemos terminado). 
 
-To allow for this,
-Git has a special *staging area*
-where it keeps track of things that have been added to
-the current [change set](reference.html#change-set)
-but not yet committed.
+Para permitir esto, 
+Git tiene un área especial conocida como *staging area*
+en la cual rastrea cambios que han sido añadidos al grupo de cambios o 
+[change set](reference.html#change-set) actual, pero que aún no han sido 
+aprobados por medio de un commit.
 
 > ## Staging area {.callout}
-> If you think of Git as taking snapshots of changes over the life of a
-> project,
-> `git add` specifies *what* will go in a snapshot
-> (putting things in the staging area),
-> and `git commit` then *actually takes* the snapshot, and
-> makes a permanent record of it (as a commit).
-> If you don't have anything staged when you type `git commit`,
-> Git will prompt you to use `git commit -a` or `git commit --all`,
-> which is kind of like gathering *everyone* for the picture!
-> However, it's almost always better to
-> explicitly add things to the staging area, because you might
-> commit changes you forgot you made. (Going back to snapshots,
-> you might get the extra with incomplete makeup walking on
-> the stage for the snapshot because you used `-a`!)
-> Try to stage things manually,
-> or you might find yourself searching for "git undo commit" more
-> than you would like!
+> 
+> Si pensamos en Git como una cámera que toma fotos de los cambios a lo largo
+> de la vida de un proyecto, entonces `git add` indica *que* se va a incluir
+> en la fotografía y `git commit` esta encargado de *tomar* la fotografía, así como de 
+> crear un registro permanente de la misma (como un commit). 
+> Si no hay nada en fase "staged" cuando ejecutamos `git commit`, 
+> Git te pedirá que utilices `git commit -a` o `git commit --all`,
+> lo cual sería el equivalente de !invitar a *todos* los cambios a salir en la foto!
+> Sin embargo, casi siempre es mejor añadir cada cambio de manera explícita
+> al área de staging, ya que puede ser que apruebes cambios que hiciste pero olvidaste.
+> (Siguiendo con la analogía de las fotografías puede que incluyas a un 
+> extra con maquillaje incompleto caminando en medio de la foto por 
+> haber utilizado `-a`!). 
+> Trata de añadir cosas manualmente o frecuentemente te encontrarás buscando 
+> el comando "git undo commit". 
 
-![The Git Staging Area](fig/git-staging-area.svg)
 
-Let's watch as our changes to a file move from our editor
-to the staging area
-and into long-term storage.
-First,
-we'll add another line to the file:
+![El "Staging Area" de Git](fig/git-staging-area.svg)
+
+Observemos como los cambios a un archivo se mueven de 
+nuestro editor de texto a el área de staging y dentro del 
+registro de cambios a largo plazo. 
+Primero agreguemos otra línea al archivo:
 
 ~~~ {.bash}
 $ nano mars.txt
@@ -307,8 +305,8 @@ $ cat mars.txt
 ~~~
 ~~~ {.output}
 Cold and dry, but everything is my favorite color
-The two moons may be a problem for Wolfman
-But the Mummy will appreciate the lack of humidity
+The two moons may be a problem for Mandy
+But Billy will appreciate the lack of humidity
 ~~~
 ~~~ {.bash}
 $ git diff
@@ -320,27 +318,27 @@ index 315bf3a..b36abfd 100644
 +++ b/mars.txt
 @@ -1,2 +1,3 @@
  Cold and dry, but everything is my favorite color
- The two moons may be a problem for Wolfman
-+But the Mummy will appreciate the lack of humidity
+ The two moons may be a problem for Mandy
++But Billy will appreciate the lack of humidity
 ~~~
 
-So far, so good:
-we've added one line to the end of the file
-(shown with a `+` in the first column).
-Now let's put that change in the staging area
-and see what `git diff` reports:
+Hasta ahora todo va bien:
+añadimos una línea al final del archivo
+(mostrada con un `+` en la primera columna). 
+Ahora, pongamos este cambio en el área de staging 
+y veamos que reporta `git diff`:
 
 ~~~ {.bash}
 $ git add mars.txt
 $ git diff
 ~~~
 
-There is no output:
-as far as Git can tell,
-there's no difference between what it's been asked to save permanently
-and what's currently in the directory.
-However,
-if we do this:
+No hay resultado: 
+en lo que a Git concierne 
+no hay diferencia entre lo que se le esta pidiendo que guarde de forma
+permanente y lo que esta actualmente en el directorio.
+Sin embargo, 
+si hacemos lo siguiente: 
 
 ~~~ {.bash}
 $ git diff --staged
@@ -352,24 +350,24 @@ index 315bf3a..b36abfd 100644
 +++ b/mars.txt
 @@ -1,2 +1,3 @@
  Cold and dry, but everything is my favorite color
- The two moons may be a problem for Wolfman
-+But the Mummy will appreciate the lack of humidity
+ The two moons may be a problem for Mandy
++But Billy will appreciate the lack of humidity
 ~~~
 
-it shows us the difference between
-the last committed change
-and what's in the staging area.
-Let's save our changes:
+nos muestra un cambio entre 
+el último cambio aprobado (commited) 
+y el archivo que se encuentra en el área de staging. 
+Guardemos nuestros cambios:
 
 ~~~ {.bash}
-$ git commit -m "Discuss concerns about Mars' climate for Mummy"
+$ git commit -m "Discuss concerns about Mars' climate for Billy"
 ~~~
 ~~~ {.output}
-[master 005937f] Discuss concerns about Mars' climate for Mummy
+[master 005937f] Discuss concerns about Mars' climate for Billy
  1 file changed, 1 insertion(+)
 ~~~
 
-check our status:
+y revisemos una vez más el status:
 
 ~~~ {.bash}
 $ git status
@@ -379,7 +377,7 @@ $ git status
 nothing to commit, working directory clean
 ~~~
 
-and look at the history of what we've done so far:
+y revisemos el historial para ver que hemos hecho hasta el momento:
 
 ~~~ {.bash}
 $ git log
@@ -389,13 +387,13 @@ commit 005937fbe2a98fb83f0ade869025dc2636b4dad5
 Author: Vlad Dracula <vlad@tran.sylvan.ia>
 Date:   Thu Aug 22 10:14:07 2013 -0400
 
-    Discuss concerns about Mars' climate for Mummy
+    Discuss concerns about Mars' climate for Billy
 
 commit 34961b159c27df3b475cfe4415d94a6d1fcd064d
 Author: Vlad Dracula <vlad@tran.sylvan.ia>
 Date:   Thu Aug 22 10:07:21 2013 -0400
 
-    Add concerns about effects of Mars' moons on Wolfman
+    Add concerns about effects of Mars' moons on Mandy
 
 commit f22b25e3233b4645dabd0d81e651fe074bd8e73b
 Author: Vlad Dracula <vlad@tran.sylvan.ia>
@@ -404,31 +402,32 @@ Date:   Thu Aug 22 09:51:46 2013 -0400
     Start notes on Mars as a base
 ~~~
 
-To recap, when we want to add changes to our repository,
-we first need to add the changed files to the staging area
-(`git add`) and then commit the staged changes to the
-repository (`git commit`):
+Para recapitular, cada vez que queremos añadir cambios a nuestro repositorio, 
+tenemos primero que añadir los archivos modificados al "staging area" 
+(`git add`) y subsecuentemente aprobar los cambios para que sean agregados al 
+repositorio (`git commit`):
 
-![The Git Commit Workflow](fig/git-committing.svg)
 
-> ## Choosing a commit message {.challenge}
+![El Flujo de trabajo de Git Commit](fig/git-committing.svg)
+
+> ## Eligiendo un mensaje para el commit {.challenge}
 >
-> Which of the following commit messages would be most appropriate for the 
-> last commit made to `mars.txt`?
+> Cual de los siguiente mensajes sería más apropiado para el último commit realizado en 
+> el archivo `mars.txt`?
 > 
 > 1. 
 >
->     "Changes"
+>     "Cambios"
 > 2. 
 >
->     "Added line 'But the Mummy will appreciate the lack of humidity' to mars.txt"
+>     "Línea añadida 'But Billy will appreciate the lack of humidity' a mars.txt"
 > 3. 
 >
->     "Discuss effects of Mars' climate on the Mummy"
+>     "Discución acerca de los efectos del clima marciano en Billy"
 
-> ## Committing Changes to Git {.challenge}
+> ## Enviando commits a Git {.challenge}
 >
-> Which command(s) below would save the changes of `myfile.txt` to my local Git repository?
+> ¿Cuál o cuáles de los siguientes comandos guardarían los cambios hechos a `myfile.txt` a mi repositorio de Git local?
 >
 > 1. 
 >
@@ -453,7 +452,7 @@ repository (`git commit`):
 >     $ git commit -m myfile.txt "my recent changes"
 >     ~~~
 
-> ## `bio` Repository {.challenge}
+> ## `bio` Repositorio {.challenge}
 >
 > Create a new Git repository on your computer called `bio`.
 > Write a three-line biography for yourself in a file called `me.txt`,
@@ -461,26 +460,26 @@ repository (`git commit`):
 > then modify one line, add a fourth line, and display the differences
 > between its updated state and its original state.
 
-> ## Author and Committer {.challenge}
+> ## Author y Committer {.challenge}
 >
-> For each of the commits you have done, Git stored your name twice.
-> You are named as the author and as the committer. You can observe
-> that by telling Git to show you more information about your last
-> commits:
+> Por cada uno de los commits que haz realizado, Git ha almacenado tu nombre 
+> dos veces. Se almacena tu nombre como el autor así como la persona realizando
+> los commits o "commiter". Puedes revisar esto pidiéndole a Git que te muestre 
+> más información acerca de tus commits más recientes: 
 >
 > ~~~
 > $ git log --format=full
 > ~~~
 >
-> When commiting you can name someone else as the author:
+> Al realizar un commit puedes nombrar a alguien más como autor:
 >
 > ~~~
-> $ git commit --author="Vlad Dracula <vlad@tran.sylvan.ia>"
+> $ git commit --author="Stanley Kubrick <s.kubrick@sciland.com>"
 > ~~~
 >
-> Create a new repository and create two commits: one without the
-> `--author` option and one by naming a colleague of yours as the
-> author. Run `git log` and `git log --format=full`. Think about ways
-> how that can allow you to collaborate with your colleagues.
+> Crea un nuevo repositorio y crea dos commits: uno sin la opción 
+> `--author` y otra nombrando a un compañero tuyo como autor.
+> Ejecuta `git log` y `git log --format=full`. Piensa en que manera
+> esto puede ayudarte a colaborar con tus compañeros.
 
 [commit-messages]: http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html

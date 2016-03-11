@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Version Control with Git
-subtitle: Citation
+subtitle: Referencias
 minutes: 2
 ---
 > ## Learning Objectives {.objectives}

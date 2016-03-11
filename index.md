@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Version Control with Git
+title: Control de versiones usando Git
 ---
 
 Billy y Mandy han sido contratados para investigar si es posible enviar un 
@@ -21,7 +21,7 @@ correo electrónico ya que:
     día en particular, o que versiones de que programa fueron utilizadas para generar 
     ciertos resultados.
 
-*   Ya que tenemos un registor de quien hizo que cambios y cuando los realizo, 
+*   Ya que tenemos un registro de quien hizo que cambios y cuando los realizó, 
     sabemos a quien preguntar si tenemos preguntas acerca de estos cambios en 
     el futuro, y, de ser necesario, revertirlos a una versión previa, similar a 
     la función "deshacer" en un editor de texto. 
@@ -34,8 +34,8 @@ correo electrónico ya que:
 El sistema de control de versiones no es solo útil para trabajos en grupo: 
 investigadores individuales se pueden beneficiar inmensamente de sus capacidades. 
 Mantener un registro de que ha cambiado, cuando y porque es extremadamente práctico
-y útil para los investigadores en caso de que requieran regresar a ese 
-proyecto (por ejemplo después de un año, cuando la memoria ya no está fresca). 
+y útil en casos en los que se requieran regresar a un proyecto después de mucho tiempo
+(por ejemplo después de un año o más, cuando la memoria ya no está fresca). 
 
 El sistema de control de versiones es la bitácora de laboratorio del mundo digital:
 Es lo que utilizan los profesionales para mantener un registro de lo que han hecho 

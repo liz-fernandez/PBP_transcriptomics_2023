@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Version Control with Git
-subtitle: Licensing
+subtitle: Licencias
 minutes: 5
 ---
 > ## Learning Objectives {.objectives}

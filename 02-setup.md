@@ -1,40 +1,29 @@
 ---
 layout: page
-title: Version Control with Git
-subtitle: Setting Up Git
+title: Control de versiones usando Git
+subtitle: Configurando Git
 minutes: 5
 ---
-> ## Learning Objectives {.objectives}
+> ## Objetivos de aprendizaje {.objectives}
 >
-> *  Configure `git` the first time is used on a computer.
-> *  Understand the meaning of the `--global` configuration flag.
+> *  Configurar `git` la primera vez que es utilizado en una computadora.
+> *  Entender el significado de la bandera de configuración `--global`.
 
-
-
-When we use Git on a new computer for the first time,
-we need to configure a few things. Below are a few examples
-of configurations we will set as we get started with Git:
-
-*   our name and email address,
-*   to colorize our output,
-*   what our preferred text editor is,
-*   and that we want to use these settings globally (i.e. for every project)
-
-On a command line, Git commands are written as `git verb`, 
-where `verb` is what we actually want to do. So here is how 
-Dracula sets up his new laptop:
+Cuando utilizamos Git en una nueva computadora por primera vez,
+tenemos que configurar algunas cosas. Así es como Mandy configura Git 
+en su nueva laptop:
 
 ~~~ {.bash}
-$ git config --global user.name "Vlad Dracula"
-$ git config --global user.email "vlad@tran.sylvan.ia"
+$ git config --global user.name "Mandy Grim"
+$ git config --global user.email "mandy.grim@purohueso.org"
 $ git config --global color.ui "auto"
 ~~~
 
-(Please use your own name and email address instead of Dracula's.)
+(Por favor utilicen su propio nombre y correo electrónico en vez del de Mandy.)
 
-He also has to set his favorite text editor, following this table:
+También configura su editor de texto favorito, de acuerdo a los comandos en esta tabla:
 
-| Editor             | Configuration command                            |
+| Editor             | Comando de configuración                    |
 |:-------------------|:-------------------------------------------------|
 | nano               | `$ git config --global core.editor "nano -w"`    |
 | Text Wrangler      | `$ git config --global core.editor "edit -w"`    |
@@ -47,30 +36,41 @@ He also has to set his favorite text editor, following this table:
 | emacs              | `$ git config --global core.editor "emacs"`   |
 | vim                | `$ git config --global core.editor "vim"`   |
 
-The four commands we just ran above only need to be run once: the flag `--global` tells Git
-to use the settings for every project, in your user account, on this computer.
 
-You can check your settings at any time:
+Los comandos de Git se escriben `git verb`, donde `verb` es lo que queremos que git haga.
+En este caso, le estamos diciendo a Git:
+
+*   nuestro nombre y dirección de correo electrónico,
+*   que coloree el texto de salida (output),
+*   cual es nuestro editor de texto preferido,
+*   y que queremos utilizar esta configuración globalmente (i.e. en cada proyecto)
+
+Los cuatro comandos que escribimos anteriormente solo se tienen que ejecutar una sola
+vez: la bandera `--global` le indica a Git que debe utilizar esta configuración en 
+cada proyecto, con ese usuario, en esa computadora. 
+
+Puedes verificar tu configuración en cualquier momento usando:
 
 ~~~ {.bash}
 $ git config --list
 ~~~
 
-You can change your configuration as many times as you want: just use the
-same commands to choose another editor or update your email address.
+Puedes cambiar la configuración tantas veces como lo desees: solo utiliza los
+mismos comandos para elegir otro editor de texto o para actualizar tu dirección 
+de correo electrónico.
 
 > ## Proxy {.callout}
 >
-> In some networks you need to use a
-> [proxy](https://en.wikipedia.org/wiki/Proxy_server). If this is the case, you
-> may also need to tell Git about the proxy:
+> En algunas redes necesitaras usar un
+> [proxy](https://en.wikipedia.org/wiki/Proxy_server). De ser necesario también
+> tendrás que informarle a Git acerca del proxy:
 >
 > ~~~ {.bash}
 > $ git config --global http.proxy proxy-url
 > $ git config --global https.proxy proxy-url
 > ~~~
 >
-> To disable the proxy, use
+> Para desactivar el proxy utiliza:
 >
 > ~~~ {.bash}
 > $ git config --global --unset http.proxy

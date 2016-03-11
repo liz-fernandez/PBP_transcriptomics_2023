@@ -1,10 +1,10 @@
 ---
 layout: page
-title: Version Control with Git
-subtitle: Exploring History
+title: Control de versiones usando Git
+subtitle: Explorando el historial
 minutes: 25
 ---
-> ## Learning Objectives {.objectives}
+> ## Objetivos de aprendizaje {.objectives}
 >
 > *   Identify and use Git commit numbers.
 > *   Compare various versions of tracked files.

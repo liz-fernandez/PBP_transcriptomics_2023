@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Version Control with Git
-subtitle: Hosting
+subtitle: Albergando información
 minutes: 10
 ---
 > ## Learning Objectives {.objectives}

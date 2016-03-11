@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Version Control with Git
-subtitle: Remotes in GitHub
+subtitle: Repositorios remotos en GitHub
 minutes: 30
 ---
 > ## Learning Objectives {.objectives}
