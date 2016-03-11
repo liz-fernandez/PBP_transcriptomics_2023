@@ -4,48 +4,45 @@ title: Version Control with Git
 subtitle: Automated Version Control
 minutes: 5
 ---
-> ## Learning Objectives {.objectives}
+> ## Objetivos de aprendizaje {.objectives}
 >
-> *   Understand the benefits of an automated version control system.
-> *   Understand the basics of how Git works.
+> *   Entender los beneficios de un sistema automatizado de control de versiones. Understand the benefits of an automated version control system.
+> *   Entender las bases del funcionamiento de Git. Understand the basics of how Git works.
 
-We'll start by exploring how version control can be used
-to keep track of what one person did and when.
-Even if you aren't collaborating with other people,
-automated version control is much better than this situation:
+Comenzaremos explorando como podemos utilizar el control de versiones
+para mantener un registro de que cambios hizo una sola persona, así como
+del cuando se realizaron estos cambios. Estos cambios pueden ser en un escrito
+o en una pieza de código. 
+Incluso si no realizas trabajos en colaboración con otros personas, 
+usar un sistema de control de versiones es mucho mejor que terminar en una 
+situación como esta: 
 
 [![Piled Higher and Deeper by Jorge Cham, http://www.phdcomics.com](fig/phd101212s.gif)](http://www.phdcomics.com)
 
 "Piled Higher and Deeper" by Jorge Cham, http://www.phdcomics.com
 
-We've all been in this situation before: it seems ridiculous to have multiple nearly-identical versions of the same document. Some word processors let us deal with this a little better, such as Microsoft Word's "Track Changes" or Google Docs' version history.
+Todos hemos estado en una situación similar: parece ridículo tener multiples versiones prácticamente idénticas del mismo documento. Algunos procesadores de texto nos ayudan a lidiar con estas situaciones, como por exemplo la función "Resaltar Cambios" (Track Changes) de Microsoft Word o el historial de versiones de Google Docs. 
 
-Version control systems start with a base version of the document and then save just the changes you made at each step of the way. You can think of it as a tape: if you rewind the tape and start at the base document, then you can play back each change and end up with your latest version.
+Los sistemas de control de versiones comienzan con una version base del documento y después guardan los cambios hechos en cada paso. Podemos pensar en estos sistemas como si fuesen una película: si la regresamos al inicio y comenzamos con el documento base podemos reproducir cada cambio y terminar con la versión final del documento. 
 
-![Changes are saved sequentially](fig/play-changes.svg)
+![Los cambios se guardan de manera secuencial](fig/play-changes.svg)
 
-Once you think of changes as separate from the document itself, you can then think about "playing back" different sets of changes onto the base document and getting different versions of the document. For example, two users can make independent sets of changes based on the same document.
+Si comenzamos a pensar en los cambios como entidades independientes al documento mismo, podemos empezar a pensar en reproducir diferentes grupos de cambios sobre el documento base para así obtener diferentes versiones del documento. Por ejemplo, dos usuarios pueden hacer cambios independientes basándose en el mismo documento. 
 
-![Different versions can be saved](fig/versions.svg)
+![Se pueden guardar versiones distintas](fig/versions.svg)
 
-If there aren't conflicts, you can even try to play two sets of changes onto the same base document.
+Si no hay cambios conflictivos incluso podemos tratar de reproducir dos grupos de cambios sobre el mismo documento base.
 
-![Multiple versions can be merged](fig/merge.svg)
+![Se pueden unir versiones multiples](fig/merge.svg)
 
-A version control system is a tool that keeps track of these changes for us and
-helps us version and merge our files. It allows you to
-decide which changes make up the next version, called a
-[commit](reference.html#commit), and keeps useful metadata about them. The
-complete history of commits for a particular project and their metadata make up
-a [repository](reference.html#repository). Repositories can be kept in sync
-across different computers facilitating collaboration among different people.
+Un sistema de control de versiones es una herramienta que mantiene un registro de cambios de forma automática y nos ayuda a controlar versiones y a unir cambios hechos a un documento. Nos permite decidir que cambios se deben incorporar a la próxima version, lo que se le conoce como un [commit](reference.html#commit). Además, guarda metadatos útiles acerca de estos cambios permanentes (commits). El historial completo de commits de un proyecto en particular así como sus metadatos son lo que constituye un repositorio o[repository](reference.html#repository). Los Repositorios pueden mantenerse sincronizados en varias computadoras facilitando así las colaboraciones entre distintos individuos. 
 
-> ## The long history of version control systems {.callout}
+> ## La larga historia de los sistemas de control de versiones{.callout}
 >
-> Automated version control systems are nothing new. 
-> Tools like RCS, CVS, or Subversion have been around since the early 1980s and are used by many large companies.
-> However, many of these are now becoming considered as legacy systems due to various limitations in their capabilities.
-> In particular, the more modern systems, such as Git and [Mercurial](http://swcarpentry.github.io/hg-novice/) 
-> are *distributed*, meaning that they do not need a centralized server to host the repository.
-> These modern systems also include powerful merging tools that make it possible for multiple authors to work within 
-> the same files concurrently.
+> Los sistemas automatizados de control de versiones no son nada nuevo.
+> Herramientas como RCS, CVS o Subversion existen desde el principio de los años 80s y son utilizadas por varias compañias grandes.
+> Sin embargo, varios de estos se empiezan a considerar sistemas heredados debido a las diversas limitaciones en sus capacidades. 
+> A los sistemas más modernos como Git y [Mercurial](http://swcarpentry.github.io/hg-novice/) se les conoce como
+> *distribuidos*, ya que no cuentan con un servidor centralizado que almacena el repositorio.
+> Estos sistemas modernos también incluyen poderosas herramientas e unión o "merging" que permiten que multiples contribuidores trabajen 
+> en los mismos archivos de manera simultanea. 
