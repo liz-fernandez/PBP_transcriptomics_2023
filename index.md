@@ -3,74 +3,78 @@ layout: page
 title: Version Control with Git
 ---
 
-Wolfman and Dracula have been hired by Universal Missions (a space
-services spinoff from Euphoric State University) to investigate if it
-is possible to send their next planetary lander to Mars.  They want to
-be able to work on the plans at the same time, but they have run into
-problems doing this in the past.  If they take turns, each one will
-spend a lot of time waiting for the other to finish, but if they work
-on their own copies and email changes back and forth things will be
-lost, overwritten, or duplicated.
+Billy y Mandy han sido contratados para investigar si es posible enviar un 
+robot a la superficie de Marte. Quieren trabajar de manera conjunta en los 
+planes, pero han tenido problemas para editar sus notas simultáneamente en 
+proyectos previos. Si deciden tomar turnos, cada uno pasará mucho tiempo esperando
+a que el otro termine, pero si trabajan simultaneamente en su copia individual 
+del reporte y mandan correos para enviarse cambios entre sí siempre hay cambios que
+se pierden, se sobre escriben o se duplican.  
 
-A colleague suggests using [version control](reference.html#version-control) to
-manage their work. Version control is better than mailing files back and forth:
+Un colega les sugiere utilizar [control de versiones](reference.html#version-control) 
+para manejar su trabajo. El control de versiones es mejor que enviar versiones por
+correo electrónico ya que:
 
-*   Nothing that is committed to version control is ever lost. Since all old
-    versions of files are saved, it's always possible to go back in time to see
-    exactly who wrote what on a particular day, or what version of a program
-    was used to generate a particular set of results.
+*   Ningún cambio que haya sido confirmado (commited) al sistema de control de versiones
+    se pierde. Dado que todas la versiones anteriores de los archivos están guardadas, 
+    siempre es posible regresar en el tiempo y ver exactamente quien escribió que en un 
+    día en particular, o que versiones de que programa fueron utilizadas para generar 
+    ciertos resultados.
 
-*   As we have this record of who made what changes when, we know who to ask
-    if we have questions later on, and, if needed it, revert to a previous
-    version, much like the "undo" feature in an editor.
+*   Ya que tenemos un registor de quien hizo que cambios y cuando los realizo, 
+    sabemos a quien preguntar si tenemos preguntas acerca de estos cambios en 
+    el futuro, y, de ser necesario, revertirlos a una versión previa, similar a 
+    la función "deshacer" en un editor de texto. 
 
-*   When several people collaborate in the same project, it's possible to
-    accidentally overlook or overwrite someone's changes: the version control
-    system automatically notifies users whenever there's a conflict between one
-    person's work and another's.
+*   Cuando varias personas colaboran en un mismo proyectos, es probable que ignoren o 
+    sobre escriban los cambios de otro colaborador de forma accidental. El sistema 
+    de control de versiones automáticamente notifica a los usuarios cada vez que se 
+    detecta un conflicto entre los cambios propuestos por dos colaboradores. 
 
-Teams are not the only ones to benefit from version control: lone
-researchers can benefit immensely.  Keeping a record of what was
-changed, when, and why is extremely useful for all researchers if they
-ever need to come back to the project later on (e.g., a year later,
-when memory has faded).
+El sistema de control de versiones no es solo útil para trabajos en grupo: 
+investigadores individuales se pueden beneficiar inmensamente de sus capacidades. 
+Mantener un registro de que ha cambiado, cuando y porque es extremadamente práctico
+y útil para los investigadores en caso de que requieran regresar a ese 
+proyecto (por ejemplo después de un año, cuando la memoria ya no está fresca). 
 
-Version control is the lab notebook of the digital world: it's what
-professionals use to keep track of what they've done and to
-collaborate with other people.  Every large software development
-project relies on it, and most programmers use it for their small jobs
-as well.  And it isn't just for software: books,
-papers, small data sets, and anything that changes over time or needs
-to be shared can and should be stored in a version control system.
+El sistema de control de versiones es la bitácora de laboratorio del mundo digital:
+Es lo que utilizan los profesionales para mantener un registro de lo que han hecho 
+así como para colaborar con otras personas. Cada proyecto de desarrollo de 
+software a gran escala depende de este sistema, y muchos programadores lo 
+utilizan también para proyectos pequeños. Y no solo se utiliza para software:
+libros, artículos, sets de datos pequeños y cualquier otra entidad de datos sobre 
+la que se realizan cambios a través de tiempo o tiene que ser compartida puede y
+debe ser almacenada utilizando un sistema de control de versiones. 
 
-> ## Prerequisites {.prereq}
+> ## Conocimientos previos {.prereq}
 >
-> In this lesson we use Git from the Unix Shell.
-> Some previous experience with the shell is expected,
-> *but isn't mandatory*.
+> En esta clase aprenderemos a usar Git desde la terminal de Linux/Unix. 
+> Se espera que los estudiantes tengan alguna experiencia con la terminal,
+> *aunque no es indispensable*.
 
-> ## Getting ready {.getready}
+> ## Preparativos {.getready}
 >
-> Nothing to do: you're ready to go!
+> Tener git instalado o accesarlo a traves del cuaderno en linea Jupyter. 
+> Si ya lo instalaste: Estas listo!
 
-## Topics
+## Temas
 
-1.  [Automated Version Control](01-basics.html)
-2.  [Setting Up Git](02-setup.html)
-3.  [Creating a Repository](03-create.html)
-4.  [Tracking Changes](04-changes.html)
-5.  [Exploring History](05-history.html)
-6.  [Ignoring Things](06-ignore.html)
-7.  [Remotes in GitHub](07-github.html)
-8.  [Collaborating](08-collab.html)
-9.  [Conflicts](09-conflict.html)
+1.  [Control Automatizado de Versiones](01-basics.html)
+2.  [Configurando Git](02-setup.html)
+3.  [Creando un repositorio](03-create.html)
+4.  [Seguimiento de los cambios](04-changes.html)
+5.  [Explorando el historial](05-history.html)
+6.  [Ignorando Cosas](06-ignore.html)
+7.  [Repositorios remotos en GitHub](07-github.html)
+8.  [Colaborando](08-collab.html)
+9.  [Conflictos](09-conflict.html)
 10. [Open Science](10-open.html)
-11. [Licensing](11-licensing.html)
-12. [Citation](12-citation.html)
-13. [Hosting](13-hosting.html)
+11. [Licencias](11-licensing.html)
+12. [Referencias](12-citation.html)
+13. [Albergando información](13-hosting.html)
 
-## Other Resources
+## Otros recursos
 
-*   [Reference](reference.html)
+*   [Referencias](reference.html)
 *   [Discussion](discussion.html)
-*   [Instructor's Guide](instructors.html)
+
