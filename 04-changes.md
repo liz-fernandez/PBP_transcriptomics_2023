@@ -454,11 +454,11 @@ repositorio (`git commit`):
 
 > ## `bio` Repositorio {.challenge}
 >
-> Create a new Git repository on your computer called `bio`.
-> Write a three-line biography for yourself in a file called `me.txt`,
-> commit your changes,
-> then modify one line, add a fourth line, and display the differences
-> between its updated state and its original state.
+> Crea un nuevo repositorio de Git en tu computadora llamado `bio`.
+> Escribe un biografía de tres líneas en un archivo llamado `me.txt`,
+> agrega y aprueba tus cambios,
+> modifica una línea, agrega una cuarta línea fourth line, y muestra las diferencias
+> entre su estado actualizado y su estado original.
 
 > ## Author y Committer {.challenge}
 >
