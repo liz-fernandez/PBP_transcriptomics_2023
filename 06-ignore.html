@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="generator" content="pandoc">
-    <title>Software Carpentry: Version Control with Git</title>
+    <title>Software Carpentry: Control de versiones usando Git</title>
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css" />
@@ -26,24 +26,24 @@
       <article>
       <div class="row">
         <div class="col-md-10 col-md-offset-1">
-                    <a href="index.html"><h1 class="title">Version Control with Git</h1></a>
-          <h2 class="subtitle">Ignoring Things</h2>
+                    <a href="index.html"><h1 class="title">Control de versiones usando Git</h1></a>
+          <h2 class="subtitle">Ignorando Cosas</h2>
           <section class="objectives panel panel-warning">
 <div class="panel-heading">
-<h2><span class="glyphicon glyphicon-certificate"></span>Learning Objectives</h2>
+<h2 id="objetivos-de-aprendizaje"><span class="glyphicon glyphicon-certificate"></span>Objetivos de aprendizaje</h2>
 </div>
 <div class="panel-body">
 <ul>
-<li>Configure Git to ignore specific files.</li>
-<li>Explain why ignoring files can be useful.</li>
+<li>Configurar Git para ignorar archivos específicos.</li>
+<li>Explicar porque puede ser útil ignorar cosas.</li>
 </ul>
 </div>
 </section>
-<p>What if we have files that we do not want Git to track for us, like backup files created by our editor or intermediate files created during data analysis. Let’s create a few dummy files:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">mkdir</span> results
-$ <span class="kw">touch</span> a.dat b.dat c.dat results/a.out results/b.out</code></pre>
-<p>and see what Git says:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> status</code></pre>
+<p>¿Qué sucede si hay archivos en el repositorio que no queremos sean rastreados por Git? Por ejemplo, archivos de respaldo creados por nuestro editor de texto o archivos intermediarios creados durante el análisis de datos. Creemos algunos archivos de prueba:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">mkdir</span> results
+$ <span class="kw">touch</span> a.dat b.dat c.dat results/a.out results/b.out</code></pre></div>
+<p>y veamos que nos dice Git:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> status</code></pre></div>
 <pre class="output"><code># On branch master
 # Untracked files:
 #   (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
@@ -53,35 +53,35 @@ $ <span class="kw">touch</span> a.dat b.dat c.dat results/a.out results/b.out</c
 #   c.dat
 #   results/
 nothing added to commit but untracked files present (use &quot;git add&quot; to track)</code></pre>
-<p>Putting these files under version control would be a waste of disk space. What’s worse, having them all listed could distract us from changes that actually matter, so let’s tell Git to ignore them.</p>
-<p>We do this by creating a file in the root directory of our project called <code>.gitignore</code>:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">nano</span> .gitignore
-$ <span class="kw">cat</span> .gitignore</code></pre>
+<p>Poner estos archivos bajo control de versiones sería una pérdida de espacio de disco. Aún peor, tenerlos listados puede distraernos de cambios que realmente importan. Digámosle a Git que los ignore.</p>
+<p>Hacemos esto creando un archivo en el directorio base (o root) de nuestro proyecto llamado <code>.gitignore</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">nano</span> .gitignore
+$ <span class="kw">cat</span> .gitignore</code></pre></div>
 <pre class="output"><code>*.dat
 results/</code></pre>
-<p>These patterns tell Git to ignore any file whose name ends in <code>.dat</code> and everything in the <code>results</code> directory. (If any of these files were already being tracked, Git would continue to track them.)</p>
-<p>Once we have created this file, the output of <code>git status</code> is much cleaner:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> status</code></pre>
+<p>Estas expresiones le dicen a Git que ignore cualquier archivo cuyo nombre tiene la extensión <code>.dat</code> así como todo lo que se encuentra en el directorio <code>results</code>. (Si cualquiera de estos archivos ya estaba siendo rastreado, Git continuará registrando sus cambios).</p>
+<p>Una vez creado este archivo, el mensaje de salida de <code>git status</code> es mucho más limpio:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> status</code></pre></div>
 <pre class="output"><code># On branch master
 # Untracked files:
 #   (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
 #
 #   .gitignore
 nothing added to commit but untracked files present (use &quot;git add&quot; to track)</code></pre>
-<p>The only thing Git notices now is the newly-created <code>.gitignore</code> file. You might think we wouldn’t want to track it, but everyone we’re sharing our repository with will probably want to ignore the same things that we’re ignoring. Let’s add and commit <code>.gitignore</code>:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> add .gitignore
+<p>Lo único que Git nota es el recién creado archivo <code>.gitignore</code>. Podrías pensar que no querríamos rastrearlo, pero todos aquellos con los que compartimos el repositorio probablemente quieran ignorar las mismas cosas que nosotros estamos ignorando. Agreguemos y confirmemos <code>.gitignore</code> en el repositorio:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> add .gitignore
 $ <span class="kw">git</span> commit -m <span class="st">&quot;Add the ignore file&quot;</span>
-$ <span class="kw">git</span> status</code></pre>
+$ <span class="kw">git</span> status</code></pre></div>
 <pre class="output"><code># On branch master
 nothing to commit, working directory clean</code></pre>
-<p>As a bonus, using <code>.gitignore</code> helps us avoid accidentally adding to the repository files that we don’t want to track:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> add a.dat</code></pre>
+<p>Como un extra, utilizar <code>.gitignore</code> nos ayuda a evitar agregar accidentalmente al repositorio archivos que ya habíamos decidido ignorar:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> add a.dat</code></pre></div>
 <pre class="output"><code>The following paths are ignored by one of your .gitignore files:
 a.dat
 Use -f if you really want to add them.
 fatal: no files added</code></pre>
-<p>If we really want to override our ignore settings, we can use <code>git add -f</code> to force Git to add something. We can also always see the status of ignored files if we want:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> status --ignored</code></pre>
+<p>Si realmente deseamos ignorar nuestras configuraciones previas, podemos utilizar el comando <code>git add -f</code> para forzar a Git a añadir algo. También podemos ver el estado de archivos ignorados si así lo deseamos:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> status --ignored</code></pre></div>
 <pre class="output"><code># On branch master
 # Ignored files:
 #  (use &quot;git add -f &lt;file&gt;...&quot; to include in what will be committed)
@@ -92,13 +92,30 @@ fatal: no files added</code></pre>
 #        results/
 
 nothing to commit, working directory clean</code></pre>
+<section class="challenge panel panel-success">
+<div class="panel-heading">
+<h2 id="ignorando-archivos-anidados"><span class="glyphicon glyphicon-pencil"></span>Ignorando archivos anidados</h2>
+</div>
+<div class="panel-body">
+<p>Dado un directorio con la siguiente estructura: <sub><sub><sub> results/data results/plots </sub></sub></sub></p>
+<p>¿Cómo ignorarías solo <code>results/plots</code> y no <code>results/data</code>?</p>
+</div>
+</section>
+<section class="challenge panel panel-success">
+<div class="panel-heading">
+<h2 id="incluyendo-archivos-específicos"><span class="glyphicon glyphicon-pencil"></span>Incluyendo archivos específicos</h2>
+</div>
+<div class="panel-body">
+<p>¿Como ignorarías todos los archivos con la extensión <code>.data</code> en tu directorio base, con la excepción de <code>final.data</code>? Pista: Averigua lo que el operador <code>!</code> (signo de exclamación) hace.</p>
+</div>
+</section>
         </div>
       </div>
       </article>
       <div class="footer">
-                    <h4 class="title">Curso basado en material generado por:</h4>
+        <h5 class="title">Curso basado en material generado por:</h5>
         <a href="http://software-carpentry.org" title="Software Carpentry">
-          <img alt="Software Carpentry banner" src="img/software-carpentry-banner.png" style="width: 120px" />
+        <img alt="Software Carpentry banner" src="img/software-carpentry-banner.png" style="width: 120px" />
         <a class="label swc-blue-bg" href="https://github.com/swcarpentry/git-novice">Fuente Original</a>
         <a class="label swc-blue-bg" href="mailto:selene.fernandez.valverde@gmail.com">Contacto</a>
         <a class="label swc-blue-bg" href="LICENSE.html">Licencia</a>
@@ -107,5 +124,6 @@ nothing to commit, working directory clean</code></pre>
     <!-- Javascript placed at the end of the document so the pages load faster -->
     <script src="http://software-carpentry.org/v5/js/jquery-1.9.1.min.js"></script>
     <script src="css/bootstrap/bootstrap-js/bootstrap.js"></script>
+    <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
   </body>
 </html>

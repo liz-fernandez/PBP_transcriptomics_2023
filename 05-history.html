@@ -34,13 +34,13 @@
 </div>
 <div class="panel-body">
 <ul>
-<li>Identify and use Git commit numbers.</li>
-<li>Compare various versions of tracked files.</li>
-<li>Restore old versions of files.</li>
+<li>Identificar y utilizar los códigos identificadores de commit generados por Git.</li>
+<li>Comparar distintas versiones de archivos rastreados.</li>
+<li>Restaurar versiones previas de archivos.</li>
 </ul>
 </div>
 </section>
-<p>If we want to see what we changed at different steps, we can use <code>git diff</code> again, but with the notation <code>HEAD~1</code>, <code>HEAD~2</code>, and so on, to refer to old commits:</p>
+<p>Si queremos ver que cambios se han realizado entre distintas versiones podemos utilizar nuevamente el comando <code>git diff</code>, pero con la notación <code>HEAD~1</code>, <code>HEAD~2</code>, etc, para referirnos a commits previos:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> diff HEAD~1 mars.txt</code></pre></div>
 <pre class="output"><code>diff --git a/mars.txt b/mars.txt
 index 315bf3a..b36abfd 100644
@@ -59,8 +59,8 @@ index df0654a..b36abfd 100644
  Cold and dry, but everything is my favorite color
 +The two moons may be a problem for Wolfman
 +But the Mummy will appreciate the lack of humidity</code></pre>
-<p>In this way, we can build up a chain of commits. The most recent end of the chain is referred to as <code>HEAD</code>; we can refer to previous commits using the <code>~</code> notation, so <code>HEAD~1</code> (pronounced “head minus one”) means “the previous commit”, while <code>HEAD~123</code> goes back 123 commits from where we are now.</p>
-<p>We can also refer to commits using those long strings of digits and letters that <code>git log</code> displays. These are unique IDs for the changes, and “unique” really does mean unique: every change to any set of files on any computer has a unique 40-character identifier. Our first commit was given the ID f22b25e3233b4645dabd0d81e651fe074bd8e73b, so let’s try this:</p>
+<p>De este modo podemos construir una cadena de commits. Al eslabón más reciente de la cadena se le conoce como <code>HEAD</code>. Podemos nombrar commits previos utilizando la notación <code>~</code>, entonces <code>HEAD~1</code> (“head minus one”) significa “el commit previo” mientras que <code>HEAD~123</code> regresa 123 commits antes del commit actual.</p>
+<p>También podemos llamar estos commits utilizando las largas series de dígitos y letras que despliega el comando <code>git log</code>. Estos son identificadores únicos para cada uno de los cambios, y en este caso son realmente únicos: cada cambio en cualquier archivo en el repositorio en cualquier computadora tiene un identificador único de 40 caracteres. Por ejemplo, a nuestro primer commit se le asigno el identificador f22b25e3233b4645dabd0d81e651fe074bd8e73b. Intentemos lo siguiente:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> diff f22b25e3233b4645dabd0d81e651fe074bd8e73b mars.txt</code></pre></div>
 <pre class="output"><code>diff --git a/mars.txt b/mars.txt
 index df0654a..b36abfd 100644
@@ -70,7 +70,7 @@ index df0654a..b36abfd 100644
  Cold and dry, but everything is my favorite color
 +The two moons may be a problem for Wolfman
 +But the Mummy will appreciate the lack of humidity</code></pre>
-<p>That’s the right answer, but typing out random 40-character strings is annoying, so Git lets us use just the first few characters:</p>
+<p>Esa es la respuesta correcta,That’s the right answer, Pero teclear cadenas de 40 caracteres aleatorios es ineficiente, por lo tanto Git nos permite utilizar solo los primeros caracteres:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> diff f22b25e mars.txt</code></pre></div>
 <pre class="output"><code>diff --git a/mars.txt b/mars.txt
 index df0654a..b36abfd 100644
@@ -80,11 +80,11 @@ index df0654a..b36abfd 100644
  Cold and dry, but everything is my favorite color
 +The two moons may be a problem for Wolfman
 +But the Mummy will appreciate the lack of humidity</code></pre>
-<p>All right! So we can save changes to files and see what we’ve changed—now how can we restore older versions of things? Let’s suppose we accidentally overwrite our file:</p>
+<p>¡Muy bien! Podemos guardar los cambios a los archivos y ver que ha cambiado. Ahora, ¿cómo podemos restaurar versiones previas de archivos? Supongamos que sobre escribimos accidentalmente nuestro archivo:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">nano</span> mars.txt
 $ <span class="kw">cat</span> mars.txt</code></pre></div>
 <pre class="output"><code>We will need to manufacture our own oxygen</code></pre>
-<p><code>git status</code> now tells us that the file has been changed, but those changes haven’t been staged:</p>
+<p><code>git status</code> nos dice que el archivo ha cambiado, pero estos cambios no han sido agregados al área de stagin:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> status</code></pre></div>
 <pre class="output"><code># On branch master
 # Changes not staged for commit:
@@ -94,33 +94,33 @@ $ <span class="kw">cat</span> mars.txt</code></pre></div>
 #   modified:   mars.txt
 #
 no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)</code></pre>
-<p>We can put things back the way they were by using <code>git checkout</code>:</p>
+<p>Podemos regresar las cosas a su estado previo utilizando el comando <code>git checkout</code>:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> checkout HEAD mars.txt
 $ <span class="kw">cat</span> mars.txt</code></pre></div>
 <pre class="output"><code>Cold and dry, but everything is my favorite color
 The two moons may be a problem for Wolfman
 But the Mummy will appreciate the lack of humidity</code></pre>
-<p>As you might guess from its name, <code>git checkout</code> checks out (i.e., restores) an old version of a file. In this case, we’re telling Git that we want to recover the version of the file recorded in <code>HEAD</code>, which is the last saved commit. If we want to go back even further, we can use a commit identifier instead:</p>
+<p>Como su nombre sugiere, <code>git checkout</code> checa (restaura) una version previa de un archivo. En este caso, le estamos diciendo a Git que queremos recuperar la versión del archivo guardado en <code>HEAD</code>, que es la última versión o commit guardado. Si queremos regresar a versiones anteriores, podemos usar el identificador del commit en lugar de <code>HEAD</code>:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> checkout f22b25e mars.txt</code></pre></div>
 <aside class="callout panel panel-info">
 <div class="panel-heading">
-<h2 id="dont-lose-your-head"><span class="glyphicon glyphicon-pushpin"></span>Don’t lose your HEAD</h2>
+<h2 id="no-pierdas-la-cabeza-head"><span class="glyphicon glyphicon-pushpin"></span>No pierdas la cabeza (HEAD)</h2>
 </div>
 <div class="panel-body">
-<p>Above we used</p>
+<p>En la parte superior utilizamos</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> checkout f22b25e mars.txt</code></pre></div>
-<p>to revert mars.txt to its state after the commit f22b25e. If you forget <code>mars.txt</code> in that command, git will tell you that “You are in ‘detached HEAD’ state.” In this state, you shouldn’t make any changes. You can fix this by reattaching your head using <code>git checkout master</code></p>
+<p>para revertir mars.txt a su estado después del commit f22b25e. Si olvidas especificar <code>mars.txt</code> en ese comando, git te mostrará el mensaje “You are in ‘detached HEAD’ state.” En este estado no debes realizar ningún cambio. Puedes reparar esto re-uniendo el <code>HEAD</code> usando el comando <code>git checkout master</code></p>
 </div>
 </aside>
-<p>It’s important to remember that we must use the commit number that identifies the state of the repository <em>before</em> the change we’re trying to undo. A common mistake is to use the number of the commit in which we made the change we’re trying to get rid of. In the example below, we want to retrieve the state from before the most recent commit (<code>HEAD~1</code>), which is commit <code>f22b25e</code>:</p>
+<p>Es importante recordar que debemos usar el número de commit que identifica el estado del repositorio <em>antes</em> del cambio que estamos tratando de revertir. Un error común es utilizar el número del commit en el cual hicimos el cambio que estamos tratando de deshacer. En el ejemplo siguiente, tratamos de revertir el repositorio a su estado antes del último commit, que es el commit <code>f22b25e</code>:</p>
 <div class="figure">
 <img src="fig/git-checkout.svg" alt="Git Checkout" />
 <p class="caption">Git Checkout</p>
 </div>
-<p>So, to put it all together:</p>
+<p>En resumen:</p>
 <aside class="callout panel panel-info">
 <div class="panel-heading">
-<h2 id="how-git-works-in-cartoon-form"><span class="glyphicon glyphicon-pushpin"></span>How Git works, in cartoon form</h2>
+<h2 id="caricatura-acerca-de-como-funciona-git"><span class="glyphicon glyphicon-pushpin"></span>Caricatura acerca de como funciona Git</h2>
 </div>
 <div class="panel-body">
 <div class="figure">
@@ -131,22 +131,22 @@ But the Mummy will appreciate the lack of humidity</code></pre>
 </aside>
 <aside class="callout panel panel-info">
 <div class="panel-heading">
-<h2 id="simplifying-the-common-case"><span class="glyphicon glyphicon-pushpin"></span>Simplifying the Common Case</h2>
+<h2 id="simplificando-el-caso-común"><span class="glyphicon glyphicon-pushpin"></span>Simplificando el caso común</h2>
 </div>
 <div class="panel-body">
-<p>If you read the output of <code>git status</code> carefully, you’ll see that it includes this hint:</p>
+<p>Si lees cuidadosamente el resultado del comando <code>git status</code>, verás que incluye la siguiente pista:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">(use</span> <span class="st">&quot;git checkout -- &lt;file&gt;...&quot;</span> to discard changes in working directory<span class="kw">)</span></code></pre></div>
-<p>As it says, <code>git checkout</code> without a version identifier restores files to the state saved in <code>HEAD</code>. The double dash <code>--</code> is needed to separate the names of the files being recovered from the command itself: without it, Git would try to use the name of the file as the commit identifier.</p>
+<p>Como dice, As it says, <code>git checkout</code> sin un identificador de una versión restaura archivos al estado guardado en el <code>HEAD</code>. El guión doble <code>--</code> se necesita para separar los nombres de los archivos que estan siendo restaurados del comando mismo: sin estos, Git tratará de utilizar el nombre del archivo como el número identificador del commit.</p>
 </div>
 </aside>
-<p>The fact that files can be reverted one by one tends to change the way people organize their work. If everything is in one large document, it’s hard (but not impossible) to undo changes to the introduction without also undoing changes made later to the conclusion. If the introduction and conclusion are stored in separate files, on the other hand, moving backward and forward in time becomes much easier.</p>
+<p>El hecho de que los archivos pueden ser restaurados uno por uno tiende a cambiar la manera en la que la gente organiza su trabajo. Si todo está en un solo documento es difícil (aunque no imposible) revertir cambios a una parte del documento (por ejemplo la introducción) sin deshacer cambios en otras parte (ej: la discusión). Por el contrario, si la introducción y la conclusión se almacenan en archivos independientes cambiar a distintas versiones de las distintas partes de forma independiente se vuelve mucho más sencillo.</p>
 <section class="challenge panel panel-success">
 <div class="panel-heading">
-<h2 id="recovering-older-versions-of-a-file"><span class="glyphicon glyphicon-pencil"></span>Recovering Older Versions of a File</h2>
+<h2 id="recuperando-versiones-previas-de-un-archivo"><span class="glyphicon glyphicon-pencil"></span>Recuperando Versiones previas de un Archivo</h2>
 </div>
 <div class="panel-body">
-<p>Jennifer has made changes to the Python script that she has been working on for weeks, and the modifications she made this morning “broke” the script and it no longer runs. She has spent ~ 1hr trying to fix it, with no luck…</p>
-<p>Luckily, she has been keeping track of her project’s versions using Git! Which commands below will let her recover the last committed version of her Python script called <code>data_cruncher.py</code>?</p>
+<p>Jennifer ha hecho cambios a un script de Python en el cual ha estado trabajado por semanas, y las modificaciones que realizó esta mañana lo “rompieron” por lo que el script ya no funciona. Se ha pasado más de una hora tratando de arreglarlo sin lograrlo …</p>
+<p>Por suerte, ¡Jennifer ha utilizado control de versiones de su proyecto usando Git! ¿Cuáles de los comandos de abajo le permitirán recuperar la última versión confirmada (commited) de su script de Python llamado <code>data_cruncher.py</code>?</p>
 <ol style="list-style-type: decimal">
 <li><pre><code>$ git checkout HEAD</code></pre></li>
 <li><pre><code>$ git checkout HEAD data_cruncher.py</code></pre></li>
@@ -158,10 +158,10 @@ But the Mummy will appreciate the lack of humidity</code></pre>
 </section>
 <section class="challenge panel panel-success">
 <div class="panel-heading">
-<h2 id="understanding-workflow-and-history"><span class="glyphicon glyphicon-pencil"></span>Understanding Workflow and History</h2>
+<h2 id="entendiendo-el-historial-y-el-flujo-de-datos-workflow"><span class="glyphicon glyphicon-pencil"></span>Entendiendo el historial y el flujo de datos (workflow)</h2>
 </div>
 <div class="panel-body">
-<p>What is the output of cat venus.txt at the end of this set of commands?</p>
+<p>¿Cuál es el resultado del comando <code>cat venus.txt</code> al final de esta serie de comandos?</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cd</span> planets
 $ <span class="kw">nano</span> venus.txt <span class="co">#input the following text: Venus is beautiful and full of love</span>
 $ <span class="kw">git</span> add venus.txt
@@ -174,7 +174,7 @@ $ <span class="kw">cat</span> venus.txt <span class="co">#this will print the co
 <li><pre class="output"><code>Venus is beautiful and full of love</code></pre></li>
 <li><pre class="output"><code>Venus is beautiful and full of love
 Venus is too hot to be suitable as a base</code></pre></li>
-<li><pre class="output"><code>Error because you have changed venus.txt without committing the changes</code></pre></li>
+<li><pre class="output"><code>Error dado que cambiaste venus.txt sin confirmar los cambios</code></pre></li>
 </ol>
 </div>
 </section>

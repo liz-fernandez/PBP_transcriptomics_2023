@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="generator" content="pandoc">
-    <title>Software Carpentry: Version Control with Git</title>
+    <title>Software Carpentry: Control de versiones usando Git</title>
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css" />
@@ -26,42 +26,42 @@
       <article>
       <div class="row">
         <div class="col-md-10 col-md-offset-1">
-                    <a href="index.html"><h1 class="title">Version Control with Git</h1></a>
+                    <a href="index.html"><h1 class="title">Control de versiones usando Git</h1></a>
           <h2 class="subtitle">Colaborando</h2>
           <section class="objectives panel panel-warning">
 <div class="panel-heading">
-<h2 id="learning-objectives"><span class="glyphicon glyphicon-certificate"></span>Learning Objectives</h2>
+<h2 id="objetivos-de-aprendizaje"><span class="glyphicon glyphicon-certificate"></span>Objetivos de aprendizaje</h2>
 </div>
 <div class="panel-body">
 <ul>
-<li>Clone a remote repository.</li>
-<li>Collaborate pushing to a common repository.</li>
+<li>Clona un repositorio remoto.</li>
+<li>Colabora subindo cambios a un repositorio común.</li>
 </ul>
 </div>
 </section>
-<p>For the next step, get into pairs. One person will be the “Owner” (this is the person whose Github repository will be used to start the exercise) and the other person will be the “Collaborator” (this is the person who will be cloning the Owner’s repository and making changes to it).</p>
+<p>Para el siguiente paso deben trabajar en parejas. Una persona será el “Dueño” (esta es la persona cuyo repositorio de GitHub usaremos al inicio de este ejercicio) y la otra persona será el “Colaborador” (esta es la persona que clonará el repositorio del Dueño y realizará cambios al mismo).</p>
 <aside class="callout panel panel-info">
 <div class="panel-heading">
-<h2 id="practicing-by-yourself"><span class="glyphicon glyphicon-pushpin"></span>Practicing by yourself</h2>
+<h2 id="practicando-solo"><span class="glyphicon glyphicon-pushpin"></span>Practicando solo</h2>
 </div>
 <div class="panel-body">
-<p>If you’re working through this lesson on your own, you can carry on by opening a second terminal window, and switching to another directory (e.g. <code>/tmp</code>). This window will represent your partner, working on another computer. You won’t need to give anyone access on GitHub, because both ‘partners’ are you.</p>
+<p>Si estás estudiando esta lección solo(a), puedes continuar abriendo una segunda terminal, y cambiando a otro directorio (e.g. <code>/tmp</code>). Esta ventana representará a tu pareja, trabajando en otra computadora. En este caso no tendrás que otorgar acceso a alguien más en GitHub, ya que tu serás ambos compañeros.</p>
 </div>
 </aside>
-<p>The Owner needs to give the Collaborator access. On GitHub, click the settings button on the right, then select Collaborators, and enter your partner’s username.</p>
+<p>El Dueño deberá darle acceso al Colaborador. En Github, da click en el botón settings en el lado derecho, después selecciona Colaboradores, e inserta el nombre de tu compañero.</p>
 <div class="figure">
-<img src="fig/github-add-collaborators.png" alt="Adding collaborators on GitHub" />
-<p class="caption">Adding collaborators on GitHub</p>
+<img src="fig/github-add-collaborators.png" alt="Añadiendo colaboradores en GitHub" />
+<p class="caption">Añadiendo colaboradores en GitHub</p>
 </div>
-<p>The Collaborator needs to work on this project locally. He or she should <code>cd</code> to another directory (so <code>ls</code> doesn’t show a <code>planets</code> folder), and then make a copy of the Owner’s repository:</p>
+<p>El Colaborador debe trabajar en este proyecto de manera local. El o ella deberá cambiar de directorio usando el comando <code>cd</code> para entrar un directorio que no contenga el folder <code>planets</code>, y entonces hacer una copia del repositorio del Dueño:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> clone https://github.com/vlad/planets.git</code></pre></div>
-<p>Replace ‘vlad’ with the Owner’s username.</p>
-<p><code>git clone</code> creates a fresh local copy of a remote repository.</p>
+<p>Remplaza ‘vlad’ con el nombre del Dueño:</p>
+<p><code>git clone</code> crea una copia local fresca en tu repositorio remoto.</p>
 <div class="figure">
 <img src="fig/github-collaboration.svg" alt="After Creating Clone of Repository" />
 <p class="caption">After Creating Clone of Repository</p>
 </div>
-<p>The Collaborator can now make a change in his or her copy of the repository:</p>
+<p>El Colaborador puede ahora hacer cambios en su copia del respositorio:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cd</span> planets
 $ <span class="kw">nano</span> pluto.txt
 $ <span class="kw">cat</span> pluto.txt</code></pre></div>
@@ -70,7 +70,7 @@ $ <span class="kw">cat</span> pluto.txt</code></pre></div>
 $ <span class="kw">git</span> commit -m <span class="st">&quot;Some notes about Pluto&quot;</span></code></pre></div>
 <pre class="output"><code> 1 file changed, 1 insertion(+)
  create mode 100644 pluto.txt</code></pre>
-<p>Then push the change to GitHub:</p>
+<p>Y subir estos cambios a GitHub:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> push origin master</code></pre></div>
 <pre class="output"><code>Counting objects: 4, done.
 Delta compression using up to 4 threads.
@@ -79,8 +79,8 @@ Writing objects: 100% (3/3), 306 bytes, done.
 Total 3 (delta 0), reused 0 (delta 0)
 To https://github.com/vlad/planets.git
    9272da5..29aba7c  master -&gt; master</code></pre>
-<p>Note that we didn’t have to create a remote called <code>origin</code>: Git does this automatically, using that name, when we clone a repository. (This is why <code>origin</code> was a sensible choice earlier when we were setting up remotes by hand.)</p>
-<p>We can now download changes into the original repository on our machine:</p>
+<p>Nota que no tuvimos que crear un remoto llamado <code>origin</code>: Git lo crea automaticamente, usando este nombre, cuando clonamos un repositorio. (Es por ellos que <code>origin</code> fue una buena elección de nombre cuando configuramos los remotos manualmente).</p>
+<p>Ahora podemos descargar los cambios en el repositorio original en nuestra máquina:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> pull origin master</code></pre></div>
 <pre class="output"><code>remote: Counting objects: 4, done.
 remote: Compressing objects: 100% (2/2), done.
@@ -95,14 +95,15 @@ Fast-forward
  create mode 100644 pluto.txt</code></pre>
 <section class="challenge panel panel-success">
 <div class="panel-heading">
-<h2 id="review-changes"><span class="glyphicon glyphicon-pencil"></span>Review changes</h2>
+<h2 id="revisando-los-cambios"><span class="glyphicon glyphicon-pencil"></span>Revisando los cambios</h2>
 </div>
 <div class="panel-body">
-<p>The Owner push commits to the repository without giving any information to the Collaborator. How can the Collaborator find out what has changed with command line? And on GitHub?</p>
-<h2 id="comment-changes-in-github" class="challenge">Comment changes in GitHub</h2>
-<p>The Collaborator has some questions about one line change made by the Owner and has some suggestions to propose.</p>
-<p>With GitHub, it is possible to comment the diff of a commit. Over the line of code to comment, a blue comment icon appears to open a comment window.</p>
-<p>The Collaborator posts its comments and suggestions using GitHub interface.</p>
+<p>El Dueño sube (push) commits al repositorio sin informar a su Colaborador. ¿Cómo puede el Colaborador averiguar que ha cambiado en la línea de comandos? ¿Y en GitHub?</p>
+<h2 id="comentando-cambios-en-github" class="challenge">Comentando cambios en GitHub</h2>
+<p>El Colaborados tiene algunas preguntas acerca de un cambio en una línea hecha por el Dueño y tiene algunas sugerencias al respecto</p>
+<p>GitHub permite comentar en un <code>diff</code> o en un <code>commit</code>. Sobre la línea del código<br />
+a comentar aparece un ícono azul para abrir una ventana de comentarios. c</p>
+<p>El Colaborador publica sus comentarios y sugerencias usando la interfaz de GitHub.</p>
 </div>
 </section>
         </div>
