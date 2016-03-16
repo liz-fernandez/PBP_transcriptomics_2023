@@ -6,8 +6,8 @@ minutes: 5
 ---
 > ## Objetivos de aprendizaje {.objectives}
 >
-> *   Entender los beneficios de un sistema automatizado de control de versiones. Understand the benefits of an automated version control system.
-> *   Entender las bases del funcionamiento de Git. Understand the basics of how Git works.
+> *   Entender los beneficios de un sistema automatizado de control de versiones. 
+> *   Entender las bases del funcionamiento de Git. 
 
 Comenzaremos explorando como podemos utilizar el control de versiones
 para mantener un registro de que cambios hizo una sola persona, así como
