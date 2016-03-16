@@ -1,10 +1,10 @@
 ---
 layout: page
-title: Version Control with Git
+title: Control de versiones usando Git
 subtitle: Open Science
 minutes: 5
 ---
-> ## Learning Objectives {.objectives}
+> ## Objetivos de aprendizaje {.objectives}
 >
 > *  Explain how a version control system can be leveraged as an electronic lab notebook for computational work.
 

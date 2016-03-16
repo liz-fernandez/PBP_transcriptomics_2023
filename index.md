@@ -54,8 +54,8 @@ debe ser almacenada utilizando un sistema de control de versiones.
 
 > ## Preparativos {.getready}
 >
-> Tener git instalado o accesarlo a traves del cuaderno en linea Jupyter. 
-> Si ya lo instalaste: Estas listo!
+> Tener git instalado o accesarlo a traves del cuaderno en línea Jupyter. 
+> Si ya lo instalaste: ¡Estás listo!
 
 ## Temas
 

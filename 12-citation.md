@@ -1,10 +1,10 @@
 ---
 layout: page
-title: Version Control with Git
+title: Control de versiones usando Git
 subtitle: Referencias
 minutes: 2
 ---
-> ## Learning Objectives {.objectives}
+> ## Objetivos de aprendizaje {.objectives}
 >
 > *   Make your work easy to cite
 

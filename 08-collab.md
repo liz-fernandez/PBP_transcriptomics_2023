@@ -102,18 +102,20 @@ Fast-forward
  create mode 100644 pluto.txt
 ~~~
 
+
 > ## Revisando los cambios {.challenge}
 >
 > El Dueño sube (push) commits al repositorio sin informar a su Colaborador. 
 > ¿Cómo puede el Colaborador averiguar que ha cambiado en la 
 > línea de comandos? ¿Y en GitHub?
-> 
+
+
 > ## Comentando cambios en GitHub {.challenge}
 >
-> El Colaborados tiene algunas preguntas acerca de un cambio en una línea hecha por el Dueño y
-> tiene algunas sugerencias al respecto
+> El Colaborador tiene algunas preguntas acerca de un cambio en una línea hecha por el Dueño y
+> tiene algunas sugerencias al respecto.
 > 
 > GitHub permite comentar en un `diff` o en un `commit`. Sobre la línea del código  
-> a comentar aparece un ícono azul para abrir una ventana de comentarios. c
+> a comentar aparece un ícono azul para abrir una ventana de comentarios. 
 > 
 > El Colaborador publica sus comentarios y sugerencias usando la interfaz de GitHub. 

@@ -1,10 +1,10 @@
 ---
 layout: page
-title: Version Control with Git
+title: Control de versiones usando Git
 subtitle: Albergando información
 minutes: 10
 ---
-> ## Learning Objectives {.objectives}
+> ## Objetivos de aprendizaje {.objectives}
 >
 > *   Explain different options for hosting scientific work.
 

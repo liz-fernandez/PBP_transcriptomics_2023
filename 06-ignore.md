@@ -126,6 +126,7 @@ nothing to commit, working directory clean
 > ## Ignorando archivos anidados {.challenge}
 >
 > Dado un directorio con la siguiente estructura:
+>
 > ~~~
 > results/data
 > results/plots
