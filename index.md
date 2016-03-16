@@ -68,6 +68,8 @@ debe ser almacenada utilizando un sistema de control de versiones.
 7.  [Repositorios remotos en GitHub](07-github.html)
 8.  [Colaborando](08-collab.html)
 9.  [Conflictos](09-conflict.html)
+
+
 [//]: # (10. [Open Science](10-open.html))
 [//]: # (11. [Licencias](11-licensing.html))
 [//]: # (12. [Referencias](12-citation.html))
@@ -75,6 +77,6 @@ debe ser almacenada utilizando un sistema de control de versiones.
 
 ## Otros recursos
 
-*   [Referencias](reference.html)
-*   [Discussion](discussion.html)
+*   [Referencias - Inglés](reference.html)
+*   [Discusión - Inglés](discussion.html)
 

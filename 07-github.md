@@ -142,29 +142,28 @@ Branch master set up to track remote branch master from origin.
 
 > ## Administradores de contraseñas {.callout}
 >
-> If your operating system has a password manager configured, `git push` will
-> try to use it when it needs your username and password. If you want to type
-> your username and password at the terminal instead of using
-> a password manager, type:
+> Si tu sistema operativo tiene un administrador de contraseñas configurado, `git push` 
+> tratará de utilizarlo cuando necesite tu nombre de usuario y contraseña. Si prefieres teclear tu 
+> usuario y contraseña en la terminal en vez del administrador, teclea:
 >
 > ~~~ {.bash}
 > $ unset SSH_ASKPASS
 > ~~~
 >
-> You may want to add this command at the end of your `~/.bashrc` to make it the
-> default behavior.
+> Puedes añadir este comando al final del archivo `~/.bashrc` para hacerlo el 
+> default.
 
-Our local and remote repositories are now in this state:
+Nuestro repositorio local y remoto están ahora en este estado:
 
 ![GitHub Repository After First Push](fig/github-repo-after-first-push.svg)
 
-> ## The '-u' Flag {.callout}
+> ## La opción '-u' {.callout}
 >
-> You may see a `-u` option used with `git push` in some documentation.
-> It is related to concepts we cover in our intermediate lesson,
-> and can safely be ignored for now.
+> En ciertos tutoriales encontrarás la opción `-u` usada en conjunto con `git push`.
+> Se relaciona a conceptos que cubriremos en nuestra lección intermedia y 
+> por el momento podemos ignorarla. 
 
-We can pull changes from the remote repository to the local one as well:
+También podemos bajar cambios del repositorio remoto al local:
 
 ~~~ {.bash}
 $ git pull origin master
@@ -175,45 +174,29 @@ From https://github.com/vlad/planets
 Already up-to-date.
 ~~~
 
-Pulling has no effect in this case
-because the two repositories are already synchronized.
-If someone else had pushed some changes to the repository on GitHub,
-though,
-this command would download them to our local repository.
+Bajar en este caso no tienen ningún efecto, 
+ya que ambos repositorios están sincronizados.
+Si alguien más hubiese subido cambios al repositorio de GitHub, 
+este comando nos permitiría bajarlos a nuestro repositorio local. 
 
 > ## GitHub GUI {.challenge}
 > 
-> Browse to your `planets` repository on GitHub.
-> Under the Code tab, find and click on the text that says "XX commits" (where "XX" is some number). 
-> Hover over, and click on, the three buttons to the right of each commit.
-> What information can you gather/explore from these buttons?
-> How would you get that same information in the shell?
+> Navega hasta tu repositorio `planets` en GitHub.
+> Bajo la pestaña "Code", encuentra y da click en el texto de dice "XX commits" (donde "XX" es un número). 
+> Pon el mouse sobre el mismo y da click a los tres botones a la derecha de cada commit. 
+> ¿Qué información te proporciona cada uno de estos botones?
+> ¿Cómo podrías obtener la misma información en la línea de comandos?
 
-> ## GitHub Timestamp {.challenge}
+> ## Marca del tiempo en GitHub {.challenge}
 >
-> Create a remote repository on GitHub.
-> Push the contents of your local repository to the remote.
-> Make changes to your local repository and push these changes.
-> Go to the repo you just created on Github and check the [timestamps](reference.html#timestamp) of the files.
-> How does GitHub record times, and why?
+> Crea un repositorio remoto en GitHub.
+> Sube (push) los contenidos de tu repositorio local al remoto. 
+> Realiza cambios en tu repositorio local y súbelos a GitHub.
+> Ve al repositorio que acabase de crear y revisa la marca de tiempo o [timestamp](reference.html#timestamp) del archivo.
+> ¿Cómo registra GitHub los tiempos y por qué?
 
 > ## Push vs. commit {.challenge}
 >
-> In this lesson, we introduced the "git push" command.
-> How is "git push" different from "git commit"?
+> En esta lección introdujimos el comando "git push".
+> ¿En qué difiere "git push" de "git commit"?
 
-> ## Fixing up remote settings {.challenge}
->
-> It happens quite often in practice that you made a typo in the
-> remote URL. This exercice is about how to fix this kind of issues.
-> First start by adding a remote with an invalid URL:
->
-> ~~~ {.bash}
-> git remote add broken https://github.com/this/url/is/invalid
-> ~~~
->
-> Do you get an error when adding the remote? Can you think of a
-> command that would make it obvious that your remote URL was not
-> valid? Can you figure out how to fix the URL (tip: use `git remote
-> -h`)? Don't forget to clean up and remove this remote once you are
-> done with this exercise.

@@ -35,7 +35,7 @@ Si no hay cambios conflictivos incluso podemos tratar de reproducir dos grupos d
 
 ![Se pueden unir versiones multiples](fig/merge.svg)
 
-Un sistema de control de versiones es una herramienta que mantiene un registro de cambios de forma automática y nos ayuda a controlar versiones y a unir cambios hechos a un documento. Nos permite decidir que cambios se deben incorporar a la próxima version, lo que se le conoce como un [commit](reference.html#commit). Además, guarda metadatos útiles acerca de estos cambios permanentes (commits). El historial completo de commits de un proyecto en particular así como sus metadatos son lo que constituye un repositorio o[repository](reference.html#repository). Los Repositorios pueden mantenerse sincronizados en varias computadoras facilitando así las colaboraciones entre distintos individuos. 
+Un sistema de control de versiones es una herramienta que mantiene un registro de cambios de forma automática y nos ayuda a controlar versiones y a unir cambios hechos a un documento. Nos permite decidir que cambios se deben incorporar a la próxima version, lo que se le conoce como un [commit](reference.html#commit). Además, guarda metadatos útiles acerca de estos cambios permanentes (commits). El historial completo de commits de un proyecto en particular así como sus metadatos son lo que constituye un repositorio o [repository](reference.html#repository). Los Repositorios pueden mantenerse sincronizados en varias computadoras facilitando así las colaboraciones entre distintos individuos. 
 
 > ## La larga historia de los sistemas de control de versiones{.callout}
 >

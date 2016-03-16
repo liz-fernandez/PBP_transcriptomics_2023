@@ -6,7 +6,7 @@ minutes: 10
 ---
 > ## Objetivos de aprendizaje {.objectives}
 > 
-> *   Create a local Git repository.
+> *   Crear un repositorio local de Git.
 
 Una vez que Git esta configurado podemos comenzar a usarlo. 
 Creemos un directorio que contenga nuestro trabajo y entremos 
@@ -17,7 +17,7 @@ $ mkdir planets
 $ cd planets
 ~~~
 
-Una vez dentro, digámosle a Git que cree un [repository](reference.html#repository)&mdash llamado `planets` ; un lugar en donde Git pueda almacenar versiones de nuestros archivos:
+Una vez dentro, digámosle a Git que cree un [repository](reference.html#repository) llamado `planets` ; un lugar en donde Git pueda almacenar versiones de nuestros archivos:
 
 ~~~ {.bash}
 $ git init
