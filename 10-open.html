@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="generator" content="pandoc">
-    <title>Software Carpentry: Version Control with Git</title>
+    <title>Software Carpentry: Control de versiones usando Git</title>
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css" />
@@ -26,11 +26,11 @@
       <article>
       <div class="row">
         <div class="col-md-10 col-md-offset-1">
-                    <a href="index.html"><h1 class="title">Version Control with Git</h1></a>
+                    <a href="index.html"><h1 class="title">Control de versiones usando Git</h1></a>
           <h2 class="subtitle">Open Science</h2>
           <section class="objectives panel panel-warning">
 <div class="panel-heading">
-<h2><span class="glyphicon glyphicon-certificate"></span>Learning Objectives</h2>
+<h2 id="objetivos-de-aprendizaje"><span class="glyphicon glyphicon-certificate"></span>Objetivos de aprendizaje</h2>
 </div>
 <div class="panel-body">
 <ul>
@@ -54,7 +54,7 @@
 </ul>
 <p>For a growing number of scientists, though, the process looks like this:</p>
 <ul>
-<li>The data that the scientist collects is stored in an open access repository like <a href="http://figshare.com/">figshare</a> or <a href="http://zenodo.org">Zenodo</a>, possibly as soon as it’s collected, and given its own DOI. Or the data was already published and is stored in <a href="http://datadryad.org/">Dryad</a>.</li>
+<li>The data that the scientist collects is stored in an open access repository like <a href="http://figshare.com/">figshare</a> or <a href="http://zenodo.org">Zenodo</a>, possibly as soon as it’s collected, and given its own <a href="https://en.wikipedia.org/wiki/Digital_object_identifier">Digital Object Identifier</a> (DOI). Or the data was already published and is stored in <a href="http://datadryad.org/">Dryad</a>.</li>
 <li>The scientist creates a new repository on GitHub to hold her work.</li>
 <li>As she does her analysis, she pushes changes to her scripts (and possibly some output files) to that repository. She also uses the repository for her paper; that repository is then the hub for collaboration with her colleagues.</li>
 <li>When she’s happy with the state of her paper, she posts a version to <a href="http://arxiv.org/">arXiv</a> or some other preprint server to invite feedback from peers.</li>
@@ -64,14 +64,14 @@
 <p>This open model accelerates discovery: the more open work is, <a href="http://dx.doi.org/10.1371/journal.pone.0000308">the more widely it is cited and re-used</a>. However, people who want to work this way need to make some decisions about what exactly “open” means and how to do it.</p>
 <p>This is one of the (many) reasons we teach version control. When used diligently, it answers the “how” question by acting as a shareable electronic lab notebook for computational work:</p>
 <ul>
-<li>The conceptual stages of your work are documented, including who did what and when. Every step is stamped with an identifier (the commit ID) that is for most intents and purposes is unique.</li>
+<li>The conceptual stages of your work are documented, including who did what and when. Every step is stamped with an identifier (the commit ID) that is for most intents and purposes unique.</li>
 <li>You can tie documentation of rationale, ideas, and other intellectual work directly to the changes that spring from them.</li>
 <li>You can refer to what you used in your research to obtain your computational results in a way that is unique and recoverable.</li>
 <li>With a distributed version control system such as Git, the version control repository is easy to archive for perpetuity, and contains the entire history.</li>
 </ul>
 <aside class="callout panel panel-info">
 <div class="panel-heading">
-<h2><span class="glyphicon glyphicon-pushpin"></span>Making Code Citable</h2>
+<h2 id="making-code-citable"><span class="glyphicon glyphicon-pushpin"></span>Making Code Citable</h2>
 </div>
 <div class="panel-body">
 <p><a href="https://guides.github.com/activities/citable-code/">This short guide</a> from GitHub explains how to create a Digital Object Identifier (DOI) for your code, your papers, or anything else hosted in a version control repository.</p>
@@ -79,7 +79,7 @@
 </aside>
 <section class="challenge panel panel-success">
 <div class="panel-heading">
-<h2><span class="glyphicon glyphicon-pencil"></span>How Reproducible Is My Work?</h2>
+<h2 id="how-reproducible-is-my-work"><span class="glyphicon glyphicon-pencil"></span>How Reproducible Is My Work?</h2>
 </div>
 <div class="panel-body">
 <p>Ask one of your labmates to reproduce a result you recently obtained using only what they can find in your papers or on the web. Try to do the same for one of their results, then try to do it for a result from a lab you work with.</p>
@@ -89,9 +89,9 @@
       </div>
       </article>
       <div class="footer">
-                    <h4 class="title">Curso basado en material generado por:</h4>
+        <h5 class="title">Curso basado en material generado por:</h5>
         <a href="http://software-carpentry.org" title="Software Carpentry">
-          <img alt="Software Carpentry banner" src="img/software-carpentry-banner.png" style="width: 120px" />
+        <img alt="Software Carpentry banner" src="img/software-carpentry-banner.png" style="width: 120px" />
         <a class="label swc-blue-bg" href="https://github.com/swcarpentry/git-novice">Fuente Original</a>
         <a class="label swc-blue-bg" href="mailto:selene.fernandez.valverde@gmail.com">Contacto</a>
         <a class="label swc-blue-bg" href="LICENSE.html">Licencia</a>
@@ -100,5 +100,6 @@
     <!-- Javascript placed at the end of the document so the pages load faster -->
     <script src="http://software-carpentry.org/v5/js/jquery-1.9.1.min.js"></script>
     <script src="css/bootstrap/bootstrap-js/bootstrap.js"></script>
+    <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
   </body>
 </html>
