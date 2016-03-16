@@ -1,44 +1,48 @@
 ---
 layout: page
-title: Version Control with Git
+title: Control de versiones usando Git
 subtitle: Colaborando
 minutes: 25
 ---
-> ## Learning Objectives {.objectives}
-> *   Clone a remote repository.
-> *  Collaborate pushing to a common repository.
-
-For the next step, get into pairs.
-One person will be the "Owner" (this is the person whose Github repository will be used to start the exercise) and the other person will be the "Collaborator" (this is the person who will be cloning the Owner's repository and making changes to it).
-
-> ## Practicing by yourself {.callout}
+> ## Objetivos de aprendizaje {.objectives}
 >
-> If you're working through this lesson on your own, you can carry on by opening
-> a second terminal window, and switching to another directory (e.g. `/tmp`).
-> This window will represent your partner, working on another computer. You
-> won't need to give anyone access on GitHub, because both 'partners' are you.
+> *  Clona un repositorio remoto.
+> *  Colabora subindo cambios a un repositorio común. 
 
-The Owner needs to give the Collaborator access.
-On GitHub, click the settings button on the right,
-then select Collaborators, and enter your partner's username.
+Para el siguiente paso deben trabajar en parejas. 
+Una persona será el "Dueño" (esta es la persona cuyo repositorio de GitHub usaremos al inicio de este ejercicio)
+y la otra persona será el "Colaborador" (esta es la persona que clonará el repositorio del Dueño y 
+realizará cambios al mismo). 
 
-![Adding collaborators on GitHub](fig/github-add-collaborators.png)
+> ## Practicando solo {.callout}
+>
+> Si estás estudiando esta lección solo(a), puedes continuar abriendo 
+> una segunda terminal, y cambiando a otro directorio (e.g. `/tmp`).
+> Esta ventana representará a tu pareja, trabajando en otra computadora. 
+> En este caso no tendrás que otorgar acceso a alguien más en GitHub, 
+> ya que tu serás ambos compañeros. 
 
-The Collaborator needs to work on this project locally. He or she should `cd` to another directory
-(so `ls` doesn't show a `planets` folder),
-and then make a copy of the Owner's repository:
+El Dueño deberá darle acceso al Colaborador. 
+En Github, da click en el botón settings en el lado derecho, 
+después selecciona Colaboradores, e inserta el nombre de tu compañero. 
+
+![Añadiendo colaboradores en GitHub](fig/github-add-collaborators.png)
+
+El Colaborador debe trabajar en este proyecto de manera local. El o ella deberá 
+cambiar de directorio usando el comando `cd` para entrar un directorio que no contenga
+el folder `planets`, y entonces hacer una copia del repositorio del Dueño:
 
 ~~~ {.bash}
 $ git clone https://github.com/vlad/planets.git
 ~~~
 
-Replace 'vlad' with the Owner's username.
+Remplaza 'vlad' con el nombre del Dueño:
 
-`git clone` creates a fresh local copy of a remote repository.
+`git clone` crea una copia local fresca en tu repositorio remoto.
 
 ![After Creating Clone of Repository](fig/github-collaboration.svg)
 
-The Collaborator can now make a change in his or her copy of the repository:
+El Colaborador puede ahora hacer cambios en su copia del respositorio:
 
 ~~~ {.bash}
 $ cd planets
@@ -57,7 +61,7 @@ $ git commit -m "Some notes about Pluto"
  create mode 100644 pluto.txt
 ~~~
 
-Then push the change to GitHub:
+Y subir estos cambios a GitHub:
 
 ~~~ {.bash}
 $ git push origin master
@@ -72,14 +76,14 @@ To https://github.com/vlad/planets.git
    9272da5..29aba7c  master -> master
 ~~~
 
-Note that we didn't have to create a remote called `origin`:
-Git does this automatically,
-using that name,
-when we clone a repository.
-(This is why `origin` was a sensible choice earlier
-when we were setting up remotes by hand.)
+Nota que no tuvimos que crear un remoto llamado `origin`:
+Git lo crea automaticamente, 
+usando este nombre, 
+cuando clonamos un repositorio. 
+(Es por ellos que `origin` fue una buena elección
+de nombre cuando configuramos los remotos manualmente).
 
-We can now download changes into the original repository on our machine:
+Ahora podemos descargar los cambios en el repositorio original en nuestra máquina:
 
 ~~~ {.bash}
 $ git pull origin master
@@ -98,18 +102,18 @@ Fast-forward
  create mode 100644 pluto.txt
 ~~~
 
-> ## Review changes {.challenge}
+> ## Revisando los cambios {.challenge}
 >
-> The Owner push commits to the repository without giving any information
-> to the Collaborator. How can the Collaborator find out what has changed with 
-> command line? And on GitHub? 
+> El Dueño sube (push) commits al repositorio sin informar a su Colaborador. 
+> ¿Cómo puede el Colaborador averiguar que ha cambiado en la 
+> línea de comandos? ¿Y en GitHub?
 > 
-> ## Comment changes in GitHub {.challenge}
+> ## Comentando cambios en GitHub {.challenge}
 >
-> The Collaborator has some questions about one line change made by the Owner and
-> has some suggestions to propose. 
+> El Colaborados tiene algunas preguntas acerca de un cambio en una línea hecha por el Dueño y
+> tiene algunas sugerencias al respecto
 > 
-> With GitHub, it is possible to comment the diff of a commit. Over the line of 
-> code to comment, a blue comment icon appears to open a comment window. 
+> GitHub permite comentar en un `diff` o en un `commit`. Sobre la línea del código  
+> a comentar aparece un ícono azul para abrir una ventana de comentarios. c
 > 
-> The Collaborator posts its comments and suggestions using GitHub interface.
+> El Colaborador publica sus comentarios y sugerencias usando la interfaz de GitHub. 

@@ -1,47 +1,48 @@
 ---
 layout: page
-title: Version Control with Git
+title: Control de versiones usando Git
 subtitle: Repositorios remotos en GitHub
 minutes: 30
 ---
-> ## Learning Objectives {.objectives}
+> ## Objetivos de aprendizaje {.objectives}
 >
-> *   Explain what remote repositories are and why they are useful.
-> *   Push to or pull from a remote repository.
+> *   Explicar que son los repositorios remotos y porque son útiles.
+> *   Subir o bajar (push o pull) de un repositorio remoto.
 
-Version control really comes into its own
-when we begin to collaborate with other people.
-We already have most of the machinery we need to do this;
-the only thing missing is to copy changes from one repository to another.
+El sistema de control de versiones realmente brilla
+cuando comenzamos a colaborar con otras personas. 
+Ya tenemos la mayoría de la maquinaria que requerimos para hacer esto;
+la única cosa que nos falta el copiar cambios de un repositorio a otro. 
 
-Systems like Git allow us to move work between any two repositories.
-In practice,
-though,
-it's easiest to use one copy as a central hub,
-and to keep it on the web rather than on someone's laptop.
-Most programmers use hosting services like
+Sistemas como Git nos permiten mover trabajo entre dos repositorios. 
+Sin embargo en la práctica es más sencillo utilizar uno de estos 
+como un hub central, y mantenerlo en la red en vez de en la computadora
+de alguien. La mayoría de los programadores utilizan servicios de almacenamiento como
 [GitHub](http://github.com),
 [BitBucket](http://bitbucket.org) or
 [GitLab](http://gitlab.com/)
-to hold those master copies;
-we'll explore the pros and cons of this in the final section of this lesson.
+para guardar las copias maestras.
+Exploraremos los pros y contras de este método en la sección final de esta lección.
 
-Let's start by sharing the changes we've made to our current project with the world.
-Log in to GitHub,
-then click on the icon in the top right corner to create a new repository called `planets`:
+Comencemos por compartir los cambios que hemos realizado a nuestro proyecto con el 
+mundo. 
+Inicia sesión en GitHub,
+y da click en el ícono en la parte superior derecha para crear un nuevo repositorio 
+llamado `planets`:
 
 ![Creating a Repository on GitHub (Step 1)](fig/github-create-repo-01.png)
 
-Name your repository "planets" and then click "Create Repository":
+Llama tu repositorio "planets" y da click en en el botón "Create Repository":
 
 ![Creating a Repository on GitHub (Step 2)](fig/github-create-repo-02.png)
 
-As soon as the repository is created,
-GitHub displays a page with a URL and some information on how to configure your local repository:
+Tan pronto se haya creado el repositorio, 
+GitHub despliega una página con la dirección URL y alguna información acerca de como
+configurar tu repositorio local:
 
 ![Creating a Repository on GitHub (Step 3)](fig/github-create-repo-03.png)
 
-This effectively does the following on GitHub's servers:
+Esto ejecuta los siguientes comandos en los servidores de GitHub:
 
 ~~~ {.bash}
 $ mkdir planets
@@ -49,45 +50,46 @@ $ cd planets
 $ git init
 ~~~
 
-Our local repository still contains our earlier work on `mars.txt`,
-but the remote repository on GitHub doesn't contain any files yet:
+Nuestro repositorio local aún contiene trabajo previo realizado en 
+en el archivo `mars.txt`, pero el repositorio remoto en GitHub aún
+no tiene ningún archivo:
 
 ![Freshly-Made GitHub Repository](fig/git-freshly-made-github-repo.svg)
 
-The next step is to connect the two repositories.
-We do this by making the GitHub repository a [remote](reference.html#remote)
-for the local repository.
-The home page of the repository on GitHub includes
-the string we need to identify it:
+El siguiente paso es conectar ambos repositorios.
+Para esto convertimos el repositorio de GitHub en un [remote](reference.html#remote)
+del repositorio local. 
+La página de entrada del repositorio en GitHub incluye
+el identificador que requerimos para identificarlo:
 
 ![Where to Find Repository URL on GitHub](fig/github-find-repo-string.png)
 
-Click on the 'HTTPS' link to change the [protocol](reference.html#protocol) from SSH to HTTPS.
+Da click en el link 'HTTPS' para cambiar el [protocol](reference.html#protocol) de SSH a HTTPS.
 
 > ## HTTPS vs SSH {.callout}
 >
-> We use HTTPS here because it does not require additional configuration.
-> After the workshop you may want to set up SSH access, which is a bit more
-> secure, by following one of the great tutorials from
+> Utilizamos HTTPS ya que no requiere configuración adicional. 
+> Después del curso puedes configurar acceso via SSH, el cual es un poco más seguro. 
+> Sigue alguno de estos excelentes tutoriales:
 > [GitHub](https://help.github.com/articles/generating-ssh-keys),
 > [Atlassian/BitBucket](https://confluence.atlassian.com/display/BITBUCKET/Set+up+SSH+for+Git)
-> and [GitLab](https://about.gitlab.com/2014/03/04/add-ssh-key-screencast/)
-> (this one has a screencast).
+> y [GitLab](https://about.gitlab.com/2014/03/04/add-ssh-key-screencast/)
+> (este último incluye videos).
 
 ![Changing the Repository URL on GitHub](fig/github-change-repo-string.png)
 
-Copy that URL from the browser,
-go into the local `planets` repository,
-and run this command:
+Copia esa dirección URL del navegador, 
+ve al repositorio local `planets` y 
+ejecuta este comando:
 
 ~~~ {.bash}
 $ git remote add origin https://github.com/vlad/planets.git
 ~~~
 
-Make sure to use the URL for your repository rather than Vlad's:
-the only difference should be your username instead of `vlad`.
+Segurarate de utilizar la URL para tu repositorio en vez de la de Vlad:
+debes utilizar tu nombre de usuario en vez de `vlad`.
 
-We can check that the command has worked by running `git remote -v`:
+Podemos verificar que el comando funcionó ejecutando `git remote -v`:
 
 ~~~ {.bash}
 $ git remote -v
@@ -97,13 +99,13 @@ origin   https://github.com/vlad/planets.git (push)
 origin   https://github.com/vlad/planets.git (fetch)
 ~~~
 
-The name `origin` is a local nickname for your remote repository:
-we could use something else if we wanted to,
-but `origin` is by far the most common choice.
+El nombre `origin` es un apodo local para tu repositorio remoto:
+podríamos utilizar otro nombre si lo desearamos, 
+pero `origin` es el nombre más común. 
 
-Once the nickname `origin` is set up,
-this command will push the changes from our local repository
-to the repository on GitHub:
+Una vez que el apodo `origin` se ha asignado, 
+este comando subirá (push) los cambios realizados en nuestro repositorio local
+al repositorio en GitHub:
 
 ~~~ {.bash}
 $ git push origin master
@@ -121,24 +123,24 @@ Branch master set up to track remote branch master from origin.
 
 > ## Proxy {.callout}
 >
-> If the network you are connected to uses a proxy there is an chance that your last
-> command failed with "Could not resolve hostname" as the error message. To
-> solve this issue you need to tell Git about the proxy:
+> Si la red a la que estás conectado(a) utiliza un proxy existe la posibilidad de que el
+> comando anterior haya fallado y mostrado el mensaje de error "Could not resolve hostname". 
+> Para resolver este problema necesitas informarle a Git acerca del proxy:
 >
 > ~~~ {.bash}
 > $ git config --global http.proxy http://user:password@proxy.url
 > $ git config --global https.proxy http://user:password@proxy.url
 > ~~~
 >
-> When you connect to another network that doesn't use a proxy you will need to
-> tell Git to disable the proxy using:
+> Cuando te conectas a otras redes que no utilizan un proxy deberás
+> decirle a Git que desactive el proxy utilizando:
 >
 > ~~~ {.bash}
 > $ git config --global --unset http.proxy
 > $ git config --global --unset https.proxy
 > ~~~
 
-> ## Password Managers {.callout}
+> ## Administradores de contraseñas {.callout}
 >
 > If your operating system has a password manager configured, `git push` will
 > try to use it when it needs your username and password. If you want to type
