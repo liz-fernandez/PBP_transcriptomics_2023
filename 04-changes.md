@@ -423,7 +423,7 @@ repositorio (`git commit`):
 >     "Línea añadida 'But Billy will appreciate the lack of humidity' a mars.txt"
 > 3. 
 >
->     "Discución acerca de los efectos del clima marciano en Billy"
+>     "Discusión acerca de los efectos del clima marciano en Billy"
 
 > ## Enviando commits a Git {.challenge}
 >
