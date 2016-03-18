@@ -9,7 +9,7 @@ minutes: 20
 > *   Realizar el ciclo modificar-añadir-confirmar (modify-add-commit) para un solo archivo.
 > *   Explicar donde se almacena la información en cada etapa del ciclo de Git.
 
-Creemos un archivo llamado `mars.txt` que contenga algunas notas
+Creemos un archivo llamado `mars.txt`, que contenga algunas notas
 acerca de las posibilidades de utilizar el planeta rojo como base espacial.  
 (Para el ejercicio utilizaremos el editor `nano` para editar el archivo;
 puedes utilizar tu editor de texto preferido si así lo deseas. Mantén en mente 
@@ -59,8 +59,8 @@ $ git status
 nothing added to commit but untracked files present (use "git add" to track)
 ~~~
 
-El mensaje notificándonos de archivos no rastreados "untracked files" nos indica
-que hay un archivo que Git no está rastreando:
+El mensaje, notificándonos de archivos no rastreados por "untracked files", nos indica
+que hay un archivo que Git no está rastreando.
 Le podemos decir a Git que rastree este archivo utilizando `git add`:
 
 ~~~ {.bash}
@@ -425,7 +425,7 @@ repositorio (`git commit`):
 >     "Línea añadida 'But Billy will appreciate the lack of humidity' a mars.txt"
 > 3. 
 >
->     "Discución acerca de los efectos del clima marciano en Billy"
+>     "Discusión acerca de los efectos del clima marciano en Billy"
 
 > ## Enviando commits a Git {.challenge}
 >
