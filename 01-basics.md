@@ -11,7 +11,7 @@ minutes: 5
 
 Comenzaremos explorando como podemos utilizar el control de versiones
 para mantener un registro de que cambios hizo una sola persona, así como
-del cuando se realizaron estos cambios. Estos cambios pueden ser en un escrito
+de cuando se realizaron estos cambios. Estos cambios pueden ser en un escrito
 o en una pieza de código. 
 Incluso si no realizas trabajos en colaboración con otros personas, 
 usar un sistema de control de versiones es mucho mejor que terminar en una 
@@ -21,7 +21,7 @@ situación como esta:
 
 "Piled Higher and Deeper" by Jorge Cham, http://www.phdcomics.com
 
-Todos hemos estado en una situación similar: parece ridículo tener multiples versiones prácticamente idénticas del mismo documento. Algunos procesadores de texto nos ayudan a lidiar con estas situaciones, como por exemplo la función "Resaltar Cambios" (Track Changes) de Microsoft Word o el historial de versiones de Google Docs. 
+Todos hemos estado en una situación similar: parece ridículo tener múltiples versiones prácticamente idénticas del mismo documento. Algunos procesadores de texto nos ayudan a lidiar con estas situaciones, como por exemplo la función "Resaltar Cambios" (Track Changes) de Microsoft Word o el historial de versiones de Google Docs. 
 
 Los sistemas de control de versiones comienzan con una version base del documento y después guardan los cambios hechos en cada paso. Podemos pensar en estos sistemas como si fuesen una película: si la regresamos al inicio y comenzamos con el documento base podemos reproducir cada cambio y terminar con la versión final del documento. 
 
@@ -45,4 +45,4 @@ Un sistema de control de versiones es una herramienta que mantiene un registro d
 > A los sistemas más modernos como Git y [Mercurial](http://swcarpentry.github.io/hg-novice/) se les conoce como
 > *distribuidos*, ya que no cuentan con un servidor centralizado que almacena el repositorio.
 > Estos sistemas modernos también incluyen poderosas herramientas e unión o "merging" que permiten que multiples contribuidores trabajen 
-> en los mismos archivos de manera simultanea. 
+> en los mismos archivos de manera simultánea. 
