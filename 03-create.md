@@ -40,7 +40,7 @@ $ ls -a
 .	..	.git
 ~~~
 
-Git almacena información del proyecto en el este subdirectorio especial. 
+Git almacena información del proyecto en este subdirectorio especial, 
 Si alguna vez lo borramos perderemos todo el historial de ese proyecto. 
 
 Podemos revisar que todo está configurado correctamente pidiéndole a Git 
