@@ -23,8 +23,8 @@ realizará cambios al mismo).
 > ya que tu serás ambos compañeros. 
 
 El Dueño deberá darle acceso al Colaborador. 
-En Github, da click en el botón settings en el lado derecho, 
-después selecciona Colaboradores, e inserta el nombre de tu compañero. 
+En Github, se da click en el botón settings en el lado derecho, 
+después se selecciona Colaboradores, y por último se inserta el nombre/usuario/correo de tu compañero. 
 
 ![Añadiendo colaboradores en GitHub](fig/github-add-collaborators.png)
 

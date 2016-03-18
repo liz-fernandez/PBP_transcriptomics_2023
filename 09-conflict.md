@@ -1,4 +1,4 @@
----
+ ---
 layout: page
 title: Control de versiones usando Git
 subtitle: Conflictos
@@ -258,7 +258,7 @@ o encontrar una manera diferente de dividir el trabajo.
 > ## Resolviendo conflictos creados por tí {.challenge}
 >
 > Clona el repositorio creado por tu instructor,
-> Añádele un nuevo archivo, 
+> añádele un nuevo archivo, 
 > y modifica un archivo existente (tu instructor te dirá cual). 
 > Cuando te lo pida el instructor, 
 > baja los cambios del repositorio para crear un conflicto
