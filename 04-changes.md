@@ -98,20 +98,21 @@ $ git commit -m "Start notes on Mars as a base"
 ~~~
 
 Cuando ejecutamos `git commit`,
-Git toma todo lo que le hemos indicado agregar usando `git add`
+Git toma los archivos que hemos agregado a través del comando `git add`
 y almacena una copia permanentemente dentro del directorio especial `.git`.
 Esta copia permanente se llama un [commit](reference.html#commit)
-(o [revision](reference.html#revision)) y su código de identificación corto 
-es `f22b25e`. (Tu commit puede tener otro identificador). 
+(o [revision](reference.html#revision)) y su código corto de identificación 
+es `f22b25e`. (Cada commit tendrá un identificador distinto). 
 
 Utilizamos la bandera `-m` (de "mensaje")
 para guardar un mensaje específico, corto y descriptivo que nos permita
-recordar que cambios hicimos y porque. 
-Si solo ejecutamos el comando `git commit` sin la opción `-m`,  
+recordar qué cambios hicimos y el porqué. 
+Si sólo ejecutamos el comando `git commit` sin la opción `-m`,  
 Git iniciará `nano` (o cualquier otro editor que hayamos asignado como `core.editor`)
-para permitirnos escribir un mensaje más largo. 
+para permitirnos escribir el mensaje. Si no se escribe un un mensaje, no
+se realizará el commit.
 
-Los [mensajes buenos en un commit][commit-messages] comienzan con un pequeño resumen 
+Los [buenos mensajes en un commit][commit-messages] comienzan con un pequeño resumen 
 (menos de 50 caracteres) de los cambios hechos como parte del commit. 
 Si deseas agregar detalles más descriptivos puedes añadir una línea vacía
 entre la línea de resumen y otros notas adicionales. 
@@ -145,7 +146,7 @@ Date:   Thu Aug 22 09:51:46 2013 -0400
 `git log` lista todos los commits realizados en ese repositorio en ordern cronológico
 inverso. El listado de cada commit incluye el identificador (el cual comienza
 con los mismo caracteres que el identificador corto impreso por el comando 
-`git commit` que ejecutamos previamente), el autor del commit, cuando fue creado, 
+`git commit` que ejecutamos previamente), el autor del commit, cuándo fue creado, 
 y el mensaje de registro (log) que le otorgamos a Git cuando creamos el commit. 
 
 > ## ¿Dónde están mis cambios? {.callout}
@@ -187,7 +188,7 @@ $ git status
 no changes added to commit (use "git add" and/or "git commit -a")
 ~~~
 
-La última linea proporciona la frase clave:
+La última línea proporciona la frase clave:
 "no changes added to commit".
 Hemos modificado este archivo, 
 pero no le hemos dicho a Git que queremos agregar estos cambios
@@ -217,9 +218,9 @@ es una serie de comandos para herramientas tales como editores y `patch`
 indicándoles como reconstruir un archivo dado los cambios en el otro. 
 Si lo dividimos en partes:
 
-1.  La primera linea nos indica que Git esta imprimiendo un resultado similar al del
+1.  La primera línea nos indica que Git está imprimiendo un resultado similar al del
 	commando `diff` al comparar la versión antigua y nueva del archivo.
-2.  La segunda línea nos dice exactamente que versiones del archivo está comparando
+2.  La segunda línea nos dice exactamente qué versiones del archivo está comparando
     Git;
     `df0654a` y `315bf3a` son etiquetas únicas generadas por la computadora para 
     cada una de esas versiones.
@@ -254,6 +255,7 @@ Arreglémoslo:
 $ git add mars.txt
 $ git commit -m "Add concerns about effects of Mars' moons on Mandy"
 ~~~
+
 ~~~ {.output}
 [master 34961b1] Add concerns about effects of Mars' moons on Mandy
  1 file changed, 1 insertion(+)
@@ -277,12 +279,12 @@ aprobados por medio de un commit.
 > ## Staging area {.callout}
 > 
 > Si pensamos en Git como una cámera que toma fotos de los cambios a lo largo
-> de la vida de un proyecto, entonces `git add` indica *que* se va a incluir
+> de la vida de un proyecto, entonces `git add` indica *qué* se va a incluir
 > en la fotografía y `git commit` esta encargado de *tomar* la fotografía, así como de 
 > crear un registro permanente de la misma (como un commit). 
 > Si no hay nada en fase "staged" cuando ejecutamos `git commit`, 
 > Git te pedirá que utilices `git commit -a` o `git commit --all`,
-> lo cual sería el equivalente de !invitar a *todos* los cambios a salir en la foto!
+> lo cual sería equivalente a !invitar a *todos* los cambios a salir en la foto!
 > Sin embargo, casi siempre es mejor añadir cada cambio de manera explícita
 > al área de staging, ya que puede ser que apruebes cambios que hiciste pero olvidaste.
 > (Siguiendo con la analogía de las fotografías puede que incluyas a un 
@@ -460,7 +462,7 @@ repositorio (`git commit`):
 > modifica una línea, agrega una cuarta línea fourth line, y muestra las diferencias
 > entre su estado actualizado y su estado original.
 
-> ## Author y Committer {.challenge}
+> ## Autor y Committer {.challenge}
 >
 > Por cada uno de los commits que haz realizado, Git ha almacenado tu nombre 
 > dos veces. Se almacena tu nombre como el autor así como la persona realizando
@@ -479,7 +481,7 @@ repositorio (`git commit`):
 >
 > Crea un nuevo repositorio y crea dos commits: uno sin la opción 
 > `--author` y otra nombrando a un compañero tuyo como autor.
-> Ejecuta `git log` y `git log --format=full`. Piensa en que manera
+> Ejecuta `git log` y `git log --format=full`. Piensa en qué manera
 > esto puede ayudarte a colaborar con tus compañeros.
 
 [commit-messages]: http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
