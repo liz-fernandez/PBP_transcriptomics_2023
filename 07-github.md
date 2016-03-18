@@ -179,6 +179,12 @@ ya que ambos repositorios están sincronizados.
 Si alguien más hubiese subido cambios al repositorio de GitHub, 
 este comando nos permitiría bajarlos a nuestro repositorio local. 
 
+Sin embargo se debe tener cuidado de actualizar el repositorio local si 
+si otra  persona se encuentra modificando archivos de forma simultanea, ya que 
+al tratar de subir archivos sin antes bajar las últimas modificaciones, el 
+usuario caerá en un conflicto. 
+
+
 > ## GitHub GUI {.challenge}
 > 
 > Navega hasta tu repositorio `planets` en GitHub.
