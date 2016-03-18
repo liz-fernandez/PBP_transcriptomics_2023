@@ -6,8 +6,19 @@ minutes: 5
 ---
 > ## Objetivos de aprendizaje {.objectives}
 >
+> * Instalar 'git' en dos plataformas: Windows y Linux
 > *  Configurar `git` la primera vez que es utilizado en una computadora.
 > *  Entender el significado de la bandera de configuración `--global`.
+
+Para descargar e instalar 'git' en Linux ejecuta el siguiente comando en bash:
+
+sudo apt-get install git-all
+
+Existen diferentes versiones de visualizar Git en plaforma Windows, una
+de ellas es emulando la consola de Linux, la podrás encontrar en el siguiente link:
+
+https://git-scm.com/download/win 
+
 
 Cuando utilizamos Git en una nueva computadora por primera vez,
 tenemos que configurar algunas cosas. Así es como Mandy configura Git 
