@@ -64,13 +64,13 @@ nothing to commit (create/copy files and use "git add" to track)
 > para crear un repositorio de Git dentro de otro:
 > 
 > ~~~ {.bash}
-> cd             # return to home directory
-> mkdir planets  # make a new directory planets
-> cd planets     # go into planets
-> git init       # make the planets directory a Git repository
-> mkdir moons    # make a sub-directory planets/moons
-> cd moons       # go into planets/moons
-> git init       # make the moons sub-directory a Git repository
+> cd             # regresar al directorio home
+> mkdir planets  # crear nuevo directorio planets
+> cd planets     # ir al directorio planets
+> git init       # convertir el directorio planets en un repositorio Git
+> mkdir moons    # generar subdirectorio planets/moon
+> cd moons       # moverse a  planets/moons
+> git init       # convertir el subdirectorio planets/moons en un repositorio Git
 > ~~~
 > 
 > ¿Porqué es una mala idea hacer esto?
