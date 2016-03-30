@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Analisis transcriptomicos
+title: Análisis transcriptómicos
 ---
 
 Estamos realizando un estudio transcriptomico para entender la expresion de genes
@@ -12,11 +12,11 @@ http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE73227
 Hemos logrado aislar los transcritos del cromosoma I en dos condiciones: mutante y 
 wild type (WT).
 
-Queremos realizar un analisis completo de la expresión diferencial de estos transcritos. 
+Queremos realizar un análisis completo de la expresión diferencial de estos transcritos. 
 Durante esta practica realizaremos el análisis desde identificar la calidad de las secuencias
 hasta medir si los cambios en expresión son significativos usando métodos estadísticos.
 
-Diagrama de flujo de trabajo para analisis de datos de secuenciacion masiva
+Diagrama de flujo de trabajo para análisis de datos de secuenciacion masiva
 
 Esta mañana recibimos un correo de nuestro colaborador:
 
@@ -40,7 +40,7 @@ Professor X.
 > ## Conocimientos previos {.prereq}
 >
 > Se espera que los estudiantes tengan alguna experiencia con la terminal,
-> asi con el uso del lenguaje de programación R. 
+> así con el uso del lenguaje de programación R. 
 
 
 ## Temas
@@ -48,9 +48,9 @@ Professor X.
 1.  [Control de calidad de datos de secuenciacion masiva](01-quality.html)
 2.  [Ensamblando datos de novo](02-assembly.html)
 3.  [Mapeo de secuencias](03-mapping.html)
-4.  [Anotacion](04-annotation.html)
+4.  [Anotación](04-annotation.html)
 5.  [Usadon un explorador de genomas (genome browser)](05-genomebrowser.html)
-6.  [Analisis de expresión diferencial](06-diffexpression.html)
+6.  [Análisis de expresión diferencial](06-diffexpression.html)
 7.  [Otras herramientas](07-others.html)
 
 
@@ -61,5 +61,5 @@ Professor X.
 
 ## Otros recursos
 
-*   [Analisis de microarreglos - Inglés](microarrays.html)
+*   [Análisis de microarreglos - Inglés](microarrays.html)
 *   [Referencias](reference.html)
