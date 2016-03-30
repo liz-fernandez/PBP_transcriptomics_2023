@@ -253,7 +253,7 @@ Si embargo, la **distribución de nucleótidos por base** muestra que, al princi
 
 También observamos que: 
 
-* La *distribución de GC por secuencia** es muy similar a la distribución hipotética. 
+* La **distribución de GC por secuencia** es muy similar a la distribución hipotética. 
 * Hay pocas **bases ambiguas (Ns)** .
 * Todas las secuencias tienen el mismo **tamaño**.  
 * Los niveles de **duplicación de secuencias** son bajos.
