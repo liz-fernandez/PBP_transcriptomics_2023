@@ -1,73 +1,57 @@
 ---
 layout: page
-title: Control de versiones usando Git
+title: Analisis transcriptomicos
 ---
 
-Billy y Mandy han sido contratados para investigar si es posible enviar un 
-robot a la superficie de Marte. Quieren trabajar de manera conjunta en los 
-planes, pero han tenido problemas para editar sus notas simultáneamente en 
-proyectos previos. Si deciden tomar turnos, cada uno pasará mucho tiempo esperando
-a que el otro termine, pero si trabajan simultaneamente en su copia individual 
-del reporte y mandan correos para enviarse cambios entre sí siempre hay cambios que
-se pierden, se sobre escriben o se duplican.  
+Estamos realizando un estudio transcriptomico para entender la expresion de genes
+en la levadura (Saccharomyces cerevisiae) cuando se expresa una 
+mutante de la proteina Puf2 que cambia la especificidad 
 
-Un colega les sugiere utilizar [control de versiones](reference.html#version-control) 
-para manejar su trabajo. El control de versiones es mejor que enviar versiones por
-correo electrónico ya que:
+http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE73227
 
-*   Ningún cambio que haya sido confirmado (commited) al sistema de control de versiones
-    se pierde. Dado que todas la versiones anteriores de los archivos están guardadas, 
-    siempre es posible regresar en el tiempo y ver exactamente quien escribió que en un 
-    día en particular, o que versiones de que programa fueron utilizadas para generar 
-    ciertos resultados.
+Hemos logrado aislar los transcritos del cromosoma I en dos condiciones: mutante y 
+wild type (WT).
 
-*   Ya que tenemos un registro de quien hizo que cambios y cuando los realizó, 
-    sabemos a quien preguntar si tenemos preguntas acerca de estos cambios en 
-    el futuro, y, de ser necesario, revertirlos a una versión previa, similar a 
-    la función "deshacer" en un editor de texto. 
+Queremos realizar un analisis completo de la expresión diferencial de estos transcritos. 
+Durante esta practica realizaremos el análisis desde identificar la calidad de las secuencias
+hasta medir si los cambios en expresión son significativos usando métodos estadísticos.
 
-*   Cuando varias personas colaboran en un mismo proyectos, es probable que ignoren o 
-    sobre escriban los cambios de otro colaborador de forma accidental. El sistema 
-    de control de versiones automáticamente notifica a los usuarios cada vez que se 
-    detecta un conflicto entre los cambios propuestos por dos colaboradores. 
+Diagrama de flujo de trabajo para analisis de datos de secuenciacion masiva
 
-El sistema de control de versiones no es solo útil para trabajos en grupo: 
-investigadores individuales se pueden beneficiar inmensamente de sus capacidades. 
-Mantener un registro de que ha cambiado, cuando y porque es extremadamente práctico
-y útil en casos en los que se requieran regresar a un proyecto después de mucho tiempo
-(por ejemplo después de un año o más, cuando la memoria ya no está fresca). 
+Esta mañana recibimos un correo de nuestro colaborador:
 
-El sistema de control de versiones es la bitácora de laboratorio del mundo digital:
-Es lo que utilizan los profesionales para mantener un registro de lo que han hecho 
-así como para colaborar con otras personas. Cada proyecto de desarrollo de 
-software a gran escala depende de este sistema, y muchos programadores lo 
-utilizan también para proyectos pequeños. Y no solo se utiliza para software:
-libros, artículos, sets de datos pequeños y cualquier otra entidad de datos sobre 
-la que se realizan cambios a través de tiempo o tiene que ser compartida puede y
-debe ser almacenada utilizando un sistema de control de versiones. 
+Good day, 
+
+I have great news. All samples passed the QC and where successfully sequenced in 
+our Hi-Seq 2500. You can download the data from the URL below. The md5sum files are also 
+in the tar-ball.  
+
+XXxxxxx
+
+Can’t wait to see if there are indeed major changes to the transcriptome in the mutant! 
+
+Happy data wranggling!
+
+Professor X. 
+
+
+
 
 > ## Conocimientos previos {.prereq}
 >
-> En esta clase aprenderemos a usar Git desde la terminal de Linux/Unix. 
 > Se espera que los estudiantes tengan alguna experiencia con la terminal,
-> *aunque no es indispensable*.
+> asi con el uso del lenguaje de programación R. 
 
-> ## Preparativos {.getready}
->
-> Tener git instalado o accesarlo a traves del cuaderno en línea Jupyter. 
-> Si ya lo instalaste: ¡Estás listo!
 
 ## Temas
 
-1.  [Control Automatizado de Versiones](01-basics.html)
-2.  [Configurando Git](02-setup.html)
-3.  [Creando un repositorio](03-create.html)
-4.  [Seguimiento de los cambios](04-changes.html)
-5.  [Explorando el historial](05-history.html)
-6.  [Ignorando Cosas](06-ignore.html)
-7.  [Repositorios remotos en GitHub](07-github.html)
-8.  [Colaborando](08-collab.html)
-9.  [Conflictos](09-conflict.html)
+1.  [Control de calidad de datos de secuenciacion masiva](01-quality.html)
+2.  [Ensamblando datos de novo](02-assembly.html)
+3.  [Mapeo de secuencias](03-mapping.html)
+4.  [Anotacion](04-annotation.html)
+5.  [Usadon un explorador de genomas (genome browser)](05-genomebrowser.html)
+6.  [Analisis de expresión diferencial](06-diffexpression.html)
+7.  [Otras herramientas](07-others.html)
 
 
 [//]: # (10. [Open Science](10-open.html))
@@ -77,6 +61,5 @@ debe ser almacenada utilizando un sistema de control de versiones.
 
 ## Otros recursos
 
-*   [Referencias - Inglés](reference.html)
-*   [Discusión - Inglés](discussion.html)
-
+*   [Analisis de microarreglos - Inglés](microarrays.html)
+*   [Referencias](reference.html)
