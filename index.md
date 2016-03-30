@@ -2,59 +2,56 @@
 layout: page
 title: Version Control with Git
 ---
-Wolfman and Dracula have been hired by Universal Missions
-(a space services spinoff from Euphoric State University)
-to investigate if it is possible to send their next planetary lander to Mars.
-They want to be able to work on the plans at the same time,
-but they have run into problems doing this in the past.
-If they take turns,
-each one will spend a lot of time waiting for the other to finish,
-but if they work on their own copies and email changes back and forth
-things will be lost, overwritten, or duplicated.
 
-A colleague suggests using [version control](reference.html#version-control) to manage their work.
-Version control is better than mailing files back and forth because:
+Estamos realizando un estudio transcriptomico para entender la expresion de genes
+en la levadura (Saccharomyces cerevisiae) cuando se expresa una 
+mutante de la proteina Puf2 que cambia la especificidad 
 
-*   Nothing that is committed to version control is ever lost.
-    This means it can be used like the "undo" feature in an editor,
-    and since all old versions of files are saved
-    it's always possible to go back in time to see exactly who wrote what on a particular day,
-    or what version of a program was used to generate a particular set of results.
-*   It keeps a record of who made what changes when,
-    so that if people have questions later on,
-    they know who to ask.
-*   It's hard (but not impossible) to accidentally overlook or overwrite someone's changes:
-    the version control system automatically notifies users
-    whenever there's a conflict between one person's work and another's.
+http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE73227
 
-Version control is the lab notebook of the digital world:
-it's what professionals use to keep track of what they've done
-and to collaborate with other people.
-Every large software development project relies on it,
-and most programmers use it for their small jobs as well.
-And it isn't just for software:
-books (like this one),
-papers,
-small data sets,
-and anything that changes over time or needs to be shared
-can and should be stored in a version control system.
+Hemos logrado aislar los transcritos del cromosoma I en dos condiciones: mutante y 
+wild type (WT).
 
-> ## Prerequisites {.prereq}
+Queremos realizar un analisis completo de la expresión diferencial de estos transcritos. 
+Durante esta practica realizaremos el análisis desde identificar la calidad de las secuencias
+hasta medir si los cambios en expresión son significativos usando métodos estadísticos.
+
+Diagrama de flujo de trabajo para analisis de datos de secuenciacion masiva
+
+Esta mañana recibimos un correo de nuestro colaborador:
+
+> Good day, 
+> 
+> I have great news. All samples passed the QC and where successfully sequenced in 
+> our Hi-Seq 2000. You can download the data from the URL below. The md5sum files are also 
+> in the tar-ball.  
+> 
+> XXxxxxx
+> 
+> Can’t wait to see if there are indeed major changes to the transcriptome in the mutant! 
+> 
+> Happy data wranggling!
+> 
+> Professor X. 
+
+Bajamos los datos de esta dirección y nos preparamos para llevar a cabo el análisis.
+
+> ## Conocimientos previos {.prereq}
 >
-> In this lesson we use Git from the Unix Shell.
-> Some previous experience with the shell is expected,
-> *but isn't mandatory*.
+> Se espera que los estudiantes tengan alguna experiencia con la terminal,
+> asi con el uso del lenguaje de programación R. 
 
-## Topics
+## Temas
 
-1.  [A Better Kind of Backup](01-backup.html)
-2.  [Collaborating](02-collab.html)
-3.  [Conflicts](03-conflict.html)
-4.  [Open Science](04-open.html)
+1.  [Control de calidad de datos de secuenciación masiva](01-quality.html)
+2.  [Ensamblando datos de novo](02-assembly.html)
+3.  [Mapeo](03-mapping.html)
+4.  [Anotación](04-annotation.html)
+5.  [Explorador de genomas (genome browser)](05-genomebrowser.html)
+6.  [Analisis de expresión diferencial](06-diffexpression.html)
+7.  [Otras herramientas](07-others.html)
 
-## Other Resources
+## Otros recursos
 
-*   [Motivation](motivation.html)
-*   [Reference](reference.html)
-*   [Discussion](discussion.html)
-*   [Instructor's Guide](instructors.html)
+*   [Analisis de microarreglos - Inglés](microarrays.html)
+*   [Referencias](reference.html)
