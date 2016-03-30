@@ -68,7 +68,7 @@ Revisemos uno de los archivos usando el comando head. Normalmente nos muestra la
 10 líneas de una archivo pero con la bandera `-n` nos mostrará las primeras 12:
 
 ~~~ {.bash}
-head -n 12 Partial_SRR2467141.fastq 
+$ head -n 12 Partial_SRR2467141.fastq 
 ~~~
 ~~~ {.output}
 @SRR2467141.1 SALLY:472:C6NCDACXX:8:1101:1392:1873 length=101
@@ -186,7 +186,7 @@ cada uno de los cuales nos ayuda a identificar distintos problemas en nuestros d
 Analicemos nuestro primer archivo de secuenciación:
 
 ~~~ {.bash}
-fastqc -O ./QUAL/ Partial_SRR2467141.fastq 
+$ fastqc -O ./QUAL/ Partial_SRR2467141.fastq 
 ~~~
 ~~~ {.output}
 Started analysis of Partial_SRR2467141.fastq
@@ -200,8 +200,8 @@ Analysis complete for Partial_SRR2467141.fastq
 Una vez terminado revisemos el resultado:
 
 ~~~ {.bash}
-cd QUAL
-ls
+$ cd QUAL
+$ ls
 ~~~
 ~~~ {.output}
 Partial_SRR2467141_fastqc.html 
@@ -297,7 +297,7 @@ tanto el resumen:
 
 ~~~ {.bash}
 $ cd Partial_SRR2467141_fastqc
-more summary.txt
+$ more summary.txt
 ~~~
 ~~~ {.output}
 PASS    Basic Statistics        Partial_SRR2467141.fastq
@@ -317,7 +317,7 @@ PASS    Kmer Content    Partial_SRR2467141.fastq
 Como el archivo completo:
 
 ~~~ {.bash}
-more fastqc_data.txt
+$ more fastqc_data.txt
 ~~~
 
 Hemos omitido el contenido ya que es muy largo. 
@@ -378,13 +378,13 @@ Pueden encontrar descripciones más detalladas de sus funciones en el [manual](h
 Veamos como funciona. Instalaremos el software bajando el archivo binario:
 
 ~~~ {.bash}
-wget http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/Trimmomatic-0.36.zip
+$ wget http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/Trimmomatic-0.36.zip
 ~~~
 
 Descomprimimos el binario usando el comando unzip:
 
 ~~~ {.bash}
-unzip Trimmomatic-0.36.zip
+$ unzip Trimmomatic-0.36.zip
 ~~~
 ~~~ {.output}
 Archive:  Trimmomatic-0.36.zip
@@ -403,8 +403,8 @@ Archive:  Trimmomatic-0.36.zip
 Debemos averiguar la ruta de carpeta del archivo para poderlo utilizar:
 
 ~~~ {.bash}
-cd Trimmomatic-0.36
-pwd
+$ cd Trimmomatic-0.36
+$ pwd
 ~~~
 
 El comando pwd nos proporciona la ruta de carpeta para usarlo 
@@ -416,7 +416,7 @@ Este resultado diferirá en cada uno de sus equipos dependiendo de donde bajaron
 programa. Regresemos a la carpeta donde están nuestro archivos fastq. 
 
 ~~~ {.bash}
-cd /Users/uqslizbe/Documents/transcriptome_analysis/DATA/FastQC_Short
+$ cd /Users/uqslizbe/Documents/transcriptome_analysis/DATA/FastQC_Short
 ~~~ 
 
 La calidad de nuestras secuencias de prueba es bastante buena, pero vimos que la calidad 
@@ -431,7 +431,7 @@ Pediremos que corte:
 * Secuencias menores a 60 nucleótidos.
 
 ~~~ {.bash}
-java -jar /Users/uqslizbe/Applications/Trimmomatic-0.36/trimmomatic-0.36.jar SE Partial_SRR2467141.fastq Trimmed_Partial_SRR2467141.fastq ILLUMINACLIP:TruSeq3-SE.fa:2:30:10 HEADCROP:10 SLIDINGWINDOW:4:15 MINLEN:60
+$ java -jar /Users/uqslizbe/Applications/Trimmomatic-0.36/trimmomatic-0.36.jar SE Partial_SRR2467141.fastq Trimmed_Partial_SRR2467141.fastq ILLUMINACLIP:TruSeq3-SE.fa:2:30:10 HEADCROP:10 SLIDINGWINDOW:4:15 MINLEN:60
 ~~~ 
 ~~~ {.output}
 Automatically using 4 threads
@@ -464,8 +464,8 @@ crear una copia. Además, de borrarse estos enlaces, el archivo original no es a
 Creemos el enlace y ejecutemos nuevamente Trimmomatic:
 
 ~~~ {.bash}
-ln -s /Users/uqslizbe/Applications/Trimmomatic-0.36/adapters/*fa .
-java -jar /Users/uqslizbe/Applications/Trimmomatic-0.36/trimmomatic-0.36.jar SE Partial_SRR2467141.fastq Trimmed_Partial_SRR2467141.fastq ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 HEADCROP:10 SLIDINGWINDOW:4:15 MINLEN:60
+$ ln -s /Users/uqslizbe/Applications/Trimmomatic-0.36/adapters/*fa .
+$ java -jar /Users/uqslizbe/Applications/Trimmomatic-0.36/trimmomatic-0.36.jar SE Partial_SRR2467141.fastq Trimmed_Partial_SRR2467141.fastq ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 HEADCROP:10 SLIDINGWINDOW:4:15 MINLEN:60
 ~~~ 
 ~~~ {.output}
 Automatically using 4 threads
@@ -523,7 +523,7 @@ TruSeq3-SE.fa
 > En nuestro caso escribiriamos el comando:
 >
 > ~~~ {.bash}
-> java -Xms512m -Xmx2000m -jar /Users/uqslizbe/Applications/Trimmomatic-0.36/trimmomatic-0.36.jar SE Partial_SRR2467141.fastq Trimmed_Partial_SRR2467141.fastq ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 HEADCROP:10 SLIDINGWINDOW:4:15 MINLEN:60
+> $ java -Xms512m -Xmx2000m -jar /Users/uqslizbe/Applications/Trimmomatic-0.36/trimmomatic-0.36.jar SE Partial_SRR2467141.fastq Trimmed_Partial_SRR2467141.fastq ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 HEADCROP:10 SLIDINGWINDOW:4:15 MINLEN:60
 > ~~~
 > 
 > Solo debes asegurarte que la memoria que pides es congruente con los recursos disponibles en tu computadora o servidor. 
@@ -554,7 +554,7 @@ Podemos ver que hasta en las primeras líneas se efectuaron cortes, en su mayor�
 Revisemos ahora los resultados globales usando FastQC:
 
 ~~~ {.bash}
-fastqc -O ./QUAL/ Trimmed_Partial_SRR2467141.fastq 
+$ fastqc -O ./QUAL/ Trimmed_Partial_SRR2467141.fastq 
 ~~~
 ~~~ {.output}
 Started analysis of Trimmed_Partial_SRR2467141.fastq
@@ -568,7 +568,7 @@ Analysis complete for Trimmed_Partial_SRR2467141.fastq
 Abrimos el resultado html:
 
 ~~~ {.output}
-[Trimmed_Partial_SRR2467141_fastqc.html] (http://liz-fernandez.github.io/transcriptome_analysis/Trimmed_Partial_SRR2467141_fastqc.html)
+[Trimmed_Partial_SRR2467141_fastqc.html](http://liz-fernandez.github.io/transcriptome_analysis/Trimmed_Partial_SRR2467141_fastqc.html)
 ~~~
 
 > ## ¿Qué diferencias hay entre las secuencias crudas y limpias? {.challenge}
