@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="generator" content="pandoc">
+    <title>Software Carpentry: Análisis transcriptómicos</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="css/swc.css" />
+    <link rel="alternate" type="application/rss+xml" title="Software Carpentry Blog" href="http://software-carpentry.org/feed.xml"/>
+    <meta charset="UTF-8" />
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body class="lesson">
+    <div class="container card">
+      <div class="banner">
+        <a href="http://www.puntoyaprende.com/pbi/" title="Posgrado en Biologia Integrativa">
+          <img alt="Logo Posgrado Biologia Integrativa" src="img/posgrado_bi_logo.png" />
+        </a>
+      </div>
+      <article>
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+                    <a href="index.html"><h1 class="title">Análisis transcriptómicos</h1></a>
+          <h2 class="subtitle">Control de calidad de datos de secuenciación masiva</h2>
+          <section class="objectives panel panel-warning">
+<div class="panel-heading">
+<h2 id="objetivos-de-aprendizaje"><span class="glyphicon glyphicon-certificate"></span>Objetivos de aprendizaje</h2>
+</div>
+<div class="panel-body">
+<ul>
+<li>Entender el formato FastQ.</li>
+<li>Entender el concepto de calidad de una secuencia.</li>
+<li>Aprender a utilizar software para medir la calidad de datos de secuenciación masiva.</li>
+</ul>
+</div>
+</section>
+<p>Lo primero que hacemos al recibir nuestros datos es descargarlos usando el comando wget:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">wget</span> XX</code></pre></div>
+<p>Los archivos de secuenciación generalmente están en un formato comprimido llamado tar. Podemos descomprimir los datos usando ese mismo comando:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">tar</span> -xvf XX</code></pre></div>
+<p>La bandera <code>-x</code></p>
+<p>Esto genera un directorio llamado <code>FastQC_Short</code>. Entramos en ese directorio:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cd</span> FastQC_Short</code></pre></div>
+<p>Revisamos su contenido:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">ls</span></code></pre></div>
+<pre class="output"><code></code></pre>
+<p>Revisemos uno de los archivos: <sub>~</sub> {.bash} head X <sub><sub><sub> </sub></sub></sub> {.output}</p>
+<p><sub>~</sub></p>
+<p>http://www.bioinformatics.babraham.ac.uk/projects/fastqc/good_sequence_short_fastqc.html http://www.bioinformatics.babraham.ac.uk/projects/fastqc/bad_sequence_fastqc.html http://www.bioinformatics.babraham.ac.uk/projects/fastqc/RNA-Seq_fastqc.html http://www.bioinformatics.babraham.ac.uk/projects/fastqc/small_rna_fastqc.html http://www.bioinformatics.babraham.ac.uk/projects/fastqc/RRBS_fastqc.html http://www.bioinformatics.babraham.ac.uk/projects/fastqc/pacbio_srr075104_fastqc.html http://www.bioinformatics.babraham.ac.uk/projects/fastqc/454_SRR073599_fastqc.html</p>
+<aside class="callout panel panel-info">
+<div class="panel-heading">
+<h2 id="la-larga-historia-de-los-sistemas-de-control-de-versiones"><span class="glyphicon glyphicon-pushpin"></span>La larga historia de los sistemas de control de versiones</h2>
+</div>
+<div class="panel-body">
+<p>Los sistemas automatizados de control de versiones no son nada nuevo. Herramientas como RCS, CVS o Subversion existen desde el principio de los años 80s y son utilizadas por varias compañias grandes. Sin embargo, varios de estos se empiezan a considerar sistemas heredados debido a las diversas limitaciones en sus capacidades. A los sistemas más modernos como Git y <a href="http://swcarpentry.github.io/hg-novice/">Mercurial</a> se les conoce como <em>distribuidos</em>, ya que no cuentan con un servidor centralizado que almacena el repositorio. Estos sistemas modernos también incluyen poderosas herramientas e unión o “merging” que permiten que multiples contribuidores trabajen en los mismos archivos de manera simultánea.</p>
+</div>
+</aside>
+        </div>
+      </div>
+      </article>
+      <div class="footer">
+        <a class="label swc-blue-bg" href="mailto:selene.fernandez.valverde@gmail.com">Contacto</a>
+        <a class="label swc-blue-bg" href="LICENSE.html">Licencia</a>
+      </div>
+    </div>
+    <!-- Javascript placed at the end of the document so the pages load faster -->
+    <script src="http://software-carpentry.org/v5/js/jquery-1.9.1.min.js"></script>
+    <script src="css/bootstrap/bootstrap-js/bootstrap.js"></script>
+    <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+  </body>
+</html>
