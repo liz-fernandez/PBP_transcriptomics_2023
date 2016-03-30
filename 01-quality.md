@@ -26,7 +26,7 @@ Podemos descomprimir los datos usando ese mismo comando:
 $ tar -xvf FastQC_Short.tar.gz
 ~~~
 
-Esto descomprime un directorio llamado `FastQC_Short`. Entramos en ese directorio:
+Este comando descomprime un directorio llamado `FastQC_Short`. Entramos en ese directorio:
 
 ~~~ {.bash}
 $ cd FastQC_Short
@@ -98,7 +98,7 @@ de estos nucleótidos.
 >
 > Los archivos fastq que recibas después de un experimento de secuenciación serán
 > los que te soliciten cuando quieras publicar un artículo. Idealmente, realiza un
-> para de copias en cuanto los recibas y *no los modifiques manualmente*.
+> para de copias en distintos dispositivos en cuanto los recibas y *no los modifiques manualmente*.
 > 
 > También es recomendable que, de tener la información a la mano, crees un pequeño
 > archivo README (de texto plano) que esté en el mismo directorio que tus archivos fastq 
@@ -154,20 +154,20 @@ en la línea cuatro son una mezcla de símbolos alfanuméricos?
 #1:=BDDDHDHB?<?CFGGGC9@FF@GGGG>EEEDGDHGFHGE;AEFH>AC@D;@B>C>CCC@C>>DDCC3:>AA5>CC>>CCD>@CCDCDCCCCC@C@>C
 ~~~
 
-Esto es debido a que estos puntajes están codificados en ASCCI (American Standard Code for Informational Interchange). 
+Esto es debido a que estos puntajes están codificados en ASCII (American Standard Code for Informational Interchange). 
 En breve, ASCII es un sistema de codificación que equipara un número a un caracter 
 alfanumérico. Por ejemplo, el carácter 'A' se representa por el número 65 en la tabla 
-de código ASCCI, mientras que '%' se representa por el número 37. Este sistema nos permite
+de código ASCII, mientras que '%' se representa por el número 37. Este sistema nos permite
 representar así un total de 256 caracteres distintos. 
 
-¿Por qué usar ASCCI? Dada la enorme cantidad de datos producidos durante secuenciación
+¿Por qué usar ASCII? Dada la enorme cantidad de datos producidos durante secuenciación
 masiva, se trata de reducir los datos al máximo. El sistema ASCII nos permite representar 
 números de dos dígitos en un solo bit (8 bites), lo cual reduce el espacio que ocupan
 estos archivos. Si te interesa el tema puedes leer más acerca de codificación binaria. 
 
 Finalmente, desde que se inventó este sistema de codificación de calidad, el cuál ya se
 utilizaba con la secuenciación tipo Sanger, distintas compañías han "deslizado" las escalas
-de conversión de ASCCI porque lo que es importante verificar con la compañía o laboratorio
+de conversión de ASCII porque lo que es importante verificar con la compañía o laboratorio
 en que versión de esta escala se han codificado para usar la conversión correcta. Algunas
 de las herramientas de control de calidad que utilizaremos infieren el tipo de codificación
 utilizado a partir de los datos.
@@ -211,7 +211,7 @@ Partial_SRR2467141_fastqc.zip
 La manera más sencilla de explorar estos resultados es abriendo el archivo html en
 su navegador. Lo puedes hacer dando doble click en el archivo. 
 
-El resultado obtenido deberá ser similar a [este ](liz-fernandez.github.io/transcriptome_analysis/HTML/Partial_SRR2467141_fastqc.html).
+El resultado obtenido deberá ser similar a [este](http://liz-fernandez.github.io/transcriptome_analysis/Partial_SRR2467141_fastqc.html).
 
 Esta página contiene mucha información desglosada en las siguientes secciones:
 
@@ -234,10 +234,10 @@ En general vemos que la mayoría de los criterios tienen una palomita verde o ce
 de pase de control de calidad, con la excepción de el contenido de GC por base.
 
 A pesar de que no proporcionamos esta información, el programa ha inferido la codificación 
-ASCCI (Sanger / Illumina 1.9) así como contado el número de secuencias, su tamaño y 
+ASCII (Sanger / Illumina 1.9) así como contado el número de secuencias, su tamaño y 
 su contenido de GC. 
 
-Cuando observamos la *calidad por base*, vemos que la mayoría de las bases están en la zona 
+Cuando observamos la **calidad por base**, vemos que la mayoría de las bases están en la zona 
 verde o tienen buena calidad. Cada base esta representada por un diagrama de caja que 
 proporciona una buena idea acerca de la distribución de los puntajes de calidad en todas
 las secuencias. Es evidente que la calidad decrece levemente al inicio y más marcadamente
@@ -245,7 +245,21 @@ al final de la secuencia. Esto es conocido ya que pequeños errores se acumulan 
 más larga sea la secuencia, esta es una de las razones por la que los secuenciadores basados
 en incorporación de nucleótidos tienen un límite en la longitud máxima de sus lecturas. 
 
+La gráfica mostrando la **calidad por cuadro** esta completamente azul mostrando que la distribución promedio de errores en el cuadro (tile) es muy similar.
 
+La gráfica de **puntaje de calidad por secuencia** muestra que la mayoría de las secuencias tienen puntajes altos.
+
+Si embargo, la **distribución de nucleótidos por base** muestra que, al principio de la secuencia, la distribución es muy disparatada. Esto es uno de los errores comunes en RNA-Seq hecho por Illumina. Generalmente se soluciona cortando algunos de los nucleótidos en el 5'.
+
+También observamos que: 
+
+* La *distribución de GC por secuencia** es muy similar a la distribución hipotética. 
+* Hay pocas **bases ambiguas (Ns)** .
+* Todas las secuencias tienen el mismo **tamaño**.  
+* Los niveles de **duplicación de secuencias** son bajos.
+* No hay **secuencias sobre representadas**.
+* Hay pocos **adaptadores**.
+* No hay **kmers** sobre representados.
 
 Al ejecutar FastQC también se generó un archivo comprimido llamado 
 `Partial_SRR2467141_fastqc.zip`. 
