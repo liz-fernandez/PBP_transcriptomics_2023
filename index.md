@@ -20,21 +20,20 @@ Diagrama de flujo de trabajo para análisis de datos de secuenciacion masiva
 
 Esta mañana recibimos un correo de nuestro colaborador:
 
-Good day, 
-
-I have great news. All samples passed the QC and where successfully sequenced in 
-our Hi-Seq 2500. You can download the data from the URL below. The md5sum files are also 
-in the tar-ball.  
-
-XXxxxxx
-
-Can’t wait to see if there are indeed major changes to the transcriptome in the mutant! 
-
-Happy data wranggling!
-
-Professor X. 
-
-
+>
+>Good day, 
+>
+>I have great news. All samples passed the QC and where successfully sequenced in 
+>our Hi-Seq 2500. You can download the data from the URL below. The md5sum files are also 
+>in the tar-ball.  
+>
+>XXxxxxx
+>
+>Can’t wait to see if there are indeed major changes to the transcriptome in the mutant! 
+>
+>Happy data wranggling!
+>
+>Professor X. 
 
 
 > ## Conocimientos previos {.prereq}
@@ -45,7 +44,7 @@ Professor X.
 
 ## Temas
 
-1.  [Control de calidad de datos de secuenciacion masiva](01-quality.html)
+1.  [Control de calidad de datos de secuenciación masiva](01-quality.html)
 2.  [Ensamblando datos de novo](02-assembly.html)
 3.  [Mapeo de secuencias](03-mapping.html)
 4.  [Anotación](04-annotation.html)
