@@ -43,20 +43,16 @@ Esta mañana recibimos un correo de nuestro colaborador:
 ## Temas
 
 1.  [Control de calidad de datos de secuenciación masiva](01-quality.html)
+
 [//]: # (2.  [Ensamblando datos de novo](02-assembly.html))
 [//]: # (3.  [Mapeo de secuencias](03-mapping.html))
 [//]: # (4.  [Anotación](04-annotation.html))
 [//]: # (5.  [Usadon un explorador de genomas (genome browser)](05-genomebrowser.html))
 [//]: # (6.  [Análisis de expresión diferencial](06-diffexpression.html))
 [//]: # (7.  [Otras herramientas](07-others.html))
+[//]: # ([Análisis de microarreglos - Inglés](microarrays.html))
 
 
-[//]: # (10. [Open Science](10-open.html))
-[//]: # (11. [Licencias](11-licensing.html))
-[//]: # (12. [Referencias](12-citation.html))
-[//]: # (13. [Albergando información](13-hosting.html))
 
-## Otros recursos
 
-*   [Análisis de microarreglos - Inglés](microarrays.html)
 
