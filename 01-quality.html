@@ -296,7 +296,8 @@ PASS    Kmer Content    Partial_SRR2467141.fastq</code></pre>
 <p>Debemos averiguar la ruta de carpeta del archivo para poderlo utilizar:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cd</span> Trimmomatic-0.36
 $ <span class="kw">pwd</span></code></pre></div>
-<p>El comando pwd nos proporciona la ruta de carpeta para usarlo <sub>~</sub> {.output} /Users/uqslizbe/Applications/Trimmomatic-0.36 <sub>~</sub></p>
+<p>El comando pwd nos proporciona la ruta de carpeta para usarlo</p>
+<pre class="output"><code>/Users/uqslizbe/Applications/Trimmomatic-0.36</code></pre>
 <p>Este resultado diferirá en cada uno de sus equipos dependiendo de donde bajaron el programa. Regresemos a la carpeta donde están nuestro archivos fastq.</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cd</span> /Users/uqslizbe/Documents/transcriptome_analysis/DATA/FastQC_Short</code></pre></div>
 <p>La calidad de nuestras secuencias de prueba es bastante buena, pero vimos que la calidad baja en el extremo 3’, así como la presencia desproporcionada de bases en el extremo 5’. Limpiemos nuestras secuencias usando Trimmomatic.</p>
@@ -394,8 +395,7 @@ Approx 40% complete for Trimmed_Partial_SRR2467141.fastq
 Approx 60% complete for Trimmed_Partial_SRR2467141.fastq
 Approx 80% complete for Trimmed_Partial_SRR2467141.fastq
 Analysis complete for Trimmed_Partial_SRR2467141.fastq</code></pre>
-<p>Abrimos el resultado html:</p>
-<pre class="output"><code>[Trimmed_Partial_SRR2467141_fastqc.html](http://liz-fernandez.github.io/transcriptome_analysis/Trimmed_Partial_SRR2467141_fastqc.html)</code></pre>
+<p>Abrimos el resultado html <a href="http://liz-fernandez.github.io/transcriptome_analysis/Trimmed_Partial_SRR2467141_fastqc.html">Trimmed_Partial_SRR2467141_fastqc.html</a>.</p>
 <section class="challenge panel panel-success">
 <div class="panel-heading">
 <h2 id="qué-diferencias-hay-entre-las-secuencias-crudas-y-limpias"><span class="glyphicon glyphicon-pencil"></span>¿Qué diferencias hay entre las secuencias crudas y limpias?</h2>

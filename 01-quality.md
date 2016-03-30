@@ -4,6 +4,7 @@ title: Análisis transcriptómicos
 subtitle: Control de calidad de datos de secuenciación masiva
 minutes: 5
 ---
+
 > ## Objetivos de aprendizaje {.objectives}
 >
 > *   Entender el formato FastQ.
@@ -408,6 +409,7 @@ $ pwd
 ~~~
 
 El comando pwd nos proporciona la ruta de carpeta para usarlo 
+
 ~~~ {.output}
 /Users/uqslizbe/Applications/Trimmomatic-0.36
 ~~~ 
@@ -565,11 +567,8 @@ Approx 80% complete for Trimmed_Partial_SRR2467141.fastq
 Analysis complete for Trimmed_Partial_SRR2467141.fastq
 ~~~ 
 
-Abrimos el resultado html:
+Abrimos el resultado html [Trimmed_Partial_SRR2467141_fastqc.html](http://liz-fernandez.github.io/transcriptome_analysis/Trimmed_Partial_SRR2467141_fastqc.html).
 
-~~~ {.output}
-[Trimmed_Partial_SRR2467141_fastqc.html](http://liz-fernandez.github.io/transcriptome_analysis/Trimmed_Partial_SRR2467141_fastqc.html)
-~~~
 
 > ## ¿Qué diferencias hay entre las secuencias crudas y limpias? {.challenge}
 >
