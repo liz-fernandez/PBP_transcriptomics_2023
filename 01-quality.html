@@ -45,7 +45,7 @@
 <pre class="output"><code>https://drive.google.com/open?id=0B9ZVSRlHL8cIbm5EUXczdzM4a2M</code></pre>
 <p>Debemos movernos al directorio al cual se bajo el archivo comprimido. Los archivos de secuenciación generalmente están en un formato comprimido llamado tar. Podemos descomprimir los datos usando ese mismo comando:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">tar</span> -xvf FastQC_Short.tar.gz</code></pre></div>
-<p>Esto descomprime un directorio llamado <code>FastQC_Short</code>. Entramos en ese directorio:</p>
+<p>Este comando descomprime un directorio llamado <code>FastQC_Short</code>. Entramos en ese directorio:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cd</span> FastQC_Short</code></pre></div>
 <p>Revisamos su contenido:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">ls</span></code></pre></div>
@@ -92,7 +92,7 @@ CATCTTTTCTTTAGGCACATCATCCTGATAAGTGTACTTACCAGGATATATACCATCGGTATTGATGTTATCGGCATCAC
 <h2 id="no-cambies-archivos-fastq"><span class="glyphicon glyphicon-pushpin"></span>¡No cambies archivos fastq!</h2>
 </div>
 <div class="panel-body">
-<p>Los archivos fastq que recibas después de un experimento de secuenciación serán los que te soliciten cuando quieras publicar un artículo. Idealmente, realiza un para de copias en cuanto los recibas y <em>no los modifiques manualmente</em>.</p>
+<p>Los archivos fastq que recibas después de un experimento de secuenciación serán los que te soliciten cuando quieras publicar un artículo. Idealmente, realiza un para de copias en distintos dispositivos en cuanto los recibas y <em>no los modifiques manualmente</em>.</p>
 <p>También es recomendable que, de tener la información a la mano, crees un pequeño archivo README (de texto plano) que esté en el mismo directorio que tus archivos fastq y describa como se realizó el experimento, cuantas réplicas hay de cada condición, que índices y controles se utilizaron, etc. Esto te ayudará enormemente al tratar de interpretar tus resultados.</p>
 </div>
 </aside>
@@ -140,9 +140,9 @@ NTTATTTTTTTCGTTCTTCTTGAAGAAGACGTTACCTACGGCGTATTTGCCCATCTCAGGTATGTCTAGATCAAGATCTA
 </table>
 <p>Espera, si los puntajes de Phred son números, ¿por qué los puntajes de calidad mostrados en la línea cuatro son una mezcla de símbolos alfanuméricos?</p>
 <pre class="output"><code>#1:=BDDDHDHB?&lt;?CFGGGC9@FF@GGGG&gt;EEEDGDHGFHGE;AEFH&gt;AC@D;@B&gt;C&gt;CCC@C&gt;&gt;DDCC3:&gt;AA5&gt;CC&gt;&gt;CCD&gt;@CCDCDCCCCC@C@&gt;C</code></pre>
-<p>Esto es debido a que estos puntajes están codificados en ASCCI (American Standard Code for Informational Interchange). En breve, ASCII es un sistema de codificación que equipara un número a un caracter alfanumérico. Por ejemplo, el carácter ‘A’ se representa por el número 65 en la tabla de código ASCCI, mientras que ‘%’ se representa por el número 37. Este sistema nos permite representar así un total de 256 caracteres distintos.</p>
-<p>¿Por qué usar ASCCI? Dada la enorme cantidad de datos producidos durante secuenciación masiva, se trata de reducir los datos al máximo. El sistema ASCII nos permite representar números de dos dígitos en un solo bit (8 bites), lo cual reduce el espacio que ocupan estos archivos. Si te interesa el tema puedes leer más acerca de codificación binaria.</p>
-<p>Finalmente, desde que se inventó este sistema de codificación de calidad, el cuál ya se utilizaba con la secuenciación tipo Sanger, distintas compañías han “deslizado” las escalas de conversión de ASCCI porque lo que es importante verificar con la compañía o laboratorio en que versión de esta escala se han codificado para usar la conversión correcta. Algunas de las herramientas de control de calidad que utilizaremos infieren el tipo de codificación utilizado a partir de los datos.</p>
+<p>Esto es debido a que estos puntajes están codificados en ASCII (American Standard Code for Informational Interchange). En breve, ASCII es un sistema de codificación que equipara un número a un caracter alfanumérico. Por ejemplo, el carácter ‘A’ se representa por el número 65 en la tabla de código ASCII, mientras que ‘%’ se representa por el número 37. Este sistema nos permite representar así un total de 256 caracteres distintos.</p>
+<p>¿Por qué usar ASCII? Dada la enorme cantidad de datos producidos durante secuenciación masiva, se trata de reducir los datos al máximo. El sistema ASCII nos permite representar números de dos dígitos en un solo bit (8 bites), lo cual reduce el espacio que ocupan estos archivos. Si te interesa el tema puedes leer más acerca de codificación binaria.</p>
+<p>Finalmente, desde que se inventó este sistema de codificación de calidad, el cuál ya se utilizaba con la secuenciación tipo Sanger, distintas compañías han “deslizado” las escalas de conversión de ASCII porque lo que es importante verificar con la compañía o laboratorio en que versión de esta escala se han codificado para usar la conversión correcta. Algunas de las herramientas de control de calidad que utilizaremos infieren el tipo de codificación utilizado a partir de los datos.</p>
 <h2 id="verificando-la-calidad-de-las-secuencias">Verificando la calidad de las secuencias</h2>
 <p>Verificaremos la calidad de las secuencias usando el programa <a href="http://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a>. Este es uno de los programa más utilizados para este tipo de análisis, ya que provee una visión global de como se estructuran los datos, así como ser bastante rápido.</p>
 <p>FastQC lee una serie de archivos de secuenciación y produce un reporte de control de calidad para cada uno, el cual consiste de un número de módulos diferentes, cada uno de los cuales nos ayuda a identificar distintos problemas en nuestros datos.</p>
@@ -160,7 +160,7 @@ Analysis complete for Partial_SRR2467141.fastq</code></pre>
 <pre class="output"><code>Partial_SRR2467141_fastqc.html 
 Partial_SRR2467141_fastqc.zip</code></pre>
 <p>La manera más sencilla de explorar estos resultados es abriendo el archivo html en su navegador. Lo puedes hacer dando doble click en el archivo.</p>
-<p>El resultado obtenido deberá ser similar a <a href="liz-fernandez.github.io/transcriptome_analysis/HTML/Partial_SRR2467141_fastqc.html">este</a>.</p>
+<p>El resultado obtenido deberá ser similar a <a href="http://liz-fernandez.github.io/transcriptome_analysis/Partial_SRR2467141_fastqc.html">este</a>.</p>
 <p>Esta página contiene mucha información desglosada en las siguientes secciones:</p>
 <ol style="list-style-type: decimal">
 <li><strong>Basic Statistics</strong> - Las estadística básicas del experimento.</li>
@@ -178,8 +178,22 @@ Partial_SRR2467141_fastqc.zip</code></pre>
 </ol>
 <p>Revisemos los resultados una vez más dando click en el <a href="http://liz-fernandez.github.io/transcriptome_analysis/Partial_SRR2467141_fastqc.html">link</a>.</p>
 <p>En general vemos que la mayoría de los criterios tienen una palomita verde o certificado de pase de control de calidad, con la excepción de el contenido de GC por base.</p>
-<p>A pesar de que no proporcionamos esta información, el programa ha inferido la codificación ASCCI (Sanger / Illumina 1.9) así como contado el número de secuencias, su tamaño y su contenido de GC.</p>
-<p>Cuando observamos la <em>calidad por base</em>, vemos que la mayoría de las bases están en la zona verde o tienen buena calidad. Cada base esta representada por un diagrama de caja que proporciona una buena idea acerca de la distribución de los puntajes de calidad en todas las secuencias. Es evidente que la calidad decrece levemente al inicio y más marcadamente al final de la secuencia. Esto es conocido ya que pequeños errores se acumulan mientras más larga sea la secuencia, esta es una de las razones por la que los secuenciadores basados en incorporación de nucleótidos tienen un límite en la longitud máxima de sus lecturas.</p>
+<p>A pesar de que no proporcionamos esta información, el programa ha inferido la codificación ASCII (Sanger / Illumina 1.9) así como contado el número de secuencias, su tamaño y su contenido de GC.</p>
+<p>Cuando observamos la <strong>calidad por base</strong>, vemos que la mayoría de las bases están en la zona verde o tienen buena calidad. Cada base esta representada por un diagrama de caja que proporciona una buena idea acerca de la distribución de los puntajes de calidad en todas las secuencias. Es evidente que la calidad decrece levemente al inicio y más marcadamente al final de la secuencia. Esto es conocido ya que pequeños errores se acumulan mientras más larga sea la secuencia, esta es una de las razones por la que los secuenciadores basados en incorporación de nucleótidos tienen un límite en la longitud máxima de sus lecturas.</p>
+<p>La gráfica mostrando la <strong>calidad por cuadro</strong> esta completamente azul mostrando que la distribución promedio de errores en el cuadro (tile) es muy similar.</p>
+<p>La gráfica de <strong>puntaje de calidad por secuencia</strong> muestra que la mayoría de las secuencias tienen puntajes altos.</p>
+<p>Si embargo, la <strong>distribución de nucleótidos por base</strong> muestra que, al principio de la secuencia, la distribución es muy disparatada. Esto es uno de los errores comunes en RNA-Seq hecho por Illumina. Generalmente se soluciona cortando algunos de los nucleótidos en el 5’.</p>
+<p>También observamos que:</p>
+<ul>
+<li>La *distribución de GC por secuencia** es muy similar a la distribución hipotética.</li>
+<li>Hay pocas <strong>bases ambiguas (Ns)</strong> .</li>
+<li>Todas las secuencias tienen el mismo <strong>tamaño</strong>.<br />
+</li>
+<li>Los niveles de <strong>duplicación de secuencias</strong> son bajos.</li>
+<li>No hay <strong>secuencias sobre representadas</strong>.</li>
+<li>Hay pocos <strong>adaptadores</strong>.</li>
+<li>No hay <strong>kmers</strong> sobre representados.</li>
+</ul>
 <p>Al ejecutar FastQC también se generó un archivo comprimido llamado <code>Partial_SRR2467141_fastqc.zip</code>. Desempacamos este archivo usando el comando:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">unzip</span> Partial_SRR2467141_fastqc.zip</code></pre></div>
 <pre class="output"><code>Archive:  Partial_SRR2467141_fastqc.zip
