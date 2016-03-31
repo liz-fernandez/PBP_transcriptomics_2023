@@ -43,8 +43,12 @@ Esta mañana recibimos un correo de nuestro colaborador:
 ## Temas
 
 1.  [Control de calidad de datos de secuenciación masiva](01-quality.html)
+2.  [Ensamblando datos de novo](02-assem.html)
 
-[//]: # (2.  [Ensamblando datos de novo](02-assembly.html))
+## Presentaciones
+
+[Presentaciones por clase](presentaciones.html)
+
 [//]: # (3.  [Mapeo de secuencias](03-mapping.html))
 [//]: # (4.  [Anotación](04-annotation.html))
 [//]: # (5.  [Usadon un explorador de genomas (genome browser)](05-genomebrowser.html))
