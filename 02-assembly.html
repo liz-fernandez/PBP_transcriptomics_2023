@@ -51,7 +51,7 @@
 <p><a href="datasets/Sp_log.left.fq.gz">Sp_log.left.fq.gz</a></p>
 <p><a href="datasets/Sp_log.right.fq.gz">Sp_log.right.fq.gz</a></p>
 <p>Exploremos las lecturas en cada archivo:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">for</span> <span class="kw">i</span> in S*fastq.gz <span class="kw">;</span> <span class="kw">do</span> <span class="kw">zcat</span> <span class="ot">$i</span> <span class="kw">|</span> <span class="kw">head</span> <span class="kw">;</span> <span class="kw">wait</span> <span class="kw">;</span> <span class="kw">done</span> </code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">for</span> <span class="kw">i</span> in S*fq.gz <span class="kw">;</span> <span class="kw">do</span> <span class="kw">zcat</span> <span class="ot">$i</span> <span class="kw">|</span> <span class="kw">head</span> <span class="kw">;</span> <span class="kw">wait</span> <span class="kw">;</span> <span class="kw">done</span> </code></pre></div>
 <p>Este comando nos mostrará las primeras 10 líneas de cada archivo de manera iterativa. Esta estructura es conocida como un <code>for loop</code>. Un for loop nos permite ejecutar un comando en varios archivos de manera secuencial. Es extremadamente útil cuando tenemos varios archivos.</p>
 <p>Una vez que verificamos que los datos son correctos, usaremos el programa Trinity para ensamblar los transcritos.</p>
 <p>Primero empezaremos usando un comando genérico:</p>

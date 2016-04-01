@@ -36,7 +36,7 @@ Y bajaremos los siguientes archivos fastq:
 Exploremos las lecturas en cada archivo:
 
 ~~~ {.bash}
-$ for i in S*fastq.gz ; do zcat $i | head ; wait ; done 
+$ for i in S*fq.gz ; do zcat $i | head ; wait ; done 
 ~~~
 
 Este comando nos mostrará las primeras 10 líneas de cada archivo
