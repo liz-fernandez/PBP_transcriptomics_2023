@@ -17,24 +17,23 @@ $ sudo apt-get install trinityrnaseq
 
 Y bajaremos los siguientes archivos fastq:
 
-[Sp_ds.left.fq.gz](DATA/RNASEQ_data/Sp_ds.left.fq.gz)
+[Sp_ds.left.fq.gz](datasets/Sp_ds.left.fq.gz)
   
-[Sp_ds.right.fq.gz](DATA/RNASEQ_data/Sp_ds.right.fq.gz)
+[Sp_ds.right.fq.gz](datasets/Sp_ds.right.fq.gz)
    
-[Sp_hs.right.fq.gz](DATA/RNASEQ_data/Sp_hs.right.fq.gz)
+[Sp_hs.right.fq.gz](datasets/Sp_hs.right.fq.gz)
  
-[Sp_hs.left.fq.gz](DATA/RNASEQ_data/Sp_hs.left.fq.gz)
+[Sp_hs.left.fq.gz](datasets/Sp_hs.left.fq.gz)
     
-[Sp_plat.left.fq.gz](DATA/RNASEQ_data/Sp_plat.left.fq.gz)
+[Sp_plat.left.fq.gz](datasets/Sp_plat.left.fq.gz)
   
-[Sp_plat.right.fq.gz](DATA/RNASEQ_data/Sp_plat.right.fq.gz)
+[Sp_plat.right.fq.gz](datasets/Sp_plat.right.fq.gz)
  
-[Sp_log.left.fq.gz](DATA/RNASEQ_data/Sp_log.left.fq.gz)
+[Sp_log.left.fq.gz](datasets/Sp_log.left.fq.gz)
    
-[Sp_log.right.fq.gz](DATA/RNASEQ_data/Sp_log.right.fq.gz) 
+[Sp_log.right.fq.gz](datasets/Sp_log.right.fq.gz) 
 
-Después de descomprimir el archivo, exploraremos las lecturas 
-en cada archivo:
+Exploremos las lecturas en cada archivo:
 
 ~~~ {.bash}
 $ for i in S*fastq.gz ; do zcat $i | head ; wait ; done 
@@ -105,7 +104,7 @@ explorar escribiendo (en una terminal diferente a la que estamos
 usando para nuestro análisis):
 
 ~~~ {.bash}
-$ Trinity --help
+$ Trinity 
 ~~~
 ~~~ {.output}
 ###############################################################################
@@ -206,10 +205,13 @@ $ Trinity --help
 ###############################################################################
 ~~~
 
-Una de las opciones más interesante es la normalización virtual `X`. 
-Esta se encarga de eliminar kmeros raros. Dado que Inchworm explora
-todos los kmeros, realizar este tipo de normalización resulta en 
-ahorros significativos de tiempo de análisis. 
+Una de las opciones más interesante es la normalización *in silico* 
+ejecutada a través de la opción `--normalize_reads`. Esta opción es
+especialmente útil para sets de datos de >300 millones de pares. 
+
+Esta cambia la probabilidad de las lecturas dada su abundancia en 
+relación a la abundancia de sus kmeros. Este tipo de normalización 
+resulta en ahorros significativos de tiempo de análisis. 
 
 Nuestro trabajo debe haber terminado, revisemos los transcritos 
 generados, los cuales se encuentran en el archivo `Trinity.fasta`:
