@@ -193,14 +193,57 @@
 <p>Una de las opciones más interesante es la normalización <em>in silico</em> ejecutada a través de la opción <code>--normalize_reads</code>. Esta opción es especialmente útil para sets de datos de &gt;300 millones de pares.</p>
 <p>Esta cambia la probabilidad de las lecturas dada su abundancia en relación a la abundancia de sus kmeros. Este tipo de normalización resulta en ahorros significativos de tiempo de análisis.</p>
 <p>Nuestro trabajo debe haber terminado, revisemos los transcritos generados, los cuales se encuentran en el archivo <code>Trinity.fasta</code>:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">head</span> Trinity.fasta</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">head</span> trinity_out_dir/Trinity.fasta</code></pre></div>
 <p>Observamos que los resultados son secuencias en formato <code>fasta</code>.</p>
-<pre class="output"><code></code></pre>
+<pre class="output"><code>&gt;TR1|c0_g1_i1 len=344 path=[322:0-343] [-1, 322, -2]
+GAAAAAATTTATCATCGTCAAATCTTTAAGCAGTTTCTGACTAACAAAATTTTGAAAGAT
+CCAAAACAAAGAAGGTTTTTTAAAATGACGGACTTGCACGATTTGTTTACGTTAGGCGAT
+AACAAGACTGAGGGCACTGAGACAGGCAGCATGTTTTTGGGATCTGAACGAGTACTTCGA
+AAGGATAATTCCTCAAGAAATGGCAATGAAGCTGAAGATATTCCAGCTCGTGACCGAAAA
+AAGCACAAAATTCACGACAAAGGTAAAAAAGTTAACAGCTCCAAAGTGTTTGAAAAAATG
+GGGATTGCATCGATGGAAAAGTATAAACCACCGCAAGAGTCAAA
+&gt;TR1|c3_g1_i1 len=229 path=[207:0-228] [-1, 207, -2]
+ATTGGTGATGAAATGGGACTAGGAAAAACTATTCAAATAGTATCTTTCCTTTCGTCTTTG
+CATCACTCTGGCAAATTTCAAAAGCCTGCACTTATCGTTTGTCCAGCGACTTTAATGAAG</code></pre>
 <h2 id="analisando-las-estadísticas-del-transcriptoma-ensamblado">Analisando las estadísticas del transcriptoma ensamblado</h2>
 <p>Podemos capturar algunas estadística acerca de este ensamble usando un programa que es parte de Trinity:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ot">$TRINITY_HOME</span><span class="kw">/util/TrinityStats.pl</span> Trinity.fasta</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">/usr/lib/trinityrnaseq/util/TrinityStats.pl</span> trinity_out_dir/Trinity.fasta </code></pre></div>
 <p>El cuál generará los siguientes datos:</p>
-<pre class="output"><code></code></pre>
+<pre class="output"><code>################################
+## Counts of transcripts, etc.
+################################
+Total trinity &#39;genes&#39;:    333
+Total trinity transcripts:    338
+Percent GC: 39.27
+
+########################################
+Stats based on ALL transcript contigs:
+########################################
+
+    Contig N10: 2605
+    Contig N20: 2016
+    Contig N30: 1596
+    Contig N40: 1394
+    Contig N50: 1160
+
+    Median contig length: 496
+    Average contig: 773.81
+    Total assembled bases: 261549
+
+
+#####################################################
+## Stats based on ONLY LONGEST ISOFORM per &#39;GENE&#39;:
+#####################################################
+
+    Contig N10: 2576
+    Contig N20: 1917
+    Contig N30: 1591
+    Contig N40: 1377
+    Contig N50: 1143
+
+    Median contig length: 494
+    Average contig: 761.29
+    Total assembled bases: 253508</code></pre>
 <p>Este resumen nos indica:</p>
 <ul>
 <li>Cuantos genes y transcritos fueron ensamblados</li>
