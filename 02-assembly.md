@@ -292,8 +292,11 @@ Este resumen nos indica:
 * Número de bases ensambladas
 * Estadísticas sobre el tamaño medio de la isoforma más larga de cada gen
 
-De este resumen, es particularmente importante el concepto de Contig N50, N40, etc. Este número indica el tamaño del contig medio cuando 
-todos los contigs son ordenados por tamaño, en el caso de N50. 
+De este resumen, es particularmente importante el concepto de Contig N50, N40, etc. 
+Por ejemplo, N50 indica el tamaño del contig medio (o 50%) cuando 
+todos los contigs son ordenados por tamaño. N40 es el 40% etc. Esta medida nos
+ayuda a no basarnos simplemente en el contig más largo y nos permite observar
+como va incrementando la longitud en todos los transcritos. 
 
 Finalmente, realizaremos un blast de las primeras 5 secuencias 
 para identificar de que organismo provienen. Navegen hacia:
