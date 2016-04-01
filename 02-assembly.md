@@ -1,89 +1,278 @@
 ---
 layout: page
-title: Control de versiones usando Git
-subtitle: Configurando Git
+title: Análisis transcriptómicos
+subtitle: Ensamblando transcriptomas *de novo*
 minutes: 5
 ---
 > ## Objetivos de aprendizaje {.objectives}
 >
-> * Instalar 'git' en dos plataformas: Windows y Linux
-> *  Configurar `git` la primera vez que es utilizado en una computadora.
-> *  Entender el significado de la bandera de configuración `--global`.
+> *  Aprender como funciona el ensamble de RNA-Seq *de novo*.
+> *  Aprender a usar Trinity para ensamblar datos de novo.
 
-Para descargar e instalar 'git' en Linux ejecuta el siguiente comando en bash:
-
-sudo apt-get install git-all
-
-Existen diferentes versiones de visualizar Git en plaforma Windows, una
-de ellas es emulando la consola de Linux, la podrás encontrar en el siguiente link:
-
-https://git-scm.com/download/win 
-
-
-Cuando utilizamos Git en una nueva computadora por primera vez,
-tenemos que configurar algunas cosas. Así es como Mandy configura Git 
-en su nueva laptop:
+Para empezar, instalaremos Trinity en sus computadoras:
 
 ~~~ {.bash}
-$ git config --global user.name "Mandy Grim"
-$ git config --global user.email "mandy.grim@purohueso.org"
-$ git config --global color.ui "auto"
+$ sudo apt-get install trinityrnaseq
 ~~~
 
-(Por favor utilicen su propio nombre y correo electrónico en vez del de Mandy.)
+Y bajaremos los siguientes archivos fastq:
 
-También configura su editor de texto favorito, de acuerdo a los comandos en esta tabla:
+[Sp_ds.left.fq.gz](DATA/RNASEQ_data/Sp_ds.left.fq.gz)
+  
+[Sp_ds.right.fq.gz](DATA/RNASEQ_data/Sp_ds.right.fq.gz)
+   
+[Sp_hs.right.fq.gz](DATA/RNASEQ_data/Sp_hs.right.fq.gz)
+ 
+[Sp_hs.left.fq.gz](DATA/RNASEQ_data/Sp_hs.left.fq.gz)
+    
+[Sp_plat.left.fq.gz](DATA/RNASEQ_data/Sp_plat.left.fq.gz)
+  
+[Sp_plat.right.fq.gz](DATA/RNASEQ_data/Sp_plat.right.fq.gz)
+ 
+[Sp_log.left.fq.gz](DATA/RNASEQ_data/Sp_log.left.fq.gz)
+   
+[Sp_log.right.fq.gz](DATA/RNASEQ_data/Sp_log.right.fq.gz) 
 
-| Editor             | Comando de configuración                    |
-|:-------------------|:-------------------------------------------------|
-| nano               | `$ git config --global core.editor "nano -w"`    |
-| Text Wrangler      | `$ git config --global core.editor "edit -w"`    |
-| Sublime Text (Mac) | `$ git config --global core.editor "subl -n -w"` |
-| Sublime Text (Win, 32-bit install) | `$ git config --global core.editor "'c:/program files (x86)/sublime text 3/sublime_text.exe' -w"` |
-| Sublime Text (Win, 64-bit install) | `$ git config --global core.editor "'c:/program files/sublime text 3/sublime_text.exe' -w"` |
-| Notepad++ (Win)    | `$ git config --global core.editor "'c:/program files (x86)/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin"`|
-| Kate (Linux)       | `$ git config --global core.editor "kate"`       |
-| Gedit (Linux)      | `$ git config --global core.editor "gedit -s -w"`   |
-| emacs              | `$ git config --global core.editor "emacs"`   |
-| vim                | `$ git config --global core.editor "vim"`   |
-
-
-Los comandos de Git se escriben `git verb`, donde `verb` es lo que queremos que git haga.
-En este caso, le estamos diciendo a Git:
-
-*   nuestro nombre y dirección de correo electrónico,
-*   que coloree el texto de salida (output),
-*   cual es nuestro editor de texto preferido,
-*   y que queremos utilizar esta configuración globalmente (i.e. en cada proyecto)
-
-Los cuatro comandos que escribimos anteriormente solo se tienen que ejecutar una sola
-vez: la bandera `--global` le indica a Git que debe utilizar esta configuración en 
-cada proyecto, con ese usuario, en esa computadora. 
-
-Puedes verificar tu configuración en cualquier momento usando:
+Después de descomprimir el archivo, exploraremos las lecturas 
+en cada archivo:
 
 ~~~ {.bash}
-$ git config --list
+$ for i in S*fastq.gz ; do zcat $i | head ; wait ; done 
 ~~~
 
-Puedes cambiar la configuración tantas veces como lo desees: solo utiliza los
-mismos comandos para elegir otro editor de texto o para actualizar tu dirección 
-de correo electrónico.
+Este comando nos mostrará las primeras 10 líneas de cada archivo
+de manera iterativa. Esta estructura es conocida como un `for loop`. 
+Un for loop nos permite ejecutar un comando en varios archivos 
+de manera secuencial. Es extremadamente útil cuando tenemos varios 
+archivos.
 
-> ## Proxy {.callout}
+Una vez que verificamos que los datos son correctos,
+usaremos el programa Trinity para ensamblar los transcritos.
+
+Primero empezaremos usando un comando genérico:
+
+~~~ {.bash}
+$ Trinity --seqType fq --SS_lib_type RF \
+--left Sp_log.left.fq.gz Sp_hs.left.fq.gz \
+--right Sp_log.right.fq.gz Sp_hs.right.fq.gz \
+--CPU 2 --max_memory 1GB
+~~~
+
+Este comando tardará aproximadamente 15 minutos en ensamblar un 
+transcriptoma. 
+
+Las opciones (banderas) que hemos utilizado son las siguientes:
+
+* --seqType fq - Indicamos que estamos usando archivos tipo fastq
+* --SS_lib_type RF - Indicamos que la librería fue construida usando 
+lecturas en pares en la orientación RF (reverse-forward)
+* --left - Lecturas del lado izquierdo (o R1)
+* --right - Lecturas del lado derecho (o R2)
+* --CPU 2 - Utilizar 2 CPUs
+* --max_memory 1GB - Indicar que la memoria RAM máxima a usar es de 1GB
+
+Estás son las opciones más esenciales para llevar a cabo el análisis. 
+Por ello es muy importante saber la orientación de la librería 
+dado el protocolo que se usó para generarla. 
+
+> ## Orientación de librerías {.callout}
 >
-> En algunas redes necesitaras usar un
-> [proxy](https://en.wikipedia.org/wiki/Proxy_server). De ser necesario también
-> tendrás que informarle a Git acerca del proxy:
+> La orientación de las librerías es un parámetro esencial para el 
+> ensamble, ya que esto dictará la orientación de los transcritos. 
+> 
+> Esta es una clave que les permitirá decidir que parámetro utilizar
+> para indicar a Trinity la orientación de su librería. 
+> 
+> ![Orientación de librerías](fig/strand_specificity.jpg)
 >
-> ~~~ {.bash}
-> $ git config --global http.proxy proxy-url
-> $ git config --global https.proxy proxy-url
-> ~~~
+
+> ## ¿Porqué mezclamos librerías? {.challenge}
 >
-> Para desactivar el proxy utiliza:
+> En el comando usado en la parte superior podemos ver que 
+> Estamos ensamblando el transcriptoma con la librería log 
+> así como la librería hs. ¿Por qué no ensamblarlas de forma
+> independiente? ¿Qué ventajas o desventajas crees que tendría 
+> ensamblarlas juntas o separadas?
+
+Uno de los problemas comunes con Trinity es la falta de memoria. 
+Un análisis típico de Trinity requiere ~1 hora y ~1GB de RAM 
+por ~1 millón de lecturas en pares (paired-end). Es por ello 
+que estos análisis se efectúan en un servidor con grandes 
+cantidades de memoria y se le deja correr por varios días. 
+
+Trinity tiene muchas otras opciones las cuales podemos 
+explorar escribiendo (en una terminal diferente a la que estamos
+usando para nuestro análisis):
+
+~~~ {.bash}
+$ Trinity --help
+~~~
+~~~ {.output}
+###############################################################################
+#
+#     ______  ____   ____  ____   ____  ______  __ __
+#    |      ||    \ |    ||    \ |    ||      ||  |  |
+#    |      ||  D  ) |  | |  _  | |  | |      ||  |  |
+#    |_|  |_||    /  |  | |  |  | |  | |_|  |_||  ~  |
+#      |  |  |    \  |  | |  |  | |  |   |  |  |___, |
+#      |  |  |  .  \ |  | |  |  | |  |   |  |  |     |
+#      |__|  |__|\_||____||__|__||____|  |__|  |____/
+#
+###############################################################################
+#
+# Required:
+#
+#  --seqType <string>      :type of reads: ( fa, or fq )
+#
+#  --max_memory <string>      :suggested max memory to use by Trinity where limiting can be enabled. (jellyfish, sorting, etc)
+#                            provied in Gb of RAM, ie.  '--max_memory 10G'
+#
+#  If paired reads:
+#      --left  <string>    :left reads, one or more file names (separated by commas, no spaces)
+#      --right <string>    :right reads, one or more file names (separated by commas, no spaces)
+#
+#  Or, if unpaired reads:
+#      --single <string>   :single reads, one or more file names, comma-delimited (note, if single file contains pairs, can use flag: --run_as_paired )
+#
+####################################
+##  Misc:  #########################
+#
+#  --SS_lib_type <string>          :Strand-specific RNA-Seq read orientation.
+#                                   if paired: RF or FR,
+#                                   if single: F or R.   (dUTP method = RF)
+#                                   See web documentation.
+#
+#  --CPU <int>                     :number of CPUs to use, default: 2
+#  --min_contig_length <int>       :minimum assembled contig length to report
+#                                   (def=200)
+#
+#  --long_reads <string>           :fasta file containing error-corrected or circular consensus (CCS) pac bio reads
+#
+#  --genome_guided_bam <string>    :genome guided mode, provide path to coordinate-sorted bam file.
+#                                   (see genome-guided param section under --show_full_usage_info)
+#
+#  --jaccard_clip                  :option, set if you have paired reads and
+#                                   you expect high gene density with UTR
+#                                   overlap (use FASTQ input file format
+#                                   for reads).
+#                                   (note: jaccard_clip is an expensive
+#                                   operation, so avoid using it unless
+#                                   necessary due to finding excessive fusion
+#                                   transcripts w/o it.)
+#
+#  --trimmomatic                   :run Trimmomatic to quality trim reads
+#                                        see '--quality_trimming_params' under full usage info for tailored settings.
+#                                  
+#
+#  --normalize_reads               :run in silico normalization of reads. Defaults to max. read coverage of 50.
+#                                       see '--normalize_max_read_cov' under full usage info for tailored settings.
+#     
+#  --no_distributed_trinity_exec   :do not run Trinity phase 2 (assembly of partitioned reads), and stop after generating command list.
+#
+#
+#  --output <string>               :name of directory for output (will be
+#                                   created if it doesn't already exist)
+#                                   default( your current working directory: "/home/usuario/trinity_out_dir" 
+#                                    note: must include 'trinity' in the name as a safety precaution! )
+#  
+#  --full_cleanup                  :only retain the Trinity fasta file, rename as ${output_dir}.Trinity.fasta
+#
+#  --cite                          :show the Trinity literature citation
+#
+#  --verbose                       :provide additional job status info during the run.
+#
+#  --version                       :reports Trinity version (v2.0.6) and exits.
+#
+#  --show_full_usage_info          :show the many many more options available for running Trinity (expert usage).
+#
+#
+###############################################################################
+#
+#  *Note, a typical Trinity command might be:
+#
+#        Trinity --seqType fq --max_memory 50G --left reads_1.fq  --right reads_2.fq --CPU 6
+#
+#
+#    and for Genome-guided Trinity:
+#
+#        Trinity --genome_guided_bam rnaseq_alignments.csorted.bam --max_memory 50G
+#                --genome_guided_max_intron 10000 --CPU 6
+#
+#     see: /usr/lib/trinityrnaseq/sample_data/test_Trinity_Assembly/
+#          for sample data and 'runMe.sh' for example Trinity execution
+#
+#     For more details, visit: http://trinityrnaseq.github.io
+#
+###############################################################################
+~~~
+
+Una de las opciones más interesante es la normalización virtual `X`. 
+Esta se encarga de eliminar kmeros raros. Dado que Inchworm explora
+todos los kmeros, realizar este tipo de normalización resulta en 
+ahorros significativos de tiempo de análisis. 
+
+Nuestro trabajo debe haber terminado, revisemos los transcritos 
+generados, los cuales se encuentran en el archivo `Trinity.fasta`:
+
+~~~ {.bash}
+$ head Trinity.fasta
+~~~
+
+Observamos que los resultados son secuencias en formato `fasta`.
+
+~~~ {.output}
+
+~~~
+
+## Analisando las estadísticas del transcriptoma ensamblado
+
+Podemos capturar algunas estadística acerca de este ensamble
+usando un programa que es parte de Trinity:
+
+~~~ {.bash}
+$ $TRINITY_HOME/util/TrinityStats.pl Trinity.fasta
+~~~
+
+El cuál generará los siguientes datos: 
+
+~~~ {.output}
+
+~~~
+
+Este resumen nos indica: 
+
+* Cuantos genes y transcritos fueron ensamblados
+* El contenido de GC
+* Estadísticas sobre el tamaño medio de los contigs
+* Número de bases ensambladas
+* Estadísticas sobre el tamaño medio de la isoforma más larga de cada gen
+
+De este resumen, es particularmente importante el concepto de Contig N50, N40, etc. Este número indica el tamaño del contig medio cuando 
+todos los contigs son ordenados por tamaño, en el caso de N50. 
+
+Finalmente, realizaremos un blast de las primeras 5 secuencias 
+para identificar de que organismo provienen. Navegen hacia:
+
+[NCBI Blast](http://blast.ncbi.nlm.nih.gov/Blast.cgi)
+
+> ## ¿Qué tipo de Blast debo utilizar? {.challenge}
 >
-> ~~~ {.bash}
-> $ git config --global --unset http.proxy
-> $ git config --global --unset https.proxy
-> ~~~
+> Dado que tenemos datos nucleotídicos pero queremos buscar en las
+> bases de datos de proteínas de NCBI.
+> ¿Qué tipo de blast debemos utilizar?
+
+> ## Tarea {.challenge}
+>
+> Si se pudieron dar cuenta, los datos que ensamblamos son los datos crudos, es decir
+> sin filtrar por calidad. Afortunadamente Trinity incluye una opción para usar 
+> Trimmomatic de manera sencilla. 
+>
+> Su tarea consiste en re-ensamblar el transcriptoma esta vez utilizando todos los 
+> archivos proporcionados, pero filtrando la calidad de las secuencias. 
+> Añadan a su repositorio un archivo con las primeras 20 secuencias del 
+> transcriptoma con el nombre "Ensamble_Final_NOMBRE_APELLIDO.fasta". 
+> Una vez más, añadanlo a su repositorio en cuanto empecemos la siguiente clase.
+>
+> Conserven el archivo fasta completo, ya que lo necesitarán para las siguientes
+> prácticas.
+

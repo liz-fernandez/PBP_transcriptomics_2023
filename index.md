@@ -43,7 +43,7 @@ Esta mañana recibimos un correo de nuestro colaborador:
 ## Temas
 
 1.  [Control de calidad de datos de secuenciación masiva](01-quality.html)
-2.  [Ensamblando datos de novo](02-assem.html)
+2.  [Ensamblando transcriptomas *de novo*](02-assem.html)
 
 ## Presentaciones
 
