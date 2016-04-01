@@ -42,15 +42,15 @@
 <p>Para empezar, instalaremos Trinity en sus computadoras:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">sudo</span> apt-get install trinityrnaseq</code></pre></div>
 <p>Y bajaremos los siguientes archivos fastq:</p>
-<p><a href="DATA/RNASEQ_data/Sp_ds.left.fq.gz">Sp_ds.left.fq.gz</a></p>
-<p><a href="DATA/RNASEQ_data/Sp_ds.right.fq.gz">Sp_ds.right.fq.gz</a></p>
-<p><a href="DATA/RNASEQ_data/Sp_hs.right.fq.gz">Sp_hs.right.fq.gz</a></p>
-<p><a href="DATA/RNASEQ_data/Sp_hs.left.fq.gz">Sp_hs.left.fq.gz</a></p>
-<p><a href="DATA/RNASEQ_data/Sp_plat.left.fq.gz">Sp_plat.left.fq.gz</a></p>
-<p><a href="DATA/RNASEQ_data/Sp_plat.right.fq.gz">Sp_plat.right.fq.gz</a></p>
-<p><a href="DATA/RNASEQ_data/Sp_log.left.fq.gz">Sp_log.left.fq.gz</a></p>
-<p><a href="DATA/RNASEQ_data/Sp_log.right.fq.gz">Sp_log.right.fq.gz</a></p>
-<p>Después de descomprimir el archivo, exploraremos las lecturas en cada archivo:</p>
+<p><a href="datasets/Sp_ds.left.fq.gz">Sp_ds.left.fq.gz</a></p>
+<p><a href="datasets/Sp_ds.right.fq.gz">Sp_ds.right.fq.gz</a></p>
+<p><a href="datasets/Sp_hs.right.fq.gz">Sp_hs.right.fq.gz</a></p>
+<p><a href="datasets/Sp_hs.left.fq.gz">Sp_hs.left.fq.gz</a></p>
+<p><a href="datasets/Sp_plat.left.fq.gz">Sp_plat.left.fq.gz</a></p>
+<p><a href="datasets/Sp_plat.right.fq.gz">Sp_plat.right.fq.gz</a></p>
+<p><a href="datasets/Sp_log.left.fq.gz">Sp_log.left.fq.gz</a></p>
+<p><a href="datasets/Sp_log.right.fq.gz">Sp_log.right.fq.gz</a></p>
+<p>Exploremos las lecturas en cada archivo:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">for</span> <span class="kw">i</span> in S*fastq.gz <span class="kw">;</span> <span class="kw">do</span> <span class="kw">zcat</span> <span class="ot">$i</span> <span class="kw">|</span> <span class="kw">head</span> <span class="kw">;</span> <span class="kw">wait</span> <span class="kw">;</span> <span class="kw">done</span> </code></pre></div>
 <p>Este comando nos mostrará las primeras 10 líneas de cada archivo de manera iterativa. Esta estructura es conocida como un <code>for loop</code>. Un for loop nos permite ejecutar un comando en varios archivos de manera secuencial. Es extremadamente útil cuando tenemos varios archivos.</p>
 <p>Una vez que verificamos que los datos son correctos, usaremos el programa Trinity para ensamblar los transcritos.</p>
@@ -93,7 +93,7 @@
 </section>
 <p>Uno de los problemas comunes con Trinity es la falta de memoria. Un análisis típico de Trinity requiere ~1 hora y ~1GB de RAM por ~1 millón de lecturas en pares (paired-end). Es por ello que estos análisis se efectúan en un servidor con grandes cantidades de memoria y se le deja correr por varios días.</p>
 <p>Trinity tiene muchas otras opciones las cuales podemos explorar escribiendo (en una terminal diferente a la que estamos usando para nuestro análisis):</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">Trinity</span> --help</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">Trinity</span> </code></pre></div>
 <pre class="output"><code>###############################################################################
 #
 #     ______  ____   ____  ____   ____  ______  __ __
@@ -190,7 +190,8 @@
 #     For more details, visit: http://trinityrnaseq.github.io
 #
 ###############################################################################</code></pre>
-<p>Una de las opciones más interesante es la normalización virtual <code>X</code>. Esta se encarga de eliminar kmeros raros. Dado que Inchworm explora todos los kmeros, realizar este tipo de normalización resulta en ahorros significativos de tiempo de análisis.</p>
+<p>Una de las opciones más interesante es la normalización <em>in silico</em> ejecutada a través de la opción <code>--normalize_reads</code>. Esta opción es especialmente útil para sets de datos de &gt;300 millones de pares.</p>
+<p>Esta cambia la probabilidad de las lecturas dada su abundancia en relación a la abundancia de sus kmeros. Este tipo de normalización resulta en ahorros significativos de tiempo de análisis.</p>
 <p>Nuestro trabajo debe haber terminado, revisemos los transcritos generados, los cuales se encuentran en el archivo <code>Trinity.fasta</code>:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">head</span> Trinity.fasta</code></pre></div>
 <p>Observamos que los resultados son secuencias en formato <code>fasta</code>.</p>
