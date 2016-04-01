@@ -217,13 +217,22 @@ Nuestro trabajo debe haber terminado, revisemos los transcritos
 generados, los cuales se encuentran en el archivo `Trinity.fasta`:
 
 ~~~ {.bash}
-$ head Trinity.fasta
+$ head trinity_out_dir/Trinity.fasta
 ~~~
 
 Observamos que los resultados son secuencias en formato `fasta`.
 
 ~~~ {.output}
-
+>TR1|c0_g1_i1 len=344 path=[322:0-343] [-1, 322, -2]
+GAAAAAATTTATCATCGTCAAATCTTTAAGCAGTTTCTGACTAACAAAATTTTGAAAGAT
+CCAAAACAAAGAAGGTTTTTTAAAATGACGGACTTGCACGATTTGTTTACGTTAGGCGAT
+AACAAGACTGAGGGCACTGAGACAGGCAGCATGTTTTTGGGATCTGAACGAGTACTTCGA
+AAGGATAATTCCTCAAGAAATGGCAATGAAGCTGAAGATATTCCAGCTCGTGACCGAAAA
+AAGCACAAAATTCACGACAAAGGTAAAAAAGTTAACAGCTCCAAAGTGTTTGAAAAAATG
+GGGATTGCATCGATGGAAAAGTATAAACCACCGCAAGAGTCAAA
+>TR1|c3_g1_i1 len=229 path=[207:0-228] [-1, 207, -2]
+ATTGGTGATGAAATGGGACTAGGAAAAACTATTCAAATAGTATCTTTCCTTTCGTCTTTG
+CATCACTCTGGCAAATTTCAAAAGCCTGCACTTATCGTTTGTCCAGCGACTTTAATGAAG
 ~~~
 
 ## Analisando las estadísticas del transcriptoma ensamblado
@@ -232,13 +241,47 @@ Podemos capturar algunas estadística acerca de este ensamble
 usando un programa que es parte de Trinity:
 
 ~~~ {.bash}
-$ $TRINITY_HOME/util/TrinityStats.pl Trinity.fasta
+$ /usr/lib/trinityrnaseq/util/TrinityStats.pl trinity_out_dir/Trinity.fasta 
 ~~~
 
 El cuál generará los siguientes datos: 
 
 ~~~ {.output}
+################################
+## Counts of transcripts, etc.
+################################
+Total trinity 'genes':    333
+Total trinity transcripts:    338
+Percent GC: 39.27
 
+########################################
+Stats based on ALL transcript contigs:
+########################################
+
+    Contig N10: 2605
+    Contig N20: 2016
+    Contig N30: 1596
+    Contig N40: 1394
+    Contig N50: 1160
+
+    Median contig length: 496
+    Average contig: 773.81
+    Total assembled bases: 261549
+
+
+#####################################################
+## Stats based on ONLY LONGEST ISOFORM per 'GENE':
+#####################################################
+
+    Contig N10: 2576
+    Contig N20: 1917
+    Contig N30: 1591
+    Contig N40: 1377
+    Contig N50: 1143
+
+    Median contig length: 494
+    Average contig: 761.29
+    Total assembled bases: 253508
 ~~~
 
 Este resumen nos indica: 
