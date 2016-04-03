@@ -54,7 +54,7 @@ Primero empezaremos usando un comando genérico:
 $ Trinity --seqType fq --SS_lib_type RF \
 --left Sp_log.left.fq.gz Sp_hs.left.fq.gz \
 --right Sp_log.right.fq.gz Sp_hs.right.fq.gz \
---CPU 2 --max_memory 1GB
+--CPU 2 --max_memory 1G
 ~~~
 
 Este comando tardará aproximadamente 15 minutos en ensamblar un 
@@ -68,7 +68,7 @@ lecturas en pares en la orientación RF (reverse-forward)
 * --left - Lecturas del lado izquierdo (o R1)
 * --right - Lecturas del lado derecho (o R2)
 * --CPU 2 - Utilizar 2 CPUs
-* --max_memory 1GB - Indicar que la memoria RAM máxima a usar es de 1GB
+* --max_memory 1G - Indicar que la memoria RAM máxima a usar es de 1GB
 
 Estás son las opciones más esenciales para llevar a cabo el análisis. 
 Por ello es muy importante saber la orientación de la librería 
