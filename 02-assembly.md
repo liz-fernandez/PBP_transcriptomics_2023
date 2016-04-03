@@ -321,7 +321,8 @@ para identificar de que organismo provienen. Navegen hacia:
 > transcriptoma con el nombre "Ensamble_Final_NOMBRE_APELLIDO.fasta". 
 > Una vez más, añadanlo a su repositorio en cuanto empecemos la siguiente clase.
 >
-> **Nota: Por favor agreguen también el reporte generado por el programa `TrinityStats.pl`, con el nombre "Ensamble_Final_NOMBRE_APELLIDO_Stats.txt".**
+> **Nota: Por favor agreguen también el reporte generado por el programa `TrinityStats.pl` 
+en su transcriptoma completo con el nombre "Ensamble_Final_NOMBRE_APELLIDO_Stats.txt".**
 >
 > Conserven el archivo fasta completo, ya que lo necesitarán para las siguientes
 > prácticas.
