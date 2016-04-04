@@ -37,7 +37,9 @@ Como ya sabemos, es buena idea primero ver que los datos están en el
 formato correcto:
 
 ~~~ {.bash}
-$ for i in *qtrim.gz ; do zcat $i | head ; wait ; done 
+$ for i in trinity_out_dir/*.qtrim.gz ; do zcat $i | head ; done 
+
+ ln -s ./trinity_out_dir/*qtrim.gz .
 ~~~
 
 Una vez que verificamos que las lecturas están el formato correcto,
@@ -51,12 +53,58 @@ En los casos en los que contamos con una referencia, es muy útil analizar los t
 en su contexto genómico. En este ejercicio usaremos el programa de mapeo 
 [GMAP](http://research-pub.gene.com/gmap/).
 
+Primero instalemos el programa:
+
+~~~ {.bash}
+sudo apt-get update
+sudo apt-get install gmap
+~~~
+
 El primer paso para realizar el mapeo es generar el índice por medio del comando:
 
 ~~~ {.bash}
+$ cd /usr/lib/gmap/
+$ sudo cp * /usr/bin
 $ gmap_build -d genome -D . -k 13 Sp_genome.fa
 ~~~
 ~~~ {.output}
+-k flag specified (not as 15), but not -b, so building with basesize == kmer size
+Sorting chromosomes in chrom order.  To turn off or sort other ways, use the -s flag.
+Running /usr/bin/fa_coords  -o ./genome.coords Sp_genome.fa
+Opening file Sp_genome.fa
+  Processed short contigs (<1000000 nt): .
+============================================================
+Contig mapping information has been written to file ./genome.coords.
+You should look at this file, and edit it if necessary
+If everything is okay, you should proceed by running
+    make gmapdb
+============================================================
+Running /usr/bin/gmap_process  -c ./genome.coords Sp_genome.fa | /usr/bin/gmapindex -d genome -D . -A 
+Reading coordinates from file ./genome.coords
+Logging contig genome at genome:1..451226 in genome genome
+Total genomic length = 451226 bp
+Chromosome genome has universal coordinates 1..451226
+Writing IIT file header information...done
+Processing null division/chromosome...sorting...writing...done (1 intervals)
+Writing IIT file footer information...done
+Writing IIT file header information...done
+Processing null division/chromosome...sorting...writing...done (1 intervals)
+Writing IIT file footer information...done
+Running /usr/bin/gmap_process  -c ./genome.coords Sp_genome.fa | /usr/bin/gmapindex -d genome -F . -D . -G
+Genome length is 451226 nt
+Trying to allocate 42303*4 bytes of memory...succeeded.  Building genome in memory.
+Reading coordinates from file ./genome.coords
+Writing contig genome to universal coordinates 1..451226 in genome genome
+A total of 0 non-ACGTNX characters were seen in the genome.
+Running cat ./genome.genomecomp | /usr/bin/gmapindex -b 13 -k 13 -q 3 -d genome -F . -D . -O
+Allocating 67108865*4 bytes for offsets
+Indexing offsets of oligomers in genome genome (13 bp every 3 bp), position 0
+Writing 67108865 offsets compressed to file with total of 142909 positions...done
+Running cat ./genome.genomecomp | /usr/bin/gmapindex -b 13 -k 13 -q 3 -d genome -F . -D . -P
+Trying to allocate 142909*4 bytes of memory...succeeded.  Building positions in memory.
+Indexing positions of oligomers in genome genome (13 bp every 3 bp), position 0
+Writing 142909 genomic positions to file ./genome.ref133positions ...
+Copying files to directory ./genome
 ~~~
 
 Una vez generado el índice mapeamos los transcritos generados en la tarea al genoma:
@@ -65,17 +113,68 @@ Una vez generado el índice mapeamos los transcritos generados en la tarea al ge
 $ gmap -n 0 -D . -d genome trinity_out_dir/Trinity.fasta -f samse > trinity_gmap.sam
 ~~~
 ~~~ {.output}
+Trying to allocate 142909*4 bytes of memory...succeeded.  Building positions in memory.
+Indexing positions of oligomers in genome genome (13 bp every 3 bp), position 0
+Writing 142909 genomic positions to file ./genome.ref133positions ...
+Copying files to directory ./genome
+usuario@HP334:~/Documents/TEMPO$ gmap -n 0 -D . -d genome trinity_out_dir/Trinity.fasta -f samse > trinity_gmap.sam
+GMAP version 2012-06-12 called with args: gmap -n 0 -D . -d genome trinity_out_dir/Trinity.fasta -f samse
+Note: >1 sequence detected, so index files are being memory mapped.
+  GMAP can run slowly at first while the computer starts to accumulate
+  pages from the hard disk into its cache.  To copy index files into RAM
+  instead of memory mapping, use -B 3, -B 4, or -B 5, if you have enough RAM.
+  For more speed, also try multiple threads (-t <int>), if you have multiple processors or cores.
+Pre-loading compressed genome....done (169,212 bytes, 42 pages, 0.00 sec)
+Looking for index files in directory ./genome
+  No gammaptrs file, because kmersize 13 == basesize 13
+  Offsetscomp file is genome.ref13133offsetscomp
+  Positions file is genome.ref133positions
+Allocating memory for ref offsets, kmer 13, interval 3...done (268,435,460 bytes, 0.05 sec)
+Pre-loading ref positions, kmer 13, interval 3....done (571,636 bytes, 140 pages, 0.00 sec)
+No paths found for TR3|c0_g1_i1
+No paths found for TR3|c0_g2_i1
+No paths found for TR5|c0_g1_i1
+No paths found for TR9|c0_g1_i1
+No paths found for TR13|c0_g1_i1
+No paths found for TR31|c0_g1_i1
+No paths found for TR33|c0_g1_i1
+No paths found for TR33|c1_g1_i1
+No paths found for TR37|c0_g1_i1
+No paths found for TR39|c0_g1_i1
+No paths found for TR58|c0_g1_i1
+No paths found for TR58|c0_g2_i1
+No paths found for TR60|c0_g1_i1
+No paths found for TR60|c0_g2_i1
+No paths found for TR79|c0_g1_i1
+No paths found for TR79|c0_g2_i1
+No paths found for TR82|c0_g1_i1
+No paths found for TR82|c0_g2_i1
+No paths found for TR83|c0_g1_i1
+No paths found for TR89|c0_g1_i1
+No paths found for TR98|c0_g1_i1
+No paths found for TR99|c2_g1_i1
+No paths found for TR102|c0_g1_i1
+No paths found for TR102|c1_g1_i1
+No paths found for TR111|c0_g1_i1
+No paths found for TR115|c0_g1_i1
+No paths found for TR123|c0_g1_i1
+No paths found for TR130|c0_g1_i1
+No paths found for TR139|c0_g1_i1
+No paths found for TR147|c0_g1_i1
+No paths found for TR160|c0_g1_i1
+No paths found for TR183|c0_g1_i1
+No paths found for TR183|c0_g2_i1
+No paths found for TR191|c0_g1_i1
+No paths found for TR215|c0_g1_i1
+Processed 354 queries in 4.14 seconds (85.51 queries/sec)
 ~~~
 
 Si revisamos el resultado, es un archivo con coordenadas en un formato llamado
 SAM (Sequence Alignment/Map format). Veamos en que consiste este formato:
 
 ~~~ {.bash}
-$ head -n trinity_gmap.sam
+$ more trinity_gmap.sam
 ~~~
-~~~ {.output}
-~~~
-
 
 ### El formato SAM
 
@@ -188,30 +287,88 @@ $ samtools index trinity_gmap.bam
 El primer paso ordena los resultados por sus coordenadas y el segundo crea índices
 para hacer más rápida la visualización usando un navegador.
 
-
 ## Mapeando las lecturas filtradas al genoma
 
 Primero generaremos un índice de bowtie2 para el genoma:
 
 ~~~ {.bash}
 $ bowtie2-build Sp_genome.fa Sp_genome 
+$ ls *bt2
 ~~~ 
 ~~~ {.output}
+Sp_genome.1.bt2        
+Sp_genome.2.bt2              
+Sp_genome.3.bt2       
+Sp_genome.4.bt2           
+Sp_genome.rev.1.bt2          
+Sp_genome.rev.2.bt2
 ~~~
 
 Usamos tophat2 para mapear las lecturas. Este programa nos permite dividir lecturas
 que atraviesan sitios de splicing 
 
 ~~~ {.bash}
-$ tophat2 -I 300 -i 20 genome \
-    RNASEQ_data/Sp_log.left.fq.gz,RNASEQ_data/Sp_hs.left.fq.gz,RNASEQ_data/Sp_ds.left.fq.gz,RNASEQ_data/Sp_plat.left.fq.gz \
-    RNASEQ_data/Sp_log.right.fq.gz,RNASEQ_data/Sp_hs.right.fq.gz,RNASEQ_data/Sp_ds.right.fq.gz,RNASEQ_data/Sp_plat.right.fq.gz
+$ tophat2 -I 300 -i 20 Sp_genome \
+    Sp_log.left.fq.gz.P.qtrim.gz,Sp_hs.left.fq.gz.P.qtrim.gz,Sp_ds.left.fq.gz.P.qtrim.gz,Sp_plat.left.fq.gz.P.qtrim.gz \
+    Sp_log.right.fq.gz.P.qtrim.gz,Sp_hs.right.fq.gz.P.qtrim.gz,Sp_ds.right.fq.gz.P.qtrim.gz,Sp_plat.right.fq.gz.P.qtrim.gz
 ~~~ 
+~~~ {.output}
+[2016-04-04 14:18:50] Beginning TopHat run (v2.0.13)
+-----------------------------------------------
+[2016-04-04 14:18:50] Checking for Bowtie
+		  Bowtie version:	 2.2.4.0
+[2016-04-04 14:18:50] Checking for Bowtie index files (genome)..
+[2016-04-04 14:18:50] Checking for reference FASTA file
+[2016-04-04 14:18:50] Generating SAM header for Sp_genome
+Error: could not open pipe gzip -cd < RNASEQ_data/Sp_log.left.fq.gz
+usuario@HP334:~/Documents/TEMPO$ ls tophat2 -I 300 -i 20 Sp_genome \
+>     Sp_log.left.fq.gz.P.qtrim.gz,Sp_hs.left.fq.gz.P.qtrim.gz,Sp_ds.left.fq.gz.P.qtrim.gz,Sp_plat.left.fq.gz.P.qtrim.gz \
+>     Sp_log.right.fq.gz.P.qtrim.gz,Sp_hs.right.fq.gz.P.qtrim.gz,Sp_ds.right.fq.gz.P.qtrim.gz,Sp_plat.right.fq.gz.P.qtrim.gz
+ls: cannot access tophat2: No such file or directory
+ls: cannot access 20: No such file or directory
+ls: cannot access Sp_genome: No such file or directory
+ls: cannot access Sp_log.left.fq.gz.P.qtrim.gz,Sp_hs.left.fq.gz.P.qtrim.gz,Sp_ds.left.fq.gz.P.qtrim.gz,Sp_plat.left.fq.gz.P.qtrim.gz: No such file or directory
+ls: cannot access Sp_log.right.fq.gz.P.qtrim.gz,Sp_hs.right.fq.gz.P.qtrim.gz,Sp_ds.right.fq.gz.P.qtrim.gz,Sp_plat.right.fq.gz.P.qtrim.gz: No such file or directory
+usuario@HP334:~/Documents/TEMPO$  tophat2 -I 300 -i 20 Sp_genome     Sp_log.left.fq.gz.P.qtrim.gz,Sp_hs.left.fq.gz.P.qtrim.gz,Sp_ds.left.fq.gz.P.qtrim.gz,Sp_plat.left.fq.gz.P.qtrim.gz     Sp_log.right.fq.gz.P.qtrim.gz,Sp_hs.right.fq.gz.P.qtrim.gz,Sp_ds.right.fq.gz.P.qtrim.gz,Sp_plat.right.fq.gz.P.qtrim.gz
+
+[2016-04-04 14:21:02] Beginning TopHat run (v2.0.13)
+-----------------------------------------------
+[2016-04-04 14:21:02] Checking for Bowtie
+		  Bowtie version:	 2.2.4.0
+[2016-04-04 14:21:02] Checking for Bowtie index files (genome)..
+[2016-04-04 14:21:02] Checking for reference FASTA file
+[2016-04-04 14:21:02] Generating SAM header for Sp_genome
+[2016-04-04 14:21:02] Preparing reads
+	 left reads: min. length=25, max. length=68, 329490 kept reads (432 discarded)
+	right reads: min. length=25, max. length=68, 329760 kept reads (162 discarded)
+[2016-04-04 14:21:10] Mapping left_kept_reads to genome Sp_genome with Bowtie2 
+[2016-04-04 14:21:24] Mapping left_kept_reads_seg1 to genome Sp_genome with Bowtie2 (1/2)
+[2016-04-04 14:21:24] Mapping left_kept_reads_seg2 to genome Sp_genome with Bowtie2 (2/2)
+[2016-04-04 14:21:24] Mapping right_kept_reads to genome Sp_genome with Bowtie2 
+[2016-04-04 14:21:39] Mapping right_kept_reads_seg1 to genome Sp_genome with Bowtie2 (1/2)
+[2016-04-04 14:21:39] Mapping right_kept_reads_seg2 to genome Sp_genome with Bowtie2 (2/2)
+[2016-04-04 14:21:40] Searching for junctions via segment mapping
+	Coverage-search algorithm is turned on, making this step very slow
+	Please try running TopHat again with the option (--no-coverage-search) if this step takes too much time or memory.
+[2016-04-04 14:21:45] Retrieving sequences for splices
+[2016-04-04 14:21:45] Indexing splices
+Building a SMALL index
+[2016-04-04 14:21:45] Mapping left_kept_reads_seg1 to genome segment_juncs with Bowtie2 (1/2)
+[2016-04-04 14:21:45] Mapping left_kept_reads_seg2 to genome segment_juncs with Bowtie2 (2/2)
+[2016-04-04 14:21:45] Joining segment hits
+[2016-04-04 14:21:47] Mapping right_kept_reads_seg1 to genome segment_juncs with Bowtie2 (1/2)
+[2016-04-04 14:21:47] Mapping right_kept_reads_seg2 to genome segment_juncs with Bowtie2 (2/2)
+[2016-04-04 14:21:47] Joining segment hits
+[2016-04-04 14:21:48] Reporting output tracks
+-----------------------------------------------
+[2016-04-04 14:22:15] A summary of the alignment counts can be found in ./tophat_out/align_summary.txt
+[2016-04-04 14:22:15] Run complete: 00:01:12 elapsed
+~~~
 
 Exploramos el resultado, el cuál es un archivo tipo sam. 
 
 ~~~ {.bash}
-$ head X 
+$ samtools view tophat_out/accepted_hits.bam | head
 ~~~ 
 
 > ## Tarea - Alineando las lecturas filtradas al transcriptoma {.challenge}
