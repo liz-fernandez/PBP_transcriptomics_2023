@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="generator" content="pandoc">
+    <title>Software Carpentry: Análisis transcriptómicos</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="css/swc.css" />
+    <link rel="alternate" type="application/rss+xml" title="Software Carpentry Blog" href="http://software-carpentry.org/feed.xml"/>
+    <meta charset="UTF-8" />
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body class="lesson">
+    <div class="container card">
+      <div class="banner">
+        <a href="http://www.puntoyaprende.com/pbi/" title="Posgrado en Biologia Integrativa">
+          <img alt="Logo Posgrado Biologia Integrativa" src="img/posgrado_bi_logo.png" />
+        </a>
+      </div>
+      <article>
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+                    <a href="index.html"><h1 class="title">Análisis transcriptómicos</h1></a>
+          <h2 class="subtitle">Alineamiento de lecturas</h2>
+          <section class="objectives panel panel-warning">
+<div class="panel-heading">
+<h2 id="objetivos-de-aprendizaje"><span class="glyphicon glyphicon-certificate"></span>Objetivos de aprendizaje</h2>
+</div>
+<div class="panel-body">
+<ul>
+<li>Alinear datos de secuenciación a una referencia (genomas o transcriptomas)</li>
+<li>Entender como interpretar datos de alineamiento de secuenciación masiva</li>
+<li>Entender los formatos de coordenadas bam y sam</li>
+</ul>
+</div>
+</section>
+<section class="prereq panel panel-warning">
+<div class="panel-heading">
+<h2 id="datos-requeridos"><span class="glyphicon glyphicon-education"></span>Datos requeridos</h2>
+</div>
+<div class="panel-body">
+<p>Para proceder con esta práctica, se requieren los resultados de tarea de ensamble de transcriptoma de la clase pasada:</p>
+<ul>
+<li>Archivos fastq de lecturas filtradas por calidad usando Trimmomatic</li>
+<li>Archivo fasta de ensamble de transcriptoma completo</li>
+</ul>
+</div>
+</section>
+<p>Usaremos los archivos fastq que utilizamos la clase pasada, pero filtrados por calidad por Trimmomatic via Trinity resultantes de su tarea. Estos se encuentran el en directorio <code>trinity_out_dir</code> con la extensión <code>P.qtrim.gz</code>.</p>
+<p>Así como el genoma de referencia de nuestro organismo, <em>Saccharomyces pombe</em>:</p>
+<p><a href="datasets/genome/Sp_genome.fa">Sp_genome.fa</a></p>
+<p>La lista de archivos debe ser similar a esta:</p>
+<pre class="output"><code></code></pre>
+<p>Como ya sabemos, es buena idea primero ver que los datos están en el formato correcto:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">for</span> <span class="kw">i</span> in *qtrim.gz <span class="kw">;</span> <span class="kw">do</span> <span class="kw">zcat</span> <span class="ot">$i</span> <span class="kw">|</span> <span class="kw">head</span> <span class="kw">;</span> <span class="kw">wait</span> <span class="kw">;</span> <span class="kw">done</span> </code></pre></div>
+<p>Una vez que verificamos que las lecturas están el formato correcto, vamos a mapear los datos al genoma utilizando Bowtie2 via TopHat.</p>
+<p>Pueden encontrar el manual en el siguiente <a href="https://ccb.jhu.edu/software/tophat/manual.shtml">link</a>.</p>
+<h2 id="mapeando-los-transcritos-al-genoma">Mapeando los transcritos al genoma</h2>
+<p>En los casos en los que contamos con una referencia, es muy útil analizar los transcritos en su contexto genómico. En este ejercicio usaremos el programa de mapeo <a href="http://research-pub.gene.com/gmap/">GMAP</a>.</p>
+<p>El primer paso para realizar el mapeo es generar el índice por medio del comando:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">gmap_build</span> -d genome -D . -k 13 Sp_genome.fa</code></pre></div>
+<pre class="output"><code></code></pre>
+<p>Una vez generado el índice mapeamos los transcritos generados en la tarea al genoma:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">gmap</span> -n 0 -D . -d genome trinity_out_dir/Trinity.fasta -f samse <span class="kw">&gt;</span> trinity_gmap.sam</code></pre></div>
+<pre class="output"><code></code></pre>
+<p>Si revisamos el resultado, es un archivo con coordenadas en un formato llamado SAM (Sequence Alignment/Map format). Veamos en que consiste este formato:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">head</span> -n trinity_gmap.sam</code></pre></div>
+<pre class="output"><code></code></pre>
+<h3 id="el-formato-sam">El formato SAM</h3>
+<p>Supongamos que tenemos el siguiente alineamiento:</p>
+<pre class="output"><code>Coor    12345678901234 5678901234567890123456789012345
+ref AGCATGTTAGATAA**GATAGCTGTGCTAGTAGGCAGTCAGCGCCAT
++r001/1       TTAGATAAAGGATA*CTG
++r002        aaaAGATAA*GGATA
++r003      gcctaAGCTAA
++r004                    ATAGCT..............TCAGC
+-r003                           ttagctTAGGC
+-r001/2                                       CAGCGGCAT</code></pre>
+<p>El formato SAM correspondiente será el siguiente:</p>
+<pre class="output"><code>@HD VN:1.5  SO:coordinate
+@SQ SN:ref  LN:45
+r001    99  ref 7   30  8M2I4M1D3M  =   37  39  TTAGATAAAGGATACTG   *
+r002    0   ref 9   30  3S6M1P1I4M  *   0   0   AAAAGATAAGGATA  *
+r003    0   ref 9   30  5S6M    *   0   0   GCCTAAGCTAA *   SA:Z:ref,29,-,6H5M,17,0;
+r004    0   ref 16  30  6M14N5M *   0   0   ATAGCTTCAGC *
+r003    2064    ref 29  17  6H5M    *   0   0   TAGGC   *   SA:Z:ref,9,+,5S6M,30,1;
+r001    147 ref 37  30  9M  =   7   -39 CAGCGGCAT   *   NM:i:1</code></pre>
+<p>El formato SAM es un formato de texto plano que nos permite guardar datos de secuenciación en formato ASCII delimitado por tabulaciones.</p>
+<p>Está compuesto de dos secciones principales:</p>
+<ul>
+<li>El encabezado</li>
+<li>El alineamiento</li>
+</ul>
+<p>La sección del <strong>encabezado</strong> comienza con el caracter <code>@</code> seguido por uno de lo códigos de dos letras que sirven para características de los alineamientos en este archivo. Cada línea esta delimitada por tabulaciones y, además de las líneas que comienzan con <code>@CO</code>, cada campo de datos tiene el formato <code>TAG:VALUE</code>, en donde <code>TAG</code> es una cadena de dos caracteres que define el formato y contenido de <code>VALUE</code>.</p>
+<p>El encabezado no es indispensable pero contiene información acerca de la versión del archivo así como si está ordenado o no. Por ello es recomendable incluirlo.</p>
+<p>La sección de <em>alineamiento</em> contiene la siguiente información:</p>
+<ol style="list-style-type: decimal">
+<li><strong>QNAME</strong> Nombre de la referencia, QNAME (SAM)/Nombre de la lectura(BAM). Se utiliza para agrupar alineamientos que están juntos, como es el caso de alineamientos de lecturas por pares o una lectura que aparece en alineamientos múltiples.</li>
+<li><strong>FLAG</strong> Set de información describiendo el alineamiento. Provee la siguiente información: ..* ¿Hay múltiples fragmentos?are there multiple fragments? ..* ¿Todos los fragmentos están bien alineados?are all fragments properly aligned? ..* ¿Está alineado este fragmento?is this fragment unmapped? ..* ¿No ha sido alineado el siguiente fragmento?is the next fragment unmapped? ..* ¿Es esta referencia la cadena inversa?is this query the reverse strand? ..* ¿El el siguiente fragmento la cadena reversa?is the next fragment the reverse strand? ..* ¿Es este el primer fragmento?is this the 1st fragment? ..* ¿Es este el último fragmento?is this the last fragment? ..* ¿Es este un alineamiento secundario?is this a secondary alignment? ..* ¿Esta lectura falló los filtros de calidad?did this read fail quality controls? ..* ¿Es esta lectura un duplicado por PCR o óptico?is this read a PCR or optical duplicate?</li>
+<li><strong>RNAME</strong> Nombre de la secuencia de referencia.</li>
+<li><strong>POS</strong> Posición de alineamiento izquierda (base 1).</li>
+<li><strong>MAPQ</strong> Calidad del alineamiento.</li>
+<li><strong>CIGAR</strong> cadena CIGAR.</li>
+<li><strong>RNEXT</strong> Nombre de referencia del par (mate) o la siguiente lectura.</li>
+<li><strong>PNEXT</strong> Posición del par (mate) o la siguiente lectura.</li>
+<li><strong>TLEN</strong> Longitud del alineamiento.</li>
+<li><strong>SEQ</strong> La secuencia de prueba de este alineamiento (en este caso la secuencia de la lectura).</li>
+<li><strong>QUAL</strong> La calidad de la lectura.</li>
+<li><strong>TAGs</strong> Información adicional.</li>
+</ol>
+<aside class="callout panel panel-info">
+<div class="panel-heading">
+<h2 id="cadenas-cigar"><span class="glyphicon glyphicon-pushpin"></span>Cadenas CIGAR</h2>
+</div>
+<div class="panel-body">
+<p>La secuencia alineada a la referencia puede tener bases adicionales que no están en la referencia o puede no tener bases en la lectura que si están en la referencial. La cadena CIGAR es una cadena que codifica cada base y la caracteristica de cada una en el alineamiento.</p>
+<p>Por ejemplo, la cadena CIGAR:</p>
+<pre class="output"><code>CIGAR: 3M1I3M1D5M</code></pre>
+<p>indica que las primera 3 bases de la lectura alinea con la referencia (3M), la siguiente base no existe en la referencia (1I), las siguientes 3 bases alinean con la referencia (3M), la siguiente base no existe en la lectura (1D), y 5 bases más alinean con la referencia (5M).</p>
+</div>
+</aside>
+<p>Como pueden ver estos archivos contienen muchísima información</p>
+<p>La versión comprimida de los archivos tipo SAM se conoce como BAM (binary sam). Convirtamos el archivo SAM a BAM usando samtools:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">samtools</span> view -Sb trinity_gmap.sam <span class="kw">&gt;</span> trinity_gmap.bam</code></pre></div>
+<p>No abriremos este archivo ya que, dado que esta en formato binario, es ilegible. Sin embargo, tenemos que realizar dos últimos pasos visualizar los resultados:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">samtools</span> sort trinity_gmap.bam trinity_gmap
+$ <span class="kw">samtools</span> index trinity_gmap.bam</code></pre></div>
+<p>El primer paso ordena los resultados por sus coordenadas y el segundo crea índices para hacer más rápida la visualización usando un navegador.</p>
+<h2 id="mapeando-las-lecturas-filtradas-al-genoma">Mapeando las lecturas filtradas al genoma</h2>
+<p>Primero generaremos un índice de bowtie2 para el genoma:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">bowtie2-build</span> Sp_genome.fa Sp_genome </code></pre></div>
+<pre class="output"><code></code></pre>
+<p>Usamos tophat2 para mapear las lecturas. Este programa nos permite dividir lecturas que atraviesan sitios de splicing</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">tophat2</span> -I 300 -i 20 genome \
+    RNASEQ_data/Sp_log.left.fq.gz,RNASEQ_data/Sp_hs.left.fq.gz,RNASEQ_data/Sp_ds.left.fq.gz,RNASEQ_data/Sp_plat.left.fq.gz \
+    RNASEQ_data/Sp_log.right.fq.gz,RNASEQ_data/Sp_hs.right.fq.gz,RNASEQ_data/Sp_ds.right.fq.gz,RNASEQ_data/Sp_plat.right.fq.gz</code></pre></div>
+<p>Exploramos el resultado, el cuál es un archivo tipo sam.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">head</span> X </code></pre></div>
+<section class="challenge panel panel-success">
+<div class="panel-heading">
+<h2 id="tarea---alineando-las-lecturas-filtradas-al-transcriptoma"><span class="glyphicon glyphicon-pencil"></span>Tarea - Alineando las lecturas filtradas al transcriptoma</h2>
+</div>
+<div class="panel-body">
+<p>Hemos alineado las lecturas al genoma pero queremos alinearlas también directamente al transcriptoma. La tarea consiste en revisar el manual de TopHat2 y usar las opciones que nos permite mapear lecturas directamente a transcriptomas.</p>
+<p>Agreguen el archivo Trinity.fasta de referencia y el archivo de mapeo en formato BAM (ordenado e indizado) a su repositorio en un nuevo directorio llamado Transcriptome_Mapping. Lo deberán agregar antes de la clase del viernes 8 de abril.</p>
+<p><em>Pista 1:</em> No podrán utilizar el índice generado previamente. <em>Pista 2:</em> No deberán iniciar un nuevo repositorio, solo tienen que agregar el nuevo directorio y su contenido.</p>
+</div>
+</section>
+        </div>
+      </div>
+      </article>
+      <div class="footer">
+        <a class="label swc-blue-bg" href="mailto:selene.fernandez.valverde@gmail.com">Contacto</a>
+        <a class="label swc-blue-bg" href="LICENSE.html">Licencia</a>
+      </div>
+    </div>
+    <!-- Javascript placed at the end of the document so the pages load faster -->
+    <script src="http://software-carpentry.org/v5/js/jquery-1.9.1.min.js"></script>
+    <script src="css/bootstrap/bootstrap-js/bootstrap.js"></script>
+    <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+  </body>
+</html>
