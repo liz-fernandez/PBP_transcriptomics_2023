@@ -8,42 +8,48 @@ minutes: 5
 >
 > *  Alinear datos de secuenciación a una referencia (genomas o transcriptomas)
 > *  Entender como interpretar datos de alineamiento de secuenciación masiva
-> *  Entender los formatos de coordenadas bam y sam
+> *  Primer acercamiento a los formatos de coordenadas SAM y BAM
 
 > ## Datos requeridos {.prereq}
 >
 > Para proceder con esta práctica, se requieren los resultados de tarea de 
 > ensamble de transcriptoma de la clase pasada:
 >
-> *  Archivos fastq de lecturas filtradas por calidad usando Trimmomatic
+> *  Archivos fastq de lecturas filtradas por calidad usando Trimmomatic via Trinity
 > *  Archivo fasta de ensamble de transcriptoma completo
 
 Usaremos los archivos fastq que utilizamos la clase pasada, pero 
 filtrados por calidad por Trimmomatic via Trinity 
 resultantes de su tarea. Estos se encuentran el en directorio
-`trinity_out_dir` con la extensión `P.qtrim.gz`. 
+`trinity_out_dir` con la extensión `*.qtrim.gz`. 
 
-Así como el genoma de referencia de nuestro organismo, 
+Con lecturas en pares, habrá casos en los que ambas lecturas sean filtradas (P), 
+y casos en los que una lectura se conservó y la otra se desechó (U). Las lecturas 
+filtradas se encuentran en los siguientes archivos (ejemplo):
+
+~~~ {.output}
+reads.left.fq.gz.P.qtrim.gz     
+reads.left.fq.gz.U.qtrim.gz
+reads.right.fq.gz.P.qtrim.gz
+reads.right.fq.gz.U.qtrim.gz
+~~~
+
+También usaremos el genoma de referencia de nuestro organismo, 
 *Saccharomyces pombe*:
 
 [Sp_genome.fa](datasets/genome/Sp_genome.fa) 
 
-La lista de archivos debe ser similar a esta:
-
-~~~ {.output}
-~~~
-
 Como ya sabemos, es buena idea primero ver que los datos están en el 
-formato correcto:
+formato correcto. Para este ejercicio solo utilizaremos las lecturas
+que conservaron sus pares después de ser filtradas:
 
 ~~~ {.bash}
-$ for i in trinity_out_dir/*.qtrim.gz ; do zcat $i | head ; done 
-
- ln -s ./trinity_out_dir/*qtrim.gz .
+$ for i in trinity_out_dir/*.P.qtrim.gz ; do zcat $i | head ; done 
+$ ln -s ./trinity_out_dir/*.P.qtrim.gz .
 ~~~
 
 Una vez que verificamos que las lecturas están el formato correcto,
-vamos a mapear los datos al genoma utilizando Bowtie2 via TopHat. 
+vamos a alinear las lecturas y transcritos al genoma utilizando Bowtie2 via TopHat. 
 
 Pueden encontrar el manual en el siguiente [link](https://ccb.jhu.edu/software/tophat/manual.shtml).
 
@@ -56,15 +62,17 @@ en su contexto genómico. En este ejercicio usaremos el programa de mapeo
 Primero instalemos el programa:
 
 ~~~ {.bash}
-sudo apt-get update
-sudo apt-get install gmap
+$ sudo apt-get update
+$ sudo apt-get install gmap
+$ cd /usr/lib/gmap/
+$ sudo cp * /usr/bin
+$ cd Directorio_con_transcriptoma
 ~~~
 
 El primer paso para realizar el mapeo es generar el índice por medio del comando:
 
 ~~~ {.bash}
-$ cd /usr/lib/gmap/
-$ sudo cp * /usr/bin
+
 $ gmap_build -d genome -D . -k 13 Sp_genome.fa
 ~~~
 ~~~ {.output}
@@ -178,6 +186,7 @@ $ more trinity_gmap.sam
 
 ### El formato SAM
 
+Veamos un ejemplo más pequeño de este formato.
 Supongamos que tenemos el siguiente alineamiento:
 
 ~~~ {.output}
@@ -221,33 +230,33 @@ de dos caracteres que define el formato y contenido de `VALUE`.
 El encabezado no es indispensable pero contiene información acerca de la versión del 
 archivo así como si está ordenado o no. Por ello es recomendable incluirlo.
 
-La sección de *alineamiento* contiene la siguiente información:
+La sección de **alineamiento** contiene la siguiente información:
 
-1. **QNAME** Nombre de la referencia, QNAME (SAM)/Nombre de la lectura(BAM). 
+1. **QNAME**	Nombre de la referencia, QNAME (SAM)/Nombre de la lectura(BAM). 
 Se utiliza para agrupar alineamientos que están juntos, como es el caso de alineamientos
 de lecturas por pares o una lectura que aparece en alineamientos múltiples. 
-2.  **FLAG** Set de información describiendo el alineamiento. Provee la siguiente información:
-..* ¿Hay múltiples fragmentos?are there multiple fragments?
-..* ¿Todos los fragmentos están bien alineados?are all fragments properly aligned?
-..* ¿Está alineado este fragmento?is this fragment unmapped?
-..* ¿No ha sido alineado el siguiente fragmento?is the next fragment unmapped?
-..* ¿Es esta referencia la cadena inversa?is this query the reverse strand?
-..* ¿El el siguiente fragmento la cadena reversa?is the next fragment the reverse strand?
-..* ¿Es este el primer fragmento?is this the 1st fragment?
-..* ¿Es este el último fragmento?is this the last fragment?
-..* ¿Es este un alineamiento secundario?is this a secondary alignment?
-..* ¿Esta lectura falló los filtros de calidad?did this read fail quality controls?
-..* ¿Es esta lectura un duplicado por PCR o óptico?is this read a PCR or optical duplicate?
-3. **RNAME** Nombre de la secuencia de referencia.
-3. **POS** Posición de alineamiento izquierda (base 1).
-3. **MAPQ** Calidad del alineamiento.
-3. **CIGAR** cadena CIGAR.
-3. **RNEXT** Nombre de referencia del par (mate) o la siguiente lectura.
-3. **PNEXT** Posición del par (mate) o la siguiente lectura.
-3. **TLEN** Longitud del alineamiento.
-3. **SEQ** La secuencia de prueba de este alineamiento (en este caso la secuencia de la lectura).
-3. **QUAL** La calidad de la lectura.
-3. **TAGs** Información adicional. 
+2.  **FLAG**	Set de información describiendo el alineamiento. Provee la siguiente información:
+	* ¿Hay múltiples fragmentos?
+	* ¿Todos los fragmentos están bien alineados?
+	* ¿Está alineado este fragmento?
+	* ¿No ha sido alineado el siguiente fragmento?
+	* ¿Es esta referencia la cadena inversa?
+	* ¿El el siguiente fragmento la cadena reversa?
+	* ¿Es este el primer fragmento?
+	* ¿Es este el último fragmento?
+	* ¿Es este un alineamiento secundario?
+	* ¿Esta lectura falló los filtros de calidad?
+	* ¿Es esta lectura un duplicado por PCR o óptico?
+3. **RNAME**	Nombre de la secuencia de referencia.
+3. **POS**	Posición de alineamiento izquierda (base 1).
+3. **MAPQ**	Calidad del alineamiento.
+3. **CIGAR**	cadena CIGAR.
+3. **RNEXT**	Nombre de referencia del par (mate) o la siguiente lectura.
+3. **PNEXT**	Posición del par (mate) o la siguiente lectura.
+3. **TLEN**	Longitud del alineamiento.
+3. **SEQ**	La secuencia de prueba de este alineamiento (en este caso la secuencia de la lectura).
+3. **QUAL**	La calidad de la lectura.
+3. **TAGs**	Información adicional. 
 
 > ## Cadenas CIGAR {.callout}
 >
@@ -266,7 +275,10 @@ de lecturas por pares o una lectura que aparece en alineamientos múltiples.
 > no existe en la referencia (1I), las siguientes 3 bases alinean con la referencia (3M), la 
 > siguiente base no existe en la lectura (1D), y 5 bases más alinean con la referencia (5M). 
 
-Como pueden ver estos archivos contienen muchísima información
+Como pueden ver estos archivos contienen muchísima información que puede ser analizada
+usando scripts que arrojen estadísticas del alineamiento. Programas como 
+[Picard](http://broadinstitute.github.io/picard/) realizan
+este tipo de análisis.
 
 La versión comprimida de los archivos tipo SAM se conoce como BAM (binary sam). 
 Convirtamos el archivo SAM a BAM usando samtools:
@@ -285,7 +297,8 @@ $ samtools index trinity_gmap.bam
 ~~~
 
 El primer paso ordena los resultados por sus coordenadas y el segundo crea índices
-para hacer más rápida la visualización usando un navegador.
+para hacer más rápida la visualización usando un navegador. Visualizaremos esto datos
+en la próxima clase.
 
 ## Mapeando las lecturas filtradas al genoma
 
@@ -305,12 +318,12 @@ Sp_genome.rev.2.bt2
 ~~~
 
 Usamos tophat2 para mapear las lecturas. Este programa nos permite dividir lecturas
-que atraviesan sitios de splicing 
+que atraviesan sitios de splicing:
 
 ~~~ {.bash}
 $ tophat2 -I 300 -i 20 Sp_genome \
-    Sp_log.left.fq.gz.P.qtrim.gz,Sp_hs.left.fq.gz.P.qtrim.gz,Sp_ds.left.fq.gz.P.qtrim.gz,Sp_plat.left.fq.gz.P.qtrim.gz \
-    Sp_log.right.fq.gz.P.qtrim.gz,Sp_hs.right.fq.gz.P.qtrim.gz,Sp_ds.right.fq.gz.P.qtrim.gz,Sp_plat.right.fq.gz.P.qtrim.gz
+ Sp_log.left.fq.gz.P.qtrim.gz,Sp_hs.left.fq.gz.P.qtrim.gz,Sp_ds.left.fq.gz.P.qtrim.gz,Sp_plat.left.fq.gz.P.qtrim.gz \
+ Sp_log.right.fq.gz.P.qtrim.gz,Sp_hs.right.fq.gz.P.qtrim.gz,Sp_ds.right.fq.gz.P.qtrim.gz,Sp_plat.right.fq.gz.P.qtrim.gz
 ~~~ 
 ~~~ {.output}
 [2016-04-04 14:18:50] Beginning TopHat run (v2.0.13)
@@ -365,7 +378,7 @@ Building a SMALL index
 [2016-04-04 14:22:15] Run complete: 00:01:12 elapsed
 ~~~
 
-Exploramos el resultado, el cuál es un archivo tipo sam. 
+Exploramos el resultado, el cuál es un archivo tipo SAM. 
 
 ~~~ {.bash}
 $ samtools view tophat_out/accepted_hits.bam | head
@@ -379,11 +392,15 @@ $ samtools view tophat_out/accepted_hits.bam | head
 > 
 > Agreguen el archivo Trinity.fasta de referencia y el archivo de mapeo en formato BAM
 > (ordenado e indizado) a su repositorio en un nuevo directorio llamado Transcriptome_Mapping.
+> También agreguen un archivo de texto plano con el commando que utilizaron para realizar
+> este análisis.
 > Lo deberán agregar antes de la clase del viernes 8 de abril.
 > 
-> *Pista 1:* No podrán utilizar el índice generado previamente.
-> *Pista 2:* No deberán iniciar un nuevo repositorio, solo tienen que agregar el nuevo 
+> * **Pista 1:** No podrán utilizar el índice generado previamente.
+> * **Pista 2:** No deberán iniciar un nuevo repositorio, solo tienen que agregar el nuevo 
 > directorio y su contenido. 
+
+
 
 
 

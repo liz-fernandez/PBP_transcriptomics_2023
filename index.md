@@ -44,12 +44,12 @@ Esta mañana recibimos un correo de nuestro colaborador:
 
 1.  [Control de calidad de datos de secuenciación masiva](01-quality.html)
 2.  [Ensamblando transcriptomas *de novo*](02-assembly.html)
+3.  [Alineamiento de lecturas](03-mapping.html)
 
 ## Presentaciones
 
 [Presentaciones por clase](presentaciones.html)
 
-[//]: # (3.  [Mapeo de secuencias](03-mapping.html))
 [//]: # (4.  [Anotación](04-annotation.html))
 [//]: # (5.  [Usadon un explorador de genomas (genome browser)](05-genomebrowser.html))
 [//]: # (6.  [Análisis de expresión diferencial](06-diffexpression.html))
