@@ -136,7 +136,7 @@ $ <span class="kw">~/Downloads/tmhmm-2.0c/tmhmm</span> --short <span class="kw">
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">head</span> blastx.outfmt6 blastp.outfmt6 TrinotatePFAM.out signalp.out tmhmm.out</code></pre></div>
 <h3 id="paso-3.-agregar-los-resultados-de-la-anotación-a-la-base-de-datos.">Paso 3. Agregar los resultados de la anotación a la base de datos.</h3>
 <p>Primero creamos un archivo que especifique que transcrito corresponde a que proteina:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">TRINITY_HOME/util/support_scripts/get_Trinity_gene_to_trans_map.pl</span> Trinity.fasta <span class="kw">&gt;</span>  Trinity.fasta.gene_trans_map</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">/usr/lib/trinityrnaseq/util/support_scripts/get_Trinity_gene_to_trans_map.pl</span> Trinity.fasta <span class="kw">&gt;</span>  Trinity.fasta.gene_trans_map</code></pre></div>
 <p>Iniciamos la base de datos importando el transcriptoma y ORFs:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">~/Downloads/Trinotate-3.0.0/Trinotate</span> Trinotate.sqlite init --gene_trans_map Trinity.fasta.gene_trans_map --transcript_fasta ../trinity_out_dir/Trinity.fasta --transdecoder_pep Trinity.fasta.transdecoder.pep</code></pre></div>
 <p>Las secuencias homólogas y dominios encontrados:</p>
@@ -146,7 +146,7 @@ $ <span class="kw">~/Downloads/tmhmm-2.0c/tmhmm</span> --short <span class="kw">
 <span class="kw">~/Downloads/Trinotate-3.0.0/Trinotate</span> Trinotate.sqlite LOAD_tmhmm tmhmm.out 
 <span class="kw">~/Downloads/Trinotate-3.0.0/Trinotate</span> Trinotate.sqlite LOAD_signalp signalp.out </code></pre></div>
 <p>Y finalmente generamos un reporte:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">Trinotate</span> Trinotate.sqlite report <span class="kw">&gt;</span> Trinotate_annotation_report.xls</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">~/Downloads/Trinotate-3.0.0/Trinotate</span> Trinotate.sqlite report <span class="kw">&gt;</span> Trinotate_annotation_report.xls</code></pre></div>
 <p>Este reporte tiene las siguientes columnas:</p>
 <ol style="list-style-type: decimal">
 <li>#gene_id</li>
@@ -173,7 +173,7 @@ $ <span class="kw">~/Downloads/tmhmm-2.0c/tmhmm</span> --short <span class="kw">
 <h2 id="tarea---dominios-de-proteínas"><span class="glyphicon glyphicon-pencil"></span>Tarea - Dominios de proteínas</h2>
 </div>
 <div class="panel-body">
-<p>Usando su reporte de Trinotate, generen una lista de los dominios de PFAM, ya sea en R o en excel. Generen una gráfica de barras de los dominios más abundantes en la anotación de su transcriptoma. Debajo de la gráfica discutan brevemente (1 párrafo de máximo 10 líneas) cual es la relevancia biológica de conocer estos dominios.</p>
+<p>Usando su reporte de Trinotate, generen una lista de los dominios de PFAM, ya sea en R o en excel. Generen una gráfica de barras de los 10 dominios más abundantes en la anotación de su transcriptoma. Debajo de la gráfica discutan brevemente (1 párrafo de máximo 10 líneas) cual es la relevancia biológica de conocer estos dominios.</p>
 <p>Añadan este reporte (la gráfica y el párrafo) a su repositorio de análisis de transcriptomas. El formato del reporte es libre así que lo pueden realizar en Rmd o incluso en Word. Si eligen el último formato <strong>por favor súbanlo en PDF, no en Word</strong>.</p>
 </div>
 </section>
