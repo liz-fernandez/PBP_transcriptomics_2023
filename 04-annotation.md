@@ -89,7 +89,7 @@ gunzip Trinotate.sqlite.gz
 Por el momento, en su archivo Trinity.fasta solo contiene secuencias de 
 nucleótidos en formato fasta. Vamos a generar (predecir) las secuencias de proteinas en estos 
 transcritos usando el programa 
-(TransDecoder)[https://transdecoder.github.io/]. Este ya está incluido en el 
+[TransDecoder](https://transdecoder.github.io/). Este ya está incluido en el 
 paquete que acompaña a Trinity.
 
 TransDecoder identifica secuencias con potencial codificante basándose en:
