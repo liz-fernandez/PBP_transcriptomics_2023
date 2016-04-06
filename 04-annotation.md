@@ -192,7 +192,7 @@ Primero creamos un archivo que especifique que transcrito corresponde a que
 proteina:
 
 ~~~ {.bash}
-TRINITY_HOME/util/support_scripts/get_Trinity_gene_to_trans_map.pl Trinity.fasta >  Trinity.fasta.gene_trans_map
+/usr/lib/trinityrnaseq/util/support_scripts/get_Trinity_gene_to_trans_map.pl Trinity.fasta >  Trinity.fasta.gene_trans_map
 ~~~
 
 Iniciamos la base de datos importando el transcriptoma y ORFs:
@@ -214,7 +214,7 @@ Las secuencias homólogas y dominios encontrados:
 Y finalmente generamos un reporte:
 
 ~~~ {.bash}
-Trinotate Trinotate.sqlite report > Trinotate_annotation_report.xls
+~/Downloads/Trinotate-3.0.0/Trinotate Trinotate.sqlite report > Trinotate_annotation_report.xls
 ~~~ 
 
 Este reporte tiene las siguientes columnas:
@@ -241,7 +241,7 @@ Este reporte tiene las siguientes columnas:
 > ## Tarea - Dominios de proteínas {.challenge}
 >
 > Usando su reporte de Trinotate, generen una lista de los dominios de PFAM, ya sea
-> en R o en excel. Generen una gráfica de barras de los dominios más abundantes en la 
+> en R o en excel. Generen una gráfica de barras de los 10 dominios más abundantes en la 
 > anotación de su transcriptoma. Debajo de la gráfica discutan brevemente (1 párrafo de máximo 
 > 10 líneas) cual es la relevancia biológica de conocer estos dominios. 
 > 
