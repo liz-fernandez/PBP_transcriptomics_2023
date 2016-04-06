@@ -13,7 +13,6 @@ minutes: 5
 > Para proceder con esta práctica, se requieren resultados de las clases anteriores:
 >
 > *  Archivo Trinity.fasta con ensamble de secuencias *de novo*
-> *  Archivo de mapeo generado por gmap
 
 ## Anotación usando Trinotate
 
@@ -33,7 +32,7 @@ el protocolo SQLite, permitiéndonos accesar estos datos rápidamente.
 
 Comenzaremos descargando los archivos que requerimos:
 
-(Trinotate 3.0.0)[https://github.com/Trinotate/Trinotate/archive/v3.0.0.tar.gz]
+[Trinotate 3.0.0](https://github.com/Trinotate/Trinotate/archive/v3.0.0.tar.gz)
 
 Installando SQLite:
 
@@ -44,15 +43,15 @@ sudo apt-get install sqlite3 libsqlite3-dev
 Descargamos las bases de datos que necesitamos. *Los links de abajo les permitirán bajar las bases de datos pero durante la clase las copiarán de una
 memoria para hacer este proceso más rápido*.
 
-(SwissProt)https://data.broadinstitute.org/Trinity/Trinotate_v3_RESOURCES/uniprot_sprot.pep.gz
+[SwissProt](https://data.broadinstitute.org/Trinity/Trinotate_v3_RESOURCES/uniprot_sprot.pep.gz)
 
-(Pfam-A)https://data.broadinstitute.org/Trinity/Trinotate_v3_RESOURCES/Pfam-A.hmm.gz
+[Pfam-A](https://data.broadinstitute.org/Trinity/Trinotate_v3_RESOURCES/Pfam-A.hmm.gz)
 
 También descargamos los ejecutables de los programas:
 
-*  signalP v4 
-*  tmhmm v2
-*  RNAMMER 
+*  [signalP v4](signalp-4.1c.Linux.tar.gz)
+*  [tmhmm v2](programs/tmhmm-2.0c.Linux.tar.gz)
+*  [RNAMMER](programs/rnammer-1.2.src.tar.Z)
 
 ### Paso 1. Extraer marcos de lectura abierta (ORFs) de todos los transcritos.
 

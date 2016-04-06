@@ -46,7 +46,6 @@
 <p>Para proceder con esta práctica, se requieren resultados de las clases anteriores:</p>
 <ul>
 <li>Archivo Trinity.fasta con ensamble de secuencias <em>de novo</em></li>
-<li>Archivo de mapeo generado por gmap</li>
 </ul>
 </div>
 </section>
@@ -62,17 +61,17 @@
 </ul>
 <p>Estas anotaciones se integran en el una base datos generada usando el protocolo SQLite, permitiéndonos accesar estos datos rápidamente.</p>
 <p>Comenzaremos descargando los archivos que requerimos:</p>
-<p>(Trinotate 3.0.0)[https://github.com/Trinotate/Trinotate/archive/v3.0.0.tar.gz]</p>
+<p><a href="https://github.com/Trinotate/Trinotate/archive/v3.0.0.tar.gz">Trinotate 3.0.0</a></p>
 <p>Installando SQLite:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get install sqlite3 libsqlite3-dev</code></pre></div>
 <p>Descargamos las bases de datos que necesitamos. <em>Los links de abajo les permitirán bajar las bases de datos pero durante la clase las copiarán de una memoria para hacer este proceso más rápido</em>.</p>
-<p>(SwissProt)https://data.broadinstitute.org/Trinity/Trinotate_v3_RESOURCES/uniprot_sprot.pep.gz</p>
-<p>(Pfam-A)https://data.broadinstitute.org/Trinity/Trinotate_v3_RESOURCES/Pfam-A.hmm.gz</p>
+<p><a href="https://data.broadinstitute.org/Trinity/Trinotate_v3_RESOURCES/uniprot_sprot.pep.gz">SwissProt</a></p>
+<p><a href="https://data.broadinstitute.org/Trinity/Trinotate_v3_RESOURCES/Pfam-A.hmm.gz">Pfam-A</a></p>
 <p>También descargamos los ejecutables de los programas:</p>
 <ul>
-<li>signalP v4</li>
-<li>tmhmm v2</li>
-<li>RNAMMER</li>
+<li><a href="signalp-4.1c.Linux.tar.gz">signalP v4</a></li>
+<li><a href="programs/tmhmm-2.0c.Linux.tar.gz">tmhmm v2</a></li>
+<li><a href="programs/rnammer-1.2.src.tar.Z">RNAMMER</a></li>
 </ul>
 <h3 id="paso-1.-extraer-marcos-de-lectura-abierta-orfs-de-todos-los-transcritos.">Paso 1. Extraer marcos de lectura abierta (ORFs) de todos los transcritos.</h3>
 <p>Por el momento, en su archivo Trinity.fasta solo contiene secuencias de nucleótidos en formato fasta. Vamos a generar (recuperar) las secuencias de proteinas en estos transcritos usando el programa (TransDecoder)[https://transdecoder.github.io/]. Este ya está incluido en el paquete que acompaña a Trinity.</p>
