@@ -156,13 +156,13 @@ $ <span class="kw">mv</span> sacPom1.2bit sacPom1/</code></pre></div>
 <ul>
 <li>trinity_gmap.bam</li>
 <li>trinity_gmap.bai</li>
-<li>accepted_reads.bam</li>
+<li>accepted_hits.bam</li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cd</span> sacPom1
-$ <span class="kw">mv</span> trinity_gmap.bam trinity_gmap.bai accepted_reads.bam .</code></pre></div>
+$ <span class="kw">mv</span> trinity_gmap.bam trinity_gmap.bai accepted_hits.bam .</code></pre></div>
 <p>Finalmente vamos a hacer un índice para los hits de tophat</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">samtools</span> sort accepted_reads.bam accepted_reads_sorted
-$ <span class="kw">samtools</span> index accepted_reads_sorted.bam</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">samtools</span> sort accepted_hits.bam accepted_hits_sorted
+$ <span class="kw">samtools</span> index accepted_hits_sorted.bam</code></pre></div>
 <p>Generaremos un archivo llamado groups.txt</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">gedit</span> groups.txt</code></pre></div>
 <p>Y agregaremos el siguiente contenido:</p>
@@ -176,7 +176,7 @@ defaultIsClosed 0</code></pre>
 <pre class="output"><code>#database: sacPom1 - esto es un comentario
 
 track TopHat2_Mapping_Reads
-bigDataUrl http://**&lt;IP&gt;**/~usuario/GenomeHub/sacPom1/accepted_reads_sorted.bam
+bigDataUrl http://**&lt;IP&gt;**/~usuario/GenomeHub/sacPom1/accepted_hits_sorted.bam
 shortLabel TopHat2_Mapping
 longLabel Paired end reads Sp exp mapped with TopHat2
 pairEndsByName on
