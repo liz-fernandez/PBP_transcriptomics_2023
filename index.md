@@ -46,12 +46,13 @@ Esta mañana recibimos un correo de nuestro colaborador:
 2.  [Ensamblando transcriptomas *de novo*](02-assembly.html)
 3.  [Alineamiento de lecturas](03-mapping.html)
 4.  [Anotación](04-annotation.html)
+5.  [Navegador de genomas](05-browsers.html)
 
 ## Presentaciones
 
 [Presentaciones por clase](presentaciones.html)
 
-[//]: # (5.  [Usadon un explorador de genomas (genome browser)](05-genomebrowser.html))
+[//]: # (5.  [Exploradores de genomas y transcriptomas(genome browser)](05-genomebrowser.html))
 [//]: # (6.  [Análisis de expresión diferencial](06-diffexpression.html))
 [//]: # (7.  [Otras herramientas](07-others.html))
 [//]: # ([Análisis de microarreglos - Inglés](microarrays.html))

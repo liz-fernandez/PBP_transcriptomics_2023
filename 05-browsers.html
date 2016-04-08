@@ -146,11 +146,12 @@ htmlPath sacPom1/description.html</code></pre>
 </ul>
 <p>Y vamos a descargar a copiar el genoma al que mapeamos a este directorio. Si no lo tienen lo pueden descargar de aquí <a href="datasets/genome/Sp_genome.fa">Sp_genome.fa</a>.</p>
 <p>Generamos la referencia y la movemos al directorio <code>sacPom1</code>:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">faToTwoBit</span> Sp_genome.fa sacPom1.2bit
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">chmod</span> 755 faToTwoBit twoBitInfo
+$ <span class="kw">./faToTwoBit</span> Sp_genome.fa sacPom1.2bit
 $ <span class="kw">mkdir</span> sacPom1
 $ <span class="kw">mv</span> sacPom1.2bit sacPom1/</code></pre></div>
 <p>Generamos la información acerca del tamaño de los cromosomas:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">twoBitInfo</span> sacPom1.2bit stdout <span class="kw">|</span> <span class="kw">sort</span> -k2rn <span class="kw">&gt;</span> sacPom1.chrom.sizes</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">./twoBitInfo</span> ./sacPom1/sacPom1.2bit stdout <span class="kw">|</span> <span class="kw">sort</span> -k2rn <span class="kw">&gt;</span> sacPom1.chrom.sizes</code></pre></div>
 <p>Una vez generados nuestros archivos entramos al directorio sacPom1. Movemos ahí los archivos generados en la clase de mapeo.</p>
 <ul>
 <li>trinity_gmap.bam</li>
@@ -162,9 +163,16 @@ $ <span class="kw">mv</span> trinity_gmap.bam trinity_gmap.bai accepted_reads.ba
 <p>Finalmente vamos a hacer un índice para los hits de tophat</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">samtools</span> sort accepted_reads.bam accepted_reads_sorted
 $ <span class="kw">samtools</span> index accepted_reads_sorted.bam</code></pre></div>
+<p>Generaremos un archivo llamado groups.txt</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">gedit</span> groups.txt</code></pre></div>
+<p>Y agregaremos el siguiente contenido:</p>
+<pre class="output"><code>name map
+label Mapping
+priority 2
+defaultIsClosed 0</code></pre>
 <p>Crearemos un archivo llamado <code>trackDb.txt</code>. Este es uno de los archivo más importantes ya que especifica como se muestran los tracks.</p>
 <p>Agreguemos nuestro primeros tracks con los resultados de TopHat2 y GMAP</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">gedit</span> trackDb</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">gedit</span> trackDb.txt</code></pre></div>
 <pre class="output"><code>#database: sacPom1 - esto es un comentario
 
 track TopHat2_Mapping_Reads
@@ -218,8 +226,8 @@ showNames off</code></pre>
 <span class="kw">chmod</span> -R 755 ~/public_html</code></pre></div>
 <p>Para verificar que funciona navegaremos a nuestro IP. Averiguamos nuestro IP con el comando:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">ip</span> a <span class="kw">|</span> <span class="kw">grep</span> inet <span class="kw">|</span> <span class="kw">grep</span> eth1</code></pre></div>
-<p>Nuestra IP es el primer número después de inet. Navegamos al hub:</p>
-<p><a href="http://10.10.30.92/~usuario/GenomeHub/hub.txt" class="uri">http://10.10.30.92/~usuario/GenomeHub/hub.txt</a></p>
+<p>Nuestra IP es el primer número después de inet. No podemos accesar a estas computadoras pero veamos un ejemplo en otro servidor:</p>
+<p><a href="http://203.101.225.191/~selene/GenomeHub/hub.txt" class="uri">http://203.101.225.191/~selene/GenomeHub/hub.txt</a></p>
 <p>Pongan su IP en vez de la del ejemplo:</p>
 <p>Finalmente abrimos el navegador de genomas y damos click en la parte de abajo de la ventana de navegación en el botón <code>track hubs</code>. Esto nos lleva a la página siguiente:</p>
 <div class="figure">
@@ -232,21 +240,7 @@ showNames off</code></pre>
 <p class="caption">TrackHubs</p>
 </div>
 <p>Si todo salió bien nos redirigira a nuestro hub.</p>
-<h1 id="usando-el-navegador-de-genomastranscriptomas-igv">Usando el navegador de genomas/transcriptomas IGV</h1>
-<p>Este navegador lo podemos utilizar cuando no tenemos acceso al genoma.</p>
-<section class="challenge panel panel-success">
-<div class="panel-heading">
-<h2 id="tarea---alineando-las-lecturas-filtradas-al-transcriptoma"><span class="glyphicon glyphicon-pencil"></span>Tarea - Alineando las lecturas filtradas al transcriptoma</h2>
-</div>
-<div class="panel-body">
-<p>Hemos alineado las lecturas al genoma pero queremos alinearlas también directamente al transcriptoma. La tarea consiste en revisar el manual de TopHat2 y usar las opciones que nos permite mapear lecturas directamente a transcriptomas.</p>
-<p>Agreguen el archivo Trinity.fasta de referencia y el archivo de mapeo en formato BAM (ordenado e indizado) a su repositorio en un nuevo directorio llamado Transcriptome_Mapping. También agreguen un archivo de texto plano con el commando que utilizaron para realizar este análisis. Lo deberán agregar antes de la clase del viernes 8 de abril.</p>
-<ul>
-<li><strong>Pista 1:</strong> No podrán utilizar el índice generado previamente.</li>
-<li><strong>Pista 2:</strong> No deberán iniciar un nuevo repositorio, solo tienen que agregar el nuevo directorio y su contenido.</li>
-</ul>
-</div>
-</section>
+<p>http://genomebrowser.pombase.org/Schizosaccharomyces_pombe/Info/Index</p>
         </div>
       </div>
       </article>
