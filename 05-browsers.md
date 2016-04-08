@@ -208,18 +208,18 @@ archivos generados en la clase de mapeo.
 
 *  trinity_gmap.bam
 *  trinity_gmap.bai
-*  accepted_reads.bam
+*  accepted_hits.bam
 
 ~~~ {.bash}
 $ cd sacPom1
-$ mv trinity_gmap.bam trinity_gmap.bai accepted_reads.bam .
+$ mv trinity_gmap.bam trinity_gmap.bai accepted_hits.bam .
 ~~~ 
 
 Finalmente vamos a hacer un índice para los hits de tophat
 
 ~~~ {.bash}
-$ samtools sort accepted_reads.bam accepted_reads_sorted
-$ samtools index accepted_reads_sorted.bam
+$ samtools sort accepted_hits.bam accepted_hits_sorted
+$ samtools index accepted_hits_sorted.bam
 ~~~ 
 
 Generaremos un archivo llamado groups.txt
@@ -250,7 +250,7 @@ $ gedit trackDb.txt
 #database: sacPom1 - esto es un comentario
 
 track TopHat2_Mapping_Reads
-bigDataUrl http://**<IP>**/~usuario/GenomeHub/sacPom1/accepted_reads_sorted.bam
+bigDataUrl http://**<IP>**/~usuario/GenomeHub/sacPom1/accepted_hits_sorted.bam
 shortLabel TopHat2_Mapping
 longLabel Paired end reads Sp exp mapped with TopHat2
 pairEndsByName on
