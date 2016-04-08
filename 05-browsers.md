@@ -191,7 +191,8 @@ tienen lo pueden descargar de aquí [Sp_genome.fa](datasets/genome/Sp_genome.fa)
 Generamos la referencia y la movemos al directorio `sacPom1`:
 
 ~~~ {.bash}
-$ faToTwoBit Sp_genome.fa sacPom1.2bit
+$ chmod 755 faToTwoBit twoBitInfo
+$ ./faToTwoBit Sp_genome.fa sacPom1.2bit
 $ mkdir sacPom1
 $ mv sacPom1.2bit sacPom1/
 ~~~
@@ -199,7 +200,7 @@ $ mv sacPom1.2bit sacPom1/
 Generamos la información acerca del tamaño de los cromosomas:
 
 ~~~ {.bash}
-$ twoBitInfo sacPom1.2bit stdout | sort -k2rn > sacPom1.chrom.sizes
+$ ./twoBitInfo ./sacPom1/sacPom1.2bit stdout | sort -k2rn > sacPom1.chrom.sizes
 ~~~
 
 Una vez generados nuestros archivos entramos al directorio sacPom1. Movemos ahí los 
@@ -221,13 +222,28 @@ $ samtools sort accepted_reads.bam accepted_reads_sorted
 $ samtools index accepted_reads_sorted.bam
 ~~~ 
 
+Generaremos un archivo llamado groups.txt
+
+~~~ {.bash}
+$ gedit groups.txt
+~~~
+
+Y agregaremos el siguiente contenido:
+
+~~~ {.output}
+name map
+label Mapping
+priority 2
+defaultIsClosed 0
+~~~
+
 Crearemos un archivo llamado `trackDb.txt`. Este es uno de los archivo más importantes 
 ya que especifica como se muestran los tracks. 
 
 Agreguemos nuestro primeros tracks con los resultados de TopHat2 y GMAP
 
 ~~~ {.bash}
-$ gedit trackDb
+$ gedit trackDb.txt
 ~~~
 
 ~~~ {.output}
@@ -296,9 +312,10 @@ comando:
 ip a | grep inet | grep eth1
 ~~~
 
-Nuestra IP es el primer número después de inet. Navegamos al hub:
+Nuestra IP es el primer número después de inet. 
+No podemos accesar a estas computadoras pero veamos un ejemplo en otro servidor:
 
-[http://10.10.30.92/~usuario/GenomeHub/hub.txt](http://10.10.30.92/~usuario/GenomeHub/hub.txt)
+[http://203.101.225.191/~selene/GenomeHub/hub.txt](http://203.101.225.191/~selene/GenomeHub/hub.txt)
 
 Pongan su IP en vez de la del ejemplo:
 
@@ -313,27 +330,8 @@ Pegamos nuestra dirección y damos click en `Add Hub`.
 
 Si todo salió bien nos redirigira a nuestro hub. 
 
-# Usando el navegador de genomas/transcriptomas IGV
+http://genomebrowser.pombase.org/Schizosaccharomyces_pombe/Info/Index
 
-Este navegador lo podemos utilizar cuando no tenemos acceso al genoma. 
-
-
-
-> ## Tarea - Alineando las lecturas filtradas al transcriptoma {.challenge}
->
-> Hemos alineado las lecturas al genoma pero queremos alinearlas también directamente
-> al transcriptoma. La tarea consiste en revisar el manual de TopHat2 y usar las opciones
-> que nos permite mapear lecturas directamente a transcriptomas. 
-> 
-> Agreguen el archivo Trinity.fasta de referencia y el archivo de mapeo en formato BAM
-> (ordenado e indizado) a su repositorio en un nuevo directorio llamado Transcriptome_Mapping.
-> También agreguen un archivo de texto plano con el commando que utilizaron para realizar
-> este análisis.
-> Lo deberán agregar antes de la clase del viernes 8 de abril.
-> 
-> * **Pista 1:** No podrán utilizar el índice generado previamente.
-> * **Pista 2:** No deberán iniciar un nuevo repositorio, solo tienen que agregar el nuevo 
-> directorio y su contenido. 
 
 
 
