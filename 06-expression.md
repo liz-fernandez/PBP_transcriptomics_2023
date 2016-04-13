@@ -83,7 +83,7 @@ htseq-count -f bam -s no -r pos Sp_plat.bam Sp_genes.gtf > Sp_plat.counts &
 Es importante verificar que el conteo de HTSeq engloba a la mayoría de las lecturas. 
 Si estos porcentajes son muy bajos podrían indicar problemas con los parámetros de 
 conteo (e.g. si le decimos que nuestra muestra no tiene direccionalidad (strandness)
-cuando si la tiene.
+cuando si la tiene).
 
 Finalmente uniremos los resultados usando el siguiente comando:
 

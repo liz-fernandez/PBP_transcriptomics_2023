@@ -85,7 +85,7 @@
 <p>¿Por qué contamos las lecturas en cada librería de manera independiente si ensamblamos el transcriptoma usando todas las lecturas?</p>
 </div>
 </section>
-<p>Es importante verificar que el conteo de HTSeq engloba a la mayoría de las lecturas. Si estos porcentajes son muy bajos podrían indicar problemas con los parámetros de conteo (e.g. si le decimos que nuestra muestra no tiene direccionalidad (strandness) cuando si la tiene.</p>
+<p>Es importante verificar que el conteo de HTSeq engloba a la mayoría de las lecturas. Si estos porcentajes son muy bajos podrían indicar problemas con los parámetros de conteo (e.g. si le decimos que nuestra muestra no tiene direccionalidad (strandness) cuando si la tiene).</p>
 <p>Finalmente uniremos los resultados usando el siguiente comando:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">paste</span> *counts <span class="kw">|</span> <span class="kw">cut</span> -f 1,2,4,6,8 <span class="kw">|</span> <span class="kw">grep</span> <span class="st">&#39;__&#39;</span> -v <span class="kw">&gt;</span> Sp_Counts_Table.txt
 <span class="kw">head</span> Sp_Counts_Table.txt</code></pre></div>
