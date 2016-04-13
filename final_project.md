@@ -7,7 +7,7 @@ subtitle: Proyecto Final
 El proyecto final consistirá en realizar un análisis de expresión diferencial en los 
 siguientes datos:
 
-[RNA-Seq_Data_PBI.tar.gz](datasets/RNA-Seq_Data_PBI.tar.gz)
+[RNA-Seq_Data_PBI.tar.gz](https://drive.google.com/open?id=0B9ZVSRlHL8cIMkt6cDQtbGd2cFE)
 
 ### Descripción de las muestras
 
