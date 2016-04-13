@@ -47,6 +47,7 @@ Esta mañana recibimos un correo de nuestro colaborador:
 3.  [Alineamiento de lecturas](03-mapping.html)
 4.  [Anotación](04-annotation.html)
 5.  [Navegador de genomas](05-browsers.html)
+6.  [Análisis de expresión diferencial](06-expression.html)
 
 ## Presentaciones
 
@@ -56,10 +57,6 @@ Esta mañana recibimos un correo de nuestro colaborador:
 
 [Proyecto Final](final_project.html)
 
-[//]: # (5.  [Exploradores de genomas y transcriptomas(genome browser)](05-genomebrowser.html))
-[//]: # (6.  [Análisis de expresión diferencial](06-diffexpression.html))
-[//]: # (7.  [Otras herramientas](07-others.html))
-[//]: # ([Análisis de microarreglos - Inglés](microarrays.html))
 
 
 
