@@ -330,4 +330,3 @@ Pegamos nuestra dirección y damos click en `Add Hub`.
 
 Si todo salió bien nos redirigira a nuestro hub. 
 
-
