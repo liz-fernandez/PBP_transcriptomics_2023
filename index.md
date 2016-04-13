@@ -52,6 +52,10 @@ Esta mañana recibimos un correo de nuestro colaborador:
 
 [Presentaciones por clase](presentaciones.html)
 
+## Proyecto Final
+
+[Proyecto Final](final_project.html)
+
 [//]: # (5.  [Exploradores de genomas y transcriptomas(genome browser)](05-genomebrowser.html))
 [//]: # (6.  [Análisis de expresión diferencial](06-diffexpression.html))
 [//]: # (7.  [Otras herramientas](07-others.html))

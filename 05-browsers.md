@@ -330,14 +330,4 @@ Pegamos nuestra dirección y damos click en `Add Hub`.
 
 Si todo salió bien nos redirigira a nuestro hub. 
 
-http://genomebrowser.pombase.org/Schizosaccharomyces_pombe/Info/Index
-
-
-
-
-
-
-
-
-
 
