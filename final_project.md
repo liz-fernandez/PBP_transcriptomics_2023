@@ -23,10 +23,9 @@ El reporte deberá contener secciones que expliquen de forma **clara y concisa**
 análisis realizados incluyendo:
 
 * Metodología (como fue secuenciado, que organismo es y si fue secuenciado en pares o no)
-* Análisis de calidad de secuencia
-* Filtros de calidad de lecturas
+* Análisis y filtros de calidad de lecturas
 * Ensamble *de novo*
-* Mapeo de lecturas al transcriptoma
+* Alineamiento de lecturas al transcriptoma
 * Visualización de transcritos en el genoma (opcional)
 * Anotaciones via Trinotate de genes sobreexpresados
 * Análisis de expresión diferencial 
@@ -41,17 +40,17 @@ a uno de sus colaboradores. Piensen en que preguntas les interesarían:
 * ¿Qué nos indican los genes expresados de manera diferencial? 
 
 Deberán enviarlo a mi correo: selene.fernandez.valverde at gmail com. 
-El reporte deberá estar en formato PDF con un máximo de 5 cuartillas. 
+El reporte deberá estar en formato PDF con un máximo de 5 cuartillas/páginas. 
 Pueden hacerlo en R Markdown, Word u otro procesador de texto.  
 No tienen que poner todos los datos pero si justificar sus criterios de 
 manera general utilizando figuras y gráficos relevantes. 
 
-Pueden complementar su reporte con un repositorio organizado con los 
-datos crudos. Esto es opcional pero si el repositorio no esta bien 
+Pueden complementar su reporte con un repositorio organizado que incluya los
+resultados de los análisis. Esto es opcional pero si el repositorio no esta bien 
 organizado y descrito puede perjudicarles en vez de ayudarles. 
 
-La clase del lunes estará enfocada a entender mejor estos datos entre ustedes. 
-Reservaré un espacio en donde podamos hacer una mesa redonda y puedan discutir. 
+La clase del lunes 18 estará enfocada a discutir estos datos entre ustedes. 
+Reservaré un espacio en donde podamos hacer una mesa redonda. 
 Su participación durante esta clase será parte de su calificación.
 
 La fecha de entrega es el mediodía del jueves 21 de abril. **No habrá prórrogas 
@@ -60,9 +59,8 @@ por lo menos un día antes.
 
 Les pido presten atención al contenido así como a la ortografía de su 
 trabajo. El reporte combinado con su participación en la clase del próximo lunes
-serán el 70% de su calificación. 
-Si su reporte es excelente se les dará la oportunidad de tomarlo como su
-calificación total (sin tareas). 
+serán el 70% de su calificación. Si su reporte es excelente se les dará la 
+oportunidad de convertirlo en su calificación total (sin tareas). 
 
 
 
