@@ -12,7 +12,7 @@ siguientes datos:
 ### Descripción de las muestras
 
 Los datos consisten en 3 réplicas de 2 librerías. Se generaron usando la 
-preparación TruSeq total de Illumina y depleción de RNA ribosomal a través de el kit 
+preparación TruSeq total de Illumina y remoción de RNA ribosomal a través de el kit 
 Ribozero. **OJO:** Son más grandes que los usados en clase y tardan varias horas en ensamblarse.
 
 Genoma (.fasta) y archivos de anotación de genes (.gtf):
@@ -54,8 +54,9 @@ La clase del lunes estará enfocada a entender mejor estos datos entre ustedes.
 Reservaré un espacio en donde podamos hacer una mesa redonda y puedan discutir. 
 Su participación durante esta clase será parte de su calificación.
 
-La fecha de entrega es el martes 19 de abril hasta la medianoche. **No habrá prórrogas 
-para la entrega del reporte.** 
+La fecha de entrega es el mediodía del jueves 21 de abril. **No habrá prórrogas 
+para la entrega del reporte, incluso por razones técnicas.** Les sugiero lo envíen 
+por lo menos un día antes.  
 
 Les pido presten atención al contenido así como a la ortografía de su 
 trabajo. El reporte combinado con su participación en la clase del próximo lunes
