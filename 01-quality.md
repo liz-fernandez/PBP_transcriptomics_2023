@@ -14,7 +14,6 @@ minutes: 5
 ## Descargando los datos
 
 Lo primero que hacemos al recibir nuestros datos es descargarlos de la dirección:
-
 ~~~ {.output}
 https://drive.google.com/open?id=0B9ZVSRlHL8cIbm5EUXczdzM4a2M
 ~~~
