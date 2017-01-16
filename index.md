@@ -40,22 +40,34 @@ Esta mañana recibimos un correo de nuestro colaborador:
 > así con el uso del lenguaje de programación R. 
 
 
-## Temas
+### Temas
 
-1.  [Control de calidad de datos de secuenciación masiva](01-quality.html)
-2.  [Ensamblando transcriptomas *de novo*](02-assembly.html)
-3.  [Alineamiento de lecturas](03-mapping.html)
-4.  [Anotación](04-annotation.html)
-5.  [Navegador de genomas](05-browsers.html)
-6.  [Análisis de expresión diferencial](06-expression.html)
+1. Introducción a la transcriptómica y técnicas de secuenciación masiva. 
+	* [Presentación](SLIDES/TIB2017_1.pdf)
+2. Control de calidad de datos de secuenciación masiva.
+	* [Presentación](SLIDES/TIB2017_2.pdf)
+	* [Práctica](01-quality.html)
+3. Ensamble de transcriptomas *de novo*.
+	* [Presentación](SLIDES/TIB2017_3.pdf)
+	* [Práctica](02-assembly_denovo.html)
+4. Alineamiento de lecturas y transcritos.
+	* [Presentación](SLIDES/TIB2017_4.pdf)
+	* [Práctica](03-mapping.html)
+5. Ensamble de transcriptomas guiado.
+	* [Presentación](SLIDES/TIB2017_5.pdf)
+	* [Práctica](04-assembly_guided.html)
+6. Navegadores de genomas y transcriptomas.
+	* [Presentación](SLIDES/TIB2017_6.pdf)
+	* [Práctica](05-browsers.html)
+7. Análisis de expresión diferencial.
+	* [Presentación](SLIDES/TIB2017_7.pdf)
+	* [Práctica](06-expression.html)
+8. Anotación.
+	* [Presentación](SLIDES/TIB2017_8.pdf)
+	* [Práctica](07-annotation.html)
 
-## Presentaciones
 
-[Presentaciones por clase](presentaciones.html)
 
-## Proyecto Final
-
-[Proyecto Final](final_project.html)
 
 
 
