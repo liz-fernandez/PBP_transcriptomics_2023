@@ -44,9 +44,9 @@ Esta mañana recibimos un correo de nuestro colaborador:
 
 
 1. Introducción a la transcriptómica y técnicas de secuenciación masiva. 
-	* [Presentación](SLIDES/TIB17_1.pdf)
+	* [Presentación](SLIDES/TIB17_Clase_1.pdf)
 2. Control de calidad de datos de secuenciación masiva.
-	* [Presentación](SLIDES/TIB17_2.pdf)
+	* [Presentación](SLIDES/TIB17_Clase_2.pdf)
 	* [Práctica](01-quality.html)
 
 <!--
