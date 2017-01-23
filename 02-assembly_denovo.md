@@ -9,34 +9,31 @@ minutes: 5
 > *  Aprender como funciona el ensamble de RNA-Seq *de novo*.
 > *  Aprender a usar Trinity para ensamblar datos de novo.
 
-Para empezar, instalaremos Trinity en sus computadoras:
+Para empezar, crearemos un directorio para almacenar nuestro resultados:
 
 ~~~ {.bash}
-$ sudo apt-get install trinityrnaseq
+cd 
+mkdir FASTQ_Complete
+cd FASTQ_Complete
+~~~ 
+
+Y descargaremos los siguientes archivos fastq usando wget:
+
+~~~ {.bash}
+$ wget https://liz-fernandez.github.io/Talleres_Bioinfo_Cuernavaca_17/datasets/Sp_ds.left.fq.gz 
+$ wget https://liz-fernandez.github.io/Talleres_Bioinfo_Cuernavaca_17/datasets/Sp_ds.right.fq.gz
+$ wget https://liz-fernandez.github.io/Talleres_Bioinfo_Cuernavaca_17/datasets/Sp_hs.right.fq.gz 
+$ wget https://liz-fernandez.github.io/Talleres_Bioinfo_Cuernavaca_17/datasets/Sp_hs.left.fq.gz   
+$ wget https://liz-fernandez.github.io/Talleres_Bioinfo_Cuernavaca_17/datasets/Sp_plat.left.fq.gz
+$ wget https://liz-fernandez.github.io/Talleres_Bioinfo_Cuernavaca_17/datasets/Sp_plat.right.fq.gz
+$ wget https://liz-fernandez.github.io/Talleres_Bioinfo_Cuernavaca_17/datasets/Sp_log.left.fq.gz  
+$ wget https://liz-fernandez.github.io/Talleres_Bioinfo_Cuernavaca_17/datasets/Sp_log.right.fq.gz
 ~~~
 
-Y bajaremos los siguientes archivos fastq:
-
-[Sp_ds.left.fq.gz](datasets/Sp_ds.left.fq.gz)
-  
-[Sp_ds.right.fq.gz](datasets/Sp_ds.right.fq.gz)
-   
-[Sp_hs.right.fq.gz](datasets/Sp_hs.right.fq.gz)
- 
-[Sp_hs.left.fq.gz](datasets/Sp_hs.left.fq.gz)
-    
-[Sp_plat.left.fq.gz](datasets/Sp_plat.left.fq.gz)
-  
-[Sp_plat.right.fq.gz](datasets/Sp_plat.right.fq.gz)
- 
-[Sp_log.left.fq.gz](datasets/Sp_log.left.fq.gz)
-   
-[Sp_log.right.fq.gz](datasets/Sp_log.right.fq.gz) 
-
-Exploremos las lecturas en cada archivo:
+Exploremos las lecturas en cada archivo usando un ciclo for:
 
 ~~~ {.bash}
-$ for i in S*fq.gz ; do zcat $i | head ; wait ; done 
+$ for fastq in S*fq.gz ; do echo $fastq; zcat $fastq | head ; wait ; done 
 ~~~
 
 Este comando nos mostrará las primeras 10 líneas de cada archivo
@@ -47,6 +44,8 @@ archivos.
 
 Una vez que verificamos que los datos son correctos,
 usaremos el programa Trinity para ensamblar los transcritos.
+En este ejercicio estamos asumiendo que a estos archivos ya se les hizo
+filtrado por calidad. 
 
 Primero empezaremos usando un comando genérico:
 
@@ -121,7 +120,7 @@ $ Trinity
 #
 # Required:
 #
-#  --seqType <string>      :type of reads: ( fa, or fq )
+#  --seqType <string>      :type of reads: ('fa' or 'fq')
 #
 #  --max_memory <string>      :suggested max memory to use by Trinity where limiting can be enabled. (jellyfish, sorting, etc)
 #                            provied in Gb of RAM, ie.  '--max_memory 10G'
@@ -132,6 +131,16 @@ $ Trinity
 #
 #  Or, if unpaired reads:
 #      --single <string>   :single reads, one or more file names, comma-delimited (note, if single file contains pairs, can use flag: --run_as_paired )
+#
+#  Or,
+#      --samples_file <string>         tab-delimited text file indicating biological replicate relationships.
+#                                   ex.
+#                                        cond_A    cond_A_rep1    A_rep1_left.fq    A_rep1_right.fq
+#                                        cond_A    cond_A_rep2    A_rep2_left.fq    A_rep2_right.fq
+#                                        cond_B    cond_B_rep1    B_rep1_left.fq    B_rep1_right.fq
+#                                        cond_B    cond_B_rep2    B_rep2_left.fq    B_rep2_right.fq
+#
+#                      # if single-end instead of paired-end, then leave the 4th column above empty.
 #
 ####################################
 ##  Misc:  #########################
@@ -146,6 +155,7 @@ $ Trinity
 #                                   (def=200)
 #
 #  --long_reads <string>           :fasta file containing error-corrected or circular consensus (CCS) pac bio reads
+#                                   (** note: experimental parameter **, this functionality continues to be under development)
 #
 #  --genome_guided_bam <string>    :genome guided mode, provide path to coordinate-sorted bam file.
 #                                   (see genome-guided param section under --show_full_usage_info)
@@ -161,26 +171,27 @@ $ Trinity
 #
 #  --trimmomatic                   :run Trimmomatic to quality trim reads
 #                                        see '--quality_trimming_params' under full usage info for tailored settings.
-#                                  
 #
-#  --normalize_reads               :run in silico normalization of reads. Defaults to max. read coverage of 50.
+#
+#  --no_normalize_reads            :Do *not* run in silico normalization of reads. Defaults to max. read coverage of 50.
 #                                       see '--normalize_max_read_cov' under full usage info for tailored settings.
-#     
+#                                       (note, as of Sept 21, 2016, normalization is on by default)
+#
 #  --no_distributed_trinity_exec   :do not run Trinity phase 2 (assembly of partitioned reads), and stop after generating command list.
 #
 #
 #  --output <string>               :name of directory for output (will be
 #                                   created if it doesn't already exist)
-#                                   default( your current working directory: "/home/usuario/trinity_out_dir" 
+#                                   default( your current working directory: "/home/sfernandez/CLASS_TEST/FASTQ_Complete/trinity_out_dir/trinity_out_dir"
 #                                    note: must include 'trinity' in the name as a safety precaution! )
-#  
+#
 #  --full_cleanup                  :only retain the Trinity fasta file, rename as ${output_dir}.Trinity.fasta
 #
 #  --cite                          :show the Trinity literature citation
 #
 #  --verbose                       :provide additional job status info during the run.
 #
-#  --version                       :reports Trinity version (v2.0.6) and exits.
+#  --version                       :reports Trinity version (Trinity-v2.3.2) and exits.
 #
 #  --show_full_usage_info          :show the many many more options available for running Trinity (expert usage).
 #
@@ -197,21 +208,13 @@ $ Trinity
 #        Trinity --genome_guided_bam rnaseq_alignments.csorted.bam --max_memory 50G
 #                --genome_guided_max_intron 10000 --CPU 6
 #
-#     see: /usr/lib/trinityrnaseq/sample_data/test_Trinity_Assembly/
+#     see: /usr/local/bioconda/opt/trinity-2.3.2/sample_data/test_Trinity_Assembly/
 #          for sample data and 'runMe.sh' for example Trinity execution
 #
 #     For more details, visit: http://trinityrnaseq.github.io
 #
 ###############################################################################
-~~~
-
-Una de las opciones más interesante es la normalización *in silico* 
-ejecutada a través de la opción `--normalize_reads`. Esta opción es
-especialmente útil para sets de datos de >300 millones de pares. 
-
-Esta cambia la probabilidad de las lecturas dada su abundancia en 
-relación a la abundancia de sus kmeros. Este tipo de normalización 
-resulta en ahorros significativos de tiempo de análisis. 
+~~~ 
 
 Nuestro trabajo debe haber terminado, revisemos los transcritos 
 generados, los cuales se encuentran en el archivo `Trinity.fasta`:
@@ -223,16 +226,16 @@ $ head trinity_out_dir/Trinity.fasta
 Observamos que los resultados son secuencias en formato `fasta`.
 
 ~~~ {.output}
->TR1|c0_g1_i1 len=344 path=[322:0-343] [-1, 322, -2]
-GAAAAAATTTATCATCGTCAAATCTTTAAGCAGTTTCTGACTAACAAAATTTTGAAAGAT
-CCAAAACAAAGAAGGTTTTTTAAAATGACGGACTTGCACGATTTGTTTACGTTAGGCGAT
-AACAAGACTGAGGGCACTGAGACAGGCAGCATGTTTTTGGGATCTGAACGAGTACTTCGA
-AAGGATAATTCCTCAAGAAATGGCAATGAAGCTGAAGATATTCCAGCTCGTGACCGAAAA
-AAGCACAAAATTCACGACAAAGGTAAAAAAGTTAACAGCTCCAAAGTGTTTGAAAAAATG
-GGGATTGCATCGATGGAAAAGTATAAACCACCGCAAGAGTCAAA
->TR1|c3_g1_i1 len=229 path=[207:0-228] [-1, 207, -2]
-ATTGGTGATGAAATGGGACTAGGAAAAACTATTCAAATAGTATCTTTCCTTTCGTCTTTG
-CATCACTCTGGCAAATTTCAAAAGCCTGCACTTATCGTTTGTCCAGCGACTTTAATGAAG
+>TRINITY_DN8_c0_g1_i1 len=1720 path=[1:0-1719] [-1, 1, -2]
+TTGCAATGCAAGTATTTAAGCGTATCACAACACATTGTTCTTCTCCAAGGTTCGTGAATC
+GCTGTATTATTCTTTATTTTTCTTCAAGTGAGGATAAGAGTGATTGTTTGGCAAAGAAAA
+ATTATGTTAACAAGTGTCTTATGGCCAAGGCACTTAAAGATTACCCCGTTCATACCAATA
+TTGATCCTGATGCAGGGAAGTTATCATTTGACGATGCTTTTTACGAAGCTCACATTGAAC
+TTCATTATCAATTTTTGAAGGAGGCTTCCCTAAATACCCTTATTAAAGATAAAAAAATGC
+TCAAGTTTATTATCACTGTTCGTCCCGTTCATTTGCATGTCTCACCTTGGGTGGTTTATC
+GTCGATATCGGGGGTTCAAAACTTTATACTATTTGTTAAAAAAGCAAAGTGCTAGAAATG
+GGCGAGCTGTACCGAGTTTTCCTGTTTGGCGTGGAAACACGTATGAGAAGTTTCGTGAAG
+GATTGTATTTTTTTATAGAAGCTTTACTGCATGATAGTCACTTTGCAACTAATGTTGATG
 ~~~
 
 ## Analisando las estadísticas del transcriptoma ensamblado
@@ -241,7 +244,7 @@ Podemos capturar algunas estadística acerca de este ensamble
 usando un programa que es parte de Trinity:
 
 ~~~ {.bash}
-$ /usr/lib/trinityrnaseq/util/TrinityStats.pl trinity_out_dir/Trinity.fasta 
+$ TrinityStats.pl trinity_out_dir/Trinity.fasta 
 ~~~
 
 El cuál generará los siguientes datos: 
@@ -250,38 +253,38 @@ El cuál generará los siguientes datos:
 ################################
 ## Counts of transcripts, etc.
 ################################
-Total trinity 'genes':    333
-Total trinity transcripts:    338
-Percent GC: 39.27
+Total trinity 'genes':	381
+Total trinity transcripts:	387
+Percent GC: 39.44
 
 ########################################
 Stats based on ALL transcript contigs:
 ########################################
 
-    Contig N10: 2605
-    Contig N20: 2016
-    Contig N30: 1596
-    Contig N40: 1394
-    Contig N50: 1160
+	Contig N10: 2532
+	Contig N20: 1917
+	Contig N30: 1594
+	Contig N40: 1384
+	Contig N50: 1132
 
-    Median contig length: 496
-    Average contig: 773.81
-    Total assembled bases: 261549
+	Median contig length: 429
+	Average contig: 710.80
+	Total assembled bases: 275079
 
 
 #####################################################
 ## Stats based on ONLY LONGEST ISOFORM per 'GENE':
 #####################################################
 
-    Contig N10: 2576
-    Contig N20: 1917
-    Contig N30: 1591
-    Contig N40: 1377
-    Contig N50: 1143
+	Contig N10: 2576
+	Contig N20: 1917
+	Contig N30: 1593
+	Contig N40: 1377
+	Contig N50: 1132
 
-    Median contig length: 494
-    Average contig: 761.29
-    Total assembled bases: 253508
+	Median contig length: 428
+	Average contig: 704.94
+	Total assembled bases: 268583
 ~~~
 
 Este resumen nos indica: 
@@ -309,7 +312,7 @@ para identificar de que organismo provienen. Navegen hacia:
 > bases de datos de proteínas de NCBI.
 > ¿Qué tipo de blast debemos utilizar?
 
-> ## Tarea {.challenge}
+> ## Reto - Ensambla después de filtrar por secuencias {.challenge}
 >
 > Si se pudieron dar cuenta, los datos que ensamblamos son los datos crudos, es decir
 > sin filtrar por calidad. Afortunadamente Trinity incluye una opción para usar 
@@ -317,12 +320,6 @@ para identificar de que organismo provienen. Navegen hacia:
 >
 > Su tarea consiste en re-ensamblar el transcriptoma esta vez utilizando todos los 
 > archivos proporcionados, pero filtrando la calidad de las secuencias. 
-> Añadan a su repositorio un archivo con las primeras 20 secuencias del 
-> transcriptoma con el nombre "Ensamble_Final_NOMBRE_APELLIDO.fasta". 
-> Una vez más, añadanlo a su repositorio en cuanto empecemos la siguiente clase.
->
-> **Nota: Por favor agreguen también el reporte generado por el programa `TrinityStats.pl` 
-en su transcriptoma completo con el nombre "Ensamble_Final_NOMBRE_APELLIDO_Stats.txt".**
 >
 > Conserven el archivo fasta completo, ya que lo necesitarán para las siguientes
 > prácticas.

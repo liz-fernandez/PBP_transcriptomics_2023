@@ -14,6 +14,7 @@ minutes: 5
 ## Descargando los datos
 
 Lo primero que hacemos al recibir nuestros datos es descargarlos de la dirección:
+
 ~~~ {.output}
 https://drive.google.com/open?id=0B9ZVSRlHL8cIbm5EUXczdzM4a2M
 ~~~
@@ -183,7 +184,14 @@ FastQC lee una serie de archivos de secuenciación y produce un reporte de
 control de calidad para cada uno, el cual consiste de un número de módulos diferentes, 
 cada uno de los cuales nos ayuda a identificar distintos problemas en nuestros datos. 
 
-Analicemos nuestro primer archivo de secuenciación:
+Analicemos nuestro primer archivo de secuenciación, 
+primero creamos un directorio para almacenar nuestros resultados:
+
+~~~ {.bash}
+$ mkdir QUAL
+~~~
+
+Y realizamos nuestro análisis de calidad usando FastQC:
 
 ~~~ {.bash}
 $ fastqc -O ./QUAL/ Partial_SRR2467141.fastq 
@@ -375,49 +383,18 @@ La configuración cambia dependiendo si las secuencias son single end o paired-e
 
 Pueden encontrar descripciones más detalladas de sus funciones en el [manual](http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf) en línea. 
 
-Veamos como funciona. Instalaremos el software bajando el archivo binario:
+Veamos como funciona. El software ya está instalado en el servidor. 
+
+Si lo quisieras instalar en tu computadora lo harías descargando el archivo binario:
 
 ~~~ {.bash}
 $ wget http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/Trimmomatic-0.36.zip
 ~~~
 
-Descomprimimos el binario usando el comando unzip:
+Regresemos a la carpeta donde están nuestro archivos fastq. 
 
 ~~~ {.bash}
-$ unzip Trimmomatic-0.36.zip
-~~~
-~~~ {.output}
-Archive:  Trimmomatic-0.36.zip
-   creating: Trimmomatic-0.36/
-  inflating: Trimmomatic-0.36/LICENSE
-  inflating: Trimmomatic-0.36/trimmomatic-0.36.jar
-   creating: Trimmomatic-0.36/adapters/
-  inflating: Trimmomatic-0.36/adapters/NexteraPE-PE.fa
-  inflating: Trimmomatic-0.36/adapters/TruSeq2-PE.fa
-  inflating: Trimmomatic-0.36/adapters/TruSeq2-SE.fa
-  inflating: Trimmomatic-0.36/adapters/TruSeq3-PE-2.fa
-  inflating: Trimmomatic-0.36/adapters/TruSeq3-PE.fa
-  inflating: Trimmomatic-0.36/adapters/TruSeq3-SE.fa
-~~~
-
-Debemos averiguar la ruta de carpeta del archivo para poderlo utilizar:
-
-~~~ {.bash}
-$ cd Trimmomatic-0.36
-$ pwd
-~~~
-
-El comando pwd nos proporciona la ruta de carpeta para usarlo 
-
-~~~ {.output}
-/Users/uqslizbe/Applications/Trimmomatic-0.36
-~~~ 
-
-Este resultado diferirá en cada uno de sus equipos dependiendo de donde bajaron el 
-programa. Regresemos a la carpeta donde están nuestro archivos fastq. 
-
-~~~ {.bash}
-$ cd /Users/uqslizbe/Documents/transcriptome_analysis/DATA/FastQC_Short
+$ cd ..
 ~~~ 
 
 La calidad de nuestras secuencias de prueba es bastante buena, pero vimos que la calidad 
@@ -432,11 +409,12 @@ Pediremos que corte:
 * Secuencias menores a 60 nucleótidos.
 
 ~~~ {.bash}
-$ java -jar /Users/uqslizbe/Applications/Trimmomatic-0.36/trimmomatic-0.36.jar SE Partial_SRR2467141.fastq Trimmed_Partial_SRR2467141.fastq ILLUMINACLIP:TruSeq3-SE.fa:2:30:10 HEADCROP:10 SLIDINGWINDOW:4:15 MINLEN:60
+$ trimmomatic SE Partial_SRR2467141.fastq Trimmed_Partial_SRR2467141.fastq ILLUMINACLIP:TruSeq3-SE.fa:2:30:10 HEADCROP:10 SLIDINGWINDOW:4:15 MINLEN:60
 ~~~ 
+
 ~~~ {.output}
-Automatically using 4 threads
-java.io.FileNotFoundException: /Users/uqslizbe/Documents/LABO/LANGEBIO/TEACHING/PBI/CLASES/Transcriptome_March-April_2016/transcriptome_analysis/DATA/FastQC_Short/TruSeq3-SE.fa (No such file or directory)
+Automatically using 1 threads
+java.io.FileNotFoundException: /home/sfernandez/CLASS_TEST/FastQC_Short/TruSeq3-SE.fa (No such file or directory)
 	at java.io.FileInputStream.open0(Native Method)
 	at java.io.FileInputStream.open(FileInputStream.java:195)
 	at java.io.FileInputStream.<init>(FileInputStream.java:138)
@@ -455,21 +433,23 @@ TrimmomaticSE: Completed successfully
 Podemos ver que hubo muy pocas secuencias que fueron descartadas pero aún así son cosas que podrían haber afectado nuestro análisis y/o ensamble. Vemos además que hay un error:
 
 ~~~ {.output}
-java.io.FileNotFoundException: /Users/uqslizbe/Documents/LABO/LANGEBIO/TEACHING/PBI/CLASES/Transcriptome_March-April_2016/transcriptome_analysis/DATA/FastQC_Short/TruSeq3-PE.fa (No such file or directory)
+java.io.FileNotFoundException: /home/sfernandez/CLASS_TEST/FastQC_Short/TruSeq3-SE.fa (No such file or directory)
 ~~~ 
 
-Esto se debe a que las secuencias de los adaptadores no se encuentran el mismo directorio que nuestro datos. Una manera de compensar esto es hacer un `symlink`. Esto es un link
-simbólico que le permite al programa encontrar los archivos que necesita, pero sin
-crear una copia. Además, de borrarse estos enlaces, el archivo original no es afectado, sin embargo, cambios dentro del archivo si afectan al archivo original así que debe utilizarse con cuidado. 
+Esto se debe a que las secuencias de los adaptadores no se encuentran el mismo directorio que nuestro datos. Una manera de compensar esto es descargar los archivos necesarios (estos archivos se proveen con trimmomatic pero los descargaremos dado que estamos trabajando en el servidor)
 
-Creemos el enlace y ejecutemos nuevamente Trimmomatic:
+Descarguemos este archivo y ejecutemos nuevamente Trimmomatic:
+
+~~~ {.bash}
+$ wget https://raw.githubusercontent.com/timflutre/trimmomatic/master/adapters/TruSeq3-SE.fa
+~~~
 
 ~~~ {.bash}
 $ ln -s /Users/uqslizbe/Applications/Trimmomatic-0.36/adapters/*fa .
 $ java -jar /Users/uqslizbe/Applications/Trimmomatic-0.36/trimmomatic-0.36.jar SE Partial_SRR2467141.fastq Trimmed_Partial_SRR2467141.fastq ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 HEADCROP:10 SLIDINGWINDOW:4:15 MINLEN:60
 ~~~ 
 ~~~ {.output}
-Automatically using 4 threads
+Automatically using 1 threads
 Using Long Clipping Sequence: 'AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTA'
 Using Long Clipping Sequence: 'AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC'
 ILLUMINACLIP: Using 0 prefix pairs, 2 forward/reverse sequences, 0 forward only sequences, 0 reverse only sequences
@@ -489,7 +469,6 @@ Si usamos el comando `ls` podemos ver que se generó un archivo de resultados ll
 $ ls
 ~~~ 
 ~~~ {.output}
-NexteraPE-PE.fa
 Partial_SRR2467141.fastq
 Partial_SRR2467142.fastq
 Partial_SRR2467143.fastq
@@ -503,10 +482,6 @@ Partial_SRR2467150.fastq
 Partial_SRR2467151.fastq
 QUAL
 **Trimmed_Partial_SRR2467141.fastq**
-TruSeq2-PE.fa
-TruSeq2-SE.fa
-TruSeq3-PE-2.fa
-TruSeq3-PE.fa
 TruSeq3-SE.fa
 ~~~ 
 
@@ -578,18 +553,11 @@ Abrimos el resultado html [Trimmed_Partial_SRR2467141_fastqc.html](http://liz-fe
 Existen otras herramientas como `fastx-toolkit`,`scythe` y `sickle` que realizan procesos similares. 
 Estás herramientas están en su versión de Biolinux si las quieren comparar.
 
-> ## Tarea {.challenge}
+> ## Reto - Análisis de calidad {.challenge}
 >
 > Realiza un análisis de calidad y corte por Trimmomatic de cada uno de los archivos
 fastq en el directorio que bajaron. 
->
-> Crea un repositorio **local** llamado Calidad_RNA-Seq que contenga:
->
-> * Los htmls de los reportes FastQC para las secuencias crudas y limpias. 
-> * Un documento en R Markdown que describa los comandos usados para el corte usando
-> Trimmomatic así como la justificación para usar esos critérios. 
->
-> **NOTA: Suban el repositorio al remoto en GitHub solo 10 minutos antes de la clase del viernes (git push).**
+
 
 
 

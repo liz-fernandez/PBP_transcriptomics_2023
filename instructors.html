@@ -3,13 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta name="generator" content="pandoc">
-    <title>Software Carpentry: Version Control with Git</title>
+    <title>TIB2017: Version Control with Git</title>
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap-theme.css" />
     <link rel="stylesheet" type="text/css" href="css/swc.css" />
-    <link rel="alternate" type="application/rss+xml" title="Software Carpentry Blog" href="http://software-carpentry.org/feed.xml"/>
+    <link rel="alternate" type="application/rss+xml" title="TIB2017 - Transcriptomica" href="http://congresos.nnb.unam.mx/TIB2017/ngs-genomica-funcional-transcriptomica/"/>
     <meta charset="UTF-8" />
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -19,8 +19,9 @@
   <body class="lesson">
     <div class="container card">
       <div class="banner">
-        <a href="http://www.puntoyaprende.com/pbi/" title="Posgrado en Biologia Integrativa">
-          <img alt="Logo Posgrado Biologia Integrativa" src="img/posgrado_bi_logo.png" />
+        <a href="http://congresos.nnb.unam.mx/TIB2017/" title="Talleres Internacionales de
+            Bioinformatica 2017">
+          <img alt="Logo TIB 2017" src="img/tib_logo_header_web.png" />
         </a>
       </div>
       <article>
@@ -28,9 +29,9 @@
         <div class="col-md-10 col-md-offset-1">
                     <a href="index.html"><h1 class="title">Version Control with Git</h1></a>
           <h2 class="subtitle">Instructor’s Guide</h2>
-          <p>Using a software tool to handle the versions of your project files lets you focus on the more interesting/innovative aspects of your project</p>
+          <p>Using a software tool to handle the versions of your project files lets you focus on the more interesting/innovative aspects of your project.</p>
 <ul>
-<li>Version control’s advantages:
+<li>Version control’s advantages
 <ul>
 <li>It’s easy to set up</li>
 <li>Every copy of a Git repository is a full backup of a project and its history</li>
@@ -39,10 +40,10 @@
 </ul></li>
 <li>Two main concepts
 <ul>
-<li><em>commit</em>: a recorded set of changes in your project’s file</li>
+<li><em>commit</em>: a recorded set of changes in your project’s files</li>
 <li><em>repository</em>: the history of all your project’s commits</li>
 </ul></li>
-<li>Why Use Github?
+<li>Why use Github?
 <ul>
 <li>No need for a server: easy to set up</li>
 <li>GitHub’s strong community: your colleagues are probably already there</li>
@@ -93,9 +94,24 @@ $ rm -rf  temp_git </code></pre></li>
 </ul>
 <h2 id="tracking-changes"><a href="04-changes.html">Tracking Changes</a></h2>
 <ul>
-<li><p>It’s important that learners do a full commit cycle by themselves (make changes, <code>git add</code>, <code>git diff</code>, and <code>git commit</code>). The “<code>bio</code> repository” challenge does that.</p></li>
+<li><p>It’s important that learners do a full commit cycle by themselves (make changes, <code>git diff</code>, <code>git add</code>, and <code>git commit</code>). The “<code>bio</code> repository” challenge does that.</p></li>
 <li><p>This is a good moment to show a diff with a graphical diff tool. If you skip it because you’re short on time, show it once in GitHub.</p></li>
 </ul>
+<p>Solutions to exercises:</p>
+<section class="challenge panel panel-success">
+<div class="panel-heading">
+<h2 id="choosing-a-commit-message"><span class="glyphicon glyphicon-pencil"></span>Choosing a commit message</h2>
+</div>
+<div class="panel-body">
+<p>Which of the following commit messages would be most appropriate for the last commit made to <code>mars.txt</code>?</p>
+<ol style="list-style-type: decimal">
+<li>“Changes”</li>
+<li>“Added line ‘But the Mummy will appreciate the lack of humidity’ to mars.txt”</li>
+<li><strong>“Discuss effects of Mars’ climate on the Mummy”</strong></li>
+</ol>
+<p>Answer 1 is not descriptive enough, answer 2 is too descriptive and redundant, and answer 3 is good - short but descriptive.</p>
+</div>
+</section>
 <h2 id="exploring-history"><a href="05-history.html">Exploring History</a></h2>
 <ul>
 <li><p>One thing may cause confusion is recovering old versions. If, instead of doing <code>$ git checkout f22b25e mars.txt</code>, someone does <code>$ git checkout f22b25e</code>, they wind up in the “detached HEAD” state and confusion abounds. It’s then possible to keep on committing, but things like <code>git push origin master</code> a bit later will not give easily comprehensible results. It also makes it look like commits can be lost. To “fix” a “detached HEAD”, simply <code>git checkout master</code>.</p></li>
@@ -105,7 +121,7 @@ $ rm -rf  temp_git </code></pre></li>
 <p>Just remember that you can use wildcards and regular expressions to ignore a particular set of files in <code>.gitignore</code>.</p>
 <h2 id="remotes-in-github"><a href="07-github.html">Remotes in GitHub</a></h2>
 <ul>
-<li><p>Make it clear that Git and GitHub are not the same thing: Git is an open source version control tool, GitHub is a company that hosts Git repositories in the web and provides a web interface to interact with repos the host.</p></li>
+<li><p>Make it clear that Git and GitHub are not the same thing: Git is an open source version control tool, GitHub is a company that hosts Git repositories in the web and provides a web interface to interact with repos they host.</p></li>
 <li><p>If your learners are advanced enough to be comfortable with SSH, tell them they can use keys to authenticate on GitHub instead of passwords, but don’t try to set this up during class: it takes too long, and is a distraction from the core ideas of the lesson.</p></li>
 <li><p>It is very useful to draw a diagram showing the different repositories involved.</p></li>
 </ul>
@@ -124,7 +140,7 @@ $ rm -rf  temp_git </code></pre></li>
 </ul></li>
 <li><p>Before cloning the repo, be sure that nobody is inside another repo. The best way to achieve this is moving to the <code>Desktop</code> before cloning: <code>cd &amp;&amp; cd Desktop</code>.</p></li>
 <li><p>If both repos are in the <code>Desktop</code>, have them to clone their collaborator repo under a given directory using a second argument:</p>
-<pre class="input"><code>$ git clone https://github.com/vlad/planets.git vlad-planet`</code></pre></li>
+<pre class="input"><code>$ git clone https://github.com/vlad/planets.git vlad-planet</code></pre></li>
 <li><p>The most common mistake is that learners <code>push</code> before <code>pull</code>ing. If they <code>pull</code> afterward, they may get a conflict.</p></li>
 <li><p>Conflicts, sometimes weird, will start to arise. Stay tight: conflicts are next.</p></li>
 </ul>
@@ -134,7 +150,8 @@ $ rm -rf  temp_git </code></pre></li>
 <li><p>If you’re the only instructor, the best way to create a conflict is:</p>
 <ul>
 <li>Clone your repo in a different directory, pretending is your computer at work: <code>git clone https://github.com/vlad/planets.git planets-at-work</code>.</li>
-<li>At the office, you make a change, commit and push.<br /></li>
+<li>At the office, you make a change, commit and push.<br />
+</li>
 <li>At your laptop repo, you (forget to pull and) make a change, commit and try to push.</li>
 <li><code>git pull</code> now and show the conflict.</li>
 </ul></li>
@@ -149,16 +166,12 @@ $ rm -rf  temp_git </code></pre></li>
 <h2 id="open-science"><a href="10-open.html">Open Science</a></h2>
 <h2 id="licensing"><a href="11-licensing.html">Licensing</a></h2>
 <p>We teach about licensing because questions about who owns what, or can use what, arise naturally once we start talking about using public services like GitHub to store files. Also, the discussion gives learners a chance to catch their breath after what is often a frustrating couple of hours.</p>
-<h2 id="hosting"><a href="12-hosting.html">Hosting</a></h2>
+<h2 id="hosting"><a href="13-hosting.html">Hosting</a></h2>
 <p>A common concern for learners is having their work publicly available on GitHub. While we encourage open science, sometimes private repos are the only choice. It’s always interesting to mention the options to have web-hosted private repositories.</p>
         </div>
       </div>
       </article>
       <div class="footer">
-                    <h4 class="title">Curso basado en material generado por:</h4>
-        <a href="http://software-carpentry.org" title="Software Carpentry">
-          <img alt="Software Carpentry banner" src="img/software-carpentry-banner.png" style="width: 120px" />
-        <a class="label swc-blue-bg" href="https://github.com/swcarpentry/git-novice">Fuente Original</a>
         <a class="label swc-blue-bg" href="mailto:selene.fernandez.valverde@gmail.com">Contacto</a>
         <a class="label swc-blue-bg" href="LICENSE.html">Licencia</a>
       </div>
@@ -166,5 +179,6 @@ $ rm -rf  temp_git </code></pre></li>
     <!-- Javascript placed at the end of the document so the pages load faster -->
     <script src="http://software-carpentry.org/v5/js/jquery-1.9.1.min.js"></script>
     <script src="css/bootstrap/bootstrap-js/bootstrap.js"></script>
+    <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
   </body>
 </html>

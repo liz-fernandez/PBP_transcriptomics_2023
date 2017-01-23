@@ -42,6 +42,7 @@ Esta mañana recibimos un correo de nuestro colaborador:
 
 ### Temas
 
+
 1. Introducción a la transcriptómica y técnicas de secuenciación masiva. 
 	* [Presentación](SLIDES/TIB2017_1.pdf)
 2. Control de calidad de datos de secuenciación masiva.
@@ -65,7 +66,8 @@ Esta mañana recibimos un correo de nuestro colaborador:
 8. Anotación.
 	* [Presentación](SLIDES/TIB2017_8.pdf)
 	* [Práctica](07-annotation.html)
-
+<!--
+-->
 
 
 
