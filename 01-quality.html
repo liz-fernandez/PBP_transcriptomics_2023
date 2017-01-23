@@ -313,8 +313,7 @@ TrimmomaticSE: Completed successfully</code></pre>
 <p>Esto se debe a que las secuencias de los adaptadores no se encuentran el mismo directorio que nuestro datos. Una manera de compensar esto es descargar los archivos necesarios (estos archivos se proveen con trimmomatic pero los descargaremos dado que estamos trabajando en el servidor)</p>
 <p>Descarguemos este archivo y ejecutemos nuevamente Trimmomatic:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">wget</span> https://raw.githubusercontent.com/timflutre/trimmomatic/master/adapters/TruSeq3-SE.fa</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">ln</span> -s /Users/uqslizbe/Applications/Trimmomatic-0.36/adapters/*fa .
-$ <span class="kw">java</span> -jar /Users/uqslizbe/Applications/Trimmomatic-0.36/trimmomatic-0.36.jar SE Partial_SRR2467141.fastq Trimmed_Partial_SRR2467141.fastq ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 HEADCROP:10 SLIDINGWINDOW:4:15 MINLEN:60</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">trimmomatic</span> SE Partial_SRR2467141.fastq Trimmed_Partial_SRR2467141.fastq ILLUMINACLIP:TruSeq3-SE.fa:2:30:10 HEADCROP:10 SLIDINGWINDOW:4:15 MINLEN:60</code></pre></div>
 <pre class="output"><code>Automatically using 1 threads
 Using Long Clipping Sequence: &#39;AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTA&#39;
 Using Long Clipping Sequence: &#39;AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC&#39;

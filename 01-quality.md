@@ -438,8 +438,7 @@ $ wget https://raw.githubusercontent.com/timflutre/trimmomatic/master/adapters/T
 ~~~
 
 ~~~ {.bash}
-$ ln -s /Users/uqslizbe/Applications/Trimmomatic-0.36/adapters/*fa .
-$ java -jar /Users/uqslizbe/Applications/Trimmomatic-0.36/trimmomatic-0.36.jar SE Partial_SRR2467141.fastq Trimmed_Partial_SRR2467141.fastq ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 HEADCROP:10 SLIDINGWINDOW:4:15 MINLEN:60
+$ trimmomatic SE Partial_SRR2467141.fastq Trimmed_Partial_SRR2467141.fastq ILLUMINACLIP:TruSeq3-SE.fa:2:30:10 HEADCROP:10 SLIDINGWINDOW:4:15 MINLEN:60
 ~~~ 
 ~~~ {.output}
 Automatically using 1 threads
