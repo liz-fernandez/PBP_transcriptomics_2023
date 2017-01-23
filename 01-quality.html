@@ -42,10 +42,8 @@
 </div>
 </section>
 <h2 id="descargando-los-datos">Descargando los datos</h2>
-<p>Lo primero que hacemos al recibir nuestros datos es descargarlos de la dirección:</p>
-<pre class="output"><code>https://drive.google.com/open?id=0B9ZVSRlHL8cIbm5EUXczdzM4a2M</code></pre>
-<p>Debemos movernos al directorio al cual se bajo el archivo comprimido. Los archivos de secuenciación generalmente están en un formato comprimido llamado tar. Podemos descomprimir los datos usando ese mismo comando:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">tar</span> -xvf FastQC_Short.tar.gz</code></pre></div>
+<p>Lo primero que hacemos al recibir nuestros datos es descargarlos. Generalmente están en un formato comprimido llamado tar. Podemos descomprimir los datos usando ese mismo comando:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">tar</span> -xvf /space21/NNB/T6/FastQC_Short.tar.gz</code></pre></div>
 <p>Este comando descomprime un directorio llamado <code>FastQC_Short</code>. Entramos en ese directorio:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cd</span> FastQC_Short</code></pre></div>
 <p>Revisamos su contenido:</p>

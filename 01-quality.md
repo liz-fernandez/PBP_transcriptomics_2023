@@ -13,18 +13,11 @@ minutes: 5
 
 ## Descargando los datos
 
-Lo primero que hacemos al recibir nuestros datos es descargarlos de la dirección:
-
-~~~ {.output}
-https://drive.google.com/open?id=0B9ZVSRlHL8cIbm5EUXczdzM4a2M
-~~~
- 
-Debemos movernos al directorio al cual se bajo el archivo comprimido. 
-Los archivos de secuenciación generalmente están en un formato comprimido llamado tar. 
+Lo primero que hacemos al recibir nuestros datos es descargarlos. Generalmente están en un formato comprimido llamado tar. 
 Podemos descomprimir los datos usando ese mismo comando:
 
 ~~~ {.bash}
-$ tar -xvf FastQC_Short.tar.gz
+$ tar -xvf /space21/NNB/T6/FastQC_Short.tar.gz
 ~~~
 
 Este comando descomprime un directorio llamado `FastQC_Short`. Entramos en ese directorio:
