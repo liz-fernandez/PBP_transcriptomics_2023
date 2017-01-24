@@ -238,7 +238,7 @@ GGCGAGCTGTACCGAGTTTTCCTGTTTGGCGTGGAAACACGTATGAGAAGTTTCGTGAAG
 GATTGTATTTTTTTATAGAAGCTTTACTGCATGATAGTCACTTTGCAACTAATGTTGATG
 ~~~
 
-## Analisando las estadísticas del transcriptoma ensamblado
+## Analizando las estadísticas del transcriptoma ensamblado
 
 Podemos capturar algunas estadística acerca de este ensamble
 usando un programa que es parte de Trinity:

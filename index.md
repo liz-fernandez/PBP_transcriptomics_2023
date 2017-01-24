@@ -48,11 +48,10 @@ Esta mañana recibimos un correo de nuestro colaborador:
 2. Control de calidad de datos de secuenciación masiva.
 	* [Presentación](SLIDES/TIB17_Clase_2.pdf)
 	* [Práctica](01-quality.html)
-
-<!--
 3. Ensamble de transcriptomas *de novo*.
 	* [Presentación](SLIDES/TIB2017_3.pdf)
 	* [Práctica](02-assembly_denovo.html)
+	<!--
 4. Alineamiento de lecturas y transcritos.
 	* [Presentación](SLIDES/TIB2017_4.pdf)
 	* [Práctica](03-mapping.html)
