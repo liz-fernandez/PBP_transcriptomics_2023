@@ -37,7 +37,9 @@ reads.right.fq.gz.U.qtrim.gz
 También usaremos el genoma de referencia de nuestro organismo, 
 *Saccharomyces pombe*:
 
-[Sp_genome.fa](datasets/genome/Sp_genome.fa) 
+~~~ {.output}
+$ wget https://liz-fernandez.github.io/Talleres_Bioinfo_Cuernavaca_17/datasets/genome/Sp_genome.fa
+~~~
 
 Como ya sabemos, es buena idea primero ver que los datos están en el 
 formato correcto. Para este ejercicio solo utilizaremos las lecturas
@@ -59,26 +61,16 @@ En los casos en los que contamos con una referencia, es muy útil analizar los t
 en su contexto genómico. En este ejercicio usaremos el programa de mapeo 
 [GMAP](http://research-pub.gene.com/gmap/).
 
-Primero instalemos el programa:
-
-~~~ {.bash}
-$ sudo apt-get update
-$ sudo apt-get install gmap
-$ cd /usr/lib/gmap/
-$ sudo cp * /usr/bin
-$ cd Directorio_con_transcriptoma
-~~~
-
 El primer paso para realizar el mapeo es generar el índice por medio del comando:
 
 ~~~ {.bash}
-
 $ gmap_build -d genome -D . -k 13 Sp_genome.fa
 ~~~
+
 ~~~ {.output}
--k flag specified (not as 15), but not -b, so building with basesize == kmer size
 Sorting chromosomes in chrom order.  To turn off or sort other ways, use the -s flag.
-Running /usr/bin/fa_coords  -o ./genome.coords Sp_genome.fa
+Creating files in directory ./genome
+Running "/usr/local/bioconda/bin/fa_coords"     -o "./genome.coords" -f "./genome.sources"
 Opening file Sp_genome.fa
   Processed short contigs (<1000000 nt): .
 ============================================================
@@ -87,32 +79,69 @@ You should look at this file, and edit it if necessary
 If everything is okay, you should proceed by running
     make gmapdb
 ============================================================
-Running /usr/bin/gmap_process  -c ./genome.coords Sp_genome.fa | /usr/bin/gmapindex -d genome -D . -A 
+Running "/usr/local/bioconda/bin/gmap_process"  -c "./genome.coords" -f "./genome.sources" | "/usr/local/bioconda/bin/gmapindex"  -d genome -D "./genome" -A
 Reading coordinates from file ./genome.coords
 Logging contig genome at genome:1..451226 in genome genome
+ => primary (linear) chromosome
 Total genomic length = 451226 bp
+Have a total of 1 chromosomes
+Writing chromosome file ./genome/genome.chromosome
 Chromosome genome has universal coordinates 1..451226
-Writing IIT file header information...done
+Writing chromosome IIT file ./genome/genome.chromosome.iit
+Writing IIT file header information...coordinates require 4 bytes each...done
 Processing null division/chromosome...sorting...writing...done (1 intervals)
 Writing IIT file footer information...done
-Writing IIT file header information...done
+Writing IIT file header information...coordinates require 4 bytes each...done
 Processing null division/chromosome...sorting...writing...done (1 intervals)
 Writing IIT file footer information...done
-Running /usr/bin/gmap_process  -c ./genome.coords Sp_genome.fa | /usr/bin/gmapindex -d genome -F . -D . -G
+No alternate scaffolds observed
+Running "/usr/local/bioconda/bin/gmap_process"  -c "./genome.coords" -f "./genome.sources" | "/usr/local/bioconda/bin/gmapindex"  -d genome -F "./genome" -D "./genome" -G
 Genome length is 451226 nt
 Trying to allocate 42303*4 bytes of memory...succeeded.  Building genome in memory.
 Reading coordinates from file ./genome.coords
-Writing contig genome to universal coordinates 1..451226 in genome genome
+Writing contig genome to universal coordinates 1..451226
 A total of 0 non-ACGTNX characters were seen in the genome.
-Running cat ./genome.genomecomp | /usr/bin/gmapindex -b 13 -k 13 -q 3 -d genome -F . -D . -O
-Allocating 67108865*4 bytes for offsets
+Running cat "./genome/genome.genomecomp" | "/usr/local/bioconda/bin/gmapindex" -d genome -U > "./genome/genome.genomebits128"
+Running cat "./genome/genome.genomecomp" | "/usr/local/bioconda/bin/gmapindex" -k 13 -q 3  -d genome -F "./genome" -D "./genome" -N
+Counting positions in genome genome (13 bp every 3 bp), position 0
+Number of offsets: 142909 => pages file not required
+Running "/usr/local/bioconda/bin/gmapindex" -k 13 -q 3  -d genome -F "./genome" -D "./genome" -O  "./genome/genome.genomecomp"
+Offset compression types: bitpack64
+Allocating 1048576*1 bytes for packsizes
+Allocating 1048576*8 bytes for bitpacks
 Indexing offsets of oligomers in genome genome (13 bp every 3 bp), position 0
-Writing 67108865 offsets compressed to file with total of 142909 positions...done
-Running cat ./genome.genomecomp | /usr/bin/gmapindex -b 13 -k 13 -q 3 -d genome -F . -D . -P
-Trying to allocate 142909*4 bytes of memory...succeeded.  Building positions in memory.
+Writing 67108865 offsets compressed via bitpack64...done
+Running "/usr/local/bioconda/bin/gmapindex" -k 13 -q 3  -d genome -F "./genome" -D "./genome" -P "./genome/genome.genomecomp"
+Looking for index files in directory ./genome
+  Pointers file is genome.ref133offsets64meta
+  Offsets file is genome.ref133offsets64strm
+  Positions file is genome.ref133positions
+Expanding offsetsstrm into counters...done
+Allocating 1983664 bytes for counterstrm
+Trying to allocate 142909*4 bytes of memory for positions...succeeded.  Building positions in memory.
 Indexing positions of oligomers in genome genome (13 bp every 3 bp), position 0
-Writing 142909 genomic positions to file ./genome.ref133positions ...
-Copying files to directory ./genome
+Writing 142909 genomic positions to file ./genome/genome.ref133positions ...
+done
+Running "/usr/local/bioconda/bin/gmapindex" -d genome -F "./genome" -D "./genome" -S
+Genome length is 451226
+Building suffix array
+SACA_K called with n = 451227, K = 5, level 0
+SACA_K called with n = 119713, K = 0, level 1
+SACA_K called with n = 38268, K = 0, level 2
+SACA_K called with n = 12495, K = 0, level 3
+SACA_K called with n = 4066, K = 0, level 4
+For indexsize 12, occupied 412801/16777216
+Optimal indexsize = 12
+Running "/usr/local/bioconda/bin/gmapindex" -d genome -F "./genome" -D "./genome" -L
+Building LCP array
+Writing temporary file for rank...done
+Writing temporary file for permuted sarray...done
+Found 178 exceptions
+Byte-coding: 451049 values < 255, 178 exceptions >= 255 (0.0%)
+Building DC array
+Building child array
+Byte-coding: 449732 values < 255, 1495 exceptions >= 255 (0.3%)
+Writing file ./genome/genome.salcpchilddcdone
 ~~~
 
 Una vez generado el índice mapeamos los transcritos generados en la tarea al genoma:
@@ -120,61 +149,32 @@ Una vez generado el índice mapeamos los transcritos generados en la tarea al ge
 ~~~ {.bash}
 $ gmap -n 0 -D . -d genome trinity_out_dir/Trinity.fasta -f samse > trinity_gmap.sam
 ~~~
+
 ~~~ {.output}
-Trying to allocate 142909*4 bytes of memory...succeeded.  Building positions in memory.
-Indexing positions of oligomers in genome genome (13 bp every 3 bp), position 0
-Writing 142909 genomic positions to file ./genome.ref133positions ...
-Copying files to directory ./genome
-usuario@HP334:~/Documents/TEMPO$ gmap -n 0 -D . -d genome trinity_out_dir/Trinity.fasta -f samse > trinity_gmap.sam
-GMAP version 2012-06-12 called with args: gmap -n 0 -D . -d genome trinity_out_dir/Trinity.fasta -f samse
-Note: >1 sequence detected, so index files are being memory mapped.
-  GMAP can run slowly at first while the computer starts to accumulate
-  pages from the hard disk into its cache.  To copy index files into RAM
-  instead of memory mapping, use -B 3, -B 4, or -B 5, if you have enough RAM.
-  For more speed, also try multiple threads (-t <int>), if you have multiple processors or cores.
-Pre-loading compressed genome....done (169,212 bytes, 42 pages, 0.00 sec)
+GMAP version 2016-09-23 called with args: gmap.avx2 -n 0 -D . -d genome trinity_out_dir/Trinity.fasta -f samse
+Checking compiler assumptions for SSE2: 6B8B4567 327B23C6 xor=59F066A1
+Checking compiler assumptions for SSE4.1: -103 -58 max=198 => compiler zero extends
+Checking compiler options for SSE4.2: 6B8B4567 __builtin_clz=1 __builtin_ctz=0 _mm_popcnt_u32=17 __builtin_popcount=17
+Finished checking compiler assumptions
+Pre-loading compressed genome (oligos)......done (169,212 bytes, 42 pages, 0.00 sec)
+Pre-loading compressed genome (bits)......done (169,248 bytes, 42 pages, 0.00 sec)
 Looking for index files in directory ./genome
-  No gammaptrs file, because kmersize 13 == basesize 13
-  Offsetscomp file is genome.ref13133offsetscomp
+  Pointers file is genome.ref133offsets64meta
+  Offsets file is genome.ref133offsets64strm
   Positions file is genome.ref133positions
-Allocating memory for ref offsets, kmer 13, interval 3...done (268,435,460 bytes, 0.05 sec)
-Pre-loading ref positions, kmer 13, interval 3....done (571,636 bytes, 140 pages, 0.00 sec)
-No paths found for TR3|c0_g1_i1
-No paths found for TR3|c0_g2_i1
-No paths found for TR5|c0_g1_i1
-No paths found for TR9|c0_g1_i1
-No paths found for TR13|c0_g1_i1
-No paths found for TR31|c0_g1_i1
-No paths found for TR33|c0_g1_i1
-No paths found for TR33|c1_g1_i1
-No paths found for TR37|c0_g1_i1
-No paths found for TR39|c0_g1_i1
-No paths found for TR58|c0_g1_i1
-No paths found for TR58|c0_g2_i1
-No paths found for TR60|c0_g1_i1
-No paths found for TR60|c0_g2_i1
-No paths found for TR79|c0_g1_i1
-No paths found for TR79|c0_g2_i1
-No paths found for TR82|c0_g1_i1
-No paths found for TR82|c0_g2_i1
-No paths found for TR83|c0_g1_i1
-No paths found for TR89|c0_g1_i1
-No paths found for TR98|c0_g1_i1
-No paths found for TR99|c2_g1_i1
-No paths found for TR102|c0_g1_i1
-No paths found for TR102|c1_g1_i1
-No paths found for TR111|c0_g1_i1
-No paths found for TR115|c0_g1_i1
-No paths found for TR123|c0_g1_i1
-No paths found for TR130|c0_g1_i1
-No paths found for TR139|c0_g1_i1
-No paths found for TR147|c0_g1_i1
-No paths found for TR160|c0_g1_i1
-No paths found for TR183|c0_g1_i1
-No paths found for TR183|c0_g2_i1
-No paths found for TR191|c0_g1_i1
-No paths found for TR215|c0_g1_i1
-Processed 354 queries in 4.14 seconds (85.51 queries/sec)
+Offsets compression type: bitpack64
+Allocating memory for ref offset pointers, kmer 13, interval 3...Attached new memory for ./genome/genome.ref133offsets64meta...done (8,388,624 bytes, 0.00 sec)
+Allocating memory for ref offsets, kmer 13, interval 3...Attached new memory for ./genome/genome.ref133offsets64strm...done (1,983,840 bytes, 0.01 sec)
+Pre-loading ref positions, kmer 13, interval 3......done (571,636 bytes, 0.00 sec)
+Starting alignment
+No paths found for TRINITY_DN52_c0_g1_i1
+No paths found for TRINITY_DN134_c0_g1_i1
+No paths found for TRINITY_DN155_c0_g1_i1
+No paths found for TRINITY_DN162_c0_g1_i1
+No paths found for TRINITY_DN184_c0_g1_i1
+Processed 381 queries in 2.59 seconds (147.10 queries/sec)
+Removed existing memory for shmid 42893319
+Removed existing memory for shmid 42860549
 ~~~
 
 Si revisamos el resultado, es un archivo con coordenadas en un formato llamado
@@ -287,6 +287,10 @@ Convirtamos el archivo SAM a BAM usando samtools:
 $ samtools view -Sb trinity_gmap.sam > trinity_gmap.bam
 ~~~
 
+~~~ {.output}
+[samopen] SAM header is present: 1 sequences.
+~~~
+
 No abriremos este archivo ya que, dado que esta en formato binario, es ilegible. 
 Sin embargo, tenemos que realizar dos últimos pasos visualizar 
 los resultados:
@@ -306,8 +310,451 @@ Primero generaremos un índice de bowtie2 para el genoma:
 
 ~~~ {.bash}
 $ bowtie2-build Sp_genome.fa Sp_genome 
+
+~~~ {.output}
+Settings:
+  Output files: "Sp_genome.*.bt2"
+  Line rate: 6 (line is 64 bytes)
+  Lines per side: 1 (side is 64 bytes)
+  Offset rate: 4 (one in 16)
+  FTable chars: 10
+  Strings: unpacked
+  Max bucket size: default
+  Max bucket size, sqrt multiplier: default
+  Max bucket size, len divisor: 4
+  Difference-cover sample period: 1024
+  Endianness: little
+  Actual local endianness: little
+  Sanity checking: disabled
+  Assertions: disabled
+  Random seed: 0
+  Sizeofs: void*:8, int:4, long:8, size_t:8
+Input files DNA, FASTA:
+  Sp_genome.fa
+Building a SMALL index
+Reading reference sizes
+  Time reading reference sizes: 00:00:00
+Calculating joined length
+Writing header
+Reserving space for joined string
+Joining reference sequences
+  Time to join reference sequences: 00:00:00
+bmax according to bmaxDivN setting: 107781
+Using parameters --bmax 80836 --dcv 1024
+  Doing ahead-of-time memory usage test
+  Passed!  Constructing with these parameters: --bmax 80836 --dcv 1024
+Constructing suffix-array element generator
+Building DifferenceCoverSample
+  Building sPrime
+  Building sPrimeOrder
+  V-Sorting samples
+  V-Sorting samples time: 00:00:00
+  Allocating rank array
+  Ranking v-sort output
+  Ranking v-sort output time: 00:00:00
+  Invoking Larsson-Sadakane on ranks
+  Invoking Larsson-Sadakane on ranks time: 00:00:00
+  Sanity-checking and returning
+Building samples
+Reserving space for 12 sample suffixes
+Generating random suffixes
+QSorting 12 sample offsets, eliminating duplicates
+QSorting sample offsets, eliminating duplicates time: 00:00:00
+Multikey QSorting 12 samples
+  (Using difference cover)
+  Multikey QSorting samples time: 00:00:00
+Calculating bucket sizes
+Splitting and merging
+  Splitting and merging time: 00:00:00
+Split 1, merged 7; iterating...
+Splitting and merging
+  Splitting and merging time: 00:00:00
+Split 1, merged 1; iterating...
+Splitting and merging
+  Splitting and merging time: 00:00:00
+Avg bucket size: 71853.5 (target: 80835)
+Converting suffix-array elements to index image
+Allocating ftab, absorbFtab
+Entering Ebwt loop
+Getting block 1 of 6
+  Reserving size (80836) for bucket 1
+  Calculating Z arrays for bucket 1
+  Entering block accumulator loop for bucket 1:
+  bucket 1: 10%
+  bucket 1: 20%
+  bucket 1: 30%
+  bucket 1: 40%
+  bucket 1: 50%
+  bucket 1: 60%
+  bucket 1: 70%
+  bucket 1: 80%
+  bucket 1: 90%
+  bucket 1: 100%
+  Sorting block of length 79345 for bucket 1
+  (Using difference cover)
+  Sorting block time: 00:00:00
+Returning block of 79346 for bucket 1
+Getting block 2 of 6
+  Reserving size (80836) for bucket 2
+  Calculating Z arrays for bucket 2
+  Entering block accumulator loop for bucket 2:
+  bucket 2: 10%
+  bucket 2: 20%
+  bucket 2: 30%
+  bucket 2: 40%
+  bucket 2: 50%
+  bucket 2: 60%
+  bucket 2: 70%
+  bucket 2: 80%
+  bucket 2: 90%
+  bucket 2: 100%
+  Sorting block of length 78903 for bucket 2
+  (Using difference cover)
+  Sorting block time: 00:00:00
+Returning block of 78904 for bucket 2
+Getting block 3 of 6
+  Reserving size (80836) for bucket 3
+  Calculating Z arrays for bucket 3
+  Entering block accumulator loop for bucket 3:
+  bucket 3: 10%
+  bucket 3: 20%
+  bucket 3: 30%
+  bucket 3: 40%
+  bucket 3: 50%
+  bucket 3: 60%
+  bucket 3: 70%
+  bucket 3: 80%
+  bucket 3: 90%
+  bucket 3: 100%
+  Sorting block of length 73828 for bucket 3
+  (Using difference cover)
+  Sorting block time: 00:00:00
+Returning block of 73829 for bucket 3
+Getting block 4 of 6
+  Reserving size (80836) for bucket 4
+  Calculating Z arrays for bucket 4
+  Entering block accumulator loop for bucket 4:
+  bucket 4: 10%
+  bucket 4: 20%
+  bucket 4: 30%
+  bucket 4: 40%
+  bucket 4: 50%
+  bucket 4: 60%
+  bucket 4: 70%
+  bucket 4: 80%
+  bucket 4: 90%
+  bucket 4: 100%
+  Sorting block of length 70864 for bucket 4
+  (Using difference cover)
+  Sorting block time: 00:00:00
+Returning block of 70865 for bucket 4
+Getting block 5 of 6
+  Reserving size (80836) for bucket 5
+  Calculating Z arrays for bucket 5
+  Entering block accumulator loop for bucket 5:
+  bucket 5: 10%
+  bucket 5: 20%
+  bucket 5: 30%
+  bucket 5: 40%
+  bucket 5: 50%
+  bucket 5: 60%
+  bucket 5: 70%
+  bucket 5: 80%
+  bucket 5: 90%
+  bucket 5: 100%
+  Sorting block of length 74487 for bucket 5
+  (Using difference cover)
+  Sorting block time: 00:00:00
+Returning block of 74488 for bucket 5
+Getting block 6 of 6
+  Reserving size (80836) for bucket 6
+  Calculating Z arrays for bucket 6
+  Entering block accumulator loop for bucket 6:
+  bucket 6: 10%
+  bucket 6: 20%
+  bucket 6: 30%
+  bucket 6: 40%
+  bucket 6: 50%
+  bucket 6: 60%
+  bucket 6: 70%
+  bucket 6: 80%
+  bucket 6: 90%
+  bucket 6: 100%
+  Sorting block of length 53694 for bucket 6
+  (Using difference cover)
+  Sorting block time: 00:00:00
+Returning block of 53695 for bucket 6
+Exited Ebwt loop
+fchr[A]: 0
+fchr[C]: 135086
+fchr[G]: 215577
+fchr[T]: 296650
+fchr[$]: 431126
+Exiting Ebwt::buildToDisk()
+Returning from initFromVector
+Wrote 4340604 bytes to primary EBWT file: Sp_genome.1.bt2
+Wrote 107788 bytes to secondary EBWT file: Sp_genome.2.bt2
+Re-opening _in1 and _in2 as input streams
+Returning from Ebwt constructor
+Headers:
+    len: 431126
+    bwtLen: 431127
+    sz: 107782
+    bwtSz: 107782
+    lineRate: 6
+    offRate: 4
+    offMask: 0xfffffff0
+    ftabChars: 10
+    eftabLen: 20
+    eftabSz: 80
+    ftabLen: 1048577
+    ftabSz: 4194308
+    offsLen: 26946
+    offsSz: 107784
+    lineSz: 64
+    sideSz: 64
+    sideBwtSz: 48
+    sideBwtLen: 192
+    numSides: 2246
+    numLines: 2246
+    ebwtTotLen: 143744
+    ebwtTotSz: 143744
+    color: 0
+    reverse: 0
+Total time for call to driver() for forward index: 00:00:00
+Reading reference sizes
+  Time reading reference sizes: 00:00:00
+Calculating joined length
+Writing header
+Reserving space for joined string
+Joining reference sequences
+  Time to join reference sequences: 00:00:00
+  Time to reverse reference sequence: 00:00:00
+bmax according to bmaxDivN setting: 107781
+Using parameters --bmax 80836 --dcv 1024
+  Doing ahead-of-time memory usage test
+  Passed!  Constructing with these parameters: --bmax 80836 --dcv 1024
+Constructing suffix-array element generator
+Building DifferenceCoverSample
+  Building sPrime
+  Building sPrimeOrder
+  V-Sorting samples
+  V-Sorting samples time: 00:00:00
+  Allocating rank array
+  Ranking v-sort output
+  Ranking v-sort output time: 00:00:00
+  Invoking Larsson-Sadakane on ranks
+  Invoking Larsson-Sadakane on ranks time: 00:00:00
+  Sanity-checking and returning
+Building samples
+Reserving space for 12 sample suffixes
+Generating random suffixes
+QSorting 12 sample offsets, eliminating duplicates
+QSorting sample offsets, eliminating duplicates time: 00:00:00
+Multikey QSorting 12 samples
+  (Using difference cover)
+  Multikey QSorting samples time: 00:00:00
+Calculating bucket sizes
+Splitting and merging
+  Splitting and merging time: 00:00:00
+Split 1, merged 6; iterating...
+Splitting and merging
+  Splitting and merging time: 00:00:00
+Split 1, merged 0; iterating...
+Splitting and merging
+  Splitting and merging time: 00:00:00
+Avg bucket size: 53889.9 (target: 80835)
+Converting suffix-array elements to index image
+Allocating ftab, absorbFtab
+Entering Ebwt loop
+Getting block 1 of 8
+  Reserving size (80836) for bucket 1
+  Calculating Z arrays for bucket 1
+  Entering block accumulator loop for bucket 1:
+  bucket 1: 10%
+  bucket 1: 20%
+  bucket 1: 30%
+  bucket 1: 40%
+  bucket 1: 50%
+  bucket 1: 60%
+  bucket 1: 70%
+  bucket 1: 80%
+  bucket 1: 90%
+  bucket 1: 100%
+  Sorting block of length 41923 for bucket 1
+  (Using difference cover)
+  Sorting block time: 00:00:00
+Returning block of 41924 for bucket 1
+Getting block 2 of 8
+  Reserving size (80836) for bucket 2
+  Calculating Z arrays for bucket 2
+  Entering block accumulator loop for bucket 2:
+  bucket 2: 10%
+  bucket 2: 20%
+  bucket 2: 30%
+  bucket 2: 40%
+  bucket 2: 50%
+  bucket 2: 60%
+  bucket 2: 70%
+  bucket 2: 80%
+  bucket 2: 90%
+  bucket 2: 100%
+  Sorting block of length 79784 for bucket 2
+  (Using difference cover)
+  Sorting block time: 00:00:00
+Returning block of 79785 for bucket 2
+Getting block 3 of 8
+  Reserving size (80836) for bucket 3
+  Calculating Z arrays for bucket 3
+  Entering block accumulator loop for bucket 3:
+  bucket 3: 10%
+  bucket 3: 20%
+  bucket 3: 30%
+  bucket 3: 40%
+  bucket 3: 50%
+  bucket 3: 60%
+  bucket 3: 70%
+  bucket 3: 80%
+  bucket 3: 90%
+  bucket 3: 100%
+  Sorting block of length 45293 for bucket 3
+  (Using difference cover)
+  Sorting block time: 00:00:00
+Returning block of 45294 for bucket 3
+Getting block 4 of 8
+  Reserving size (80836) for bucket 4
+  Calculating Z arrays for bucket 4
+  Entering block accumulator loop for bucket 4:
+  bucket 4: 10%
+  bucket 4: 20%
+  bucket 4: 30%
+  bucket 4: 40%
+  bucket 4: 50%
+  bucket 4: 60%
+  bucket 4: 70%
+  bucket 4: 80%
+  bucket 4: 90%
+  bucket 4: 100%
+  Sorting block of length 39705 for bucket 4
+  (Using difference cover)
+  Sorting block time: 00:00:00
+Returning block of 39706 for bucket 4
+Getting block 5 of 8
+  Reserving size (80836) for bucket 5
+  Calculating Z arrays for bucket 5
+  Entering block accumulator loop for bucket 5:
+  bucket 5: 10%
+  bucket 5: 20%
+  bucket 5: 30%
+  bucket 5: 40%
+  bucket 5: 50%
+  bucket 5: 60%
+  bucket 5: 70%
+  bucket 5: 80%
+  bucket 5: 90%
+  bucket 5: 100%
+  Sorting block of length 51531 for bucket 5
+  (Using difference cover)
+  Sorting block time: 00:00:00
+Returning block of 51532 for bucket 5
+Getting block 6 of 8
+  Reserving size (80836) for bucket 6
+  Calculating Z arrays for bucket 6
+  Entering block accumulator loop for bucket 6:
+  bucket 6: 10%
+  bucket 6: 20%
+  bucket 6: 30%
+  bucket 6: 40%
+  bucket 6: 50%
+  bucket 6: 60%
+  bucket 6: 70%
+  bucket 6: 80%
+  bucket 6: 90%
+  bucket 6: 100%
+  Sorting block of length 49697 for bucket 6
+  (Using difference cover)
+  Sorting block time: 00:00:00
+Returning block of 49698 for bucket 6
+Getting block 7 of 8
+  Reserving size (80836) for bucket 7
+  Calculating Z arrays for bucket 7
+  Entering block accumulator loop for bucket 7:
+  bucket 7: 10%
+  bucket 7: 20%
+  bucket 7: 30%
+  bucket 7: 40%
+  bucket 7: 50%
+  bucket 7: 60%
+  bucket 7: 70%
+  bucket 7: 80%
+  bucket 7: 90%
+  bucket 7: 100%
+  Sorting block of length 77916 for bucket 7
+  (Using difference cover)
+  Sorting block time: 00:00:00
+Returning block of 77917 for bucket 7
+Getting block 8 of 8
+  Reserving size (80836) for bucket 8
+  Calculating Z arrays for bucket 8
+  Entering block accumulator loop for bucket 8:
+  bucket 8: 10%
+  bucket 8: 20%
+  bucket 8: 30%
+  bucket 8: 40%
+  bucket 8: 50%
+  bucket 8: 60%
+  bucket 8: 70%
+  bucket 8: 80%
+  bucket 8: 90%
+  bucket 8: 100%
+  Sorting block of length 45270 for bucket 8
+  (Using difference cover)
+  Sorting block time: 00:00:00
+Returning block of 45271 for bucket 8
+Exited Ebwt loop
+fchr[A]: 0
+fchr[C]: 135086
+fchr[G]: 215577
+fchr[T]: 296650
+fchr[$]: 431126
+Exiting Ebwt::buildToDisk()
+Returning from initFromVector
+Wrote 4340604 bytes to primary EBWT file: Sp_genome.rev.1.bt2
+Wrote 107788 bytes to secondary EBWT file: Sp_genome.rev.2.bt2
+Re-opening _in1 and _in2 as input streams
+Returning from Ebwt constructor
+Headers:
+    len: 431126
+    bwtLen: 431127
+    sz: 107782
+    bwtSz: 107782
+    lineRate: 6
+    offRate: 4
+    offMask: 0xfffffff0
+    ftabChars: 10
+    eftabLen: 20
+    eftabSz: 80
+    ftabLen: 1048577
+    ftabSz: 4194308
+    offsLen: 26946
+    offsSz: 107784
+    lineSz: 64
+    sideSz: 64
+    sideBwtSz: 48
+    sideBwtLen: 192
+    numSides: 2246
+    numLines: 2246
+    ebwtTotLen: 143744
+    ebwtTotSz: 143744
+    color: 0
+    reverse: 1
+Total time for backward call to driver() for mirror index: 00:00:00
+~~~
+ 
+~~~ {.bash}
 $ ls *bt2
 ~~~ 
+
 ~~~ {.output}
 Sp_genome.1.bt2        
 Sp_genome.2.bt2              
@@ -315,6 +762,11 @@ Sp_genome.3.bt2
 Sp_genome.4.bt2           
 Sp_genome.rev.1.bt2          
 Sp_genome.rev.2.bt2
+~~~
+
+Creamos hiperlinks para los archivos pareados en nuestro directorio local:
+~~~ {.bash}
+$ ln -s ./trinity_out_dir/*P.qtrim.gz .
 ~~~
 
 Usamos tophat2 para mapear las lecturas. Este programa nos permite dividir lecturas
@@ -325,57 +777,40 @@ $ tophat2 -I 300 -i 20 Sp_genome \
  Sp_log.left.fq.gz.P.qtrim.gz,Sp_hs.left.fq.gz.P.qtrim.gz,Sp_ds.left.fq.gz.P.qtrim.gz,Sp_plat.left.fq.gz.P.qtrim.gz \
  Sp_log.right.fq.gz.P.qtrim.gz,Sp_hs.right.fq.gz.P.qtrim.gz,Sp_ds.right.fq.gz.P.qtrim.gz,Sp_plat.right.fq.gz.P.qtrim.gz
 ~~~ 
-~~~ {.output}
-[2016-04-04 14:18:50] Beginning TopHat run (v2.0.13)
------------------------------------------------
-[2016-04-04 14:18:50] Checking for Bowtie
-		  Bowtie version:	 2.2.4.0
-[2016-04-04 14:18:50] Checking for Bowtie index files (genome)..
-[2016-04-04 14:18:50] Checking for reference FASTA file
-[2016-04-04 14:18:50] Generating SAM header for Sp_genome
-Error: could not open pipe gzip -cd < RNASEQ_data/Sp_log.left.fq.gz
-usuario@HP334:~/Documents/TEMPO$ ls tophat2 -I 300 -i 20 Sp_genome \
->     Sp_log.left.fq.gz.P.qtrim.gz,Sp_hs.left.fq.gz.P.qtrim.gz,Sp_ds.left.fq.gz.P.qtrim.gz,Sp_plat.left.fq.gz.P.qtrim.gz \
->     Sp_log.right.fq.gz.P.qtrim.gz,Sp_hs.right.fq.gz.P.qtrim.gz,Sp_ds.right.fq.gz.P.qtrim.gz,Sp_plat.right.fq.gz.P.qtrim.gz
-ls: cannot access tophat2: No such file or directory
-ls: cannot access 20: No such file or directory
-ls: cannot access Sp_genome: No such file or directory
-ls: cannot access Sp_log.left.fq.gz.P.qtrim.gz,Sp_hs.left.fq.gz.P.qtrim.gz,Sp_ds.left.fq.gz.P.qtrim.gz,Sp_plat.left.fq.gz.P.qtrim.gz: No such file or directory
-ls: cannot access Sp_log.right.fq.gz.P.qtrim.gz,Sp_hs.right.fq.gz.P.qtrim.gz,Sp_ds.right.fq.gz.P.qtrim.gz,Sp_plat.right.fq.gz.P.qtrim.gz: No such file or directory
-usuario@HP334:~/Documents/TEMPO$  tophat2 -I 300 -i 20 Sp_genome     Sp_log.left.fq.gz.P.qtrim.gz,Sp_hs.left.fq.gz.P.qtrim.gz,Sp_ds.left.fq.gz.P.qtrim.gz,Sp_plat.left.fq.gz.P.qtrim.gz     Sp_log.right.fq.gz.P.qtrim.gz,Sp_hs.right.fq.gz.P.qtrim.gz,Sp_ds.right.fq.gz.P.qtrim.gz,Sp_plat.right.fq.gz.P.qtrim.gz
 
-[2016-04-04 14:21:02] Beginning TopHat run (v2.0.13)
+~~~ {.output}
+[2017-01-24 13:53:23] Beginning TopHat run (v2.1.1)
 -----------------------------------------------
-[2016-04-04 14:21:02] Checking for Bowtie
-		  Bowtie version:	 2.2.4.0
-[2016-04-04 14:21:02] Checking for Bowtie index files (genome)..
-[2016-04-04 14:21:02] Checking for reference FASTA file
-[2016-04-04 14:21:02] Generating SAM header for Sp_genome
-[2016-04-04 14:21:02] Preparing reads
-	 left reads: min. length=25, max. length=68, 329490 kept reads (432 discarded)
-	right reads: min. length=25, max. length=68, 329760 kept reads (162 discarded)
-[2016-04-04 14:21:10] Mapping left_kept_reads to genome Sp_genome with Bowtie2 
-[2016-04-04 14:21:24] Mapping left_kept_reads_seg1 to genome Sp_genome with Bowtie2 (1/2)
-[2016-04-04 14:21:24] Mapping left_kept_reads_seg2 to genome Sp_genome with Bowtie2 (2/2)
-[2016-04-04 14:21:24] Mapping right_kept_reads to genome Sp_genome with Bowtie2 
-[2016-04-04 14:21:39] Mapping right_kept_reads_seg1 to genome Sp_genome with Bowtie2 (1/2)
-[2016-04-04 14:21:39] Mapping right_kept_reads_seg2 to genome Sp_genome with Bowtie2 (2/2)
-[2016-04-04 14:21:40] Searching for junctions via segment mapping
+[2017-01-24 13:53:23] Checking for Bowtie
+		  Bowtie version:	 2.2.8.0
+[2017-01-24 13:53:23] Checking for Bowtie index files (genome)..
+[2017-01-24 13:53:23] Checking for reference FASTA file
+[2017-01-24 13:53:23] Generating SAM header for Sp_genome
+[2017-01-24 13:53:23] Preparing reads
+	 left reads: min. length=25, max. length=68, 329455 kept reads (431 discarded)
+	right reads: min. length=25, max. length=68, 329725 kept reads (161 discarded)
+[2017-01-24 13:53:31] Mapping left_kept_reads to genome Sp_genome with Bowtie2
+[2017-01-24 13:53:44] Mapping left_kept_reads_seg1 to genome Sp_genome with Bowtie2 (1/2)
+[2017-01-24 13:53:44] Mapping left_kept_reads_seg2 to genome Sp_genome with Bowtie2 (2/2)
+[2017-01-24 13:53:44] Mapping right_kept_reads to genome Sp_genome with Bowtie2
+[2017-01-24 13:53:57] Mapping right_kept_reads_seg1 to genome Sp_genome with Bowtie2 (1/2)
+[2017-01-24 13:53:57] Mapping right_kept_reads_seg2 to genome Sp_genome with Bowtie2 (2/2)
+[2017-01-24 13:53:57] Searching for junctions via segment mapping
 	Coverage-search algorithm is turned on, making this step very slow
 	Please try running TopHat again with the option (--no-coverage-search) if this step takes too much time or memory.
-[2016-04-04 14:21:45] Retrieving sequences for splices
-[2016-04-04 14:21:45] Indexing splices
+[2017-01-24 13:54:02] Retrieving sequences for splices
+[2017-01-24 13:54:02] Indexing splices
 Building a SMALL index
-[2016-04-04 14:21:45] Mapping left_kept_reads_seg1 to genome segment_juncs with Bowtie2 (1/2)
-[2016-04-04 14:21:45] Mapping left_kept_reads_seg2 to genome segment_juncs with Bowtie2 (2/2)
-[2016-04-04 14:21:45] Joining segment hits
-[2016-04-04 14:21:47] Mapping right_kept_reads_seg1 to genome segment_juncs with Bowtie2 (1/2)
-[2016-04-04 14:21:47] Mapping right_kept_reads_seg2 to genome segment_juncs with Bowtie2 (2/2)
-[2016-04-04 14:21:47] Joining segment hits
-[2016-04-04 14:21:48] Reporting output tracks
+[2017-01-24 13:54:02] Mapping left_kept_reads_seg1 to genome segment_juncs with Bowtie2 (1/2)
+[2017-01-24 13:54:02] Mapping left_kept_reads_seg2 to genome segment_juncs with Bowtie2 (2/2)
+[2017-01-24 13:54:02] Joining segment hits
+[2017-01-24 13:54:03] Mapping right_kept_reads_seg1 to genome segment_juncs with Bowtie2 (1/2)
+[2017-01-24 13:54:03] Mapping right_kept_reads_seg2 to genome segment_juncs with Bowtie2 (2/2)
+[2017-01-24 13:54:03] Joining segment hits
+[2017-01-24 13:54:04] Reporting output tracks
 -----------------------------------------------
-[2016-04-04 14:22:15] A summary of the alignment counts can be found in ./tophat_out/align_summary.txt
-[2016-04-04 14:22:15] Run complete: 00:01:12 elapsed
+[2017-01-24 13:54:30] A summary of the alignment counts can be found in ./tophat_out/align_summary.txt
+[2017-01-24 13:54:30] Run complete: 00:01:07 elapsed
 ~~~
 
 Exploramos el resultado, el cuál es un archivo tipo SAM. 
@@ -384,21 +819,14 @@ Exploramos el resultado, el cuál es un archivo tipo SAM.
 $ samtools view tophat_out/accepted_hits.bam | head
 ~~~ 
 
-> ## Tarea - Alineando las lecturas filtradas al transcriptoma {.challenge}
+> ## Reto - Alineando las lecturas filtradas al transcriptoma {.challenge}
 >
 > Hemos alineado las lecturas al genoma pero queremos alinearlas también directamente
-> al transcriptoma. La tarea consiste en revisar el manual de TopHat2 y usar las opciones
+> al transcriptoma. La vamos a revisar el manual de TopHat2 y usar las opciones
 > que nos permite mapear lecturas directamente a transcriptomas. 
 > 
-> Agreguen el archivo Trinity.fasta de referencia y el archivo de mapeo en formato BAM
-> (ordenado e indizado) a su repositorio en un nuevo directorio llamado Transcriptome_Mapping.
-> También agreguen un archivo de texto plano con el commando que utilizaron para realizar
-> este análisis.
-> Lo deberán agregar antes de la clase del viernes 8 de abril.
-> 
-> * **Pista 1:** No podrán utilizar el índice generado previamente.
-> * **Pista 2:** No deberán iniciar un nuevo repositorio, solo tienen que agregar el nuevo 
-> directorio y su contenido. 
+> * **Pista:** No podrán utilizar el índice generado previamente.
+
 
 
 
