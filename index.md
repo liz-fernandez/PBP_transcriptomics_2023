@@ -49,7 +49,7 @@ Esta mañana recibimos un correo de nuestro colaborador:
 	* [Presentación](SLIDES/TIB17_Clase_2.pdf)
 	* [Práctica](01-quality.html)
 3. Ensamble de transcriptomas *de novo*.
-	* [Presentación](SLIDES/TIB2017_3.pdf)
+	* [Presentación](SLIDES/TIB17_Clase_3.pdf)
 	* [Práctica](02-assembly_denovo.html)
 	
 <!--
