@@ -248,7 +248,7 @@ $ <span class="kw">samtools</span> index trinity_gmap.bam</code></pre></div>
 <p>El primer paso ordena los resultados por sus coordenadas y el segundo crea índices para hacer más rápida la visualización usando un navegador. Visualizaremos esto datos en la próxima clase.</p>
 <h2 id="mapeando-las-lecturas-filtradas-al-genoma">Mapeando las lecturas filtradas al genoma</h2>
 <p>Primero generaremos un índice de bowtie2 para el genoma:</p>
-<p><sub>~</sub> {.bash} $ bowtie2-build Sp_genome.fa Sp_genome</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">bowtie2-build</span> Sp_genome.fa Sp_genome </code></pre></div>
 <pre class="output"><code>Settings:
   Output files: &quot;Sp_genome.*.bt2&quot;
   Line rate: 6 (line is 64 bytes)
@@ -741,6 +741,9 @@ Building a SMALL index
 <ul>
 <li><strong>Pista:</strong> No podrán utilizar el índice generado previamente.</li>
 </ul>
+<h3 id="solución">Solución</h3>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">bowtie2-build</span> Trinity.fasta Trinity_assembly_Sp
+$ <span class="kw">tophat2</span> -I 300 -i 20 Trinity_assembly_Sp Sp_ds.left.fq.gz.P.qtrim.gz,Sp_hs.left.fq.gz.P.qtrim.gz,Sp_log.left.fq.gz.P.qtrim.gz,Sp_plat.left.fq.gz.P.qtrim.gz Sp_ds.right.fq.gz.P.qtrim.gz,Sp_hs.right.fq.gz.P.qtrim.gz,Sp_log.right.fq.gz.P.qtrim.gz,Sp_plat.right.fq.gz.P.qtrim.gz</code></pre></div>
 </div>
 </section>
         </div>

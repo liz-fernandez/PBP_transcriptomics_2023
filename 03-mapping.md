@@ -310,6 +310,7 @@ Primero generaremos un índice de bowtie2 para el genoma:
 
 ~~~ {.bash}
 $ bowtie2-build Sp_genome.fa Sp_genome 
+~~~
 
 ~~~ {.output}
 Settings:
@@ -826,6 +827,13 @@ $ samtools view tophat_out/accepted_hits.bam | head
 > que nos permite mapear lecturas directamente a transcriptomas. 
 > 
 > * **Pista:** No podrán utilizar el índice generado previamente.
+>
+> ### Solución
+>
+> ~~~ {.bash}
+> $ bowtie2-build Trinity.fasta Trinity_assembly_Sp
+> $ tophat2 -I 300 -i 20 Trinity_assembly_Sp Sp_ds.left.fq.gz.P.qtrim.gz,Sp_hs.left.fq.gz.P.qtrim.gz,Sp_log.left.fq.gz.P.qtrim.gz,Sp_plat.left.fq.gz.P.qtrim.gz Sp_ds.right.fq.gz.P.qtrim.gz,Sp_hs.right.fq.gz.P.qtrim.gz,Sp_log.right.fq.gz.P.qtrim.gz,Sp_plat.right.fq.gz.P.qtrim.gz
+> ~~~
 
 
 
