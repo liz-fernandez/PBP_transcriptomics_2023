@@ -52,7 +52,7 @@ Esta mañana recibimos un correo de nuestro colaborador:
 	* [Presentación](SLIDES/TIB17_Clase_3.pdf)
 	* [Práctica](02-assembly_denovo.html)
 4. Alineamiento de lecturas y transcritos.
-	* [Presentación](SLIDES/TIB2017_4.pdf)
+	* [Presentación](SLIDES/TIB17_Clase_4.pdf)
 	* [Práctica](03-mapping.html)
 	
 <!--
