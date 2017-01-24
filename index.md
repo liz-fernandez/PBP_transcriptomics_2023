@@ -51,6 +51,7 @@ Esta mañana recibimos un correo de nuestro colaborador:
 3. Ensamble de transcriptomas *de novo*.
 	* [Presentación](SLIDES/TIB2017_3.pdf)
 	* [Práctica](02-assembly_denovo.html)
+	
 <!--
 4. Alineamiento de lecturas y transcritos.
 	* [Presentación](SLIDES/TIB2017_4.pdf)
@@ -67,7 +68,6 @@ Esta mañana recibimos un correo de nuestro colaborador:
 8. Anotación.
 	* [Presentación](SLIDES/TIB2017_8.pdf)
 	* [Práctica](07-annotation.html)
-
 -->
 
 
