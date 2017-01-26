@@ -54,20 +54,21 @@ Esta mañana recibimos un correo de nuestro colaborador:
 4. Alineamiento de lecturas y transcritos.
 	* [Presentación](SLIDES/TIB17_Clase_4.pdf)
 	* [Práctica](03-mapping.html)
-	
-<!--
 5. Ensamble de transcriptomas guiado.
-	* [Presentación](SLIDES/TIB2017_5.pdf)
+	* [Presentación](SLIDES/TIB17_Clase_5.pdf)
 	* [Práctica](04-assembly_guided.html)
 6. Navegadores de genomas y transcriptomas.
-	* [Presentación](SLIDES/TIB2017_6.pdf)
+	* [Presentación](SLIDES/TIB17_Clase_6.pdf)
 	* [Práctica](05-browsers.html)
+7. Anotación.
+	* [Presentación](SLIDES/TIB17_Clase_8.pdf)
+	* [Práctica](07-annotation.html)
+	
+	
+<!--
 7. Análisis de expresión diferencial.
 	* [Presentación](SLIDES/TIB2017_7.pdf)
 	* [Práctica](06-expression.html)
-8. Anotación.
-	* [Presentación](SLIDES/TIB2017_8.pdf)
-	* [Práctica](07-annotation.html)
 -->
 
 

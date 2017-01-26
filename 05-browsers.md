@@ -328,5 +328,7 @@ Pegamos nuestra dirección y damos click en `Add Hub`.
 
 ![TrackHubs](fig/09_AddingHub.jpg)
 
-Si todo salió bien nos redirigira a nuestro hub. 
+Si todo salió bien nos redirigira a nuestro hub.
+
+ 
 

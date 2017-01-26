@@ -21,7 +21,7 @@ esta es solo una interfaz gráfica para R y si llegarán a estar en un servidor
 podrían usar los comando de R directamente en la línea de comandos. 
 
 ~~~ {.bash}
-bowtie2 -x Sp_genome -1 Sp_ds.left.fq -2 Sp_ds.right.fq -S Sp_ds.sam > &
+bowtie2 -x Sp_genome -1 Sp_ds.left.fq -2 Sp_ds.right.fq -S Sp_ds.sam &
 bowtie2 -x Sp_genome -1 Sp_hs.left.fq -2 Sp_hs.right.fq -S Sp_hs.sam &
 bowtie2 -x Sp_genome -1 Sp_log.left.fq -2 Sp_log.right.fq -S Sp_log.sam &
 bowtie2 -x Sp_genome -1 Sp_plat.left.fq -2 Sp_plat.right.fq -S Sp_plat.sam &
@@ -119,8 +119,7 @@ biocLite("DESeq2")
 library(“DESeq2”)
 ~~~
 
-Este paquete es similar a edgeR en que estima una distribución negativa binomial, pero
-corrige el estimador de manera distinta. 
+Este paquete estima una distribución negativa binomial.
 
 Leemos las cuentas en R usando read.delim:
 
