@@ -377,8 +377,8 @@ colnames(sampleDistMatrixRLD) <- NULL
 
 colors <- colorRampPalette( rev(brewer.pal(9, "Blues")) )(255)
 pheatmap(sampleDistMatrixRLD,
-         clustering_distance_rows=sampleDists,
-         clustering_distance_cols=sampleDists,
+         clustering_distance_rows=sampleDistsRLD,
+         clustering_distance_cols=sampleDistsRLD,
          col=colors)
 ~~~
 

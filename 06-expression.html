@@ -260,8 +260,8 @@ sampleDistMatrixRLD &lt;-<span class="st"> </span><span class="kw">as.matrix</sp
 
 colors &lt;-<span class="st"> </span><span class="kw">colorRampPalette</span>( <span class="kw">rev</span>(<span class="kw">brewer.pal</span>(<span class="dv">9</span>, <span class="st">&quot;Blues&quot;</span>)) )(<span class="dv">255</span>)
 <span class="kw">pheatmap</span>(sampleDistMatrixRLD,
-         <span class="dt">clustering_distance_rows=</span>sampleDists,
-         <span class="dt">clustering_distance_cols=</span>sampleDists,
+         <span class="dt">clustering_distance_rows=</span>sampleDistsRLD,
+         <span class="dt">clustering_distance_cols=</span>sampleDistsRLD,
          <span class="dt">col=</span>colors)</code></pre></div>
 <div class="figure">
 <img src="fig/SampleHeatmap.jpeg" alt="Samples Heatmap" />
