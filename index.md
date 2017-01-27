@@ -67,7 +67,7 @@ Esta mañana recibimos un correo de nuestro colaborador:
 	* [Presentación](SLIDES/TIB17_Clase_7.pdf)
 	* [Práctica](06-expression.html)
 
-
+Prácticas basadas en el curso [Trinity RNA-Seq Analysis Workshop](https://github.com/trinityrnaseq/RNASeq_Trinity_Tuxedo_Workshop/wiki).
 
 
 
