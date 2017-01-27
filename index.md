@@ -4,7 +4,7 @@ title: Análisis transcriptómicos
 ---
 
 Estamos realizando un estudio transcriptómico para entender la expresion de genes
-en la levadura (*Saccharomyces cerevisiae*) cuando se expresa una 
+en la levadura (*Saccharomyces pombe*) cuando se expresa una 
 mutante de un proteína que cambia de especificidad.
 
 Hemos logrado aislar los transcritos del cromosoma I en dos condiciones: mutante y 
@@ -63,13 +63,10 @@ Esta mañana recibimos un correo de nuestro colaborador:
 7. Anotación.
 	* [Presentación](SLIDES/TIB17_Clase_8.pdf)
 	* [Práctica](07-annotation.html)
-	
-	
-<!--
-7. Análisis de expresión diferencial.
-	* [Presentación](SLIDES/TIB2017_7.pdf)
+8. Análisis de expresión diferencial.
+	* [Presentación](SLIDES/TIB17_Clase_7.pdf)
 	* [Práctica](06-expression.html)
--->
+
 
 
 

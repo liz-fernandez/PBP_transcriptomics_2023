@@ -16,25 +16,20 @@ minutes: 5
 > *  Las lecturas no filtradas 
 
 Utilizaremos los archivos bam filtrados por calidad que utilizamos en la clase 
-de mapeo. Los análisis se realizaran en la plataforma R Studio. Recuerden que 
-esta es solo una interfaz gráfica para R y si llegarán a estar en un servidor 
-podrían usar los comando de R directamente en la línea de comandos. 
+de mapeo. Los análisis se realizaran en la plataforma R.
+
+Generemos un directorio de trabajo
 
 ~~~ {.bash}
-bowtie2 -x Sp_genome -1 Sp_ds.left.fq -2 Sp_ds.right.fq -S Sp_ds.sam &
-bowtie2 -x Sp_genome -1 Sp_hs.left.fq -2 Sp_hs.right.fq -S Sp_hs.sam &
-bowtie2 -x Sp_genome -1 Sp_log.left.fq -2 Sp_log.right.fq -S Sp_log.sam &
-bowtie2 -x Sp_genome -1 Sp_plat.left.fq -2 Sp_plat.right.fq -S Sp_plat.sam &
+$ mkdir DESEQ2
+$ cd DESEQ2/
 ~~~
 
-Una vez finalizados, los convertiremos a formato bam ordenado para poder contar las
-lecturas.
+Y creemos un link a nuestros datos previos (ensamble cufflinks y mapeos con tophat):
 
 ~~~ {.bash}
-samtools view -bS Sp_ds.sam | samtools sort - Sp_ds
-samtools view -bS Sp_hs.sam | samtools sort - Sp_hs
-samtools view -bS Sp_log.sam | samtools sort - Sp_log
-samtools view -bS Sp_plat.sam | samtools sort - Sp_plat
+$ ln -s ../CUFFLINKS/merged_asm/merged.gtf cufflinks_assembly.gtf
+$ ln -s ../CUFFLINKS/tophat.Sp_*/Sp_*bam .
 ~~~
 
 ## Contando lecturas
@@ -46,32 +41,31 @@ sufrir ningún tipo de transformación. Como vieron en la clase pasada, esto se
 debe a que el programa estima un factor de normalización. Si usamos datos 
 previamente normalizados estaremos violando los supuestos. 
 
-Descargaremos la anotación de los genes de aquí:
-
-[Sp_genes.gtf](datasets/genome/Sp_genes.gtf) 
-
-Además descargaremos he instalaremos el programa HTSeq. 
-
-[HTSeq](https://pypi.python.org/packages/source/H/HTSeq/HTSeq-0.6.1.tar.gz#md5=b7f4f38a9f4278b9b7f948d1efbc1f05)
-
-Y lo instalaremos usando los siguientes comandos:
+Descargaremos la anotación de los de *Schizosaccharomyces pombe* genes de aquí:
 
 ~~~ {.bash}
-tar -xvf HTSeq-0.6.1.tar.gz
-cd HTSeq-0.6.1
-python setup.py build
-sudo python setup.py install
-htseq-count
+$  wget https://liz-fernandez.github.io/Talleres_Bioinfo_Cuernavaca_17/datasets/genome/Sp_genes.gtf
 ~~~
+
+Usaremos el programa [HTSeq](https://pypi.python.org/packages/source/H/HTSeq/).
 
 Este programa cuenta el número de lecturas que alinean con cada gen anotado en un archivo 
 de referencia. Nosotros le proporcionaremos nuestro archivo `Sp_genes.gtf`.
 
 ~~~ {.bash}
-htseq-count -f bam -s no -r pos Sp_ds.bam Sp_genes.gtf > Sp_ds.counts &
-htseq-count -f bam -s no -r pos Sp_hs.bam Sp_genes.gtf > Sp_hs.counts &
-htseq-count -f bam -s no -r pos Sp_log.bam Sp_genes.gtf > Sp_log.counts &
-htseq-count -f bam -s no -r pos Sp_plat.bam Sp_genes.gtf > Sp_plat.counts &
+$ htseq-count -f bam -s no -r pos Sp_ds.bam Sp_genes.gtf > Sp_ds.counts &
+$ htseq-count -f bam -s no -r pos Sp_hs.bam Sp_genes.gtf > Sp_hs.counts &
+$ htseq-count -f bam -s no -r pos Sp_log.bam Sp_genes.gtf > Sp_log.counts &
+$ htseq-count -f bam -s no -r pos Sp_plat.bam Sp_genes.gtf > Sp_plat.counts &
+~~~
+
+Además contaremos las lecturas usando nuestro transcriptoma ensamblado con Cufflinks:
+
+~~~ {.bash}
+$ htseq-count -f bam -s no -r pos Sp_ds.bam cufflinks_assembly.gtf > Sp_ds_cufflinks.counts &
+$ htseq-count -f bam -s no -r pos Sp_hs.bam cufflinks_assembly.gtf > Sp_hs_cufflinks.counts & 
+$ htseq-count -f bam -s no -r pos Sp_log.bam cufflinks_assembly.gtf > Sp_log_cufflinks.counts &
+$ htseq-count -f bam -s no -r pos Sp_plat.bam cufflinks_assembly.gtf > Sp_plat_cufflinks.counts &
 ~~~
 
 > ## Contando librerías de manera independiente {.challenge}
@@ -88,8 +82,8 @@ cuando si la tiene).
 Finalmente uniremos los resultados usando el siguiente comando:
 
 ~~~ {.bash}
-paste *counts | cut -f 1,2,4,6,8 | grep '__' -v > Sp_Counts_Table.txt
-head Sp_Counts_Table.txt
+$ paste $( ls *counts | grep cufflinks -v) | cut -f 1,2,4,6,8 | grep '__' -v > Sp_counts_table.txt
+$ head Sp_Counts_Table.txt
 ~~~
 
 Esto unió los distintos archivos en uno solo el cual ya podemos utilizar en R. 
@@ -109,6 +103,12 @@ SPAC1250.07	73	36	29	74
 SPAC12B10.14c	73	38	52	50
 ~~~
 
+Haremos lo mismo para las cuentas en el transcriptoma de Cufflinks:
+
+~~~ {.bash}
+$ paste *cufflinks.counts | cut -f 1,2,4,6,8 | grep '__' -v > Sp_counts_cufflinks_table.txt
+~~~
+
 ### Análisis de expresión diferencial
 
 Ahora instalamos y cargamos el paquete `DESeq2`:
@@ -124,9 +124,10 @@ Este paquete estima una distribución negativa binomial.
 Leemos las cuentas en R usando read.delim:
 
 ~~~ {.r}
-> countData <- read.delim("./Sp_Counts_Table.txt",header=FALSE, row.names=1)
+> countData <- read.delim("./Sp_counts_table.txt",header=FALSE, row.names=1)
 > head(countData)
 ~~~
+
 ~~~ {.output}
               V2  V3  V4  V5
 SPAC1002.19   24  45   3 239
@@ -147,6 +148,7 @@ condition <- factor(c("ds","hs","log","plat"))
 colData <- data.frame(row.names=colnames(countData), condition)
 head(colData)
 ~~~
+
 ~~~ {.output}
    condition
 V2        ds
@@ -159,8 +161,8 @@ Una vez ensamblados nuestros datos podemos usar la función DESeqDataSetFromMatr
 ponerlo en el formato requerido por DESeq2:
 
 ~~~ {.r}
-dds <- DESeqDataSetFromMatrix(countData = countDATA,
-                              colData = colDATA,
+dds <- DESeqDataSetFromMatrix(countData = countData,
+                              colData = colData,
                               design = ~ condition )
 dds
 ~~~
@@ -182,6 +184,7 @@ menos una lectura. Nota: DESeq2 aplica otros filtros más estrictos por default.
 dds <- dds[ rowSums(counts(dds)) > 1, ]
 dds
 ~~~
+
 ~~~ {.output}
 class: DESeqDataSet 
 dim: 198 4 
