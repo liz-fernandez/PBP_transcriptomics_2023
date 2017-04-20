@@ -48,6 +48,8 @@ Esta mañana recibimos un correo de nuestro colaborador:
 2. Control de calidad de datos de secuenciación masiva.
 	* [Presentación](SLIDES/PBI_17_Clase_2.pdf)
 	* [Práctica](01-quality.html)
+	
+	
 <!--
 3. Ensamble de transcriptomas *de novo*.
 	* [Presentación](SLIDES/TIB17_Clase_3.pdf)
