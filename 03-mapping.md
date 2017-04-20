@@ -38,7 +38,7 @@ También usaremos el genoma de referencia de nuestro organismo,
 *Saccharomyces pombe*:
 
 ~~~ {.output}
-$ wget https://liz-fernandez.github.io/Talleres_Bioinfo_Cuernavaca_17/datasets/genome/Sp_genome.fa
+$ wget https://liz-fernandez.github.io/PBI_transcriptomics/datasets/genome/Sp_genome.fa
 ~~~
 
 Como ya sabemos, es buena idea primero ver que los datos están en el 

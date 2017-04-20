@@ -59,7 +59,7 @@ reads.left.fq.gz.U.qtrim.gz
 reads.right.fq.gz.P.qtrim.gz
 reads.right.fq.gz.U.qtrim.gz</code></pre>
 <p>También usaremos el genoma de referencia de nuestro organismo, <em>Saccharomyces pombe</em>:</p>
-<pre class="output"><code>$ wget https://liz-fernandez.github.io/Talleres_Bioinfo_Cuernavaca_17/datasets/genome/Sp_genome.fa</code></pre>
+<pre class="output"><code>$ wget https://liz-fernandez.github.io/PBI_transcriptomics/datasets/genome/Sp_genome.fa</code></pre>
 <p>Como ya sabemos, es buena idea primero ver que los datos están en el formato correcto. Para este ejercicio solo utilizaremos las lecturas que conservaron sus pares después de ser filtradas:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">for</span> <span class="kw">i</span> in trinity_out_dir/*.P.qtrim.gz <span class="kw">;</span> <span class="kw">do</span> <span class="kw">zcat</span> <span class="ot">$i</span> <span class="kw">|</span> <span class="kw">head</span> <span class="kw">;</span> <span class="kw">done</span> 
 $ <span class="kw">ln</span> -s ./trinity_out_dir/*.P.qtrim.gz .</code></pre></div>

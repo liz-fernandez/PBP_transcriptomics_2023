@@ -20,14 +20,14 @@ cd FASTQ_Complete
 Y descargaremos los siguientes archivos fastq usando wget:
 
 ~~~ {.bash}
-$ wget https://liz-fernandez.github.io/Talleres_Bioinfo_Cuernavaca_17/datasets/Sp_ds.left.fq.gz 
-$ wget https://liz-fernandez.github.io/Talleres_Bioinfo_Cuernavaca_17/datasets/Sp_ds.right.fq.gz
-$ wget https://liz-fernandez.github.io/Talleres_Bioinfo_Cuernavaca_17/datasets/Sp_hs.right.fq.gz 
-$ wget https://liz-fernandez.github.io/Talleres_Bioinfo_Cuernavaca_17/datasets/Sp_hs.left.fq.gz   
-$ wget https://liz-fernandez.github.io/Talleres_Bioinfo_Cuernavaca_17/datasets/Sp_plat.left.fq.gz
-$ wget https://liz-fernandez.github.io/Talleres_Bioinfo_Cuernavaca_17/datasets/Sp_plat.right.fq.gz
-$ wget https://liz-fernandez.github.io/Talleres_Bioinfo_Cuernavaca_17/datasets/Sp_log.left.fq.gz  
-$ wget https://liz-fernandez.github.io/Talleres_Bioinfo_Cuernavaca_17/datasets/Sp_log.right.fq.gz
+$ wget https://liz-fernandez.github.io/PBI_transcriptomics/datasets/Sp_ds.left.fq.gz 
+$ wget https://liz-fernandez.github.io/PBI_transcriptomics/datasets/Sp_ds.right.fq.gz
+$ wget https://liz-fernandez.github.io/PBI_transcriptomics/datasets/Sp_hs.right.fq.gz 
+$ wget https://liz-fernandez.github.io/PBI_transcriptomics/datasets/Sp_hs.left.fq.gz   
+$ wget https://liz-fernandez.github.io/PBI_transcriptomics/datasets/Sp_plat.left.fq.gz
+$ wget https://liz-fernandez.github.io/PBI_transcriptomics/datasets/Sp_plat.right.fq.gz
+$ wget https://liz-fernandez.github.io/PBI_transcriptomics/datasets/Sp_log.left.fq.gz  
+$ wget https://liz-fernandez.github.io/PBI_transcriptomics/datasets/Sp_log.right.fq.gz
 ~~~
 
 Exploremos las lecturas en cada archivo usando un ciclo for:
@@ -312,7 +312,7 @@ para identificar de que organismo provienen. Navegen hacia:
 > bases de datos de proteínas de NCBI.
 > ¿Qué tipo de blast debemos utilizar?
 
-> ## Reto - Ensambla después de filtrar por secuencias {.challenge}
+> ## Tarea - Ensambla después de filtrar por secuencias {.challenge}
 >
 > Si se pudieron dar cuenta, los datos que ensamblamos son los datos crudos, es decir
 > sin filtrar por calidad. Afortunadamente Trinity incluye una opción para usar 

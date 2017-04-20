@@ -17,7 +17,7 @@ Lo primero que hacemos al recibir nuestros datos es descargarlos. Generalmente e
 Podemos descomprimir los datos usando ese mismo comando:
 
 ~~~ {.bash}
-$ tar -xvf /space21/NNB/T6/FastQC_Short.tar.gz
+$ tar -xvf FastQC_Short.tar.gz
 ~~~
 
 Este comando descomprime un directorio llamado `FastQC_Short`. Entramos en ese directorio:
@@ -545,10 +545,11 @@ Abrimos el resultado html [Trimmed_Partial_SRR2467141_fastqc.html](http://liz-fe
 Existen otras herramientas como `fastx-toolkit`,`scythe` y `sickle` que realizan procesos similares. 
 Estás herramientas están en su versión de Biolinux si las quieren comparar.
 
-> ## Reto - Análisis de calidad {.challenge}
+> ## Tarea - Análisis de calidad {.challenge}
 >
-> Realiza un análisis de calidad y corte por Trimmomatic de cada uno de los archivos
-fastq en el directorio que bajaron. 
+> Realiza un análisis de calidad y corte por Trimmomatic de cada uno de los archivos 
+> fastq en el directorio que bajaron. 
+
 
 
 

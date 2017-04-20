@@ -44,14 +44,14 @@
 <span class="kw">mkdir</span> FASTQ_Complete
 <span class="kw">cd</span> FASTQ_Complete</code></pre></div>
 <p>Y descargaremos los siguientes archivos fastq usando wget:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">wget</span> https://liz-fernandez.github.io/Talleres_Bioinfo_Cuernavaca_17/datasets/Sp_ds.left.fq.gz 
-$ <span class="kw">wget</span> https://liz-fernandez.github.io/Talleres_Bioinfo_Cuernavaca_17/datasets/Sp_ds.right.fq.gz
-$ <span class="kw">wget</span> https://liz-fernandez.github.io/Talleres_Bioinfo_Cuernavaca_17/datasets/Sp_hs.right.fq.gz 
-$ <span class="kw">wget</span> https://liz-fernandez.github.io/Talleres_Bioinfo_Cuernavaca_17/datasets/Sp_hs.left.fq.gz   
-$ <span class="kw">wget</span> https://liz-fernandez.github.io/Talleres_Bioinfo_Cuernavaca_17/datasets/Sp_plat.left.fq.gz
-$ <span class="kw">wget</span> https://liz-fernandez.github.io/Talleres_Bioinfo_Cuernavaca_17/datasets/Sp_plat.right.fq.gz
-$ <span class="kw">wget</span> https://liz-fernandez.github.io/Talleres_Bioinfo_Cuernavaca_17/datasets/Sp_log.left.fq.gz  
-$ <span class="kw">wget</span> https://liz-fernandez.github.io/Talleres_Bioinfo_Cuernavaca_17/datasets/Sp_log.right.fq.gz</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">wget</span> https://liz-fernandez.github.io/PBI_transcriptomics/datasets/Sp_ds.left.fq.gz 
+$ <span class="kw">wget</span> https://liz-fernandez.github.io/PBI_transcriptomics/datasets/Sp_ds.right.fq.gz
+$ <span class="kw">wget</span> https://liz-fernandez.github.io/PBI_transcriptomics/datasets/Sp_hs.right.fq.gz 
+$ <span class="kw">wget</span> https://liz-fernandez.github.io/PBI_transcriptomics/datasets/Sp_hs.left.fq.gz   
+$ <span class="kw">wget</span> https://liz-fernandez.github.io/PBI_transcriptomics/datasets/Sp_plat.left.fq.gz
+$ <span class="kw">wget</span> https://liz-fernandez.github.io/PBI_transcriptomics/datasets/Sp_plat.right.fq.gz
+$ <span class="kw">wget</span> https://liz-fernandez.github.io/PBI_transcriptomics/datasets/Sp_log.left.fq.gz  
+$ <span class="kw">wget</span> https://liz-fernandez.github.io/PBI_transcriptomics/datasets/Sp_log.right.fq.gz</code></pre></div>
 <p>Exploremos las lecturas en cada archivo usando un ciclo for:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">for</span> <span class="kw">fastq</span> in S*fq.gz <span class="kw">;</span> <span class="kw">do</span> <span class="kw">echo</span> <span class="ot">$fastq</span><span class="kw">;</span> <span class="kw">zcat</span> <span class="ot">$fastq</span> <span class="kw">|</span> <span class="kw">head</span> <span class="kw">;</span> <span class="kw">wait</span> <span class="kw">;</span> <span class="kw">done</span> </code></pre></div>
 <p>Este comando nos mostrará las primeras 10 líneas de cada archivo de manera iterativa. Esta estructura es conocida como un <code>for loop</code>. Un for loop nos permite ejecutar un comando en varios archivos de manera secuencial. Es extremadamente útil cuando tenemos varios archivos.</p>
@@ -277,7 +277,7 @@ Stats based on ALL transcript contigs:
 </section>
 <section class="challenge panel panel-success">
 <div class="panel-heading">
-<h2 id="reto---ensambla-después-de-filtrar-por-secuencias"><span class="glyphicon glyphicon-pencil"></span>Reto - Ensambla después de filtrar por secuencias</h2>
+<h2 id="tarea---ensambla-después-de-filtrar-por-secuencias"><span class="glyphicon glyphicon-pencil"></span>Tarea - Ensambla después de filtrar por secuencias</h2>
 </div>
 <div class="panel-body">
 <p>Si se pudieron dar cuenta, los datos que ensamblamos son los datos crudos, es decir sin filtrar por calidad. Afortunadamente Trinity incluye una opción para usar Trimmomatic de manera sencilla.</p>
