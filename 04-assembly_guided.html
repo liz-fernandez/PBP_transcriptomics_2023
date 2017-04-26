@@ -45,10 +45,10 @@
 $ <span class="kw">cd</span> CUFFLINKS/</code></pre></div>
 <p>Generemos un acceso directo para el archivo del genoma:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">ln</span> -s ../MAP/Sp_genome.fa</code></pre></div>
-<p>Preparemos el archivo <code>Sp_genome.fa</code> para alinear usando TopHat:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">bowtie-build</span> Sp_genome.fa Sp_genome</code></pre></div>
+<p>Preparemos el archivo <code>Sp_genome.fa</code> para alinear usando TopHat2:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">bowtie2-build</span> Sp_genome.fa Sp_genome</code></pre></div>
 <p>Y alineamos las lecturas usando Top Hat</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">tophat</span> -I 1000 -i 20 --bowtie1 --library-type fr-firststrand -o tophat.Sp_ds.dir Sp_genome Sp_ds.left.fq.gz Sp_ds.right.fq.gz</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">tophat2</span> -I 1000 -i 20 --bowtie1 --library-type fr-firststrand -o tophat.Sp_ds.dir Sp_genome Sp_ds.left.fq.gz Sp_ds.right.fq.gz</code></pre></div>
 <p>Las opciones (banderas) y archivos que hemos utilizado son las siguientes:</p>
 <ul>
 <li>-I 1000 - Tamaño máximo del intron.</li>

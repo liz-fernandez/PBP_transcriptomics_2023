@@ -24,16 +24,16 @@ Generemos un acceso directo para el archivo del genoma:
 $ ln -s ../MAP/Sp_genome.fa
 ~~~
 
-Preparemos el archivo `Sp_genome.fa` para alinear usando TopHat:
+Preparemos el archivo `Sp_genome.fa` para alinear usando TopHat2:
 
 ~~~ {.bash}
-$ bowtie-build Sp_genome.fa Sp_genome
+$ bowtie2-build Sp_genome.fa Sp_genome
 ~~~
 
 Y alineamos las lecturas usando Top Hat
 
 ~~~ {.bash}
-$ tophat -I 1000 -i 20 --bowtie1 --library-type fr-firststrand -o tophat.Sp_ds.dir Sp_genome Sp_ds.left.fq.gz Sp_ds.right.fq.gz
+$ tophat2 -I 1000 -i 20 --bowtie1 --library-type fr-firststrand -o tophat.Sp_ds.dir Sp_genome Sp_ds.left.fq.gz Sp_ds.right.fq.gz
 ~~~
 
 Las opciones (banderas) y archivos que hemos utilizado son las siguientes:

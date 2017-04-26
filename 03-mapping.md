@@ -55,255 +55,6 @@ vamos a alinear las lecturas y transcritos al genoma utilizando Bowtie2 via TopH
 
 Pueden encontrar el manual en el siguiente [link](https://ccb.jhu.edu/software/tophat/manual.shtml).
 
-## Mapeando los transcritos al genoma
-
-En los casos en los que contamos con una referencia, es muy útil analizar los transcritos
-en su contexto genómico. En este ejercicio usaremos el programa de mapeo 
-[GMAP](http://research-pub.gene.com/gmap/).
-
-El primer paso para realizar el mapeo es generar el índice por medio del comando:
-
-~~~ {.bash}
-$ gmap_build -d genome -D . -k 13 Sp_genome.fa
-~~~
-
-~~~ {.output}
-Sorting chromosomes in chrom order.  To turn off or sort other ways, use the -s flag.
-Creating files in directory ./genome
-Running "/usr/local/bioconda/bin/fa_coords"     -o "./genome.coords" -f "./genome.sources"
-Opening file Sp_genome.fa
-  Processed short contigs (<1000000 nt): .
-============================================================
-Contig mapping information has been written to file ./genome.coords.
-You should look at this file, and edit it if necessary
-If everything is okay, you should proceed by running
-    make gmapdb
-============================================================
-Running "/usr/local/bioconda/bin/gmap_process"  -c "./genome.coords" -f "./genome.sources" | "/usr/local/bioconda/bin/gmapindex"  -d genome -D "./genome" -A
-Reading coordinates from file ./genome.coords
-Logging contig genome at genome:1..451226 in genome genome
- => primary (linear) chromosome
-Total genomic length = 451226 bp
-Have a total of 1 chromosomes
-Writing chromosome file ./genome/genome.chromosome
-Chromosome genome has universal coordinates 1..451226
-Writing chromosome IIT file ./genome/genome.chromosome.iit
-Writing IIT file header information...coordinates require 4 bytes each...done
-Processing null division/chromosome...sorting...writing...done (1 intervals)
-Writing IIT file footer information...done
-Writing IIT file header information...coordinates require 4 bytes each...done
-Processing null division/chromosome...sorting...writing...done (1 intervals)
-Writing IIT file footer information...done
-No alternate scaffolds observed
-Running "/usr/local/bioconda/bin/gmap_process"  -c "./genome.coords" -f "./genome.sources" | "/usr/local/bioconda/bin/gmapindex"  -d genome -F "./genome" -D "./genome" -G
-Genome length is 451226 nt
-Trying to allocate 42303*4 bytes of memory...succeeded.  Building genome in memory.
-Reading coordinates from file ./genome.coords
-Writing contig genome to universal coordinates 1..451226
-A total of 0 non-ACGTNX characters were seen in the genome.
-Running cat "./genome/genome.genomecomp" | "/usr/local/bioconda/bin/gmapindex" -d genome -U > "./genome/genome.genomebits128"
-Running cat "./genome/genome.genomecomp" | "/usr/local/bioconda/bin/gmapindex" -k 13 -q 3  -d genome -F "./genome" -D "./genome" -N
-Counting positions in genome genome (13 bp every 3 bp), position 0
-Number of offsets: 142909 => pages file not required
-Running "/usr/local/bioconda/bin/gmapindex" -k 13 -q 3  -d genome -F "./genome" -D "./genome" -O  "./genome/genome.genomecomp"
-Offset compression types: bitpack64
-Allocating 1048576*1 bytes for packsizes
-Allocating 1048576*8 bytes for bitpacks
-Indexing offsets of oligomers in genome genome (13 bp every 3 bp), position 0
-Writing 67108865 offsets compressed via bitpack64...done
-Running "/usr/local/bioconda/bin/gmapindex" -k 13 -q 3  -d genome -F "./genome" -D "./genome" -P "./genome/genome.genomecomp"
-Looking for index files in directory ./genome
-  Pointers file is genome.ref133offsets64meta
-  Offsets file is genome.ref133offsets64strm
-  Positions file is genome.ref133positions
-Expanding offsetsstrm into counters...done
-Allocating 1983664 bytes for counterstrm
-Trying to allocate 142909*4 bytes of memory for positions...succeeded.  Building positions in memory.
-Indexing positions of oligomers in genome genome (13 bp every 3 bp), position 0
-Writing 142909 genomic positions to file ./genome/genome.ref133positions ...
-done
-Running "/usr/local/bioconda/bin/gmapindex" -d genome -F "./genome" -D "./genome" -S
-Genome length is 451226
-Building suffix array
-SACA_K called with n = 451227, K = 5, level 0
-SACA_K called with n = 119713, K = 0, level 1
-SACA_K called with n = 38268, K = 0, level 2
-SACA_K called with n = 12495, K = 0, level 3
-SACA_K called with n = 4066, K = 0, level 4
-For indexsize 12, occupied 412801/16777216
-Optimal indexsize = 12
-Running "/usr/local/bioconda/bin/gmapindex" -d genome -F "./genome" -D "./genome" -L
-Building LCP array
-Writing temporary file for rank...done
-Writing temporary file for permuted sarray...done
-Found 178 exceptions
-Byte-coding: 451049 values < 255, 178 exceptions >= 255 (0.0%)
-Building DC array
-Building child array
-Byte-coding: 449732 values < 255, 1495 exceptions >= 255 (0.3%)
-Writing file ./genome/genome.salcpchilddcdone
-~~~
-
-Una vez generado el índice mapeamos los transcritos generados en la tarea al genoma:
-
-~~~ {.bash}
-$ gmap -n 0 -D . -d genome trinity_out_dir/Trinity.fasta -f samse > trinity_gmap.sam
-~~~
-
-~~~ {.output}
-GMAP version 2016-09-23 called with args: gmap.avx2 -n 0 -D . -d genome trinity_out_dir/Trinity.fasta -f samse
-Checking compiler assumptions for SSE2: 6B8B4567 327B23C6 xor=59F066A1
-Checking compiler assumptions for SSE4.1: -103 -58 max=198 => compiler zero extends
-Checking compiler options for SSE4.2: 6B8B4567 __builtin_clz=1 __builtin_ctz=0 _mm_popcnt_u32=17 __builtin_popcount=17
-Finished checking compiler assumptions
-Pre-loading compressed genome (oligos)......done (169,212 bytes, 42 pages, 0.00 sec)
-Pre-loading compressed genome (bits)......done (169,248 bytes, 42 pages, 0.00 sec)
-Looking for index files in directory ./genome
-  Pointers file is genome.ref133offsets64meta
-  Offsets file is genome.ref133offsets64strm
-  Positions file is genome.ref133positions
-Offsets compression type: bitpack64
-Allocating memory for ref offset pointers, kmer 13, interval 3...Attached new memory for ./genome/genome.ref133offsets64meta...done (8,388,624 bytes, 0.00 sec)
-Allocating memory for ref offsets, kmer 13, interval 3...Attached new memory for ./genome/genome.ref133offsets64strm...done (1,983,840 bytes, 0.01 sec)
-Pre-loading ref positions, kmer 13, interval 3......done (571,636 bytes, 0.00 sec)
-Starting alignment
-No paths found for TRINITY_DN52_c0_g1_i1
-No paths found for TRINITY_DN134_c0_g1_i1
-No paths found for TRINITY_DN155_c0_g1_i1
-No paths found for TRINITY_DN162_c0_g1_i1
-No paths found for TRINITY_DN184_c0_g1_i1
-Processed 381 queries in 2.59 seconds (147.10 queries/sec)
-Removed existing memory for shmid 42893319
-Removed existing memory for shmid 42860549
-~~~
-
-Si revisamos el resultado, es un archivo con coordenadas en un formato llamado
-SAM (Sequence Alignment/Map format). Veamos en que consiste este formato:
-
-~~~ {.bash}
-$ more trinity_gmap.sam
-~~~
-
-### El formato SAM
-
-Veamos un ejemplo más pequeño de este formato.
-Supongamos que tenemos el siguiente alineamiento:
-
-~~~ {.output}
-Coor	12345678901234 5678901234567890123456789012345
-ref	AGCATGTTAGATAA**GATAGCTGTGCTAGTAGGCAGTCAGCGCCAT
-+r001/1	      TTAGATAAAGGATA*CTG
-+r002	     aaaAGATAA*GGATA
-+r003	   gcctaAGCTAA
-+r004	                 ATAGCT..............TCAGC
--r003	                        ttagctTAGGC
--r001/2	                                      CAGCGGCAT
-~~~
-
-El formato SAM correspondiente será el siguiente:
-
-~~~ {.output}
-@HD	VN:1.5	SO:coordinate
-@SQ	SN:ref	LN:45
-r001	99	ref	7	30	8M2I4M1D3M	=	37	39	TTAGATAAAGGATACTG	*
-r002	0	ref	9	30	3S6M1P1I4M	*	0	0	AAAAGATAAGGATA	*
-r003	0	ref	9	30	5S6M	*	0	0	GCCTAAGCTAA	*	SA:Z:ref,29,-,6H5M,17,0;
-r004	0	ref	16	30	6M14N5M	*	0	0	ATAGCTTCAGC	*
-r003	2064	ref	29	17	6H5M	*	0	0	TAGGC	*	SA:Z:ref,9,+,5S6M,30,1;
-r001	147	ref	37	30	9M	=	7	-39	CAGCGGCAT	*	NM:i:1
-~~~
-
-El formato SAM es un formato de texto plano que nos permite guardar datos de 
-secuenciación en formato ASCII delimitado por tabulaciones. 
-
-Está compuesto de dos secciones principales:
-
-*  El encabezado
-*  El alineamiento
-
-La sección del **encabezado** comienza con el caracter `@` seguido por uno de lo códigos 
-de dos letras que sirven para características de los alineamientos en este archivo. 
-Cada línea esta delimitada por tabulaciones y, además de las líneas que comienzan con 
-`@CO`, cada campo de datos tiene el formato `TAG:VALUE`, en donde `TAG` es una cadena
-de dos caracteres que define el formato y contenido de `VALUE`. 
-
-El encabezado no es indispensable pero contiene información acerca de la versión del 
-archivo así como si está ordenado o no. Por ello es recomendable incluirlo.
-
-La sección de **alineamiento** contiene la siguiente información:
-
-1. **QNAME**	Nombre de la referencia, QNAME (SAM)/Nombre de la lectura(BAM). 
-Se utiliza para agrupar alineamientos que están juntos, como es el caso de alineamientos
-de lecturas por pares o una lectura que aparece en alineamientos múltiples. 
-2.  **FLAG**	Set de información describiendo el alineamiento. Provee la siguiente información:
-	* ¿Hay múltiples fragmentos?
-	* ¿Todos los fragmentos están bien alineados?
-	* ¿Está alineado este fragmento?
-	* ¿No ha sido alineado el siguiente fragmento?
-	* ¿Es esta referencia la cadena inversa?
-	* ¿El el siguiente fragmento la cadena reversa?
-	* ¿Es este el primer fragmento?
-	* ¿Es este el último fragmento?
-	* ¿Es este un alineamiento secundario?
-	* ¿Esta lectura falló los filtros de calidad?
-	* ¿Es esta lectura un duplicado por PCR o óptico?
-3. **RNAME**	Nombre de la secuencia de referencia.
-3. **POS**	Posición de alineamiento izquierda (base 1).
-3. **MAPQ**	Calidad del alineamiento.
-3. **CIGAR**	cadena CIGAR.
-3. **RNEXT**	Nombre de referencia del par (mate) o la siguiente lectura.
-3. **PNEXT**	Posición del par (mate) o la siguiente lectura.
-3. **TLEN**	Longitud del alineamiento.
-3. **SEQ**	La secuencia de prueba de este alineamiento (en este caso la secuencia de la lectura).
-3. **QUAL**	La calidad de la lectura.
-3. **TAGs**	Información adicional. 
-
-> ## Cadenas CIGAR {.callout}
->
-> La secuencia alineada a la referencia puede tener bases adicionales que no están en 
-> la referencia o puede no tener bases en la lectura que si están en la referencial.
-> La cadena CIGAR es una cadena que codifica cada base y la caracteristica de cada una en 
-> el alineamiento.
-> 
-> Por ejemplo, la cadena CIGAR:
-> 
-> ~~~ {.output}
-> CIGAR: 3M1I3M1D5M
-> ~~~
-> 
-> indica que las primera 3 bases de la lectura alinea con la referencia (3M), la siguiente base
-> no existe en la referencia (1I), las siguientes 3 bases alinean con la referencia (3M), la 
-> siguiente base no existe en la lectura (1D), y 5 bases más alinean con la referencia (5M). 
-
-Como pueden ver estos archivos contienen muchísima información que puede ser analizada
-usando scripts que arrojen estadísticas del alineamiento. Programas como 
-[Picard](http://broadinstitute.github.io/picard/) realizan
-este tipo de análisis.
-
-La versión comprimida de los archivos tipo SAM se conoce como BAM (binary sam). 
-Convirtamos el archivo SAM a BAM usando samtools:
-
-~~~ {.bash}
-$ samtools view -Sb trinity_gmap.sam > trinity_gmap.bam
-~~~
-
-~~~ {.output}
-[samopen] SAM header is present: 1 sequences.
-~~~
-
-No abriremos este archivo ya que, dado que esta en formato binario, es ilegible. 
-Sin embargo, tenemos que realizar dos últimos pasos visualizar 
-los resultados:
-
-~~~ {.bash}
-$ samtools sort trinity_gmap.bam trinity_gmap
-$ samtools index trinity_gmap.bam
-~~~
-
-El primer paso ordena los resultados por sus coordenadas y el segundo crea índices
-para hacer más rápida la visualización usando un navegador. Visualizaremos esto datos
-en la próxima clase.
-
 ## Mapeando las lecturas filtradas al genoma
 
 Primero generaremos un índice de bowtie2 para el genoma:
@@ -820,7 +571,122 @@ Exploramos el resultado, el cuál es un archivo tipo SAM.
 $ samtools view tophat_out/accepted_hits.bam | head
 ~~~ 
 
-> ## Reto - Alineando las lecturas filtradas al transcriptoma {.challenge}
+### El formato SAM
+
+Veamos un ejemplo más pequeño de este formato.
+Supongamos que tenemos el siguiente alineamiento:
+
+~~~ {.output}
+Coor	12345678901234 5678901234567890123456789012345
+ref	AGCATGTTAGATAA**GATAGCTGTGCTAGTAGGCAGTCAGCGCCAT
++r001/1	      TTAGATAAAGGATA*CTG
++r002	     aaaAGATAA*GGATA
++r003	   gcctaAGCTAA
++r004	                 ATAGCT..............TCAGC
+-r003	                        ttagctTAGGC
+-r001/2	                                      CAGCGGCAT
+~~~
+
+El formato SAM correspondiente será el siguiente:
+
+~~~ {.output}
+@HD	VN:1.5	SO:coordinate
+@SQ	SN:ref	LN:45
+r001	99	ref	7	30	8M2I4M1D3M	=	37	39	TTAGATAAAGGATACTG	*
+r002	0	ref	9	30	3S6M1P1I4M	*	0	0	AAAAGATAAGGATA	*
+r003	0	ref	9	30	5S6M	*	0	0	GCCTAAGCTAA	*	SA:Z:ref,29,-,6H5M,17,0;
+r004	0	ref	16	30	6M14N5M	*	0	0	ATAGCTTCAGC	*
+r003	2064	ref	29	17	6H5M	*	0	0	TAGGC	*	SA:Z:ref,9,+,5S6M,30,1;
+r001	147	ref	37	30	9M	=	7	-39	CAGCGGCAT	*	NM:i:1
+~~~
+
+El formato SAM es un formato de texto plano que nos permite guardar datos de 
+secuenciación en formato ASCII delimitado por tabulaciones. 
+
+Está compuesto de dos secciones principales:
+
+*  El encabezado
+*  El alineamiento
+
+La sección del **encabezado** comienza con el caracter `@` seguido por uno de lo códigos 
+de dos letras que sirven para características de los alineamientos en este archivo. 
+Cada línea esta delimitada por tabulaciones y, además de las líneas que comienzan con 
+`@CO`, cada campo de datos tiene el formato `TAG:VALUE`, en donde `TAG` es una cadena
+de dos caracteres que define el formato y contenido de `VALUE`. 
+
+El encabezado no es indispensable pero contiene información acerca de la versión del 
+archivo así como si está ordenado o no. Por ello es recomendable incluirlo.
+
+La sección de **alineamiento** contiene la siguiente información:
+
+1. **QNAME**	Nombre de la referencia, QNAME (SAM)/Nombre de la lectura(BAM). 
+Se utiliza para agrupar alineamientos que están juntos, como es el caso de alineamientos
+de lecturas por pares o una lectura que aparece en alineamientos múltiples. 
+2.  **FLAG**	Set de información describiendo el alineamiento. Provee la siguiente información:
+	* ¿Hay múltiples fragmentos?
+	* ¿Todos los fragmentos están bien alineados?
+	* ¿Está alineado este fragmento?
+	* ¿No ha sido alineado el siguiente fragmento?
+	* ¿Es esta referencia la cadena inversa?
+	* ¿El el siguiente fragmento la cadena reversa?
+	* ¿Es este el primer fragmento?
+	* ¿Es este el último fragmento?
+	* ¿Es este un alineamiento secundario?
+	* ¿Esta lectura falló los filtros de calidad?
+	* ¿Es esta lectura un duplicado por PCR o óptico?
+3. **RNAME**	Nombre de la secuencia de referencia.
+3. **POS**	Posición de alineamiento izquierda (base 1).
+3. **MAPQ**	Calidad del alineamiento.
+3. **CIGAR**	cadena CIGAR.
+3. **RNEXT**	Nombre de referencia del par (mate) o la siguiente lectura.
+3. **PNEXT**	Posición del par (mate) o la siguiente lectura.
+3. **TLEN**	Longitud del alineamiento.
+3. **SEQ**	La secuencia de prueba de este alineamiento (en este caso la secuencia de la lectura).
+3. **QUAL**	La calidad de la lectura.
+3. **TAGs**	Información adicional. 
+
+> ## Cadenas CIGAR {.callout}
+>
+> La secuencia alineada a la referencia puede tener bases adicionales que no están en 
+> la referencia o puede no tener bases en la lectura que si están en la referencial.
+> La cadena CIGAR es una cadena que codifica cada base y la caracteristica de cada una en 
+> el alineamiento.
+> 
+> Por ejemplo, la cadena CIGAR:
+> 
+> ~~~ {.output}
+> CIGAR: 3M1I3M1D5M
+> ~~~
+> 
+> indica que las primera 3 bases de la lectura alinea con la referencia (3M), la siguiente base
+> no existe en la referencia (1I), las siguientes 3 bases alinean con la referencia (3M), la 
+> siguiente base no existe en la lectura (1D), y 5 bases más alinean con la referencia (5M). 
+
+Como pueden ver estos archivos contienen muchísima información que puede ser analizada
+usando scripts que arrojen estadísticas del alineamiento. Programas como 
+[Picard](http://broadinstitute.github.io/picard/) realizan
+este tipo de análisis.
+
+La versión comprimida de los archivos tipo SAM se conoce como BAM (binary sam). 
+Convirtamos el archivo BAM a SAM usando samtools:
+
+~~~ {.bash}
+$ samtools view tophat_out/accepted_hits.bam > samtools view tophat_out/accepted_hits.sam
+~~~
+
+No abrimos los archivos SAM ya que, dado que esta en formato binario, son ilegible. 
+Sin embargo, tenemos que realizar dos últimos pasos visualizar 
+los resultados:
+
+~~~ {.bash}
+$ samtools sort tophat_out/accepted_hits.bam accepted_hits
+$ samtools index tophat_out/accepted_hits.bam
+~~~
+
+El primer paso ordena los resultados por sus coordenadas y el segundo crea índices
+para hacer más rápida la visualización usando un navegador. 
+
+> ## Tarea - Alineando las lecturas filtradas al transcriptoma {.challenge}
 >
 > Hemos alineado las lecturas al genoma pero queremos alinearlas también directamente
 > al transcriptoma. La vamos a revisar el manual de TopHat2 y usar las opciones
