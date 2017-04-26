@@ -48,9 +48,6 @@ Esta mañana recibimos un correo de nuestro colaborador:
 2. Control de calidad de datos de secuenciación masiva.
 	* [Presentación](SLIDES/PBI_17_Clase_2.pdf)
 	* [Práctica](01-quality.html)
-	
-	
-<!--
 3. Ensamble de transcriptomas *de novo*.
 	* [Presentación](SLIDES/TIB17_Clase_3.pdf)
 	* [Práctica](02-assembly_denovo.html)
@@ -60,15 +57,15 @@ Esta mañana recibimos un correo de nuestro colaborador:
 5. Ensamble de transcriptomas guiado.
 	* [Presentación](SLIDES/TIB17_Clase_5.pdf)
 	* [Práctica](04-assembly_guided.html)
-6. Navegadores de genomas y transcriptomas.
-	* [Presentación](SLIDES/TIB17_Clase_6.pdf)
-	* [Práctica](05-browsers.html)
+	
+	
+<!--	
+6. Análisis de expresión diferencial.
+	* [Presentación](SLIDES/TIB17_Clase_7.pdf)
+	* [Práctica](06-expression.html)
 7. Anotación.
 	* [Presentación](SLIDES/TIB17_Clase_8.pdf)
 	* [Práctica](07-annotation.html)
-8. Análisis de expresión diferencial.
-	* [Presentación](SLIDES/TIB17_Clase_7.pdf)
-	* [Práctica](06-expression.html)
 
 Prácticas basadas en el curso [Trinity RNA-Seq Analysis Workshop](https://github.com/trinityrnaseq/RNASeq_Trinity_Tuxedo_Workshop/wiki).
 
