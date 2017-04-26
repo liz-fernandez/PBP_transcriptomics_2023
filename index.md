@@ -49,13 +49,13 @@ Esta mañana recibimos un correo de nuestro colaborador:
 	* [Presentación](SLIDES/PBI_17_Clase_2.pdf)
 	* [Práctica](01-quality.html)
 3. Ensamble de transcriptomas *de novo*.
-	* [Presentación](SLIDES/TIB17_Clase_3.pdf)
+	* [Presentación](SLIDES/PBI_17_Clase_3.pdf)
 	* [Práctica](02-assembly_denovo.html)
 4. Alineamiento de lecturas y transcritos.
-	* [Presentación](SLIDES/TIB17_Clase_4.pdf)
+	* [Presentación](SLIDES/PBI_17_Clase_4.pdf)
 	* [Práctica](03-mapping.html)
 5. Ensamble de transcriptomas guiado.
-	* [Presentación](SLIDES/TIB17_Clase_5.pdf)
+	* [Presentación](SLIDES/PBI_17_Clase_5.pdf)
 	* [Práctica](04-assembly_guided.html)
 	
 	
