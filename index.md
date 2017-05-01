@@ -64,6 +64,7 @@ Esta mañana recibimos un correo de nuestro colaborador:
 	* [Presentación](SLIDES/PBI_17_Clase_8.pdf)
 	* [Práctica](07-annotation.html)
 	
+
 ![Diagrama de ensamble de transcriptomas](SLIDES/Transcriptomics_Workflow.png)
 
 Prácticas basadas en el curso [Trinity RNA-Seq Analysis Workshop](https://github.com/trinityrnaseq/RNASeq_Trinity_Tuxedo_Workshop/wiki).
