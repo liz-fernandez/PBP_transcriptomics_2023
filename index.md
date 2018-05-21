@@ -56,7 +56,8 @@ Esta mañana recibimos un correo de nuestro colaborador:
 	* [Práctica](03-mapping.html)
 5. Ensamble de transcriptomas guiado.
 	* [Presentación](SLIDES/PBI_18_Clase_5.pdf)
-	* [Práctica](04-assembly_guided.html)	
+	* [Práctica](04-assembly_guided.html)
+		
 <!---	
 6. Análisis de expresión diferencial.
 	* [Presentación](SLIDES/PBI_17_Clase_7.pdf)
