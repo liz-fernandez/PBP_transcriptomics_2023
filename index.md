@@ -54,11 +54,10 @@ Esta mañana recibimos un correo de nuestro colaborador:
 4. Alineamiento de lecturas y transcritos.
 	* [Presentación](SLIDES/PBI_18_Clase_4.pdf)
 	* [Práctica](03-mapping.html)
-	
-<!---	
 5. Ensamble de transcriptomas guiado.
-	* [Presentación](SLIDES/PBI_17_Clase_5.pdf)
+	* [Presentación](SLIDES/PBI_18_Clase_5.pdf)
 	* [Práctica](04-assembly_guided.html)	
+<!---	
 6. Análisis de expresión diferencial.
 	* [Presentación](SLIDES/PBI_17_Clase_7.pdf)
 	* [Práctica](06-expression.html)
