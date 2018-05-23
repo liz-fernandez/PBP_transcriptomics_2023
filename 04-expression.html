@@ -54,9 +54,6 @@
 <p>Generemos un directorio de trabajo</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">mkdir</span> DESEQ2
 $ <span class="kw">cd</span> DESEQ2/</code></pre></div>
-<p>Y creemos un link a nuestros datos previos (ensamble cufflinks y mapeos con tophat):</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">ln</span> -s ../CUFFLINKS/merged_asm/merged.gtf cufflinks_assembly.gtf
-$ <span class="kw">ln</span> -s ../CUFFLINKS/tophat.Sp_*/Sp_*bam .</code></pre></div>
 <h2 id="contando-lecturas">Contando lecturas</h2>
 <p>El primer paso es contar lecturas. Tanto DESeq2 como otros programas que usan la distribución negativa binomial utilizan conteos <strong>crudos</strong> (raw). Esto se refiere la número de lecturas que alinean a un transcrito específico sin sufrir ningún tipo de transformación. Como vieron en la clase pasada, esto se debe a que el programa estima un factor de normalización. Si usamos datos previamente normalizados estaremos violando los supuestos.</p>
 <p>Descargaremos la anotación de los de <em>Schizosaccharomyces pombe</em> genes de aquí:</p>
@@ -67,11 +64,6 @@ $ <span class="kw">ln</span> -s ../CUFFLINKS/tophat.Sp_*/Sp_*bam .</code></pre><
 $ <span class="kw">htseq-count</span> -f bam -s no -r pos Sp_hs.bam Sp_genes.gtf <span class="kw">&gt;</span> Sp_hs.counts <span class="kw">&amp;</span>
 $ <span class="kw">htseq-count</span> -f bam -s no -r pos Sp_log.bam Sp_genes.gtf <span class="kw">&gt;</span> Sp_log.counts <span class="kw">&amp;</span>
 $ <span class="kw">htseq-count</span> -f bam -s no -r pos Sp_plat.bam Sp_genes.gtf <span class="kw">&gt;</span> Sp_plat.counts <span class="kw">&amp;</span></code></pre></div>
-<p>Además contaremos las lecturas usando nuestro transcriptoma ensamblado con Cufflinks:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">htseq-count</span> -f bam -s no -r pos Sp_ds.bam cufflinks_assembly.gtf <span class="kw">&gt;</span> Sp_ds_cufflinks.counts <span class="kw">&amp;</span>
-$ <span class="kw">htseq-count</span> -f bam -s no -r pos Sp_hs.bam cufflinks_assembly.gtf <span class="kw">&gt;</span> Sp_hs_cufflinks.counts <span class="kw">&amp;</span> 
-$ <span class="kw">htseq-count</span> -f bam -s no -r pos Sp_log.bam cufflinks_assembly.gtf <span class="kw">&gt;</span> Sp_log_cufflinks.counts <span class="kw">&amp;</span>
-$ <span class="kw">htseq-count</span> -f bam -s no -r pos Sp_plat.bam cufflinks_assembly.gtf <span class="kw">&gt;</span> Sp_plat_cufflinks.counts <span class="kw">&amp;</span></code></pre></div>
 <section class="challenge panel panel-success">
 <div class="panel-heading">
 <h2 id="contando-librerías-de-manera-independiente"><span class="glyphicon glyphicon-pencil"></span>Contando librerías de manera independiente</h2>
@@ -95,8 +87,6 @@ SPAC11E3.14 407 152 55  396
 SPAC11H11.04    17  7   12  23
 SPAC1250.07 73  36  29  74
 SPAC12B10.14c   73  38  52  50</code></pre>
-<p>Haremos lo mismo para las cuentas en el transcriptoma de Cufflinks:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">paste</span> *cufflinks.counts <span class="kw">|</span> <span class="kw">cut</span> -f 1,2,4,6,8 <span class="kw">|</span> <span class="kw">grep</span> <span class="st">&#39;__&#39;</span> -v <span class="kw">&gt;</span> Sp_counts_cufflinks_table.txt</code></pre></div>
 <h3 id="análisis-de-expresión-diferencial">Análisis de expresión diferencial</h3>
 <p>Ahora instalamos y cargamos el paquete <code>DESeq2</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">source</span>(<span class="st">&quot;http://bioconductor.org/biocLite.R&quot;</span>)
