@@ -65,13 +65,7 @@ $ <span class="kw">cd</span> DESEQ2/</code></pre></div>
 
 $ <span class="kw">mv</span> tophat.Sp_log.dir/accepted_hits.bam tophat.Sp_log.dir/Sp_log.bam
 
-$ <span class="kw">samtools</span> index tophat.Sp_log.dir/Sp_log.bam
-
-$ <span class="kw">cufflinks</span> --overlap-radius 1 \
-             --library-type fr-firststrand \
-             -o cufflinks.Sp_log.dir tophat.Sp_log.dir/Sp_log.bam
-
-$ <span class="kw">mv</span> cufflinks.Sp_log.dir/transcripts.gtf cufflinks.Sp_log.dir/Sp_log.transcripts.gtf</code></pre></div>
+$ <span class="kw">samtools</span> index tophat.Sp_log.dir/Sp_log.bam</code></pre></div>
 <p>Usaremos el programa <a href="https://pypi.python.org/packages/source/H/HTSeq/">HTSeq</a>.</p>
 <p>Este programa cuenta el número de lecturas que alinean con cada gen anotado en un archivo de referencia. Nosotros le proporcionaremos nuestro archivo <code>Sp_genes.gtf</code>.</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">htseq-count</span> -f bam -s no -r pos Sp_ds.bam Sp_genes.gtf <span class="kw">&gt;</span> Sp_ds.counts <span class="kw">&amp;</span>

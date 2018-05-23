@@ -51,11 +51,6 @@ $ mv tophat.Sp_log.dir/accepted_hits.bam tophat.Sp_log.dir/Sp_log.bam
 
 $ samtools index tophat.Sp_log.dir/Sp_log.bam
 
-$ cufflinks --overlap-radius 1 \
-             --library-type fr-firststrand \
-             -o cufflinks.Sp_log.dir tophat.Sp_log.dir/Sp_log.bam
-
-$ mv cufflinks.Sp_log.dir/transcripts.gtf cufflinks.Sp_log.dir/Sp_log.transcripts.gtf
 ~~~ 
 
 Usaremos el programa [HTSeq](https://pypi.python.org/packages/source/H/HTSeq/).
