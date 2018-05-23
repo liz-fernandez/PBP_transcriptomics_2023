@@ -45,7 +45,7 @@ Vamos a alinear cada muestra no filtrada al genoma
 ~~~ {.bash}
 $ tophat2 -I 1000 -i 20 --library-type fr-firststrand \
            -o tophat.Sp_log.dir Sp_genome \
-           Sp_log.left.fq.gz Sp_log.right.fq.gz
+           Sp_log.left.fq Sp_log.right.fq
 
 $ mv tophat.Sp_log.dir/accepted_hits.bam tophat.Sp_log.dir/Sp_log.bam
 

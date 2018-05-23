@@ -61,7 +61,7 @@ $ <span class="kw">cd</span> DESEQ2/</code></pre></div>
 <p>Vamos a alinear cada muestra no filtrada al genoma</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">tophat2</span> -I 1000 -i 20 --library-type fr-firststrand \
            -o tophat.Sp_log.dir Sp_genome \
-           Sp_log.left.fq.gz Sp_log.right.fq.gz
+           Sp_log.left.fq Sp_log.right.fq
 
 $ <span class="kw">mv</span> tophat.Sp_log.dir/accepted_hits.bam tophat.Sp_log.dir/Sp_log.bam
 
