@@ -25,6 +25,13 @@ $ mkdir DESEQ2
 $ cd DESEQ2/
 ~~~
 
+Y creemos un link a nuestros datos previos (ensamble cufflinks y mapeos con tophat):
+
+~~~ {.bash}
+$ ln -s ../CUFFLINKS/merged_asm/merged.gtf cufflinks_assembly.gtf
+$ ln -s ../CUFFLINKS/tophat.Sp_*/Sp_*bam .
+~~~
+
 ## Contando lecturas
 
 El primer paso es contar lecturas. Tanto DESeq2 como otros programas que usan
@@ -40,24 +47,6 @@ Descargaremos la anotación de los de *Schizosaccharomyces pombe* genes de aquí
 $  wget https://liz-fernandez.github.io/Talleres_Bioinfo_Cuernavaca_17/datasets/genome/Sp_genes.gtf
 ~~~
 
-Vamos a alinear cada muestra no filtrada al genoma
-
-~~~ {.bash}
-$ tophat2 -I 1000 -i 20 --library-type fr-firststrand \
-           -o tophat.Sp_log.dir Sp_genome \
-           Sp_log.left.fq.gz Sp_log.right.fq.gz
-
-$ mv tophat.Sp_log.dir/accepted_hits.bam tophat.Sp_log.dir/Sp_log.bam
-
-$ samtools index tophat.Sp_log.dir/Sp_log.bam
-
-$ cufflinks --overlap-radius 1 \
-             --library-type fr-firststrand \
-             -o cufflinks.Sp_log.dir tophat.Sp_log.dir/Sp_log.bam
-
-$ mv cufflinks.Sp_log.dir/transcripts.gtf cufflinks.Sp_log.dir/Sp_log.transcripts.gtf
-~~~ 
-
 Usaremos el programa [HTSeq](https://pypi.python.org/packages/source/H/HTSeq/).
 
 Este programa cuenta el número de lecturas que alinean con cada gen anotado en un archivo 
@@ -68,6 +57,15 @@ $ htseq-count -f bam -s no -r pos Sp_ds.bam Sp_genes.gtf > Sp_ds.counts &
 $ htseq-count -f bam -s no -r pos Sp_hs.bam Sp_genes.gtf > Sp_hs.counts &
 $ htseq-count -f bam -s no -r pos Sp_log.bam Sp_genes.gtf > Sp_log.counts &
 $ htseq-count -f bam -s no -r pos Sp_plat.bam Sp_genes.gtf > Sp_plat.counts &
+~~~
+
+Además contaremos las lecturas usando nuestro transcriptoma ensamblado con Cufflinks:
+
+~~~ {.bash}
+$ htseq-count -f bam -s no -r pos Sp_ds.bam cufflinks_assembly.gtf > Sp_ds_cufflinks.counts &
+$ htseq-count -f bam -s no -r pos Sp_hs.bam cufflinks_assembly.gtf > Sp_hs_cufflinks.counts & 
+$ htseq-count -f bam -s no -r pos Sp_log.bam cufflinks_assembly.gtf > Sp_log_cufflinks.counts &
+$ htseq-count -f bam -s no -r pos Sp_plat.bam cufflinks_assembly.gtf > Sp_plat_cufflinks.counts &
 ~~~
 
 > ## Contando librerías de manera independiente {.challenge}
@@ -103,6 +101,12 @@ SPAC11E3.14	407	152	55	396
 SPAC11H11.04	17	7	12	23
 SPAC1250.07	73	36	29	74
 SPAC12B10.14c	73	38	52	50
+~~~
+
+Haremos lo mismo para las cuentas en el transcriptoma de Cufflinks:
+
+~~~ {.bash}
+$ paste *cufflinks.counts | cut -f 1,2,4,6,8 | grep '__' -v > Sp_counts_cufflinks_table.txt
 ~~~
 
 ### Análisis de expresión diferencial
