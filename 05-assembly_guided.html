@@ -66,7 +66,8 @@ $ <span class="kw">cd</span> CUFFLINKS/</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cufflinks</span> --overlap-radius 1 \
              --library-type fr-firststrand \
              -o cufflinks.Sp_ds.dir tophat.Sp_ds.dir/Sp_ds.bam</code></pre></div>
-<p>Y una vez más lo renombraremos para poder identificar de que muestra vino: <sub>~</sub> {.bash} $ mv cufflinks.Sp_ds.dir/transcripts.gtf cufflinks.Sp_ds.dir/Sp_ds.transcripts.gtf <sub>~</sub></p>
+<p>Y una vez más lo renombraremos para poder identificar de que muestra vino:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">mv</span> cufflinks.Sp_ds.dir/transcripts.gtf cufflinks.Sp_ds.dir/Sp_ds.transcripts.gtf</code></pre></div>
 <p>Esto finaliza el análisis para esta muestra, ahora deberás hacer los mismo para las demás muestras, por ejemplo, para la muestra Sp_log:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">tophat2</span> -I 1000 -i 20 --library-type fr-firststrand \
            -o tophat.Sp_log.dir Sp_genome \

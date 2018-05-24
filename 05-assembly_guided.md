@@ -69,6 +69,7 @@ $ cufflinks --overlap-radius 1 \
 ~~~ 
 
 Y una vez más lo renombraremos para poder identificar de que muestra vino:
+
 ~~~ {.bash}
 $ mv cufflinks.Sp_ds.dir/transcripts.gtf cufflinks.Sp_ds.dir/Sp_ds.transcripts.gtf
 ~~~ 
