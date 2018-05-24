@@ -61,6 +61,7 @@ $ samtools index tophat.Sp_ds.dir/Sp_ds.bam
 ~~~ 
 
 Reconstruiremos los transcritos para esta muestra usando Cufflinks:
+
 ~~~ {.bash}
 $ cufflinks --overlap-radius 1 \
              --library-type fr-firststrand \
