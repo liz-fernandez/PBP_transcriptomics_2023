@@ -82,7 +82,7 @@ $ <span class="kw">htseq-count</span> -f bam -s no -r pos Sp_plat.bam Sp_genes.g
 </section>
 <p>Es importante verificar que el conteo de HTSeq engloba a la mayoría de las lecturas. Si estos porcentajes son muy bajos podrían indicar problemas con los parámetros de conteo (e.g. si le decimos que nuestra muestra no tiene direccionalidad (strandness) cuando si la tiene).</p>
 <p>Finalmente uniremos los resultados usando el siguiente comando:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">paste</span> <span class="ot">$(</span> <span class="kw">ls</span> *counts <span class="kw">|</span> <span class="kw">grep</span> cufflinks -v<span class="ot">)</span> <span class="kw">|</span> <span class="kw">cut</span> -f 1,2,4,6,8 <span class="kw">|</span> <span class="kw">grep</span> <span class="st">&#39;__&#39;</span> -v <span class="kw">&gt;</span> Sp_counts_table.txt
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">paste</span> *counts <span class="kw">|</span> <span class="kw">cut</span> -f 1,2,4,6,8 <span class="kw">|</span> <span class="kw">grep</span> <span class="st">&#39;__&#39;</span> -v <span class="kw">&gt;</span> Sp_counts_table.txt
 $ <span class="kw">head</span> Sp_Counts_Table.txt</code></pre></div>
 <p>Esto unió los distintos archivos en uno solo el cual ya podemos utilizar en R. Es importante verificar el orden de pegado de los archivos para no confundir una muestra con otra.</p>
 <pre class="output"><code>SPAC1002.19 24  45  3   239

@@ -79,7 +79,7 @@ cuando si la tiene).
 Finalmente uniremos los resultados usando el siguiente comando:
 
 ~~~ {.bash}
-$ paste $( ls *counts | grep cufflinks -v) | cut -f 1,2,4,6,8 | grep '__' -v > Sp_counts_table.txt
+$ paste *counts | cut -f 1,2,4,6,8 | grep '__' -v > Sp_counts_table.txt
 $ head Sp_Counts_Table.txt
 ~~~
 
