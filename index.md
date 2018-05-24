@@ -59,7 +59,7 @@ Esta mañana recibimos un correo de nuestro colaborador:
 	* [Práctica](04-expression.html)
 6. Ensamble de transcriptomas guiado.
 	* [Presentación](SLIDES/PBI_18_Clase_5.pdf)
-	* [Práctica](04-assembly_guided.html)
+	* [Práctica](05-assembly_guided.html)
 
 <!---
 7. Anotación
