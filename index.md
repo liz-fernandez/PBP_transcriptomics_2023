@@ -43,6 +43,10 @@ Esta mañana recibimos un correo de nuestro colaborador:
 ### Temas
 
 
+
+
+<!---
+
 1. Introducción a la transcriptómica y técnicas de secuenciación masiva. 
 	* [Presentación](SLIDES/PBI_18_Clase_1.pdf)
 2. Control de calidad de datos de secuenciación masiva.
@@ -60,13 +64,6 @@ Esta mañana recibimos un correo de nuestro colaborador:
 6. Ensamble de transcriptomas guiado.
 	* [Presentación](SLIDES/PBI_18_Clase_5.pdf)
 	* [Práctica](05-assembly_guided.html)
-
-<!---
-7. Anotación
-	* [Presentación](SLIDES/PBI_17_Clase_8.pdf)
-	* [Práctica](07-annotation.html)
-	
-	
 
 ![Diagrama de ensamble de transcriptomas](SLIDES/Transcriptomics_Workflow.png)
 
