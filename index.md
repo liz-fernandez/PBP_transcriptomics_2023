@@ -41,7 +41,7 @@ Esta mañana recibimos un correo de nuestro colaborador:
 
 
 ### Temas
-
+	* [Práctica](01-quality.html)
 
 
 
