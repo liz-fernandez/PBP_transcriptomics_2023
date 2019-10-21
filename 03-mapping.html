@@ -52,18 +52,10 @@
 </ul>
 </div>
 </section>
-<p>Usaremos los archivos fastq que utilizamos la clase pasada, pero filtrados por calidad por Trimmomatic via Trinity resultantes de su tarea. Estos se encuentran el en directorio <code>trinity_out_dir</code> con la extensión <code>*.qtrim.gz</code>.</p>
-<p>Con lecturas en pares, habrá casos en los que ambas lecturas sean filtradas (P), y casos en los que una lectura se conservó y la otra se desechó (U). Las lecturas filtradas se encuentran en los siguientes archivos (ejemplo):</p>
-<pre class="output"><code>reads.left.fq.gz.P.qtrim.gz     
-reads.left.fq.gz.U.qtrim.gz
-reads.right.fq.gz.P.qtrim.gz
-reads.right.fq.gz.U.qtrim.gz</code></pre>
+<p>Usaremos los archivos fastq que utilizamos la clase pasada.</p>
 <p>También usaremos el genoma de referencia de nuestro organismo, <em>Saccharomyces pombe</em>:</p>
 <pre class="output"><code>$ wget https://liz-fernandez.github.io/PBI_transcriptomics/datasets/genome/Sp_genome.fa</code></pre>
-<p>Como ya sabemos, es buena idea primero ver que los datos están en el formato correcto. Para este ejercicio solo utilizaremos las lecturas que conservaron sus pares después de ser filtradas:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">for</span> <span class="kw">i</span> in trinity_out_dir/*.P.qtrim.gz <span class="kw">;</span> <span class="kw">do</span> <span class="kw">zcat</span> <span class="ot">$i</span> <span class="kw">|</span> <span class="kw">head</span> <span class="kw">;</span> <span class="kw">done</span> 
-$ <span class="kw">ln</span> -s ./trinity_out_dir/*.P.qtrim.gz .</code></pre></div>
-<p>Una vez que verificamos que las lecturas están el formato correcto, vamos a alinear las lecturas y transcritos al genoma utilizando Bowtie2 via TopHat.</p>
+<p>Vamos a alinear las lecturas y transcritos al genoma utilizando Bowtie2 via TopHat.</p>
 <p>Pueden encontrar el manual en el siguiente <a href="https://ccb.jhu.edu/software/tophat/manual.shtml">link</a>.</p>
 <h2 id="mapeando-las-lecturas-filtradas-al-genoma">Mapeando las lecturas filtradas al genoma</h2>
 <p>Primero generaremos un índice de bowtie2 para el genoma:</p>
@@ -512,11 +504,10 @@ Sp_genome.3.bt2
 Sp_genome.4.bt2           
 Sp_genome.rev.1.bt2          
 Sp_genome.rev.2.bt2</code></pre>
-<p>Creamos hiperlinks para los archivos pareados en nuestro directorio local: <sub>~</sub> {.bash} $ ln -s ./trinity_out_dir/*P.qtrim.gz . <sub>~</sub></p>
 <p>Usamos tophat2 para mapear las lecturas. Este programa nos permite dividir lecturas que atraviesan sitios de splicing:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">tophat2</span> -I 300 -i 20 Sp_genome \
- Sp_log.left.fq.gz.P.qtrim.gz,Sp_hs.left.fq.gz.P.qtrim.gz,Sp_ds.left.fq.gz.P.qtrim.gz,Sp_plat.left.fq.gz.P.qtrim.gz \
- Sp_log.right.fq.gz.P.qtrim.gz,Sp_hs.right.fq.gz.P.qtrim.gz,Sp_ds.right.fq.gz.P.qtrim.gz,Sp_plat.right.fq.gz.P.qtrim.gz</code></pre></div>
+ Sp_log.left.fq.gz,Sp_hs.left.fq.gz,Sp_ds.left.fq.gz,Sp_plat.left.fq.gz \
+ Sp_log.right.fq.gz,Sp_hs.right.fq.gz,Sp_ds.right.fq.gz,Sp_plat.right.fq.gz</code></pre></div>
 <pre class="output"><code>[2017-01-24 13:53:23] Beginning TopHat run (v2.1.1)
 -----------------------------------------------
 [2017-01-24 13:53:23] Checking for Bowtie
@@ -633,9 +624,7 @@ $ <span class="kw">samtools</span> index tophat_out/accepted_hits.bam</code></pr
 <ul>
 <li><strong>Pista:</strong> No podrán utilizar el índice generado previamente.</li>
 </ul>
-<h3 id="solución">Solución</h3>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">bowtie2-build</span> Trinity.fasta Trinity_assembly_Sp
-$ <span class="kw">tophat2</span> -I 300 -i 20 Trinity_assembly_Sp Sp_ds.left.fq.gz.P.qtrim.gz,Sp_hs.left.fq.gz.P.qtrim.gz,Sp_log.left.fq.gz.P.qtrim.gz,Sp_plat.left.fq.gz.P.qtrim.gz Sp_ds.right.fq.gz.P.qtrim.gz,Sp_hs.right.fq.gz.P.qtrim.gz,Sp_log.right.fq.gz.P.qtrim.gz,Sp_plat.right.fq.gz.P.qtrim.gz</code></pre></div>
+<p><sub>~</sub></p>
 </div>
 </section>
         </div>

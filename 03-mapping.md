@@ -18,21 +18,7 @@ minutes: 5
 > *  Archivos fastq de lecturas filtradas por calidad usando Trimmomatic via Trinity
 > *  Archivo fasta de ensamble de transcriptoma completo
 
-Usaremos los archivos fastq que utilizamos la clase pasada, pero 
-filtrados por calidad por Trimmomatic via Trinity 
-resultantes de su tarea. Estos se encuentran el en directorio
-`trinity_out_dir` con la extensión `*.qtrim.gz`. 
-
-Con lecturas en pares, habrá casos en los que ambas lecturas sean filtradas (P), 
-y casos en los que una lectura se conservó y la otra se desechó (U). Las lecturas 
-filtradas se encuentran en los siguientes archivos (ejemplo):
-
-~~~ {.output}
-reads.left.fq.gz.P.qtrim.gz     
-reads.left.fq.gz.U.qtrim.gz
-reads.right.fq.gz.P.qtrim.gz
-reads.right.fq.gz.U.qtrim.gz
-~~~
+Usaremos los archivos fastq que utilizamos la clase pasada.
 
 También usaremos el genoma de referencia de nuestro organismo, 
 *Saccharomyces pombe*:
@@ -41,17 +27,7 @@ También usaremos el genoma de referencia de nuestro organismo,
 $ wget https://liz-fernandez.github.io/PBI_transcriptomics/datasets/genome/Sp_genome.fa
 ~~~
 
-Como ya sabemos, es buena idea primero ver que los datos están en el 
-formato correcto. Para este ejercicio solo utilizaremos las lecturas
-que conservaron sus pares después de ser filtradas:
-
-~~~ {.bash}
-$ for i in trinity_out_dir/*.P.qtrim.gz ; do zcat $i | head ; done 
-$ ln -s ./trinity_out_dir/*.P.qtrim.gz .
-~~~
-
-Una vez que verificamos que las lecturas están el formato correcto,
-vamos a alinear las lecturas y transcritos al genoma utilizando Bowtie2 via TopHat. 
+Vamos a alinear las lecturas y transcritos al genoma utilizando Bowtie2 via TopHat. 
 
 Pueden encontrar el manual en el siguiente [link](https://ccb.jhu.edu/software/tophat/manual.shtml).
 
@@ -516,18 +492,13 @@ Sp_genome.rev.1.bt2
 Sp_genome.rev.2.bt2
 ~~~
 
-Creamos hiperlinks para los archivos pareados en nuestro directorio local:
-~~~ {.bash}
-$ ln -s ./trinity_out_dir/*P.qtrim.gz .
-~~~
-
 Usamos tophat2 para mapear las lecturas. Este programa nos permite dividir lecturas
 que atraviesan sitios de splicing:
 
 ~~~ {.bash}
 $ tophat2 -I 300 -i 20 Sp_genome \
- Sp_log.left.fq.gz.P.qtrim.gz,Sp_hs.left.fq.gz.P.qtrim.gz,Sp_ds.left.fq.gz.P.qtrim.gz,Sp_plat.left.fq.gz.P.qtrim.gz \
- Sp_log.right.fq.gz.P.qtrim.gz,Sp_hs.right.fq.gz.P.qtrim.gz,Sp_ds.right.fq.gz.P.qtrim.gz,Sp_plat.right.fq.gz.P.qtrim.gz
+ Sp_log.left.fq.gz,Sp_hs.left.fq.gz,Sp_ds.left.fq.gz,Sp_plat.left.fq.gz \
+ Sp_log.right.fq.gz,Sp_hs.right.fq.gz,Sp_ds.right.fq.gz,Sp_plat.right.fq.gz
 ~~~ 
 
 ~~~ {.output}
@@ -694,11 +665,6 @@ para hacer más rápida la visualización usando un navegador.
 > 
 > * **Pista:** No podrán utilizar el índice generado previamente.
 >
-> ### Solución
->
-> ~~~ {.bash}
-> $ bowtie2-build Trinity.fasta Trinity_assembly_Sp
-> $ tophat2 -I 300 -i 20 Trinity_assembly_Sp Sp_ds.left.fq.gz.P.qtrim.gz,Sp_hs.left.fq.gz.P.qtrim.gz,Sp_log.left.fq.gz.P.qtrim.gz,Sp_plat.left.fq.gz.P.qtrim.gz Sp_ds.right.fq.gz.P.qtrim.gz,Sp_hs.right.fq.gz.P.qtrim.gz,Sp_log.right.fq.gz.P.qtrim.gz,Sp_plat.right.fq.gz.P.qtrim.gz
 > ~~~
 
 
