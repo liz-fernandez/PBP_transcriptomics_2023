@@ -51,11 +51,16 @@ Esta mañana recibimos un correo de nuestro colaborador:
 	* [Presentación](SLIDES/PBI_19_Clase_3.pdf)
 	* [Práctica](02-assembly_denovo.html)
 4. Alineamiento de lecturas y transcritos.
-	* [Presentación](SLIDES/PBI_18_Clase_4.pdf)
+	* [Presentación](SLIDES/PBI_19_Clase_4.pdf)
 	* [Práctica](03-mapping.html)
+5. Análisis de expresión diferencial.
+	* [Presentación](SLIDES/PBI_19_Clase_7.pdf)
+
+* [Proyecto final](final_project_2019.html)
 
 <!---
 
+	* [Práctica](04-expression.html)
 1. Introducción a la transcriptómica y técnicas de secuenciación masiva. 
 	* [Presentación](SLIDES/PBI_19_Clase_1.pdf)
 2. Control de calidad de datos de secuenciación masiva.
