@@ -26,7 +26,6 @@ análisis realizados incluyendo:
 * Análisis y filtros de calidad de lecturas
 * Ensamble *de novo*
 * Alineamiento de lecturas al transcriptoma
-* Visualización de transcritos en el genoma (opcional)
 * Análisis de expresión diferencial 
 
 La estructura es libre pero imaginen que estan enviando los resultados 
@@ -48,7 +47,7 @@ Pueden complementar su reporte con un repositorio organizado que incluya los
 resultados de los análisis. Esto es opcional pero si el repositorio no esta bien 
 organizado y descrito puede perjudicarles en vez de ayudarles. 
 
-La fecha de entrega es el mediodía del jueves 10 de noviembre. **No habrá prórrogas 
+La fecha de entrega es el mediodía del viernes 15 de noviembre. **No habrá prórrogas 
 para la entrega del reporte, incluso por razones técnicas.** Les sugiero lo envíen 
 por lo menos un día antes.  
 
