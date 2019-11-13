@@ -25,8 +25,9 @@ análisis realizados incluyendo:
 * Metodología (como fue secuenciado, que organismo es y si fue secuenciado en pares o no)
 * Análisis y filtros de calidad de lecturas
 * Ensamble *de novo*
-* Alineamiento de lecturas al transcriptoma
-* Análisis de expresión diferencial 
+* Estadísticas de ensamble *de novo*
+* Alineamiento de lecturas al **genoma**
+* Análisis de expresión diferencial usando el gtf provisto
 
 La estructura es libre pero imaginen que estan enviando los resultados 
 a uno de sus colaboradores. Piensen en que preguntas les interesarían:
