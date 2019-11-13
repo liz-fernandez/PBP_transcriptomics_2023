@@ -48,7 +48,7 @@ Pueden complementar su reporte con un repositorio organizado que incluya los
 resultados de los análisis. Esto es opcional pero si el repositorio no esta bien 
 organizado y descrito puede perjudicarles en vez de ayudarles. 
 
-La fecha de entrega es el mediodía del viernes 15 de noviembre. **No habrá prórrogas 
+La fecha de entrega es el mediodía del domingo 17 de noviembre. **No habrá prórrogas 
 para la entrega del reporte, incluso por razones técnicas.** Les sugiero lo envíen 
 por lo menos un día antes.  
 
