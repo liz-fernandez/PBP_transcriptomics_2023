@@ -27,9 +27,9 @@ También usaremos el genoma de referencia de nuestro organismo,
 $ wget https://liz-fernandez.github.io/PBI_transcriptomics/datasets/genome/Sp_genome.fa
 ~~~
 
-Vamos a alinear las lecturas y transcritos al genoma utilizando Bowtie2 via TopHat. 
+Vamos a alinear las lecturas y transcritos al genoma utilizando HISAT2 
 
-Pueden encontrar el manual en el siguiente [link](https://ccb.jhu.edu/software/tophat/manual.shtml).
+Pueden encontrar el manual en el siguiente [link](http://daehwankimlab.github.io/hisat2/manual/).
 
 ## Mapeando las lecturas filtradas al genoma
 

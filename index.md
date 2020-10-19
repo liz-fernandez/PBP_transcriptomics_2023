@@ -4,17 +4,11 @@ title: Análisis transcriptómicos
 ---
 
 Estamos realizando un estudio transcriptómico para entender la expresion de genes
-en la levadura (*Saccharomyces pombe*) cuando se expresa una 
-mutante de un proteína que cambia de especificidad.
+en un microorganismo. Hemos logrado aislar RNA en distintas condiciones. Queremos 
+realizar un análisis completo de la expresión diferencial de estos transcritos. 
 
-Hemos logrado aislar los transcritos del cromosoma I en dos condiciones: mutante y 
-wild type (WT).
-
-Queremos realizar un análisis completo de la expresión diferencial de estos transcritos. 
 Durante esta practica realizaremos el análisis desde identificar la calidad de las secuencias
 hasta medir si los cambios en expresión son significativos usando métodos estadísticos.
-
-Diagrama de flujo de trabajo para análisis de datos de secuenciación masiva
 
 Esta mañana recibimos un correo de nuestro colaborador:
 
@@ -27,7 +21,7 @@ Esta mañana recibimos un correo de nuestro colaborador:
 >
 >[https://drive.google.com/open?id=0B9ZVSRlHL8cIbm5EUXczdzM4a2M](https://drive.google.com/open?id=0B9ZVSRlHL8cIbm5EUXczdzM4a2M)
 >
->Can’t wait to see if there are indeed major changes to the transcriptome in the mutant! 
+>Can’t wait to see if there are indeed major changes to the transcriptome! 
 >
 >Happy data wranggling!
 >
@@ -43,45 +37,35 @@ Esta mañana recibimos un correo de nuestro colaborador:
 ### Temas
 
 1. Introducción a la transcriptómica y técnicas de secuenciación masiva. 
-	* [Presentación](SLIDES/PBI_19_Clase_1.pdf)
-2. Control de calidad de datos de secuenciación masiva.
-	* [Presentación](SLIDES/PBI_19_Clase_2.pdf)
-	* [Práctica](01-quality.html)
-3. Ensamble de transcriptomas *de novo*.
-	* [Presentación](SLIDES/PBI_19_Clase_3.pdf)
-	* [Práctica](02-assembly_denovo.html)
-4. Alineamiento de lecturas y transcritos.
-	* [Presentación](SLIDES/PBI_19_Clase_4.pdf)
-	* [Práctica](03-mapping.html)
-5. Análisis de expresión diferencial.
-	* [Presentación](SLIDES/PBI_19_Clase_7.pdf)
-
-* [Proyecto final](final_project_2019.html)
+	* [Video - Clase 1](https://www.dropbox.com/s/hljqrft9iycyim7/clase_1_transcriptomica_bi_2020.mp4?dl=0)
 
 <!---
 
-	* [Práctica](04-expression.html)
 1. Introducción a la transcriptómica y técnicas de secuenciación masiva. 
 	* [Presentación](SLIDES/PBI_19_Clase_1.pdf)
 2. Control de calidad de datos de secuenciación masiva.
-	* [Presentación](SLIDES/PBI_19_Clase_2.pdf)
+	* [Video - Clase 2](https://www.dropbox.com/s/26domcnmutxlcfy/Clase_2_Transcriptomica_BI_2020.mp4?dl=0)
 	* [Práctica](01-quality.html)
 3. Ensamble de transcriptomas *de novo*.
-	* [Presentación](SLIDES/PBI_19_Clase_3.pdf)
-	* [Práctica](02-assembly_denovo.html)
+	* [Presentación](/PBI_19_Clase_3.pdf)
+	* [Práctica](02_assembly_denovo.html)
 4. Alineamiento de lecturas y transcritos.
-	* [Presentación](SLIDES/PBI_18_Clase_4.pdf)
-	* [Práctica](03-mapping.html)
+	* [Presentación](/PBI_18_Clase_4.pdf)
+	* [Práctica](03_mapping.html)
 5. Análisis de expresión diferencial.
-	* [Presentación](SLIDES/PBI_18_Clase_7.pdf)
-	* [Práctica](04-expression.html)
+	* [Presentación](/PBI_18_Clase_7.pdf)
+	* [Práctica](04_expression.html)
 6. Ensamble de transcriptomas guiado.
 	* [Presentación](SLIDES/PBI_18_Clase_5.pdf)
-	* [Práctica](05-assembly_guided.html)
+	* [Práctica](05_assembly_guided.html)
 
 ![Diagrama de ensamble de transcriptomas](SLIDES/Transcriptomics_Workflow.png)
 
 Prácticas basadas en el curso [Trinity RNA-Seq Analysis Workshop](https://github.com/trinityrnaseq/RNASeq_Trinity_Tuxedo_Workshop/wiki).
+
+	
+	
+* [Proyecto final](X.html)
 
 
 --->

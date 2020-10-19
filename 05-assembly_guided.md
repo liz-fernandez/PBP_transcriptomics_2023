@@ -7,7 +7,7 @@ minutes: 5
 > ## Objetivos de aprendizaje {.objectives}
 >
 > *  Aprender como funciona el ensamble guiado.
-> *  Aprender a usar Cufflinks para ensamblar datos de novo.
+> *  Aprender a usar Stringtie para ensamblar datos de novo.
 
 Usaremos las mismas lecturas que ya descargamos en la lección de [ensamble de novo](02-assembly_denovo.html). 
 

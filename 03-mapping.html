@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="generator" content="pandoc">
-    <title>TIB2017: Análisis transcriptómicos</title>
+    <title>BI-Transcriptomics: Análisis transcriptómicos</title>
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css" />
@@ -55,8 +55,8 @@
 <p>Usaremos los archivos fastq que utilizamos la clase pasada.</p>
 <p>También usaremos el genoma de referencia de nuestro organismo, <em>Saccharomyces pombe</em>:</p>
 <pre class="output"><code>$ wget https://liz-fernandez.github.io/PBI_transcriptomics/datasets/genome/Sp_genome.fa</code></pre>
-<p>Vamos a alinear las lecturas y transcritos al genoma utilizando Bowtie2 via TopHat.</p>
-<p>Pueden encontrar el manual en el siguiente <a href="https://ccb.jhu.edu/software/tophat/manual.shtml">link</a>.</p>
+<p>Vamos a alinear las lecturas y transcritos al genoma utilizando HISAT2</p>
+<p>Pueden encontrar el manual en el siguiente <a href="http://daehwankimlab.github.io/hisat2/manual/">link</a>.</p>
 <h2 id="mapeando-las-lecturas-filtradas-al-genoma">Mapeando las lecturas filtradas al genoma</h2>
 <p>Primero generaremos un índice de bowtie2 para el genoma:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">bowtie2-build</span> Sp_genome.fa Sp_genome </code></pre></div>
