@@ -404,6 +404,14 @@ Analysis complete for Trimmed_Partial_SRR2467141.fastq</code></pre>
 </div>
 </section>
 <p>Existen otras herramientas como <code>fastx-toolkit</code>,<code>scythe</code> y <code>sickle</code> que realizan procesos similares. Estás herramientas están en su versión de Biolinux si las quieren comparar.</p>
+<h2 id="guardando-la-imagen-modificada">Guardando la imagen modificada</h2>
+<p>Nos podemos salir de docker o hacer esto antes, en otra terminal usamos el siguiente comando para ver que contenedores se están ejecutando:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">docker</span> ps -a</code></pre></div>
+<pre class="output"><code>CONTAINER ID        IMAGE                              COMMAND                  CREATED              STATUS                       PORTS               NAMES
+77b7aa677672        lizfernandez/pbi_transcriptomics      &quot;/bin/bash&quot;              About a minute ago   Exited (0) 53 seconds ago                        happy_raman</code></pre>
+<p>El más reciente es el que están utilizando, el CONTAINER ID debe ser el mismo que ven en su prompt del lado izquierdo.</p>
+<p>Usamos este identificador para guardar nuestro trabajo:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">docker</span> commit 77b7aa677672 lizfernandez/pbi_transcriptomics:practicas</code></pre></div>
 <section class="challenge panel panel-success">
 <div class="panel-heading">
 <h2 id="tarea---análisis-de-calidad"><span class="glyphicon glyphicon-pencil"></span>Tarea - Análisis de calidad</h2>

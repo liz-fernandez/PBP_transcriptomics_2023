@@ -597,6 +597,27 @@ Abrimos el resultado html [Trimmed_Partial_SRR2467141_fastqc.html](http://liz-fe
 Existen otras herramientas como `fastx-toolkit`,`scythe` y `sickle` que realizan procesos similares.
 Estás herramientas están en su versión de Biolinux si las quieren comparar.
 
+## Guardando la imagen modificada
+
+Nos podemos salir de docker o hacer esto antes, en otra terminal usamos el siguiente comando para ver que contenedores se están ejecutando:
+
+~~~ {.bash}
+$ docker ps -a
+~~~
+
+~~~ {.output}
+CONTAINER ID        IMAGE                              COMMAND                  CREATED              STATUS                       PORTS               NAMES
+77b7aa677672        lizfernandez/pbi_transcriptomics      "/bin/bash"              About a minute ago   Exited (0) 53 seconds ago                        happy_raman
+~~~
+
+El más reciente es el que están utilizando, el CONTAINER ID debe ser el mismo que ven en su prompt del lado izquierdo.
+
+Usamos este identificador para guardar nuestro trabajo:
+
+~~~ {.bash}
+$ docker commit 77b7aa677672 lizfernandez/pbi_transcriptomics:practicas
+~~~
+
 > ## Tarea - Análisis de calidad {.challenge}
 >
 > Realiza los análisis de calidad para todas las muestras, así como el trimming. Realiza los análisis de FastQC correspondientes. Si tienes tiempo, intenta utilizar [MultiQC](https://multiqc.info/) para visualizar tus resultados, ya está instalado en la imagen.
