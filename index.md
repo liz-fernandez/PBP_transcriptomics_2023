@@ -38,7 +38,10 @@ Esta mañana recibimos un correo de nuestro colaborador:
 
 1. Introducción a la transcriptómica y técnicas de secuenciación masiva. 
 	* [Video - Clase 1](https://www.dropbox.com/s/hljqrft9iycyim7/clase_1_transcriptomica_bi_2020.mp4?dl=0)
-
+2. Control de calidad de datos de secuenciación masiva.
+	* [Video - Clase 2](https://www.dropbox.com/s/26domcnmutxlcfy/Clase_2_Transcriptomica_BI_2020.mp4?dl=0)
+	* [Práctica](01-quality.html)
+	
 <!---
 
 1. Introducción a la transcriptómica y técnicas de secuenciación masiva. 
