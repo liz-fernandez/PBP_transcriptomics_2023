@@ -17,7 +17,7 @@ mkdir FASTQ_Complete
 cd FASTQ_Complete
 ~~~ 
 
-Y descargaremos los siguientes archivos fastq usando wget:
+Y descargaremos los siguientes archivos fastq usando wget (ya están en el directorio '/usr/local/data'):
 
 ~~~ {.bash}
 $ wget https://liz-fernandez.github.io/PBI_transcriptomics/datasets/Sp_ds.left.fq.gz 
@@ -108,22 +108,26 @@ $ Trinity
 ~~~ {.output}
 ###############################################################################
 #
-#     ______  ____   ____  ____   ____  ______  __ __
-#    |      ||    \ |    ||    \ |    ||      ||  |  |
-#    |      ||  D  ) |  | |  _  | |  | |      ||  |  |
-#    |_|  |_||    /  |  | |  |  | |  | |_|  |_||  ~  |
-#      |  |  |    \  |  | |  |  | |  |   |  |  |___, |
-#      |  |  |  .  \ |  | |  |  | |  |   |  |  |     |
-#      |__|  |__|\_||____||__|__||____|  |__|  |____/
+
+     ______  ____   ____  ____   ____  ______  __ __
+    |      ||    \ |    ||    \ |    ||      ||  |  |
+    |      ||  D  ) |  | |  _  | |  | |      ||  |  |
+    |_|  |_||    /  |  | |  |  | |  | |_|  |_||  ~  |
+      |  |  |    \  |  | |  |  | |  |   |  |  |___, |
+      |  |  |  .  \ |  | |  |  | |  |   |  |  |     |
+      |__|  |__|\_||____||__|__||____|  |__|  |____/
+
+    Trinity-v2.11.0
+
+
 #
-###############################################################################
 #
 # Required:
 #
 #  --seqType <string>      :type of reads: ('fa' or 'fq')
 #
 #  --max_memory <string>      :suggested max memory to use by Trinity where limiting can be enabled. (jellyfish, sorting, etc)
-#                            provied in Gb of RAM, ie.  '--max_memory 10G'
+#                            provided in Gb of RAM, ie.  '--max_memory 10G'
 #
 #  If paired reads:
 #      --left  <string>    :left reads, one or more file names (separated by commas, no spaces)
@@ -144,6 +148,8 @@ $ Trinity
 #
 ####################################
 ##  Misc:  #########################
+#
+#  --include_supertranscripts      :yield supertranscripts fasta and gtf files as outputs.
 #
 #  --SS_lib_type <string>          :Strand-specific RNA-Seq read orientation.
 #                                   if paired: RF or FR,
@@ -172,17 +178,9 @@ $ Trinity
 #  --trimmomatic                   :run Trimmomatic to quality trim reads
 #                                        see '--quality_trimming_params' under full usage info for tailored settings.
 #
-#
-#  --no_normalize_reads            :Do *not* run in silico normalization of reads. Defaults to max. read coverage of 50.
-#                                       see '--normalize_max_read_cov' under full usage info for tailored settings.
-#                                       (note, as of Sept 21, 2016, normalization is on by default)
-#
-#  --no_distributed_trinity_exec   :do not run Trinity phase 2 (assembly of partitioned reads), and stop after generating command list.
-#
-#
 #  --output <string>               :name of directory for output (will be
 #                                   created if it doesn't already exist)
-#                                   default( your current working directory: "/home/sfernandez/CLASS_TEST/FASTQ_Complete/trinity_out_dir/trinity_out_dir"
+#                                   default( your current working directory: "/usr/local/TESTING/trinity_out_dir"
 #                                    note: must include 'trinity' in the name as a safety precaution! )
 #
 #  --full_cleanup                  :only retain the Trinity fasta file, rename as ${output_dir}.Trinity.fasta
@@ -191,7 +189,7 @@ $ Trinity
 #
 #  --verbose                       :provide additional job status info during the run.
 #
-#  --version                       :reports Trinity version (Trinity-v2.3.2) and exits.
+#  --version                       :reports Trinity version (Trinity-v2.11.0) and exits.
 #
 #  --show_full_usage_info          :show the many many more options available for running Trinity (expert usage).
 #
@@ -202,13 +200,14 @@ $ Trinity
 #
 #        Trinity --seqType fq --max_memory 50G --left reads_1.fq  --right reads_2.fq --CPU 6
 #
+#            (if you have multiple samples, use --samples_file ... see above for details)
 #
-#    and for Genome-guided Trinity:
+#    and for Genome-guided Trinity, provide a coordinate-sorted bam:
 #
 #        Trinity --genome_guided_bam rnaseq_alignments.csorted.bam --max_memory 50G
 #                --genome_guided_max_intron 10000 --CPU 6
 #
-#     see: /usr/local/bioconda/opt/trinity-2.3.2/sample_data/test_Trinity_Assembly/
+#     see: /usr/local/bin/trinityrnaseq/sample_data/test_Trinity_Assembly/
 #          for sample data and 'runMe.sh' for example Trinity execution
 #
 #     For more details, visit: http://trinityrnaseq.github.io
@@ -244,7 +243,7 @@ Podemos capturar algunas estadística acerca de este ensamble
 usando un programa que es parte de Trinity:
 
 ~~~ {.bash}
-$ TrinityStats.pl trinity_out_dir/Trinity.fasta 
+$ /usr/local/bin/trinityrnaseq/util/TrinityStats.pl trinity_out_dir/Trinity.fasta 
 ~~~
 
 El cuál generará los siguientes datos: 
@@ -253,38 +252,38 @@ El cuál generará los siguientes datos:
 ################################
 ## Counts of transcripts, etc.
 ################################
-Total trinity 'genes':	381
-Total trinity transcripts:	387
-Percent GC: 39.44
+Total trinity 'genes':	335
+Total trinity transcripts:	346
+Percent GC: 39.18
 
 ########################################
 Stats based on ALL transcript contigs:
 ########################################
 
-	Contig N10: 2532
-	Contig N20: 1917
-	Contig N30: 1594
-	Contig N40: 1384
-	Contig N50: 1132
+	Contig N10: 2581
+	Contig N20: 2374
+	Contig N30: 1845
+	Contig N40: 1495
+	Contig N50: 1222
 
-	Median contig length: 429
-	Average contig: 710.80
-	Total assembled bases: 275079
+	Median contig length: 506.5
+	Average contig: 805.18
+	Total assembled bases: 278592
 
 
 #####################################################
 ## Stats based on ONLY LONGEST ISOFORM per 'GENE':
 #####################################################
 
-	Contig N10: 2576
-	Contig N20: 1917
-	Contig N30: 1593
-	Contig N40: 1377
-	Contig N50: 1132
+	Contig N10: 2581
+	Contig N20: 2313
+	Contig N30: 1768
+	Contig N40: 1423
+	Contig N50: 1160
 
-	Median contig length: 428
-	Average contig: 704.94
-	Total assembled bases: 268583
+	Median contig length: 501
+	Average contig: 782.75
+	Total assembled bases: 262222
 ~~~
 
 Este resumen nos indica: 
@@ -311,6 +310,12 @@ para identificar de que organismo provienen. Navegen hacia:
 > Dado que tenemos datos nucleotídicos pero queremos buscar en las
 > bases de datos de proteínas de NCBI.
 > ¿Qué tipo de blast debemos utilizar?
+
+¡No olvides guardar tu trabajo! (reemplaza el ID del contenedor):
+
+~~~ {.bash}
+$ docker commit 77b7aa677672 lizfernandez/pbi_transcriptomics:practicas
+~~~
 
 > ## Tarea - Ensambla después de filtrar por secuencias {.challenge}
 >

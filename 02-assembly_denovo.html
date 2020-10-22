@@ -43,7 +43,7 @@
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cd</span> 
 <span class="kw">mkdir</span> FASTQ_Complete
 <span class="kw">cd</span> FASTQ_Complete</code></pre></div>
-<p>Y descargaremos los siguientes archivos fastq usando wget:</p>
+<p>Y descargaremos los siguientes archivos fastq usando wget (ya están en el directorio ‘/usr/local/data’):</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">wget</span> https://liz-fernandez.github.io/PBI_transcriptomics/datasets/Sp_ds.left.fq.gz 
 $ <span class="kw">wget</span> https://liz-fernandez.github.io/PBI_transcriptomics/datasets/Sp_ds.right.fq.gz
 $ <span class="kw">wget</span> https://liz-fernandez.github.io/PBI_transcriptomics/datasets/Sp_hs.right.fq.gz 
@@ -98,22 +98,26 @@ $ <span class="kw">wget</span> https://liz-fernandez.github.io/PBI_transcriptomi
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">Trinity</span> </code></pre></div>
 <pre class="output"><code>###############################################################################
 #
-#     ______  ____   ____  ____   ____  ______  __ __
-#    |      ||    \ |    ||    \ |    ||      ||  |  |
-#    |      ||  D  ) |  | |  _  | |  | |      ||  |  |
-#    |_|  |_||    /  |  | |  |  | |  | |_|  |_||  ~  |
-#      |  |  |    \  |  | |  |  | |  |   |  |  |___, |
-#      |  |  |  .  \ |  | |  |  | |  |   |  |  |     |
-#      |__|  |__|\_||____||__|__||____|  |__|  |____/
+
+     ______  ____   ____  ____   ____  ______  __ __
+    |      ||    \ |    ||    \ |    ||      ||  |  |
+    |      ||  D  ) |  | |  _  | |  | |      ||  |  |
+    |_|  |_||    /  |  | |  |  | |  | |_|  |_||  ~  |
+      |  |  |    \  |  | |  |  | |  |   |  |  |___, |
+      |  |  |  .  \ |  | |  |  | |  |   |  |  |     |
+      |__|  |__|\_||____||__|__||____|  |__|  |____/
+
+    Trinity-v2.11.0
+
+
 #
-###############################################################################
 #
 # Required:
 #
 #  --seqType &lt;string&gt;      :type of reads: (&#39;fa&#39; or &#39;fq&#39;)
 #
 #  --max_memory &lt;string&gt;      :suggested max memory to use by Trinity where limiting can be enabled. (jellyfish, sorting, etc)
-#                            provied in Gb of RAM, ie.  &#39;--max_memory 10G&#39;
+#                            provided in Gb of RAM, ie.  &#39;--max_memory 10G&#39;
 #
 #  If paired reads:
 #      --left  &lt;string&gt;    :left reads, one or more file names (separated by commas, no spaces)
@@ -134,6 +138,8 @@ $ <span class="kw">wget</span> https://liz-fernandez.github.io/PBI_transcriptomi
 #
 ####################################
 ##  Misc:  #########################
+#
+#  --include_supertranscripts      :yield supertranscripts fasta and gtf files as outputs.
 #
 #  --SS_lib_type &lt;string&gt;          :Strand-specific RNA-Seq read orientation.
 #                                   if paired: RF or FR,
@@ -162,17 +168,9 @@ $ <span class="kw">wget</span> https://liz-fernandez.github.io/PBI_transcriptomi
 #  --trimmomatic                   :run Trimmomatic to quality trim reads
 #                                        see &#39;--quality_trimming_params&#39; under full usage info for tailored settings.
 #
-#
-#  --no_normalize_reads            :Do *not* run in silico normalization of reads. Defaults to max. read coverage of 50.
-#                                       see &#39;--normalize_max_read_cov&#39; under full usage info for tailored settings.
-#                                       (note, as of Sept 21, 2016, normalization is on by default)
-#
-#  --no_distributed_trinity_exec   :do not run Trinity phase 2 (assembly of partitioned reads), and stop after generating command list.
-#
-#
 #  --output &lt;string&gt;               :name of directory for output (will be
 #                                   created if it doesn&#39;t already exist)
-#                                   default( your current working directory: &quot;/home/sfernandez/CLASS_TEST/FASTQ_Complete/trinity_out_dir/trinity_out_dir&quot;
+#                                   default( your current working directory: &quot;/usr/local/TESTING/trinity_out_dir&quot;
 #                                    note: must include &#39;trinity&#39; in the name as a safety precaution! )
 #
 #  --full_cleanup                  :only retain the Trinity fasta file, rename as ${output_dir}.Trinity.fasta
@@ -181,7 +179,7 @@ $ <span class="kw">wget</span> https://liz-fernandez.github.io/PBI_transcriptomi
 #
 #  --verbose                       :provide additional job status info during the run.
 #
-#  --version                       :reports Trinity version (Trinity-v2.3.2) and exits.
+#  --version                       :reports Trinity version (Trinity-v2.11.0) and exits.
 #
 #  --show_full_usage_info          :show the many many more options available for running Trinity (expert usage).
 #
@@ -192,13 +190,14 @@ $ <span class="kw">wget</span> https://liz-fernandez.github.io/PBI_transcriptomi
 #
 #        Trinity --seqType fq --max_memory 50G --left reads_1.fq  --right reads_2.fq --CPU 6
 #
+#            (if you have multiple samples, use --samples_file ... see above for details)
 #
-#    and for Genome-guided Trinity:
+#    and for Genome-guided Trinity, provide a coordinate-sorted bam:
 #
 #        Trinity --genome_guided_bam rnaseq_alignments.csorted.bam --max_memory 50G
 #                --genome_guided_max_intron 10000 --CPU 6
 #
-#     see: /usr/local/bioconda/opt/trinity-2.3.2/sample_data/test_Trinity_Assembly/
+#     see: /usr/local/bin/trinityrnaseq/sample_data/test_Trinity_Assembly/
 #          for sample data and &#39;runMe.sh&#39; for example Trinity execution
 #
 #     For more details, visit: http://trinityrnaseq.github.io
@@ -219,43 +218,43 @@ GGCGAGCTGTACCGAGTTTTCCTGTTTGGCGTGGAAACACGTATGAGAAGTTTCGTGAAG
 GATTGTATTTTTTTATAGAAGCTTTACTGCATGATAGTCACTTTGCAACTAATGTTGATG</code></pre>
 <h2 id="analizando-las-estadísticas-del-transcriptoma-ensamblado">Analizando las estadísticas del transcriptoma ensamblado</h2>
 <p>Podemos capturar algunas estadística acerca de este ensamble usando un programa que es parte de Trinity:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">TrinityStats.pl</span> trinity_out_dir/Trinity.fasta </code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">/usr/local/bin/trinityrnaseq/util/TrinityStats.pl</span> trinity_out_dir/Trinity.fasta </code></pre></div>
 <p>El cuál generará los siguientes datos:</p>
 <pre class="output"><code>################################
 ## Counts of transcripts, etc.
 ################################
-Total trinity &#39;genes&#39;:  381
-Total trinity transcripts:  387
-Percent GC: 39.44
+Total trinity &#39;genes&#39;:  335
+Total trinity transcripts:  346
+Percent GC: 39.18
 
 ########################################
 Stats based on ALL transcript contigs:
 ########################################
 
-    Contig N10: 2532
-    Contig N20: 1917
-    Contig N30: 1594
-    Contig N40: 1384
-    Contig N50: 1132
+    Contig N10: 2581
+    Contig N20: 2374
+    Contig N30: 1845
+    Contig N40: 1495
+    Contig N50: 1222
 
-    Median contig length: 429
-    Average contig: 710.80
-    Total assembled bases: 275079
+    Median contig length: 506.5
+    Average contig: 805.18
+    Total assembled bases: 278592
 
 
 #####################################################
 ## Stats based on ONLY LONGEST ISOFORM per &#39;GENE&#39;:
 #####################################################
 
-    Contig N10: 2576
-    Contig N20: 1917
-    Contig N30: 1593
-    Contig N40: 1377
-    Contig N50: 1132
+    Contig N10: 2581
+    Contig N20: 2313
+    Contig N30: 1768
+    Contig N40: 1423
+    Contig N50: 1160
 
-    Median contig length: 428
-    Average contig: 704.94
-    Total assembled bases: 268583</code></pre>
+    Median contig length: 501
+    Average contig: 782.75
+    Total assembled bases: 262222</code></pre>
 <p>Este resumen nos indica:</p>
 <ul>
 <li>Cuantos genes y transcritos fueron ensamblados</li>
@@ -275,6 +274,8 @@ Stats based on ALL transcript contigs:
 <p>Dado que tenemos datos nucleotídicos pero queremos buscar en las bases de datos de proteínas de NCBI. ¿Qué tipo de blast debemos utilizar?</p>
 </div>
 </section>
+<p>¡No olvides guardar tu trabajo! (reemplaza el ID del contenedor):</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">docker</span> commit 77b7aa677672 lizfernandez/pbi_transcriptomics:practicas</code></pre></div>
 <section class="challenge panel panel-success">
 <div class="panel-heading">
 <h2 id="tarea---ensambla-después-de-filtrar-por-secuencias"><span class="glyphicon glyphicon-pencil"></span>Tarea - Ensambla después de filtrar por secuencias</h2>
