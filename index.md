@@ -43,7 +43,7 @@ Esta mañana recibimos un correo de nuestro colaborador:
 	* [Práctica](01-quality.html)
 3. Ensamble de transcriptomas *de novo*.
 	* [Video - Clase 3](https://www.dropbox.com/s/2ifbv3sde92tswj/clase_3_transcriptomica_bi_2020.mp4?dl=0f)
-	* [Práctica](02_assembly_denovo.html)	
+	* [Práctica](02-assembly_denovo.html)	
 	
 <!---
 1. Introducción a la transcriptómica y técnicas de secuenciación masiva. 
