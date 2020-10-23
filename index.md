@@ -41,9 +41,11 @@ Esta mañana recibimos un correo de nuestro colaborador:
 2. Control de calidad de datos de secuenciación masiva.
 	* [Video - Clase 2](https://www.dropbox.com/s/26domcnmutxlcfy/Clase_2_Transcriptomica_BI_2020.mp4?dl=0)
 	* [Práctica](01-quality.html)
+3. Ensamble de transcriptomas *de novo*.
+	* [Video - Clase 3](https://www.dropbox.com/s/2ifbv3sde92tswj/clase_3_transcriptomica_bi_2020.mp4?dl=0f)
+	* [Práctica](02_assembly_denovo.html)	
 	
 <!---
-
 1. Introducción a la transcriptómica y técnicas de secuenciación masiva. 
 	* [Presentación](SLIDES/PBI_19_Clase_1.pdf)
 2. Control de calidad de datos de secuenciación masiva.
