@@ -44,6 +44,9 @@ Esta mañana recibimos un correo de nuestro colaborador:
 3. Ensamble de transcriptomas *de novo*.
 	* [Video - Clase 3](https://www.dropbox.com/s/2ifbv3sde92tswj/clase_3_transcriptomica_bi_2020.mp4?dl=0f)
 	* [Práctica](02-assembly_denovo.html)	
+4. Alineamiento de lecturas a genomas y transcriptomas.
+	* [Video - Clase 4](https://www.dropbox.com/s/j3gilmjw1ldq650/clase_4_transcriptomica_bi_2020.mp4?dl=0)
+	* [Práctica](03-mapping.html)
 	
 <!---
 1. Introducción a la transcriptómica y técnicas de secuenciación masiva. 
@@ -54,15 +57,16 @@ Esta mañana recibimos un correo de nuestro colaborador:
 3. Ensamble de transcriptomas *de novo*.
 	* [Presentación](/PBI_19_Clase_3.pdf)
 	* [Práctica](02_assembly_denovo.html)
-4. Alineamiento de lecturas y transcritos.
-	* [Presentación](/PBI_18_Clase_4.pdf)
-	* [Práctica](03_mapping.html)
-5. Análisis de expresión diferencial.
-	* [Presentación](/PBI_18_Clase_7.pdf)
-	* [Práctica](04_expression.html)
+4. Alineamiento de lecturas a genomas y transcriptomas.
+	* [Video - Clase 4](https://www.dropbox.com/s/j3gilmjw1ldq650/clase_4_transcriptomica_bi_2020.mp4?dl=0)
+	* [Práctica](03-mapping.html)
 6. Ensamble de transcriptomas guiado.
 	* [Presentación](SLIDES/PBI_18_Clase_5.pdf)
 	* [Práctica](05_assembly_guided.html)
+5. Análisis de expresión diferencial.
+	* [Presentación](/PBI_18_Clase_7.pdf)
+	* [Práctica](04_expression.html)
+
 
 ![Diagrama de ensamble de transcriptomas](SLIDES/Transcriptomics_Workflow.png)
 

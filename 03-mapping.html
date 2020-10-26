@@ -55,22 +55,34 @@
 <p>Usaremos los archivos fastq que utilizamos la clase pasada.</p>
 <p>También usaremos el genoma de referencia de nuestro organismo, <em>Saccharomyces pombe</em>:</p>
 <pre class="output"><code>$ wget https://liz-fernandez.github.io/PBI_transcriptomics/datasets/genome/Sp_genome.fa</code></pre>
+<p>Los datos ya se encuentran en su directorio de datos en Docker.</p>
 <p>Vamos a alinear las lecturas y transcritos al genoma utilizando HISAT2</p>
 <p>Pueden encontrar el manual en el siguiente <a href="http://daehwankimlab.github.io/hisat2/manual/">link</a>.</p>
-<h2 id="mapeando-las-lecturas-filtradas-al-genoma">Mapeando las lecturas filtradas al genoma</h2>
-<p>Primero generaremos un índice de bowtie2 para el genoma:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">bowtie2-build</span> Sp_genome.fa Sp_genome </code></pre></div>
+<p>Creemos un directorio para guardar nuestros análisis:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cd</span> /usr/local/
+$ <span class="kw">mkdir</span> ANALYSIS
+$ <span class="kw">cd</span> ANALYSIS
+$ <span class="kw">mkdir</span> MAPPING
+$ <span class="kw">cd</span> MAPPING</code></pre></div>
+<p>Copiemos los archivos de las lecturas y el genoma:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cp</span> /usr/local/data/Sp*fq.gz .
+$ <span class="kw">cp</span> /usr/local/data/Sp_genome.fa.gz .</code></pre></div>
+<p>Y descomprimimos el genoma:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">gunzip</span> Sp_genome.fa.gz</code></pre></div>
+<h2 id="alineando-las-lecturas-filtradas-al-genoma">Alineando las lecturas filtradas al genoma</h2>
+<p>Primero generaremos un índice de hisat2 para el genoma:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">hisat2-build</span> Sp_genome.fa Sp_genome </code></pre></div>
 <pre class="output"><code>Settings:
-  Output files: &quot;Sp_genome.*.bt2&quot;
+  Output files: &quot;Sp_genome.*.ht2&quot;
   Line rate: 6 (line is 64 bytes)
   Lines per side: 1 (side is 64 bytes)
   Offset rate: 4 (one in 16)
   FTable chars: 10
   Strings: unpacked
-  Max bucket size: default
-  Max bucket size, sqrt multiplier: default
-  Max bucket size, len divisor: 4
-  Difference-cover sample period: 1024
+  Local offset rate: 3 (one in 8)
+  Local fTable chars: 6
+  Local sequence length: 57344
+  Local sequence overlap between two consecutive indexes: 1024
   Endianness: little
   Actual local endianness: little
   Sanity checking: disabled
@@ -79,7 +91,6 @@
   Sizeofs: void*:8, int:4, long:8, size_t:8
 Input files DNA, FASTA:
   Sp_genome.fa
-Building a SMALL index
 Reading reference sizes
   Time reading reference sizes: 00:00:00
 Calculating joined length
@@ -87,7 +98,7 @@ Writing header
 Reserving space for joined string
 Joining reference sequences
   Time to join reference sequences: 00:00:00
-bmax according to bmaxDivN setting: 107781
+  Time to read SNPs and splice sites: 00:00:00
 Using parameters --bmax 80836 --dcv 1024
   Doing ahead-of-time memory usage test
   Passed!  Constructing with these parameters: --bmax 80836 --dcv 1024
@@ -123,7 +134,7 @@ Splitting and merging
 Avg bucket size: 71853.5 (target: 80835)
 Converting suffix-array elements to index image
 Allocating ftab, absorbFtab
-Entering Ebwt loop
+Entering GFM loop
 Getting block 1 of 6
   Reserving size (80836) for bucket 1
   Calculating Z arrays for bucket 1
@@ -232,316 +243,79 @@ Getting block 6 of 6
   (Using difference cover)
   Sorting block time: 00:00:00
 Returning block of 53695 for bucket 6
-Exited Ebwt loop
+Exited GFM loop
 fchr[A]: 0
 fchr[C]: 135086
 fchr[G]: 215577
 fchr[T]: 296650
 fchr[$]: 431126
-Exiting Ebwt::buildToDisk()
+Exiting GFM::buildToDisk()
 Returning from initFromVector
-Wrote 4340604 bytes to primary EBWT file: Sp_genome.1.bt2
-Wrote 107788 bytes to secondary EBWT file: Sp_genome.2.bt2
+Wrote 4340624 bytes to primary GFM file: Sp_genome.1.ht2
+Wrote 107788 bytes to secondary GFM file: Sp_genome.2.ht2
 Re-opening _in1 and _in2 as input streams
-Returning from Ebwt constructor
+Returning from GFM constructor
+Returning from initFromVector
+Wrote 201185 bytes to primary GFM file: Sp_genome.5.ht2
+Wrote 109640 bytes to secondary GFM file: Sp_genome.6.ht2
+Re-opening _in5 and _in5 as input streams
+Returning from HierEbwt constructor
 Headers:
     len: 431126
-    bwtLen: 431127
+    gbwtLen: 431127
+    nodes: 431127
     sz: 107782
-    bwtSz: 107782
+    gbwtSz: 107782
     lineRate: 6
     offRate: 4
     offMask: 0xfffffff0
     ftabChars: 10
-    eftabLen: 20
-    eftabSz: 80
+    eftabLen: 0
+    eftabSz: 0
     ftabLen: 1048577
     ftabSz: 4194308
     offsLen: 26946
     offsSz: 107784
     lineSz: 64
     sideSz: 64
-    sideBwtSz: 48
-    sideBwtLen: 192
+    sideGbwtSz: 48
+    sideGbwtLen: 192
     numSides: 2246
     numLines: 2246
-    ebwtTotLen: 143744
-    ebwtTotSz: 143744
-    color: 0
+    gbwtTotLen: 143744
+    gbwtTotSz: 143744
     reverse: 0
-Total time for call to driver() for forward index: 00:00:00
-Reading reference sizes
-  Time reading reference sizes: 00:00:00
-Calculating joined length
-Writing header
-Reserving space for joined string
-Joining reference sequences
-  Time to join reference sequences: 00:00:00
-  Time to reverse reference sequence: 00:00:00
-bmax according to bmaxDivN setting: 107781
-Using parameters --bmax 80836 --dcv 1024
-  Doing ahead-of-time memory usage test
-  Passed!  Constructing with these parameters: --bmax 80836 --dcv 1024
-Constructing suffix-array element generator
-Building DifferenceCoverSample
-  Building sPrime
-  Building sPrimeOrder
-  V-Sorting samples
-  V-Sorting samples time: 00:00:00
-  Allocating rank array
-  Ranking v-sort output
-  Ranking v-sort output time: 00:00:00
-  Invoking Larsson-Sadakane on ranks
-  Invoking Larsson-Sadakane on ranks time: 00:00:00
-  Sanity-checking and returning
-Building samples
-Reserving space for 12 sample suffixes
-Generating random suffixes
-QSorting 12 sample offsets, eliminating duplicates
-QSorting sample offsets, eliminating duplicates time: 00:00:00
-Multikey QSorting 12 samples
-  (Using difference cover)
-  Multikey QSorting samples time: 00:00:00
-Calculating bucket sizes
-Splitting and merging
-  Splitting and merging time: 00:00:00
-Split 1, merged 6; iterating...
-Splitting and merging
-  Splitting and merging time: 00:00:00
-Split 1, merged 0; iterating...
-Splitting and merging
-  Splitting and merging time: 00:00:00
-Avg bucket size: 53889.9 (target: 80835)
-Converting suffix-array elements to index image
-Allocating ftab, absorbFtab
-Entering Ebwt loop
-Getting block 1 of 8
-  Reserving size (80836) for bucket 1
-  Calculating Z arrays for bucket 1
-  Entering block accumulator loop for bucket 1:
-  bucket 1: 10%
-  bucket 1: 20%
-  bucket 1: 30%
-  bucket 1: 40%
-  bucket 1: 50%
-  bucket 1: 60%
-  bucket 1: 70%
-  bucket 1: 80%
-  bucket 1: 90%
-  bucket 1: 100%
-  Sorting block of length 41923 for bucket 1
-  (Using difference cover)
-  Sorting block time: 00:00:00
-Returning block of 41924 for bucket 1
-Getting block 2 of 8
-  Reserving size (80836) for bucket 2
-  Calculating Z arrays for bucket 2
-  Entering block accumulator loop for bucket 2:
-  bucket 2: 10%
-  bucket 2: 20%
-  bucket 2: 30%
-  bucket 2: 40%
-  bucket 2: 50%
-  bucket 2: 60%
-  bucket 2: 70%
-  bucket 2: 80%
-  bucket 2: 90%
-  bucket 2: 100%
-  Sorting block of length 79784 for bucket 2
-  (Using difference cover)
-  Sorting block time: 00:00:00
-Returning block of 79785 for bucket 2
-Getting block 3 of 8
-  Reserving size (80836) for bucket 3
-  Calculating Z arrays for bucket 3
-  Entering block accumulator loop for bucket 3:
-  bucket 3: 10%
-  bucket 3: 20%
-  bucket 3: 30%
-  bucket 3: 40%
-  bucket 3: 50%
-  bucket 3: 60%
-  bucket 3: 70%
-  bucket 3: 80%
-  bucket 3: 90%
-  bucket 3: 100%
-  Sorting block of length 45293 for bucket 3
-  (Using difference cover)
-  Sorting block time: 00:00:00
-Returning block of 45294 for bucket 3
-Getting block 4 of 8
-  Reserving size (80836) for bucket 4
-  Calculating Z arrays for bucket 4
-  Entering block accumulator loop for bucket 4:
-  bucket 4: 10%
-  bucket 4: 20%
-  bucket 4: 30%
-  bucket 4: 40%
-  bucket 4: 50%
-  bucket 4: 60%
-  bucket 4: 70%
-  bucket 4: 80%
-  bucket 4: 90%
-  bucket 4: 100%
-  Sorting block of length 39705 for bucket 4
-  (Using difference cover)
-  Sorting block time: 00:00:00
-Returning block of 39706 for bucket 4
-Getting block 5 of 8
-  Reserving size (80836) for bucket 5
-  Calculating Z arrays for bucket 5
-  Entering block accumulator loop for bucket 5:
-  bucket 5: 10%
-  bucket 5: 20%
-  bucket 5: 30%
-  bucket 5: 40%
-  bucket 5: 50%
-  bucket 5: 60%
-  bucket 5: 70%
-  bucket 5: 80%
-  bucket 5: 90%
-  bucket 5: 100%
-  Sorting block of length 51531 for bucket 5
-  (Using difference cover)
-  Sorting block time: 00:00:00
-Returning block of 51532 for bucket 5
-Getting block 6 of 8
-  Reserving size (80836) for bucket 6
-  Calculating Z arrays for bucket 6
-  Entering block accumulator loop for bucket 6:
-  bucket 6: 10%
-  bucket 6: 20%
-  bucket 6: 30%
-  bucket 6: 40%
-  bucket 6: 50%
-  bucket 6: 60%
-  bucket 6: 70%
-  bucket 6: 80%
-  bucket 6: 90%
-  bucket 6: 100%
-  Sorting block of length 49697 for bucket 6
-  (Using difference cover)
-  Sorting block time: 00:00:00
-Returning block of 49698 for bucket 6
-Getting block 7 of 8
-  Reserving size (80836) for bucket 7
-  Calculating Z arrays for bucket 7
-  Entering block accumulator loop for bucket 7:
-  bucket 7: 10%
-  bucket 7: 20%
-  bucket 7: 30%
-  bucket 7: 40%
-  bucket 7: 50%
-  bucket 7: 60%
-  bucket 7: 70%
-  bucket 7: 80%
-  bucket 7: 90%
-  bucket 7: 100%
-  Sorting block of length 77916 for bucket 7
-  (Using difference cover)
-  Sorting block time: 00:00:00
-Returning block of 77917 for bucket 7
-Getting block 8 of 8
-  Reserving size (80836) for bucket 8
-  Calculating Z arrays for bucket 8
-  Entering block accumulator loop for bucket 8:
-  bucket 8: 10%
-  bucket 8: 20%
-  bucket 8: 30%
-  bucket 8: 40%
-  bucket 8: 50%
-  bucket 8: 60%
-  bucket 8: 70%
-  bucket 8: 80%
-  bucket 8: 90%
-  bucket 8: 100%
-  Sorting block of length 45270 for bucket 8
-  (Using difference cover)
-  Sorting block time: 00:00:00
-Returning block of 45271 for bucket 8
-Exited Ebwt loop
-fchr[A]: 0
-fchr[C]: 135086
-fchr[G]: 215577
-fchr[T]: 296650
-fchr[$]: 431126
-Exiting Ebwt::buildToDisk()
-Returning from initFromVector
-Wrote 4340604 bytes to primary EBWT file: Sp_genome.rev.1.bt2
-Wrote 107788 bytes to secondary EBWT file: Sp_genome.rev.2.bt2
-Re-opening _in1 and _in2 as input streams
-Returning from Ebwt constructor
-Headers:
-    len: 431126
-    bwtLen: 431127
-    sz: 107782
-    bwtSz: 107782
-    lineRate: 6
-    offRate: 4
-    offMask: 0xfffffff0
-    ftabChars: 10
-    eftabLen: 20
-    eftabSz: 80
-    ftabLen: 1048577
-    ftabSz: 4194308
-    offsLen: 26946
-    offsSz: 107784
-    lineSz: 64
-    sideSz: 64
-    sideBwtSz: 48
-    sideBwtLen: 192
-    numSides: 2246
-    numLines: 2246
-    ebwtTotLen: 143744
-    ebwtTotSz: 143744
-    color: 0
-    reverse: 1
-Total time for backward call to driver() for mirror index: 00:00:00</code></pre>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">ls</span> *bt2</code></pre></div>
-<pre class="output"><code>Sp_genome.1.bt2        
-Sp_genome.2.bt2              
-Sp_genome.3.bt2       
-Sp_genome.4.bt2           
-Sp_genome.rev.1.bt2          
-Sp_genome.rev.2.bt2</code></pre>
-<p>Usamos tophat2 para mapear las lecturas. Este programa nos permite dividir lecturas que atraviesan sitios de splicing:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">tophat2</span> -I 300 -i 20 Sp_genome \
- Sp_log.left.fq.gz,Sp_hs.left.fq.gz,Sp_ds.left.fq.gz,Sp_plat.left.fq.gz \
- Sp_log.right.fq.gz,Sp_hs.right.fq.gz,Sp_ds.right.fq.gz,Sp_plat.right.fq.gz</code></pre></div>
-<pre class="output"><code>[2017-01-24 13:53:23] Beginning TopHat run (v2.1.1)
------------------------------------------------
-[2017-01-24 13:53:23] Checking for Bowtie
-          Bowtie version:    2.2.8.0
-[2017-01-24 13:53:23] Checking for Bowtie index files (genome)..
-[2017-01-24 13:53:23] Checking for reference FASTA file
-[2017-01-24 13:53:23] Generating SAM header for Sp_genome
-[2017-01-24 13:53:23] Preparing reads
-     left reads: min. length=25, max. length=68, 329455 kept reads (431 discarded)
-    right reads: min. length=25, max. length=68, 329725 kept reads (161 discarded)
-[2017-01-24 13:53:31] Mapping left_kept_reads to genome Sp_genome with Bowtie2
-[2017-01-24 13:53:44] Mapping left_kept_reads_seg1 to genome Sp_genome with Bowtie2 (1/2)
-[2017-01-24 13:53:44] Mapping left_kept_reads_seg2 to genome Sp_genome with Bowtie2 (2/2)
-[2017-01-24 13:53:44] Mapping right_kept_reads to genome Sp_genome with Bowtie2
-[2017-01-24 13:53:57] Mapping right_kept_reads_seg1 to genome Sp_genome with Bowtie2 (1/2)
-[2017-01-24 13:53:57] Mapping right_kept_reads_seg2 to genome Sp_genome with Bowtie2 (2/2)
-[2017-01-24 13:53:57] Searching for junctions via segment mapping
-    Coverage-search algorithm is turned on, making this step very slow
-    Please try running TopHat again with the option (--no-coverage-search) if this step takes too much time or memory.
-[2017-01-24 13:54:02] Retrieving sequences for splices
-[2017-01-24 13:54:02] Indexing splices
-Building a SMALL index
-[2017-01-24 13:54:02] Mapping left_kept_reads_seg1 to genome segment_juncs with Bowtie2 (1/2)
-[2017-01-24 13:54:02] Mapping left_kept_reads_seg2 to genome segment_juncs with Bowtie2 (2/2)
-[2017-01-24 13:54:02] Joining segment hits
-[2017-01-24 13:54:03] Mapping right_kept_reads_seg1 to genome segment_juncs with Bowtie2 (1/2)
-[2017-01-24 13:54:03] Mapping right_kept_reads_seg2 to genome segment_juncs with Bowtie2 (2/2)
-[2017-01-24 13:54:03] Joining segment hits
-[2017-01-24 13:54:04] Reporting output tracks
------------------------------------------------
-[2017-01-24 13:54:30] A summary of the alignment counts can be found in ./tophat_out/align_summary.txt
-[2017-01-24 13:54:30] Run complete: 00:01:07 elapsed</code></pre>
+    linearFM: Yes
+Total time for call to driver() for forward index: 00:00:01</code></pre>
+<p>El índice se guarda en archivos con extension .ht2:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">ls</span> *ht2</code></pre></div>
+<pre class="output"><code>Sp_genome.1.ht2
+Sp_genome.2.ht2
+Sp_genome.3.ht2
+Sp_genome.4.ht2
+Sp_genome.5.ht2
+Sp_genome.6.ht2
+Sp_genome.7.ht2
+Sp_genome.8.ht2</code></pre>
+<p>Usamos hisat2 para alinear las lecturas. Este programa nos permite dividir lecturas que atraviesan sitios de splicing:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">hisat2</span> --max-intronlen 300 --min-intronlen 20 -x ./Sp_genome -1 Sp_log.left.fq.gz  -2 Sp_log.right.fq.gz -S Sp_log.sam</code></pre></div>
+<pre class="output"><code>37915 reads; of these:
+  37915 (100.00%) were paired; of these:
+    2945 (7.77%) aligned concordantly 0 times
+    34969 (92.23%) aligned concordantly exactly 1 time
+    1 (0.00%) aligned concordantly &gt;1 times
+    ----
+    2945 pairs aligned concordantly 0 times; of these:
+      278 (9.44%) aligned discordantly 1 time
+    ----
+    2667 pairs aligned 0 times concordantly or discordantly; of these:
+      5334 mates make up the pairs; of these:
+        3354 (62.88%) aligned 0 times
+        1980 (37.12%) aligned exactly 1 time
+        0 (0.00%) aligned &gt;1 times
+95.58% overall alignment rate</code></pre>
 <p>Exploramos el resultado, el cuál es un archivo tipo SAM.</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">samtools</span> view tophat_out/accepted_hits.bam <span class="kw">|</span> <span class="kw">head</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">head</span> Sp_log.sam</code></pre></div>
 <h3 id="el-formato-sam">El formato SAM</h3>
 <p>Veamos un ejemplo más pequeño de este formato. Supongamos que tenemos el siguiente alineamiento:</p>
 <pre class="output"><code>Coor    12345678901234 5678901234567890123456789012345
@@ -609,22 +383,28 @@ r001    147 ref 37  30  9M  =   7   -39 CAGCGGCAT   *   NM:i:1</code></pre>
 </div>
 </aside>
 <p>Como pueden ver estos archivos contienen muchísima información que puede ser analizada usando scripts que arrojen estadísticas del alineamiento. Programas como <a href="http://broadinstitute.github.io/picard/">Picard</a> realizan este tipo de análisis.</p>
-<p>La versión comprimida de los archivos tipo SAM se conoce como BAM (binary sam). Convirtamos el archivo BAM a SAM usando samtools:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">samtools</span> view tophat_out/accepted_hits.bam <span class="kw">&gt;</span> samtools view tophat_out/accepted_hits.sam</code></pre></div>
-<p>No abrimos los archivos SAM ya que, dado que esta en formato binario, son ilegible. Sin embargo, tenemos que realizar dos últimos pasos visualizar los resultados:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">samtools</span> sort tophat_out/accepted_hits.bam accepted_hits
-$ <span class="kw">samtools</span> index tophat_out/accepted_hits.bam</code></pre></div>
-<p>El primer paso ordena los resultados por sus coordenadas y el segundo crea índices para hacer más rápida la visualización usando un navegador.</p>
+<p>La versión comprimida de los archivos tipo SAM se conoce como BAM (binary sam). Convirtamos el archivo SAM a BAM usando samtools:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">samtools</span> view -S -b Sp_log.sam <span class="kw">&gt;</span> Sp_log.bam</code></pre></div>
+<p>No abrimos los archivos BAM ya que, dado que esta en formato binario, son ilegible. Para poder leerlos necesitamos usar samtools con el comando:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">samtools</span> view Sp_log.bam <span class="kw">|</span> <span class="kw">head</span></code></pre></div>
 <section class="challenge panel panel-success">
 <div class="panel-heading">
-<h2 id="tarea---alineando-las-lecturas-filtradas-al-transcriptoma"><span class="glyphicon glyphicon-pencil"></span>Tarea - Alineando las lecturas filtradas al transcriptoma</h2>
+<h2 id="tarea-1---alineando-las-muestras-restantes-al-genoma"><span class="glyphicon glyphicon-pencil"></span>Tarea 1 - Alineando las muestras restantes al genoma</h2>
 </div>
 <div class="panel-body">
-<p>Hemos alineado las lecturas al genoma pero queremos alinearlas también directamente al transcriptoma. La vamos a revisar el manual de TopHat2 y usar las opciones que nos permite mapear lecturas directamente a transcriptomas.</p>
+<p>Alineamos una muestra al genoma pero queremos alinear todas las muestras.<br />
+Alinea el resto de las muestras y guarda los resultados (en formato bam), ya que los necesitaras en prácticas subsecuentes.</p>
+</div>
+</section>
+<section class="challenge panel panel-success">
+<div class="panel-heading">
+<h2 id="tarea-2---alineando-las-lecturas-filtradas-al-transcriptoma"><span class="glyphicon glyphicon-pencil"></span>Tarea 2 - Alineando las lecturas filtradas al transcriptoma</h2>
+</div>
+<div class="panel-body">
+<p>Hemos alineado las lecturas al genoma pero queremos alinearlas también directamente al transcriptoma. Revisa el manual de HISAT2 y usar las opciones que nos permite mapear lecturas directamente a transcriptomas. Deberás alinear cada muestra de manera independiente. Alinea el resto de las muestras y guarda los resultados (en formato bam), ya que los necesitaras en prácticas subsecuentes.</p>
 <ul>
 <li><strong>Pista:</strong> No podrán utilizar el índice generado previamente.</li>
 </ul>
-<p><sub>~</sub></p>
 </div>
 </section>
         </div>

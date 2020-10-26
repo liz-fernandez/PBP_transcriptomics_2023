@@ -40,29 +40,17 @@ Descargaremos la anotación de los de *Schizosaccharomyces pombe* genes de aquí
 $  wget https://liz-fernandez.github.io/Talleres_Bioinfo_Cuernavaca_17/datasets/genome/Sp_genes.gtf
 ~~~
 
-Vamos a alinear cada muestra no filtrada al genoma
-
-~~~ {.bash}
-$ tophat2 -I 1000 -i 20 --library-type fr-firststrand \
-           -o tophat.Sp_log.dir Sp_genome \
-           Sp_log.left.fq Sp_log.right.fq
-
-$ mv tophat.Sp_log.dir/accepted_hits.bam tophat.Sp_log.dir/Sp_log.bam
-
-$ samtools index tophat.Sp_log.dir/Sp_log.bam
-
-~~~ 
-
-Usaremos el programa [HTSeq](https://pypi.python.org/packages/source/H/HTSeq/).
+Usaremos el programa [HTSeq](https://pypi.python.org/packages/source/H/HTSeq/). Ya se encuentra 
+instalado en Docker.
 
 Este programa cuenta el número de lecturas que alinean con cada gen anotado en un archivo 
 de referencia. Nosotros le proporcionaremos nuestro archivo `Sp_genes.gtf`.
 
 ~~~ {.bash}
-$ htseq-count -f bam -s no -r pos Sp_ds.bam Sp_genes.gtf > Sp_ds.counts &
-$ htseq-count -f bam -s no -r pos Sp_hs.bam Sp_genes.gtf > Sp_hs.counts &
-$ htseq-count -f bam -s no -r pos Sp_log.bam Sp_genes.gtf > Sp_log.counts &
-$ htseq-count -f bam -s no -r pos Sp_plat.bam Sp_genes.gtf > Sp_plat.counts &
+$ htseq-count -f bam -s no -r pos Sp_ds_sorted.bam /usr/local/data/Sp_genes.gtf > Sp_ds.counts &
+$ htseq-count -f bam -s no -r pos Sp_hs_sorted.bam /usr/local/data/Sp_genes.gtf > Sp_hs.counts &
+$ htseq-count -f bam -s no -r pos Sp_log_sorted.bam /usr/local/data/Sp_genes.gtf > Sp_log.counts &
+$ htseq-count -f bam -s no -r pos Sp_plat_sorted.bam /usr/local/data/Sp_genes.gtf > Sp_plat.counts &
 ~~~
 
 > ## Contando librerías de manera independiente {.challenge}

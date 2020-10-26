@@ -58,20 +58,12 @@ $ <span class="kw">cd</span> DESEQ2/</code></pre></div>
 <p>El primer paso es contar lecturas. Tanto DESeq2 como otros programas que usan la distribución negativa binomial utilizan conteos <strong>crudos</strong> (raw). Esto se refiere la número de lecturas que alinean a un transcrito específico sin sufrir ningún tipo de transformación. Como vieron en la clase pasada, esto se debe a que el programa estima un factor de normalización. Si usamos datos previamente normalizados estaremos violando los supuestos.</p>
 <p>Descargaremos la anotación de los de <em>Schizosaccharomyces pombe</em> genes de aquí:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$  <span class="kw">wget</span> https://liz-fernandez.github.io/Talleres_Bioinfo_Cuernavaca_17/datasets/genome/Sp_genes.gtf</code></pre></div>
-<p>Vamos a alinear cada muestra no filtrada al genoma</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">tophat2</span> -I 1000 -i 20 --library-type fr-firststrand \
-           -o tophat.Sp_log.dir Sp_genome \
-           Sp_log.left.fq Sp_log.right.fq
-
-$ <span class="kw">mv</span> tophat.Sp_log.dir/accepted_hits.bam tophat.Sp_log.dir/Sp_log.bam
-
-$ <span class="kw">samtools</span> index tophat.Sp_log.dir/Sp_log.bam</code></pre></div>
-<p>Usaremos el programa <a href="https://pypi.python.org/packages/source/H/HTSeq/">HTSeq</a>.</p>
+<p>Usaremos el programa <a href="https://pypi.python.org/packages/source/H/HTSeq/">HTSeq</a>. Ya se encuentra instalado en Docker.</p>
 <p>Este programa cuenta el número de lecturas que alinean con cada gen anotado en un archivo de referencia. Nosotros le proporcionaremos nuestro archivo <code>Sp_genes.gtf</code>.</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">htseq-count</span> -f bam -s no -r pos Sp_ds.bam Sp_genes.gtf <span class="kw">&gt;</span> Sp_ds.counts <span class="kw">&amp;</span>
-$ <span class="kw">htseq-count</span> -f bam -s no -r pos Sp_hs.bam Sp_genes.gtf <span class="kw">&gt;</span> Sp_hs.counts <span class="kw">&amp;</span>
-$ <span class="kw">htseq-count</span> -f bam -s no -r pos Sp_log.bam Sp_genes.gtf <span class="kw">&gt;</span> Sp_log.counts <span class="kw">&amp;</span>
-$ <span class="kw">htseq-count</span> -f bam -s no -r pos Sp_plat.bam Sp_genes.gtf <span class="kw">&gt;</span> Sp_plat.counts <span class="kw">&amp;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">htseq-count</span> -f bam -s no -r pos Sp_ds_sorted.bam /usr/local/data/Sp_genes.gtf <span class="kw">&gt;</span> Sp_ds.counts <span class="kw">&amp;</span>
+$ <span class="kw">htseq-count</span> -f bam -s no -r pos Sp_hs_sorted.bam /usr/local/data/Sp_genes.gtf <span class="kw">&gt;</span> Sp_hs.counts <span class="kw">&amp;</span>
+$ <span class="kw">htseq-count</span> -f bam -s no -r pos Sp_log_sorted.bam /usr/local/data/Sp_genes.gtf <span class="kw">&gt;</span> Sp_log.counts <span class="kw">&amp;</span>
+$ <span class="kw">htseq-count</span> -f bam -s no -r pos Sp_plat_sorted.bam /usr/local/data/Sp_genes.gtf <span class="kw">&gt;</span> Sp_plat.counts <span class="kw">&amp;</span></code></pre></div>
 <section class="challenge panel panel-success">
 <div class="panel-heading">
 <h2 id="contando-librerías-de-manera-independiente"><span class="glyphicon glyphicon-pencil"></span>Contando librerías de manera independiente</h2>
