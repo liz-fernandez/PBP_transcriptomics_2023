@@ -12,13 +12,13 @@ minutes: 5
 >
 > Para proceder con esta práctica, se requieren:
 >
-> *  El genoma [Sp_genome.fa](datasets/genome/Sp_genome.fa) 
+> *  El genoma `Sp_genome.fa`
 > *  Las lecturas no filtradas 
 
 Utilizaremos los archivos bam filtrados por calidad que utilizamos en la clase 
 de mapeo. Los análisis se realizaran en la plataforma R.
 
-Generemos un directorio de trabajo
+Generemos un directorio de trabajo en su directorio de preferencia
 
 ~~~ {.bash}
 $ mkdir DESEQ2
@@ -37,7 +37,7 @@ previamente normalizados estaremos violando los supuestos.
 Descargaremos la anotación de los de *Schizosaccharomyces pombe* genes de aquí:
 
 ~~~ {.bash}
-$  wget https://liz-fernandez.github.io/Talleres_Bioinfo_Cuernavaca_17/datasets/genome/Sp_genes.gtf
+$ wget https://liz-fernandez.github.io/PBI_transcriptomics_2020/DATA/Sp_genes.gtf
 ~~~
 
 Usaremos el programa [HTSeq](https://pypi.python.org/packages/source/H/HTSeq/). Ya se encuentra 
@@ -47,16 +47,63 @@ Este programa cuenta el número de lecturas que alinean con cada gen anotado en 
 de referencia. Nosotros le proporcionaremos nuestro archivo `Sp_genes.gtf`.
 
 ~~~ {.bash}
-$ htseq-count -f bam -s no -r pos Sp_ds_sorted.bam /usr/local/data/Sp_genes.gtf > Sp_ds.counts &
-$ htseq-count -f bam -s no -r pos Sp_hs_sorted.bam /usr/local/data/Sp_genes.gtf > Sp_hs.counts &
-$ htseq-count -f bam -s no -r pos Sp_log_sorted.bam /usr/local/data/Sp_genes.gtf > Sp_log.counts &
-$ htseq-count -f bam -s no -r pos Sp_plat_sorted.bam /usr/local/data/Sp_genes.gtf > Sp_plat.counts &
+$ htseq-count -f bam -s no -r pos Sp_ds_sorted.bam /usr/local/data/Sp_genes.gtf > Sp_ds.counts 
+$ htseq-count -f bam -s no -r pos Sp_hs_sorted.bam /usr/local/data/Sp_genes.gtf > Sp_hs.counts 
+$ htseq-count -f bam -s no -r pos Sp_log_sorted.bam /usr/local/data/Sp_genes.gtf > Sp_log.counts 
+$ htseq-count -f bam -s no -r pos Sp_plat_sorted.bam /usr/local/data/Sp_genes.gtf > Sp_plat.counts 
 ~~~
+
+Veamos uno de los archivos de cuentas, primero las primeras 10 líneas:
+
+~~~ {.bash}
+$ head Sp_ds.count
+~~~
+
+~~~ {.output}
+SPAC1002.19	23
+SPAC1093.06c	48
+SPAC10F6.01c	362
+SPAC10F6.05c	91
+SPAC11D3.18c	25
+SPAC11E3.06	28
+SPAC11E3.14	399
+SPAC11H11.04	16
+SPAC1250.07	71
+SPAC12B10.14c	70
+~~~
+
+Y las últimas 10 líneas:
+
+~~~ {.bash}
+$ tail Sp_ds.count
+~~~
+
+~~~ {.output}
+SPCC736.05	18
+SPCC736.12c	57
+SPCC757.03c	1064
+SPCC794.10	68
+SPCP25A2.02c	49
+__no_feature	0
+__ambiguous	2
+__too_low_aQual	5483
+__not_aligned	1579
+__alignment_not_unique	3
+~~~
+
+Estas líneas al final del ejemplo muestran lecturas que:
+
+1. **No feature**	Lecturas que no alinean a una región anotada (gen)
+1. **Ambiguous**	Lecturas que alinean a más de un gen 
+1. **Too low alignment quality**	Lecturas con baja calidad de alineamiento
+1. **Not aligned**	Lecturas no alineadas
+1. **Alignment not unique**	Lecturas que alinean más de una vez a la referencia
+
 
 > ## Contando librerías de manera independiente {.challenge}
 >
 > ¿Por qué contamos las lecturas en cada librería de manera independiente si
-> ensamblamos el transcriptoma usando todas las lecturas? 
+> ensamblamos el transcriptoma de referencia usando todas las librerías (muestras)? 
 > 
 
 Es importante verificar que el conteo de HTSeq engloba a la mayoría de las lecturas. 
@@ -64,11 +111,11 @@ Si estos porcentajes son muy bajos podrían indicar problemas con los parámetro
 conteo (e.g. si le decimos que nuestra muestra no tiene direccionalidad (strandness)
 cuando si la tiene).
 
-Finalmente uniremos los resultados usando el siguiente comando:
+Para realizar nuestros análisis de expresión debemos eliminar estas líneas. Uniremos los resultados usando el siguiente comando:
 
 ~~~ {.bash}
 $ paste *counts | cut -f 1,2,4,6,8 | grep '__' -v > Sp_counts_table.txt
-$ head Sp_Counts_Table.txt
+$ head Sp_counts_table.txt
 ~~~
 
 Esto unió los distintos archivos en uno solo el cual ya podemos utilizar en R. 
@@ -76,29 +123,27 @@ Es importante verificar el orden de pegado de los archivos para no confundir una
 muestra con otra. 
 
 ~~~ {.output}
-SPAC1002.19	24	45	3	239
-SPAC1093.06c	50	22	34	60
-SPAC10F6.01c	376	330	534	206
-SPAC10F6.05c	63	101	34	145
+SPAC1002.19	23	44	2	230
+SPAC1093.06c	48	22	34	59
+SPAC10F6.01c	362	323	527	200
+SPAC10F6.05c	91	149	54	203
 SPAC11D3.18c	25	11	12	23
 SPAC11E3.06	28	8	5	4
-SPAC11E3.14	407	152	55	396
-SPAC11H11.04	17	7	12	23
-SPAC1250.07	73	36	29	74
-SPAC12B10.14c	73	38	52	50
+SPAC11E3.14	399	148	53	387
+SPAC11H11.04	16	6	12	23
+SPAC1250.07	71	36	29	72
+SPAC12B10.14c	70	37	52	47
 ~~~
 
 ### Análisis de expresión diferencial
 
-Ahora instalamos y cargamos el paquete `DESeq2`:
+Ahora usaremos R. Puedes hacer esto directamente en Docker o descargar la tabla de cuentas a tu computadora. Cargamos el paquete `DESeq2`:
 
 ~~~ {.r}
-source("http://bioconductor.org/biocLite.R")
-biocLite("DESeq2")
-library(“DESeq2”)
+> library(“DESeq2”)
 ~~~
 
-Este paquete estima una distribución negativa binomial.
+Este paquete estima una distribución binomial negativa.
 
 Leemos las cuentas en R usando read.delim:
 
@@ -109,10 +154,10 @@ Leemos las cuentas en R usando read.delim:
 
 ~~~ {.output}
               V2  V3  V4  V5
-SPAC1002.19   24  45   3 239
-SPAC1093.06c  50  22  34  60
-SPAC10F6.01c 376 330 534 206
-SPAC10F6.05c  63 101  34 145
+SPAC1002.19   23  44   2 230
+SPAC1093.06c  48  22  34  59
+SPAC10F6.01c 362 323 527 200
+SPAC10F6.05c  91 149  54 203
 SPAC11D3.18c  25  11  12  23
 SPAC11E3.06   28   8   5   4
 ~~~ 
@@ -123,9 +168,9 @@ Como ya mencionamos, en sus experimentos deberán cerciorarse de que este orden 
 el correcto.
 
 ~~~ {.r}
-condition <- factor(c("ds","hs","log","plat"))
-colData <- data.frame(row.names=colnames(countData), condition)
-head(colData)
+> condition <- factor(c("ds","hs","log","plat"))
+> colData <- data.frame(row.names=colnames(countData), condition)
+> head(colData)
 ~~~
 
 ~~~ {.output}
@@ -140,11 +185,12 @@ Una vez ensamblados nuestros datos podemos usar la función DESeqDataSetFromMatr
 ponerlo en el formato requerido por DESeq2:
 
 ~~~ {.r}
-dds <- DESeqDataSetFromMatrix(countData = countData,
+> dds <- DESeqDataSetFromMatrix(countData = countData,
                               colData = colData,
                               design = ~ condition )
-dds
+> dds
 ~~~
+
 ~~~ {.output}
 class: DESeqDataSet 
 dim: 200 4 
@@ -160,8 +206,8 @@ Filtramos genes con muy muy baja expresión, en este caso todos aquellos que no 
 menos una lectura. Nota: DESeq2 aplica otros filtros más estrictos por default.
 
 ~~~ {.r}
-dds <- dds[ rowSums(counts(dds)) > 1, ]
-dds
+> dds <- dds[ rowSums(counts(dds)) > 1, ]
+> dds
 ~~~
 
 ~~~ {.output}
@@ -181,32 +227,139 @@ Esta función genera una tabla con cambios de expresión en base log2,
 así como p-values y p-values ajustados por pruebas múltiples. 
 
 ~~~ {.r}
-dds <- DESeq(dds)
+> dds <- DESeq(dds)
 ~~~
+
 ~~~ {.output}
 estimating size factors
 estimating dispersions
-gene-wise dispersion estimates
-mean-dispersion relationship
-NOTE: fitType='parametric', but the dispersion trend was not well captured by the
-  function: y = a/x + b, and a local regression fit was automatically substituted.
-  specify fitType='local' or 'mean' to avoid this message next time.
-final dispersion estimates
-fitting model and testing
-Warning message:
-In .local(object, ...) : same number of samples and coefficients to fit,
-  estimating dispersion by treating samples as replicates.
-  read the ?DESeq section on 'Experiments without replicates'
+Error in checkForExperimentalReplicates(object, modelMatrix) :
+
+  The design matrix has the same number of samples and coefficients to fit,
+  so estimation of dispersion is not possible. Treating samples
+  as replicates was deprecated in v1.20 and no longer supported since v1.22.
 ~~~
 
-Este error nos indica que DESeq2 ha aplicado un filtro aún más estricto ya que, 
-debido a la falta de réplicas, no tiene manera de saber cuanta dispersión en 
+Este error nos indica que DESeq2 no nos permite realizar el análisis debido a la falta de réplicas; no tiene manera de saber cuanta dispersión en 
 los niveles de expresión se debe a variación biológica o a diferencia entre los 
-distintos tratamientos. 
+distintos tratamientos. Por lo tanto no podemos hacer expresión diferencial con estos datos. 
+
+Realizaremos el análisis con un set de datos distinto que descargaremos así:
+
+~~~ {.bash}
+$ wget XXXXX GSE60450_Lactation-GenewiseCounts.txt
+~~~
+############ CHECK
+
+Leemos las cuentas en R usando read.delim:
+
+~~~ {.r}
+> countData <- read.delim("./Sp_counts_table_complete.txt",header=FALSE, row.names=1)
+> head(countData)
+~~~
+
+~~~ {.output}
+                V2    V3    V4    V5    V6    V7    V8    V9   V10   V11   V12
+SPAC1002.19     15    10     5     6     6     2     4     5     2     1     2
+SPAC1093.06c  6257  7345  6361  5570  3585  3388  9602  9742  7702  6697  2781
+SPAC10F6.01c     1     0     0     0     0     0     0     0     0     0     0
+SPAC10F6.05c   380   260   360   346   362   361   356   399   414   331   275
+SPAC11D3.18c    36    30   147   176   174   151     0     0     0     0     0
+SPAC11E3.06  19491 18797 27019 24121 19250 15293 23490 21142 26245 25419 10869
+              V13
+SPAC1002.19     4
+SPAC1093.06c 2802
+SPAC10F6.01c    0
+SPAC10F6.05c  260
+SPAC11D3.18c    0
+SPAC11E3.06  7484
+~~~ 
+
+c("Sp.DG","Sp.DH","Sp.DI","Sp.DJ","Sp.DK","Sp.DL","Sp.LA","Sp.LB","Sp.LC","Sp.LD","Sp.LE","Sp.LF")
+
+Y añadimos la descripción de cada una de las muestras. 
+Este es el orden en el cual las "pegamos" usando el comando `paste`. 
+Como ya mencionamos, en sus experimentos deberán cerciorarse de que este orden es 
+el correcto.
+
+~~~ {.r}
+> sample_info <- read.delim("./Sp_sample_info.txt")
+#> condition <- factor(c("ds","hs","log","plat"))
+> colData <- data.frame(row.names=colnames(countData), condition)
+> head(colData)
+~~~
+
+~~~ {.output}
+   condition
+V2        ds
+V3        hs
+V4       log
+V5      plat
+~~~ 
+
+Una vez ensamblados nuestros datos podemos usar la función DESeqDataSetFromMatrix para 
+ponerlo en el formato requerido por DESeq2:
+
+~~~ {.r}
+> dds <- DESeqDataSetFromMatrix(countData = countData,
+                              colData = colData,
+                              design = ~ CellType + Status )
+> dds
+~~~
+
+~~~ {.output}
+class: DESeqDataSet 
+dim: 200 4 
+exptData(0):
+assays(1): counts
+rownames(200): SPAC1002.19 SPAC1093.06c ... SPCC794.10 SPCP25A2.02c
+rowData metadata column names(0):
+colnames(4): V2 V3 V4 V5
+colData names(1): condition
+~~~
+
+Filtramos genes con muy muy baja expresión, en este caso todos aquellos que no tengan al
+menos una lectura. Nota: DESeq2 aplica otros filtros más estrictos por default.
+
+~~~ {.r}
+> dds <- dds[ rowSums(counts(dds)) > 1, ]
+> dds
+~~~
+
+~~~ {.output}
+class: DESeqDataSet 
+dim: 198 4 
+exptData(0):
+assays(1): counts
+rownames(198): SPAC1002.19 SPAC1093.06c ... SPCC794.10 SPCP25A2.02c
+rowData metadata column names(0):
+colnames(4): V2 V3 V4 V5
+colData names(1): condition
+~~~ 
+
+La funcion DESeq realiza el análisis estándar de expresión diferencial, 
+incluyendo los pasos de estimación de la distribución. 
+Esta función genera una tabla con cambios de expresión en base log2, 
+así como p-values y p-values ajustados por pruebas múltiples. 
+
+~~~ {.r}
+> dds <- DESeq(dds)
+~~~
+
+~~~ {.output}
+estimating size factors
+estimating dispersions
+Error in checkForExperimentalReplicates(object, modelMatrix) :
+
+  The design matrix has the same number of samples and coefficients to fit,
+  so estimation of dispersion is not possible. Treating samples
+  as replicates was deprecated in v1.20 and no longer supported since v1.22.
+~~~
 
 ~~~ {.r}
 dds
 ~~~
+
 ~~~ {.output}
 class: DESeqDataSet 
 dim: 198 4 
@@ -345,6 +498,8 @@ Como ejemplo, transformaremos los datos de expresión usando la transformación
 rlog. Estas transformaciones permiten visualizar mejor los datos aunque, como en todos
 los casos, es bueno verificar que nuestros datos cumplen con los supuestos requeridos.
 En este caso se requiere que los datos no difieran mucho entre las distintas condiciones. 
+
+####### CHECK INSTALL LIBS
 
 ~~~ {.r}
 rld <- rlogTransformation(dds, blind=FALSE) 

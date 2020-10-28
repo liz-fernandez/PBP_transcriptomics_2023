@@ -45,78 +45,108 @@
 <div class="panel-body">
 <p>Para proceder con esta práctica, se requieren:</p>
 <ul>
-<li>El genoma <a href="datasets/genome/Sp_genome.fa">Sp_genome.fa</a></li>
+<li>El genoma <code>Sp_genome.fa</code></li>
 <li>Las lecturas no filtradas</li>
 </ul>
 </div>
 </section>
 <p>Utilizaremos los archivos bam filtrados por calidad que utilizamos en la clase de mapeo. Los análisis se realizaran en la plataforma R.</p>
-<p>Generemos un directorio de trabajo</p>
+<p>Generemos un directorio de trabajo en su directorio de preferencia</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">mkdir</span> DESEQ2
 $ <span class="kw">cd</span> DESEQ2/</code></pre></div>
 <h2 id="contando-lecturas">Contando lecturas</h2>
 <p>El primer paso es contar lecturas. Tanto DESeq2 como otros programas que usan la distribución negativa binomial utilizan conteos <strong>crudos</strong> (raw). Esto se refiere la número de lecturas que alinean a un transcrito específico sin sufrir ningún tipo de transformación. Como vieron en la clase pasada, esto se debe a que el programa estima un factor de normalización. Si usamos datos previamente normalizados estaremos violando los supuestos.</p>
 <p>Descargaremos la anotación de los de <em>Schizosaccharomyces pombe</em> genes de aquí:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$  <span class="kw">wget</span> https://liz-fernandez.github.io/Talleres_Bioinfo_Cuernavaca_17/datasets/genome/Sp_genes.gtf</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">wget</span> https://liz-fernandez.github.io/PBI_transcriptomics_2020/DATA/Sp_genes.gtf</code></pre></div>
 <p>Usaremos el programa <a href="https://pypi.python.org/packages/source/H/HTSeq/">HTSeq</a>. Ya se encuentra instalado en Docker.</p>
 <p>Este programa cuenta el número de lecturas que alinean con cada gen anotado en un archivo de referencia. Nosotros le proporcionaremos nuestro archivo <code>Sp_genes.gtf</code>.</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">htseq-count</span> -f bam -s no -r pos Sp_ds_sorted.bam /usr/local/data/Sp_genes.gtf <span class="kw">&gt;</span> Sp_ds.counts <span class="kw">&amp;</span>
-$ <span class="kw">htseq-count</span> -f bam -s no -r pos Sp_hs_sorted.bam /usr/local/data/Sp_genes.gtf <span class="kw">&gt;</span> Sp_hs.counts <span class="kw">&amp;</span>
-$ <span class="kw">htseq-count</span> -f bam -s no -r pos Sp_log_sorted.bam /usr/local/data/Sp_genes.gtf <span class="kw">&gt;</span> Sp_log.counts <span class="kw">&amp;</span>
-$ <span class="kw">htseq-count</span> -f bam -s no -r pos Sp_plat_sorted.bam /usr/local/data/Sp_genes.gtf <span class="kw">&gt;</span> Sp_plat.counts <span class="kw">&amp;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">htseq-count</span> -f bam -s no -r pos Sp_ds_sorted.bam /usr/local/data/Sp_genes.gtf <span class="kw">&gt;</span> Sp_ds.counts 
+$ <span class="kw">htseq-count</span> -f bam -s no -r pos Sp_hs_sorted.bam /usr/local/data/Sp_genes.gtf <span class="kw">&gt;</span> Sp_hs.counts 
+$ <span class="kw">htseq-count</span> -f bam -s no -r pos Sp_log_sorted.bam /usr/local/data/Sp_genes.gtf <span class="kw">&gt;</span> Sp_log.counts 
+$ <span class="kw">htseq-count</span> -f bam -s no -r pos Sp_plat_sorted.bam /usr/local/data/Sp_genes.gtf <span class="kw">&gt;</span> Sp_plat.counts </code></pre></div>
+<p>Veamos uno de los archivos de cuentas, primero las primeras 10 líneas:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">head</span> Sp_ds.count</code></pre></div>
+<pre class="output"><code>SPAC1002.19 23
+SPAC1093.06c    48
+SPAC10F6.01c    362
+SPAC10F6.05c    91
+SPAC11D3.18c    25
+SPAC11E3.06 28
+SPAC11E3.14 399
+SPAC11H11.04    16
+SPAC1250.07 71
+SPAC12B10.14c   70</code></pre>
+<p>Y las últimas 10 líneas:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">tail</span> Sp_ds.count</code></pre></div>
+<pre class="output"><code>SPCC736.05  18
+SPCC736.12c 57
+SPCC757.03c 1064
+SPCC794.10  68
+SPCP25A2.02c    49
+__no_feature    0
+__ambiguous 2
+__too_low_aQual 5483
+__not_aligned   1579
+__alignment_not_unique  3</code></pre>
+<p>Estas líneas al final del ejemplo muestran lecturas que:</p>
+<ol style="list-style-type: decimal">
+<li><strong>No feature</strong> Lecturas que no alinean a una región anotada (gen)</li>
+<li><strong>Ambiguous</strong> Lecturas que alinean a más de un gen</li>
+<li><strong>Too low alignment quality</strong> Lecturas con baja calidad de alineamiento</li>
+<li><strong>Not aligned</strong> Lecturas no alineadas</li>
+<li><strong>Alignment not unique</strong> Lecturas que alinean más de una vez a la referencia</li>
+</ol>
 <section class="challenge panel panel-success">
 <div class="panel-heading">
 <h2 id="contando-librerías-de-manera-independiente"><span class="glyphicon glyphicon-pencil"></span>Contando librerías de manera independiente</h2>
 </div>
 <div class="panel-body">
-<p>¿Por qué contamos las lecturas en cada librería de manera independiente si ensamblamos el transcriptoma usando todas las lecturas?</p>
+<p>¿Por qué contamos las lecturas en cada librería de manera independiente si ensamblamos el transcriptoma de referencia usando todas las librerías (muestras)?</p>
 </div>
 </section>
 <p>Es importante verificar que el conteo de HTSeq engloba a la mayoría de las lecturas. Si estos porcentajes son muy bajos podrían indicar problemas con los parámetros de conteo (e.g. si le decimos que nuestra muestra no tiene direccionalidad (strandness) cuando si la tiene).</p>
-<p>Finalmente uniremos los resultados usando el siguiente comando:</p>
+<p>Para realizar nuestros análisis de expresión debemos eliminar estas líneas. Uniremos los resultados usando el siguiente comando:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">paste</span> *counts <span class="kw">|</span> <span class="kw">cut</span> -f 1,2,4,6,8 <span class="kw">|</span> <span class="kw">grep</span> <span class="st">&#39;__&#39;</span> -v <span class="kw">&gt;</span> Sp_counts_table.txt
-$ <span class="kw">head</span> Sp_Counts_Table.txt</code></pre></div>
+$ <span class="kw">head</span> Sp_counts_table.txt</code></pre></div>
 <p>Esto unió los distintos archivos en uno solo el cual ya podemos utilizar en R. Es importante verificar el orden de pegado de los archivos para no confundir una muestra con otra.</p>
-<pre class="output"><code>SPAC1002.19 24  45  3   239
-SPAC1093.06c    50  22  34  60
-SPAC10F6.01c    376 330 534 206
-SPAC10F6.05c    63  101 34  145
+<pre class="output"><code>SPAC1002.19 23  44  2   230
+SPAC1093.06c    48  22  34  59
+SPAC10F6.01c    362 323 527 200
+SPAC10F6.05c    91  149 54  203
 SPAC11D3.18c    25  11  12  23
 SPAC11E3.06 28  8   5   4
-SPAC11E3.14 407 152 55  396
-SPAC11H11.04    17  7   12  23
-SPAC1250.07 73  36  29  74
-SPAC12B10.14c   73  38  52  50</code></pre>
+SPAC11E3.14 399 148 53  387
+SPAC11H11.04    16  6   12  23
+SPAC1250.07 71  36  29  72
+SPAC12B10.14c   70  37  52  47</code></pre>
 <h3 id="análisis-de-expresión-diferencial">Análisis de expresión diferencial</h3>
-<p>Ahora instalamos y cargamos el paquete <code>DESeq2</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">source</span>(<span class="st">&quot;http://bioconductor.org/biocLite.R&quot;</span>)
-<span class="kw">biocLite</span>(<span class="st">&quot;DESeq2&quot;</span>)
-<span class="kw">library</span>(“DESeq2”)</code></pre></div>
-<p>Este paquete estima una distribución negativa binomial.</p>
+<p>Ahora usaremos R. Puedes hacer esto directamente en Docker o descargar la tabla de cuentas a tu computadora. Cargamos el paquete <code>DESeq2</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">&gt;<span class="st"> </span><span class="kw">library</span>(“DESeq2”)</code></pre></div>
+<p>Este paquete estima una distribución binomial negativa.</p>
 <p>Leemos las cuentas en R usando read.delim:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">&gt;<span class="st"> </span>countData &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="st">&quot;./Sp_counts_table.txt&quot;</span>,<span class="dt">header=</span><span class="ot">FALSE</span>, <span class="dt">row.names=</span><span class="dv">1</span>)
 &gt;<span class="st"> </span><span class="kw">head</span>(countData)</code></pre></div>
 <pre class="output"><code>              V2  V3  V4  V5
-SPAC1002.19   24  45   3 239
-SPAC1093.06c  50  22  34  60
-SPAC10F6.01c 376 330 534 206
-SPAC10F6.05c  63 101  34 145
+SPAC1002.19   23  44   2 230
+SPAC1093.06c  48  22  34  59
+SPAC10F6.01c 362 323 527 200
+SPAC10F6.05c  91 149  54 203
 SPAC11D3.18c  25  11  12  23
 SPAC11E3.06   28   8   5   4</code></pre>
 <p>Y añadimos la descripción de cada una de las muestras. Este es el orden en el cual las “pegamos” usando el comando <code>paste</code>. Como ya mencionamos, en sus experimentos deberán cerciorarse de que este orden es el correcto.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">condition &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;ds&quot;</span>,<span class="st">&quot;hs&quot;</span>,<span class="st">&quot;log&quot;</span>,<span class="st">&quot;plat&quot;</span>))
-colData &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">row.names=</span><span class="kw">colnames</span>(countData), condition)
-<span class="kw">head</span>(colData)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">&gt;<span class="st"> </span>condition &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;ds&quot;</span>,<span class="st">&quot;hs&quot;</span>,<span class="st">&quot;log&quot;</span>,<span class="st">&quot;plat&quot;</span>))
+&gt;<span class="st"> </span>colData &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">row.names=</span><span class="kw">colnames</span>(countData), condition)
+&gt;<span class="st"> </span><span class="kw">head</span>(colData)</code></pre></div>
 <pre class="output"><code>   condition
 V2        ds
 V3        hs
 V4       log
 V5      plat</code></pre>
 <p>Una vez ensamblados nuestros datos podemos usar la función DESeqDataSetFromMatrix para ponerlo en el formato requerido por DESeq2:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dds &lt;-<span class="st"> </span><span class="kw">DESeqDataSetFromMatrix</span>(<span class="dt">countData =</span> countData,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">&gt;<span class="st"> </span>dds &lt;-<span class="st"> </span><span class="kw">DESeqDataSetFromMatrix</span>(<span class="dt">countData =</span> countData,
                               <span class="dt">colData =</span> colData,
                               <span class="dt">design =</span> ~<span class="st"> </span>condition )
-dds</code></pre></div>
+&gt;<span class="st"> </span>dds</code></pre></div>
 <pre class="output"><code>class: DESeqDataSet 
 dim: 200 4 
 exptData(0):
@@ -126,8 +156,8 @@ rowData metadata column names(0):
 colnames(4): V2 V3 V4 V5
 colData names(1): condition</code></pre>
 <p>Filtramos genes con muy muy baja expresión, en este caso todos aquellos que no tengan al menos una lectura. Nota: DESeq2 aplica otros filtros más estrictos por default.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dds &lt;-<span class="st"> </span>dds[ <span class="kw">rowSums</span>(<span class="kw">counts</span>(dds)) &gt;<span class="st"> </span><span class="dv">1</span>, ]
-dds</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">&gt;<span class="st"> </span>dds &lt;-<span class="st"> </span>dds[ <span class="kw">rowSums</span>(<span class="kw">counts</span>(dds)) &gt;<span class="st"> </span><span class="dv">1</span>, ]
+&gt;<span class="st"> </span>dds</code></pre></div>
 <pre class="output"><code>class: DESeqDataSet 
 dim: 198 4 
 exptData(0):
@@ -137,21 +167,79 @@ rowData metadata column names(0):
 colnames(4): V2 V3 V4 V5
 colData names(1): condition</code></pre>
 <p>La funcion DESeq realiza el análisis estándar de expresión diferencial, incluyendo los pasos de estimación de la distribución. Esta función genera una tabla con cambios de expresión en base log2, así como p-values y p-values ajustados por pruebas múltiples.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dds &lt;-<span class="st"> </span><span class="kw">DESeq</span>(dds)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">&gt;<span class="st"> </span>dds &lt;-<span class="st"> </span><span class="kw">DESeq</span>(dds)</code></pre></div>
 <pre class="output"><code>estimating size factors
 estimating dispersions
-gene-wise dispersion estimates
-mean-dispersion relationship
-NOTE: fitType=&#39;parametric&#39;, but the dispersion trend was not well captured by the
-  function: y = a/x + b, and a local regression fit was automatically substituted.
-  specify fitType=&#39;local&#39; or &#39;mean&#39; to avoid this message next time.
-final dispersion estimates
-fitting model and testing
-Warning message:
-In .local(object, ...) : same number of samples and coefficients to fit,
-  estimating dispersion by treating samples as replicates.
-  read the ?DESeq section on &#39;Experiments without replicates&#39;</code></pre>
-<p>Este error nos indica que DESeq2 ha aplicado un filtro aún más estricto ya que, debido a la falta de réplicas, no tiene manera de saber cuanta dispersión en los niveles de expresión se debe a variación biológica o a diferencia entre los distintos tratamientos.</p>
+Error in checkForExperimentalReplicates(object, modelMatrix) :
+
+  The design matrix has the same number of samples and coefficients to fit,
+  so estimation of dispersion is not possible. Treating samples
+  as replicates was deprecated in v1.20 and no longer supported since v1.22.</code></pre>
+<p>Este error nos indica que DESeq2 no nos permite realizar el análisis debido a la falta de réplicas; no tiene manera de saber cuanta dispersión en los niveles de expresión se debe a variación biológica o a diferencia entre los distintos tratamientos. Por lo tanto no podemos hacer expresión diferencial con estos datos.</p>
+<p>Realizaremos el análisis con un set de datos distinto que descargaremos así:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">wget</span> XXXXX GSE60450_Lactation-GenewiseCounts.txt</code></pre></div>
+<p id="check">CHECK</p>
+<p>Leemos las cuentas en R usando read.delim:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">&gt;<span class="st"> </span>countData &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="st">&quot;./Sp_counts_table_complete.txt&quot;</span>,<span class="dt">header=</span><span class="ot">FALSE</span>, <span class="dt">row.names=</span><span class="dv">1</span>)
+&gt;<span class="st"> </span><span class="kw">head</span>(countData)</code></pre></div>
+<pre class="output"><code>                V2    V3    V4    V5    V6    V7    V8    V9   V10   V11   V12
+SPAC1002.19     15    10     5     6     6     2     4     5     2     1     2
+SPAC1093.06c  6257  7345  6361  5570  3585  3388  9602  9742  7702  6697  2781
+SPAC10F6.01c     1     0     0     0     0     0     0     0     0     0     0
+SPAC10F6.05c   380   260   360   346   362   361   356   399   414   331   275
+SPAC11D3.18c    36    30   147   176   174   151     0     0     0     0     0
+SPAC11E3.06  19491 18797 27019 24121 19250 15293 23490 21142 26245 25419 10869
+              V13
+SPAC1002.19     4
+SPAC1093.06c 2802
+SPAC10F6.01c    0
+SPAC10F6.05c  260
+SPAC11D3.18c    0
+SPAC11E3.06  7484</code></pre>
+<p>c(“Sp.DG”,“Sp.DH”,“Sp.DI”,“Sp.DJ”,“Sp.DK”,“Sp.DL”,“Sp.LA”,“Sp.LB”,“Sp.LC”,“Sp.LD”,“Sp.LE”,“Sp.LF”)</p>
+<p>Y añadimos la descripción de cada una de las muestras. Este es el orden en el cual las “pegamos” usando el comando <code>paste</code>. Como ya mencionamos, en sus experimentos deberán cerciorarse de que este orden es el correcto.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">&gt;<span class="st"> </span>sample_info &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="st">&quot;./Sp_sample_info.txt&quot;</span>)
+<span class="co">#&gt; condition &lt;- factor(c(&quot;ds&quot;,&quot;hs&quot;,&quot;log&quot;,&quot;plat&quot;))</span>
+&gt;<span class="st"> </span>colData &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">row.names=</span><span class="kw">colnames</span>(countData), condition)
+&gt;<span class="st"> </span><span class="kw">head</span>(colData)</code></pre></div>
+<pre class="output"><code>   condition
+V2        ds
+V3        hs
+V4       log
+V5      plat</code></pre>
+<p>Una vez ensamblados nuestros datos podemos usar la función DESeqDataSetFromMatrix para ponerlo en el formato requerido por DESeq2:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">&gt;<span class="st"> </span>dds &lt;-<span class="st"> </span><span class="kw">DESeqDataSetFromMatrix</span>(<span class="dt">countData =</span> countData,
+                              <span class="dt">colData =</span> colData,
+                              <span class="dt">design =</span> ~<span class="st"> </span>CellType +<span class="st"> </span>Status )
+&gt;<span class="st"> </span>dds</code></pre></div>
+<pre class="output"><code>class: DESeqDataSet 
+dim: 200 4 
+exptData(0):
+assays(1): counts
+rownames(200): SPAC1002.19 SPAC1093.06c ... SPCC794.10 SPCP25A2.02c
+rowData metadata column names(0):
+colnames(4): V2 V3 V4 V5
+colData names(1): condition</code></pre>
+<p>Filtramos genes con muy muy baja expresión, en este caso todos aquellos que no tengan al menos una lectura. Nota: DESeq2 aplica otros filtros más estrictos por default.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">&gt;<span class="st"> </span>dds &lt;-<span class="st"> </span>dds[ <span class="kw">rowSums</span>(<span class="kw">counts</span>(dds)) &gt;<span class="st"> </span><span class="dv">1</span>, ]
+&gt;<span class="st"> </span>dds</code></pre></div>
+<pre class="output"><code>class: DESeqDataSet 
+dim: 198 4 
+exptData(0):
+assays(1): counts
+rownames(198): SPAC1002.19 SPAC1093.06c ... SPCC794.10 SPCP25A2.02c
+rowData metadata column names(0):
+colnames(4): V2 V3 V4 V5
+colData names(1): condition</code></pre>
+<p>La funcion DESeq realiza el análisis estándar de expresión diferencial, incluyendo los pasos de estimación de la distribución. Esta función genera una tabla con cambios de expresión en base log2, así como p-values y p-values ajustados por pruebas múltiples.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">&gt;<span class="st"> </span>dds &lt;-<span class="st"> </span><span class="kw">DESeq</span>(dds)</code></pre></div>
+<pre class="output"><code>estimating size factors
+estimating dispersions
+Error in checkForExperimentalReplicates(object, modelMatrix) :
+
+  The design matrix has the same number of samples and coefficients to fit,
+  so estimation of dispersion is not possible. Treating samples
+  as replicates was deprecated in v1.20 and no longer supported since v1.22.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dds</code></pre></div>
 <pre class="output"><code>class: DESeqDataSet 
 dim: 198 4 
@@ -240,6 +328,7 @@ res_log_vs_plat &lt;-<span class="st"> </span><span class="kw">results</span>(dd
 <h3 id="revisando-efectos-de-grupo-batch-effects">Revisando efectos de grupo (batch effects)</h3>
 <p>Un efecto de grupo es cuando hay una diferencia entre tratamientos no debido a cambios biológicos si no a la manera en que fue procesada la muestra.</p>
 <p>Para verificar los datos usamos transformaciones y visualizaciones. Como ejemplo, transformaremos los datos de expresión usando la transformación rlog. Estas transformaciones permiten visualizar mejor los datos aunque, como en todos los casos, es bueno verificar que nuestros datos cumplen con los supuestos requeridos. En este caso se requiere que los datos no difieran mucho entre las distintas condiciones.</p>
+<p id="check-install-libs">CHECK INSTALL LIBS</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rld &lt;-<span class="st"> </span><span class="kw">rlogTransformation</span>(dds, <span class="dt">blind=</span><span class="ot">FALSE</span>) 
 sampleDistsRLD &lt;-<span class="st"> </span><span class="kw">dist</span>(<span class="kw">t</span>(<span class="kw">assay</span>(rld)))
 <span class="kw">library</span>(<span class="st">&quot;RColorBrewer&quot;</span>)
