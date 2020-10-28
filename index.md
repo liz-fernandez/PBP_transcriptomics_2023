@@ -49,7 +49,7 @@ Esta mañana recibimos un correo de nuestro colaborador:
 	* [Práctica](03-mapping.html)
 5. Ensamble de transcriptomas guiado.
 	* [Video - Clase 5](https://www.dropbox.com/s/itlvtlhjaynns5a/clase_5_transcriptomica_bi_2020.mp4?dl=0)
-	* [Práctica](05_assembly_guided.html)	
+	* [Práctica](05-assembly_guided.html)	
 6. Análisis de expresión diferencial.
 	* [Video - Clase 6](https://www.dropbox.com/s/fgzqwlzdlukpeoi/clase_6_transcriptomica_bi_2020.mp4?dl=0)
 	
