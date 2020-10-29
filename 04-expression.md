@@ -484,7 +484,7 @@ plotMA(res, main="DESeq2", ylim=c(-2,2))
 dev.off()
 ~~~
 
-![MA Plot](fig/MA_plot-Sp.pdf)
+![MA Plot](fig/MA_plot-Sp.jpg)
 
 Como pueden ver estos resultados solo muestran la comparación entre las condiciones
 'plat' y 'ds'. Para extraer otros contrastes extraemos distintas parte de los 
@@ -563,7 +563,7 @@ pheatmap(sampleDistMatrixRLD,
 dev.off()
 ~~~
 
-![Samples Heatmap](fig/Heatmap_vstTransformed.pdf)
+![Samples Heatmap](fig/Heatmap_vstTransformed.jpg)
 
 Ahora imprimimos un análisis de componentes principales (PCA). 
 
@@ -573,7 +573,7 @@ plotPCA(vst, intgroup = c("Media","Condition"))
 dev.off()
 ~~~
 
-![Samples PCA](fig/Sp_Samples_PCA_vstTransformed.pdf)
+![Samples PCA](fig/Sp_Samples_PCA_vstTransformed.jpg)
 
 En esta gráfica hay una observación peculiar - ¿Qué podría estar ocurriendo? 
 
@@ -597,7 +597,7 @@ pheatmap(assay(vst)[select,], cluster_rows=FALSE, show_rownames=FALSE,
 dev.off()
 ~~~ 
 
-![Heatmap](fig/Heatmap_vstTransformed_20MostExpressed.pdf)
+![Heatmap](fig/Heatmap_vstTransformed_20MostExpressed.jpg)
 
 Ahora visualicemos los 70 genes diferenciales entre las condiciones "rich" and "starvation":
 
@@ -614,7 +614,7 @@ pheatmap(assay(vst)[rownames(DE_Genes_rich_vs_starvation),],  # Aqui estamos sel
 dev.off()
 ~~~ 
 
-![Heatmap](fig/Heatmap_vstTransformed_DEGenes.pdf)
+![Heatmap](fig/Heatmap_vstTransformed_DEGenes.jpg)
 
 Algo muy importante es que los datos pueden verse muy diferentes dependiendo de como se grafiquen, por eso no 
 utilizamos las gráficas para identificar "clusters" o genes de interés - siempre debemos basarnos en un criterio 

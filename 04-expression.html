@@ -327,7 +327,7 @@ low counts [2]     : 45, 31%
 <span class="kw">plotMA</span>(res, <span class="dt">main=</span><span class="st">&quot;DESeq2&quot;</span>, <span class="dt">ylim=</span><span class="kw">c</span>(-<span class="dv">2</span>,<span class="dv">2</span>))
 <span class="kw">dev.off</span>()</code></pre></div>
 <div class="figure">
-<embed src="fig/MA_plot-Sp.pdf" />
+<img src="fig/MA_plot-Sp.jpg" alt="MA Plot" />
 <p class="caption">MA Plot</p>
 </div>
 <p>Como pueden ver estos resultados solo muestran la comparación entre las condiciones ‘plat’ y ‘ds’. Para extraer otros contrastes extraemos distintas parte de los resultados guardados en dds usando la función <code>results</code>.</p>
@@ -374,7 +374,7 @@ colors &lt;-<span class="st"> </span><span class="kw">colorRampPalette</span>( <
          <span class="dt">col=</span>colors)
 <span class="kw">dev.off</span>()</code></pre></div>
 <div class="figure">
-<embed src="fig/Heatmap_vstTransformed.pdf" />
+<img src="fig/Heatmap_vstTransformed.jpg" alt="Samples Heatmap" />
 <p class="caption">Samples Heatmap</p>
 </div>
 <p>Ahora imprimimos un análisis de componentes principales (PCA).</p>
@@ -382,7 +382,7 @@ colors &lt;-<span class="st"> </span><span class="kw">colorRampPalette</span>( <
 <span class="kw">plotPCA</span>(vst, <span class="dt">intgroup =</span> <span class="kw">c</span>(<span class="st">&quot;Media&quot;</span>,<span class="st">&quot;Condition&quot;</span>))
 <span class="kw">dev.off</span>()</code></pre></div>
 <div class="figure">
-<embed src="fig/Sp_Samples_PCA_vstTransformed.pdf" />
+<img src="fig/Sp_Samples_PCA_vstTransformed.jpg" alt="Samples PCA" />
 <p class="caption">Samples PCA</p>
 </div>
 <p>En esta gráfica hay una observación peculiar - ¿Qué podría estar ocurriendo?</p>
@@ -397,7 +397,7 @@ df &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span cla
          <span class="dt">cluster_cols=</span><span class="ot">FALSE</span>, <span class="dt">annotation_col=</span>df)
 <span class="kw">dev.off</span>()</code></pre></div>
 <div class="figure">
-<embed src="fig/Heatmap_vstTransformed_20MostExpressed.pdf" />
+<img src="fig/Heatmap_vstTransformed_20MostExpressed.jpg" alt="Heatmap" />
 <p class="caption">Heatmap</p>
 </div>
 <p>Ahora visualicemos los 70 genes diferenciales entre las condiciones “rich” and “starvation”:</p>
@@ -412,7 +412,7 @@ df &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span cla
          <span class="dt">annotation_col=</span>df[,<span class="dv">2</span>:<span class="dv">4</span>])
 <span class="kw">dev.off</span>()</code></pre></div>
 <div class="figure">
-<embed src="fig/Heatmap_vstTransformed_DEGenes.pdf" />
+<img src="fig/Heatmap_vstTransformed_DEGenes.jpg" alt="Heatmap" />
 <p class="caption">Heatmap</p>
 </div>
 <p>Algo muy importante es que los datos pueden verse muy diferentes dependiendo de como se grafiquen, por eso no utilizamos las gráficas para identificar “clusters” o genes de interés - siempre debemos basarnos en un criterio estadísticos para evitar sesgos.</p>
