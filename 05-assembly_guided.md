@@ -33,6 +33,8 @@ Y después ejecutamos stringtie, para ensamblar un transcriptoma guiado para cad
 $ stringtie Sp_ds_sorted.bam -o Sp_ds_stringtie.gtf 
 ~~~ 
 
+Repite este comando para cada una de las condiciones restantes hs, log y plat. 
+
 Entonces estamos listos para mezclar los transcriptomas usando `stringtie merge`:
 
 ~~~ {.bash}

@@ -247,9 +247,9 @@ distintos tratamientos. Por lo tanto no podemos hacer expresión diferencial con
 Realizaremos el análisis con un set de datos distinto que descargaremos así:
 
 ~~~ {.bash}
-$ wget XXXXX GSE60450_Lactation-GenewiseCounts.txt
+$ wget https://liz-fernandez.github.io/PBI_transcriptomics_2020/DATA/Sp_counts_table_complete.txt
+$ wget https://liz-fernandez.github.io/PBI_transcriptomics_2020/DATA/Sp_sample_info.txt
 ~~~
-############ CHECK
 
 Leemos las cuentas en R usando read.delim:
 
@@ -275,26 +275,24 @@ SPAC11D3.18c    0
 SPAC11E3.06  7484
 ~~~ 
 
-c("Sp.DG","Sp.DH","Sp.DI","Sp.DJ","Sp.DK","Sp.DL","Sp.LA","Sp.LB","Sp.LC","Sp.LD","Sp.LE","Sp.LF")
-
 Y añadimos la descripción de cada una de las muestras. 
 Este es el orden en el cual las "pegamos" usando el comando `paste`. 
 Como ya mencionamos, en sus experimentos deberán cerciorarse de que este orden es 
 el correcto.
 
 ~~~ {.r}
-> sample_info <- read.delim("./Sp_sample_info.txt")
-#> condition <- factor(c("ds","hs","log","plat"))
-> colData <- data.frame(row.names=colnames(countData), condition)
+> colData <- read.delim("./Sp_sample_info.txt")
 > head(colData)
 ~~~
 
 ~~~ {.output}
-   condition
-V2        ds
-V3        hs
-V4       log
-V5      plat
+              FileName SampleName   Media Condition
+1 Sp.DG_ACTTGA_L002_R1      Sp.DG       rich    log
+2 Sp.DH_CAGATC_L002_R1      Sp.DH starvation    log
+3 Sp.DI_ACAGTG_L002_R1      Sp.DI starvation   plat
+4 Sp.DJ_CGATGT_L002_R1      Sp.DJ starvation   plat
+5 Sp.DK_TTAGGC_L002_R1      Sp.DK starvation     hs
+6 Sp.DL_ATCACG_L002_R1      Sp.DL starvation     hs
 ~~~ 
 
 Una vez ensamblados nuestros datos podemos usar la función DESeqDataSetFromMatrix para 
@@ -303,19 +301,18 @@ ponerlo en el formato requerido por DESeq2:
 ~~~ {.r}
 > dds <- DESeqDataSetFromMatrix(countData = countData,
                               colData = colData,
-                              design = ~ CellType + Status )
+                              design = ~ Media + Condition )
 > dds
 ~~~
 
 ~~~ {.output}
-class: DESeqDataSet 
-dim: 200 4 
-exptData(0):
+dim: 200 12
+metadata(1): version
 assays(1): counts
 rownames(200): SPAC1002.19 SPAC1093.06c ... SPCC794.10 SPCP25A2.02c
-rowData metadata column names(0):
-colnames(4): V2 V3 V4 V5
-colData names(1): condition
+rowData names(0):
+colnames(12): V2 V3 ... V12 V13
+colData names(4): FileName SampleName Media Condition
 ~~~
 
 Filtramos genes con muy muy baja expresión, en este caso todos aquellos que no tengan al
@@ -327,14 +324,14 @@ menos una lectura. Nota: DESeq2 aplica otros filtros más estrictos por default.
 ~~~
 
 ~~~ {.output}
-class: DESeqDataSet 
-dim: 198 4 
-exptData(0):
+class: DESeqDataSet
+dim: 146 12
+metadata(1): version
 assays(1): counts
-rownames(198): SPAC1002.19 SPAC1093.06c ... SPCC794.10 SPCP25A2.02c
-rowData metadata column names(0):
-colnames(4): V2 V3 V4 V5
-colData names(1): condition
+rownames(146): SPAC1002.19 SPAC1093.06c ... SPCC794.10 SPCP25A2.02c
+rowData names(0):
+colnames(12): V2 V3 ... V12 V13
+colData names(4): FileName SampleName Media Condition
 ~~~ 
 
 La funcion DESeq realiza el análisis estándar de expresión diferencial, 
@@ -349,26 +346,25 @@ así como p-values y p-values ajustados por pruebas múltiples.
 ~~~ {.output}
 estimating size factors
 estimating dispersions
-Error in checkForExperimentalReplicates(object, modelMatrix) :
-
-  The design matrix has the same number of samples and coefficients to fit,
-  so estimation of dispersion is not possible. Treating samples
-  as replicates was deprecated in v1.20 and no longer supported since v1.22.
+gene-wise dispersion estimates
+mean-dispersion relationship
+final dispersion estimates
+fitting model and testing
 ~~~
 
 ~~~ {.r}
-dds
+> dds
 ~~~
 
 ~~~ {.output}
-class: DESeqDataSet 
-dim: 198 4 
-exptData(0):
-assays(3): counts mu cooks
-rownames(198): SPAC1002.19 SPAC1093.06c ... SPCC794.10 SPCP25A2.02c
-rowData metadata column names(37): baseMean baseVar ... deviance maxCooks
-colnames(4): V2 V3 V4 V5
-colData names(2): condition sizeFactor
+class: DESeqDataSet
+dim: 146 12
+metadata(1): version
+assays(4): counts mu H cooks
+rownames(146): SPAC1002.19 SPAC1093.06c ... SPCC794.10 SPCP25A2.02c
+rowData names(30): baseMean baseVar ... deviance maxCooks
+colnames(12): V2 V3 ... V12 V13
+colData names(5): FileName SampleName Media Condition sizeFactor
 ~~~
 
 > ## Diseño multifactorial {.callout}
@@ -405,28 +401,48 @@ colData names(2): condition sizeFactor
 Podemos extraer los resultados usando la función res:
 
 ~~~ {.r}
-res <- results(dds)
-res
+> res <- results(dds)
+> res
 ~~~
+
 ~~~ {.output}
-log2 fold change (MAP): condition plat vs ds 
-Wald test p-value: condition plat vs ds 
-DataFrame with 6 rows and 6 columns
-              baseMean log2FoldChange     lfcSE       stat    pvalue      padj
-             <numeric>      <numeric> <numeric>  <numeric> <numeric> <numeric>
-SPAC1002.19   68.10299     1.37929086 1.0630096  1.2975338 0.1944476 0.9704666
-SPAC1093.06c  38.84823     0.06599578 0.6115834  0.1079097 0.9140673 0.9704666
-SPAC10F6.01c 368.22680    -0.80731941 0.9035895 -0.8934582 0.3716119 0.9704666
-SPAC10F6.05c  84.74091     0.83338935 0.8311666  1.0026743 0.3160180 0.9704666
-SPAC11D3.18c  16.79657    -0.27280407 0.7300479 -0.3736797 0.7086426 0.9704666
-SPAC11E3.06   10.98535    -2.00717671 1.0185420 -1.9706371 0.0487654 0.9704666
+log2 fold change (MLE): Condition plat vs hs
+Wald test p-value: Condition plat vs hs
+DataFrame with 146 rows and 6 columns
+                     baseMean     log2FoldChange             lfcSE
+                    <numeric>          <numeric>         <numeric>
+SPAC1002.19  4.89457178999425 -0.460608323181358 0.805416964949504
+SPAC1093.06c 5672.28872528616  0.620536746571423 0.202381540521687
+SPAC10F6.05c 343.532247082905 -0.225967126923073 0.123835854358009
+SPAC11D3.18c 54.5873729332635 -0.213881771098801  2.85191464522231
+SPAC11E3.06  19141.8791788776  0.589633334870796 0.162658793986188
+...                       ...                ...               ...
+SPCC736.05   1.16770368760024  0.503372494345891   1.4600169669698
+SPCC736.12c  877.447281097385 -0.355570380742308 0.227360578538931
+SPCC757.03c  440.248543141121 -0.440419439002333 0.346614951967857
+SPCC794.10   413.581224562799 -0.338525318153758 0.270403663791301
+SPCP25A2.02c 682.022930152721  0.360732526832397 0.378584434588906
+                            stat               pvalue                padj
+                       <numeric>            <numeric>           <numeric>
+SPAC1002.19   -0.571888032194897    0.567397832415822                  NA
+SPAC1093.06c    3.06617266066777  0.00216818070795727  0.0182488542919737
+SPAC10F6.05c   -1.82473103685951   0.0680416272225566   0.254526087017712
+SPAC11D3.18c -0.0749958528587479    0.940218011541381                  NA
+SPAC11E3.06     3.62497053138648 0.000288994403058294 0.00324315941209863
+...                          ...                  ...                 ...
+SPCC736.05     0.344771674394043    0.730266029436484                  NA
+SPCC736.12c     -1.5639051546547    0.117839843808318   0.325396013931216
+SPCC757.03c    -1.27063023825693    0.203860224277818     0.3974331536154
+SPCC794.10     -1.25192578165299    0.210596909297071   0.401326185641588
+SPCP25A2.02c   0.952845637259509    0.340668287387647    0.56405732829758
 ~~~
 
 Podemos obtener más información acerca de cada columna:
 
 ~~~ {.r}
-mcols(res)$description
+> mcols(res)$description
 ~~~
+
 ~~~ {.output}
 [1] "mean of normalized counts for all samples"   
 [2] "log2 fold change (MAP): condition plat vs ds"
@@ -436,32 +452,39 @@ mcols(res)$description
 [6] "BH adjusted p-values"
 ~~~ 
 
+La primera columna nos muestra las cuentas normalizadas de cada columna, 
+la segunda la razón de cambio en logaritmo base 2 entre las condiciones plat y ds, la tercera el error estándar entre estas condiciones. La otra columna que no es muy importante es la número 6, que nos muestra el valor p ajustado por pruebas múltiples (FDR). 
+
 La función `summary` nos proporciona un resumen de los indicadores de nuestros
 resultados.
 
 ~~~ {.r}
-summary(res)
+> summary(res)
 ~~~
+
 ~~~ {.output}
-out of 198 with nonzero total read count
+out of 146 with nonzero total read count
 adjusted p-value < 0.1
-LFC > 0 (up)     : 0, 0% 
-LFC < 0 (down)   : 0, 0% 
-outliers [1]     : 0, 0% 
-low counts [2]   : 0, 0% 
-(mean count < 0.7)
+LFC > 0 (up)       : 12, 8.2%
+LFC < 0 (down)     : 8, 5.5%
+outliers [1]       : 0, 0%
+low counts [2]     : 45, 31%
+(mean count < 60)
 [1] see 'cooksCutoff' argument of ?results
 [2] see 'independentFiltering' argument of ?results
 ~~~
 
-¿Qué nos sugieren estos resultados? Si vemos una gráfica MA vemos que no hay 
-ningún gen con expresión diferencial significativa:
+En breve tenemos 45 genes con pocas cuentas, 8 que bajan su expresión significativamente entre las condiciones plat y ds, y 12 que aumentan su expresión significativamente entre estos dos tratamientos. 
+
+¿Qué nos sugieren estos resultados? Si vemos una gráfica MA vemos pocos genes que se expresan de manera diferencial significativa:
 
 ~~~ {.r}
+pdf("MA_plot-Sp.pdf")
 plotMA(res, main="DESeq2", ylim=c(-2,2))
+dev.off()
 ~~~
 
-![MA Plot](fig/MA_plot.jpeg)
+![MA Plot](fig/MA_plot-Sp.pdf)
 
 Como pueden ver estos resultados solo muestran la comparación entre las condiciones
 'plat' y 'ds'. Para extraer otros contrastes extraemos distintas parte de los 
@@ -470,22 +493,38 @@ resultados guardados en dds usando la función `results`.
 Extraemos todas las combinaciones:
 
 ~~~ {.r}
-res_ds_vs_hs <- results(dds,contrast=c("condition","ds","hs"))
-res_ds_vs_log <- results(dds,contrast=c("condition","ds","log"))
-res_ds_vs_plat <- results(dds,contrast=c("condition","ds","plat"))
-res_hs_vs_log <- results(dds,contrast=c("condition","hs","log"))
-res_hs_vs_plat <- results(dds,contrast=c("condition","hs","plat"))
-res_log_vs_plat <- results(dds,contrast=c("condition","log","plat"))
+res_rich_vs_starvation <- results(dds,contrast=c("Media","rich","starvation"))
+res_log_vs_plat <- results(dds,contrast=c("Condition","log","plat"))
+res_log_vs_ds <- results(dds,contrast=c("Condition","log","hs"))
+res_plat_vs_hs <- results(dds,contrast=c("Condition","plat","hs"))
 ~~~
 
-Y los escribimos a archivos planos (Solo se muestra el ejemplo del primer archivo):
+Podemos revisar los resultados:
 
 ~~~ {.r}
-res_ds_vs_hs <- res_ds_vs_hs[order(res_ds_vs_hs$padj),]  # Ordenando
+summary(res_rich_vs_starvation)
+~~~
+
+~~~ {.output}
+out of 146 with nonzero total read count
+adjusted p-value < 0.1
+LFC > 0 (up)       : 33, 23%
+LFC < 0 (down)     : 37, 25%
+outliers [1]       : 0, 0%
+low counts [2]     : 0, 0%
+(mean count < 0)
+[1] see 'cooksCutoff' argument of ?results
+[2] see 'independentFiltering' argument of ?results
+~~~ 
+
+Y escribirlos a archivos planos (Solo se muestra el ejemplo del primer archivo):
+
+~~~ {.r}
+res_rich_vs_starvation <- res_ds_vs_hs[order(res_rich_vs_hs$starvation),]  # Ordenando por pajustada
 # Datos sin filtrar
-write.csv(as.data.frame(subset(res_ds_vs_hs)),file="Results_ds_vs_hs_unfiltered.csv", quote=FALSE)
+write.csv(as.data.frame(subset(res_rich_vs_starvation)),file="Results_rich_vs_starvation_unfiltered.csv", quote=FALSE)
 # Datos filtrados
-write.csv(as.data.frame(subset(res_ds_vs_hs, padj < 0.1)),file="Results_ds_vs_hs_padj0.05.csv", quote=FALSE)
+write.csv(as.data.frame(subset(res_rich_vs_starvation, padj < 0.1)),file="Results_rich_vs_starvation_padj0.05.csv", quote=FALSE)
 ~~~
 
 ### Revisando efectos de grupo (batch effects)
@@ -499,34 +538,44 @@ rlog. Estas transformaciones permiten visualizar mejor los datos aunque, como en
 los casos, es bueno verificar que nuestros datos cumplen con los supuestos requeridos.
 En este caso se requiere que los datos no difieran mucho entre las distintas condiciones. 
 
-####### CHECK INSTALL LIBS
 
 ~~~ {.r}
-rld <- rlogTransformation(dds, blind=FALSE) 
-sampleDistsRLD <- dist(t(assay(rld)))
+install.packages('pheatmap')
+library(pheatmap)
+~~~
+
+Realizamos una normalización (variance stabilizing normalization) para poder graficar los datos:
+
+~~~ {.r}
+vst <- varianceStabilizingTransformation(dds)
+sampleDistsRLD <- dist(t(assay(vst)))
 library("RColorBrewer")
-sampleDistMatrixRLD <- as.matrix(sampleDistsRLD)
-rownames(sampleDistMatrixRLD) <- paste(rld$condition, rld$type, sep="-")
-colnames(sampleDistMatrixRLD) <- NULL
+sampleDistMatrixVST <- as.matrix(sampleDistsRLD)
+rownames(sampleDistMatrixVST) <- paste(rld$condition, vst$type, sep="-")
+colnames(sampleDistMatrixVST) <- NULL
 
 colors <- colorRampPalette( rev(brewer.pal(9, "Blues")) )(255)
+pdf("Heatmap_vstTransformed.pdf",10,10)
 pheatmap(sampleDistMatrixRLD,
          clustering_distance_rows=sampleDistsRLD,
          clustering_distance_cols=sampleDistsRLD,
          col=colors)
+dev.off()
 ~~~
 
-![Samples Heatmap](fig/SampleHeatmap.jpeg)
+![Samples Heatmap](fig/Heatmap_vstTransformed.pdf)
 
 Ahora imprimimos un análisis de componentes principales (PCA). 
 
 ~~~ {.r}
-pdf("Sp_Samples_PCA_rlogTransformed.pdf",10,10)
-plotPCA(rld)
+pdf("Sp_Samples_PCA_vstTransformed.pdf",10,10)
+plotPCA(vst, intgroup = c("Media","Condition"))
 dev.off()
 ~~~
 
-![Samples PCA](fig/Sp_Samples_PCA_rlogTransformed.jpg)
+![Samples PCA](fig/Sp_Samples_PCA_vstTransformed.pdf)
+
+En esta gráfica hay una observación peculiar - ¿Qué podría estar ocurriendo? 
 
 ### Visualizando grupos de genes
 
@@ -539,15 +588,47 @@ estar concientes de los parámetros de visualización que cambian la escala de l
 Visualicemos los 20 genes más expresados en nuestro datos usando el paquete "pheatmap". 
 
 ~~~ {.r}
-install.packages("pheatmap")
-library("pheatmap")
 select <- order(rowMeans(counts(dds,normalized=TRUE)),decreasing=TRUE)[1:20]
 df <- as.data.frame(colData(dds))
-pheatmap(assay(rld)[select,], cluster_rows=FALSE, show_rownames=FALSE,
-+          cluster_cols=FALSE, annotation_col=df)
+
+pdf("Heatmap_vstTransformed_20MostExpressed.pdf",10,10)
+pheatmap(assay(vst)[select,], cluster_rows=FALSE, show_rownames=FALSE,
+         cluster_cols=FALSE, annotation_col=df)
+dev.off()
 ~~~ 
 
-![Heatmap](fig/Heatmap.jpeg)
+![Heatmap](fig/Heatmap_vstTransformed_20MostExpressed.pdf)
+
+Ahora visualicemos los 70 genes diferenciales entre las condiciones "rich" and "starvation":
+
+~~~ {.r}
+DE_Genes_rich_vs_starvation <- subset(res_rich_vs_starvation, padj < 0.1)
+
+pdf("Heatmap_vstTransformed_DEGenes.pdf",10,10)
+pheatmap(assay(vst)[rownames(DE_Genes_rich_vs_starvation),],  # Aqui estamos seleccionando los genes que estan en el set de datos de arriba
+         cluster_rows=TRUE, 
+         show_rownames=TRUE,
+         scale="row",
+         cluster_cols=FALSE, 
+         annotation_col=df[,2:4])
+dev.off()
+~~~ 
+
+![Heatmap](fig/Heatmap_vstTransformed_DEGenes.pdf)
+
+Algo muy importante es que los datos pueden verse muy diferentes dependiendo de como se grafiquen, por eso no 
+utilizamos las gráficas para identificar "clusters" o genes de interés - siempre debemos basarnos en un criterio 
+estadísticos para evitar sesgos. 
+
+Descargamos todos nuestros datos usando (reemplaza el número de contenedor con el de tu docker):
+
+~~~ {.bash}
+$ docker cp 53b2c8c89246:/usr/local/ANALYSIS/MAPPING/STRINGTIE/Heatmap_vstTransformed.pdf .
+$ docker cp 53b2c8c89246:/usr/local/ANALYSIS/MAPPING/STRINGTIE/Heatmap_vstTransformed_20MostExpressed.pdf .
+$ docker cp 53b2c8c89246:/usr/local/ANALYSIS/MAPPING/STRINGTIE/Heatmap_vstTransformed_DEGenes.pdf .
+$ docker cp 53b2c8c89246:/usr/local/ANALYSIS/MAPPING/STRINGTIE/MA_plot-Sp.pdf .
+$ docker cp 53b2c8c89246:/usr/local/ANALYSIS/MAPPING/STRINGTIE/Sp_Samples_PCA_vstTransformed.pdf .
+~~~ 
 
 Existen muchas otras opciones de análisis y visualizaciones, las cuales pueden
 consultar en la [Viñeta de DESeq2](https://www.bioconductor.org/packages/3.3/bioc/vignettes/DESeq2/inst/doc/DESeq2.pdf).

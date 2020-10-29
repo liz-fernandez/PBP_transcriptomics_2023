@@ -48,6 +48,7 @@ $ <span class="kw">cd</span> STRINGTIE/</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">samtools</span> sort ../Sp_ds.bam -o Sp_ds_sorted.bam</code></pre></div>
 <p>Y después ejecutamos stringtie, para ensamblar un transcriptoma guiado para cada una de nuestras muestras.</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">stringtie</span> Sp_ds_sorted.bam -o Sp_ds_stringtie.gtf </code></pre></div>
+<p>Repite este comando para cada una de las condiciones restantes hs, log y plat.</p>
 <p>Entonces estamos listos para mezclar los transcriptomas usando <code>stringtie merge</code>:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">stringtie</span> --merge Sp*gtf -o Sp_stringtie_merged.gtf</code></pre></div>
 <p>El grupo de transcritos combinados (merged) esta ahora en el archivo <code>Sp_stringtie_merged.gtf</code>. Este archivo es nuestro resultado final. Un archivo gtf es un formato de coordenadas genómicas jerárquico que nos permite saber dónde se ubican los genes en una referencia y su estructura (exones, intrones, CDS, etc). Una descripción más extensa de este archivo se encuentra <a href="https://www.ensembl.org/info/website/upload/gff.html">aquí</a>.</p>
