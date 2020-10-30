@@ -334,7 +334,7 @@ low counts [2]     : 45, 31%
 <p>Extraemos todas las combinaciones:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res_rich_vs_starvation &lt;-<span class="st"> </span><span class="kw">results</span>(dds,<span class="dt">contrast=</span><span class="kw">c</span>(<span class="st">&quot;Media&quot;</span>,<span class="st">&quot;rich&quot;</span>,<span class="st">&quot;starvation&quot;</span>))
 res_log_vs_plat &lt;-<span class="st"> </span><span class="kw">results</span>(dds,<span class="dt">contrast=</span><span class="kw">c</span>(<span class="st">&quot;Condition&quot;</span>,<span class="st">&quot;log&quot;</span>,<span class="st">&quot;plat&quot;</span>))
-res_log_vs_ds &lt;-<span class="st"> </span><span class="kw">results</span>(dds,<span class="dt">contrast=</span><span class="kw">c</span>(<span class="st">&quot;Condition&quot;</span>,<span class="st">&quot;log&quot;</span>,<span class="st">&quot;hs&quot;</span>))
+res_log_vs_hs &lt;-<span class="st"> </span><span class="kw">results</span>(dds,<span class="dt">contrast=</span><span class="kw">c</span>(<span class="st">&quot;Condition&quot;</span>,<span class="st">&quot;log&quot;</span>,<span class="st">&quot;hs&quot;</span>))
 res_plat_vs_hs &lt;-<span class="st"> </span><span class="kw">results</span>(dds,<span class="dt">contrast=</span><span class="kw">c</span>(<span class="st">&quot;Condition&quot;</span>,<span class="st">&quot;plat&quot;</span>,<span class="st">&quot;hs&quot;</span>))</code></pre></div>
 <p>Podemos revisar los resultados:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(res_rich_vs_starvation)</code></pre></div>
@@ -348,7 +348,7 @@ low counts [2]     : 0, 0%
 [1] see &#39;cooksCutoff&#39; argument of ?results
 [2] see &#39;independentFiltering&#39; argument of ?results</code></pre>
 <p>Y escribirlos a archivos planos (Solo se muestra el ejemplo del primer archivo):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res_rich_vs_starvation &lt;-<span class="st"> </span>res_ds_vs_hs[<span class="kw">order</span>(res_rich_vs_hs$starvation),]  <span class="co"># Ordenando por pajustada</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res_rich_vs_starvation &lt;-<span class="st"> </span>res_rich_vs_starvation[<span class="kw">order</span>(res_rich_vs_starvation$padj),]  <span class="co"># Ordenando por pajustada</span>
 <span class="co"># Datos sin filtrar</span>
 <span class="kw">write.csv</span>(<span class="kw">as.data.frame</span>(<span class="kw">subset</span>(res_rich_vs_starvation)),<span class="dt">file=</span><span class="st">&quot;Results_rich_vs_starvation_unfiltered.csv&quot;</span>, <span class="dt">quote=</span><span class="ot">FALSE</span>)
 <span class="co"># Datos filtrados</span>
@@ -363,7 +363,7 @@ low counts [2]     : 0, 0%
 sampleDistsRLD &lt;-<span class="st"> </span><span class="kw">dist</span>(<span class="kw">t</span>(<span class="kw">assay</span>(vst)))
 <span class="kw">library</span>(<span class="st">&quot;RColorBrewer&quot;</span>)
 sampleDistMatrixVST &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(sampleDistsRLD)
-<span class="kw">rownames</span>(sampleDistMatrixVST) &lt;-<span class="st"> </span><span class="kw">paste</span>(rld$condition, vst$type, <span class="dt">sep=</span><span class="st">&quot;-&quot;</span>)
+<span class="kw">rownames</span>(sampleDistMatrixVST) &lt;-<span class="st"> </span><span class="kw">paste</span>(vst$condition, vst$type, <span class="dt">sep=</span><span class="st">&quot;-&quot;</span>)
 <span class="kw">colnames</span>(sampleDistMatrixVST) &lt;-<span class="st"> </span><span class="ot">NULL</span>
 
 colors &lt;-<span class="st"> </span><span class="kw">colorRampPalette</span>( <span class="kw">rev</span>(<span class="kw">brewer.pal</span>(<span class="dv">9</span>, <span class="st">&quot;Blues&quot;</span>)) )(<span class="dv">255</span>)

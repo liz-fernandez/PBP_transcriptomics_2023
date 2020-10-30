@@ -495,7 +495,7 @@ Extraemos todas las combinaciones:
 ~~~ {.r}
 res_rich_vs_starvation <- results(dds,contrast=c("Media","rich","starvation"))
 res_log_vs_plat <- results(dds,contrast=c("Condition","log","plat"))
-res_log_vs_ds <- results(dds,contrast=c("Condition","log","hs"))
+res_log_vs_hs <- results(dds,contrast=c("Condition","log","hs"))
 res_plat_vs_hs <- results(dds,contrast=c("Condition","plat","hs"))
 ~~~
 
@@ -520,7 +520,7 @@ low counts [2]     : 0, 0%
 Y escribirlos a archivos planos (Solo se muestra el ejemplo del primer archivo):
 
 ~~~ {.r}
-res_rich_vs_starvation <- res_ds_vs_hs[order(res_rich_vs_hs$starvation),]  # Ordenando por pajustada
+res_rich_vs_starvation <- res_rich_vs_starvation[order(res_rich_vs_starvation$padj),]  # Ordenando por pajustada
 # Datos sin filtrar
 write.csv(as.data.frame(subset(res_rich_vs_starvation)),file="Results_rich_vs_starvation_unfiltered.csv", quote=FALSE)
 # Datos filtrados
@@ -551,7 +551,7 @@ vst <- varianceStabilizingTransformation(dds)
 sampleDistsRLD <- dist(t(assay(vst)))
 library("RColorBrewer")
 sampleDistMatrixVST <- as.matrix(sampleDistsRLD)
-rownames(sampleDistMatrixVST) <- paste(rld$condition, vst$type, sep="-")
+rownames(sampleDistMatrixVST) <- paste(vst$condition, vst$type, sep="-")
 colnames(sampleDistMatrixVST) <- NULL
 
 colors <- colorRampPalette( rev(brewer.pal(9, "Blues")) )(255)
