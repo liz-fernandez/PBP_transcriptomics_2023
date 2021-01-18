@@ -27,64 +27,63 @@
       <div class="row">
         <div class="col-md-10 col-md-offset-1">
                     <h1 class="title">Análisis transcriptómicos</h1>
-          <p>Estamos realizando un estudio transcriptómico para entender la expresion de genes en un microorganismo. Hemos logrado aislar RNA en distintas condiciones. Queremos realizar un análisis completo de la expresión diferencial de estos transcritos.</p>
-<p>Durante esta practica realizaremos el análisis desde identificar la calidad de las secuencias hasta medir si los cambios en expresión son significativos usando métodos estadísticos.</p>
-<p>Esta mañana recibimos un correo de nuestro colaborador:</p>
-<blockquote>
-<p>Dear collaborator,</p>
-<p>I have great news. All samples passed the QC and were successfully sequenced in our Hi-Seq 2000. You can download the data from the URL below. The md5sum files are also in the tar-ball.</p>
-<p><a href="https://drive.google.com/open?id=0B9ZVSRlHL8cIbm5EUXczdzM4a2M" class="uri">https://drive.google.com/open?id=0B9ZVSRlHL8cIbm5EUXczdzM4a2M</a></p>
-<p>Can’t wait to see if there are indeed major changes to the transcriptome!</p>
-<p>Happy data wranggling!</p>
-<p>Professor X</p>
-</blockquote>
-<section class="prereq panel panel-warning">
-<div class="panel-heading">
-<h2 id="conocimientos-previos"><span class="glyphicon glyphicon-education"></span>Conocimientos previos</h2>
-</div>
-<div class="panel-body">
-<p>Se espera que los estudiantes tengan alguna experiencia con la terminal, así con el uso del lenguaje de programación R.</p>
-</div>
-</section>
-<h3 id="temas">Temas</h3>
-<ol style="list-style-type: decimal">
-<li>Introducción a la transcriptómica y técnicas de secuenciación masiva.
-<ul>
-<li><a href="https://www.dropbox.com/s/hljqrft9iycyim7/clase_1_transcriptomica_bi_2020.mp4?dl=0">Video - Clase 1</a></li>
-</ul></li>
-<li>Control de calidad de datos de secuenciación masiva.
-<ul>
-<li><a href="https://www.dropbox.com/s/26domcnmutxlcfy/Clase_2_Transcriptomica_BI_2020.mp4?dl=0">Video - Clase 2</a></li>
-<li><a href="01-quality.html">Práctica</a></li>
-</ul></li>
-<li>Ensamble de transcriptomas <em>de novo</em>.
-<ul>
-<li><a href="https://www.dropbox.com/s/2ifbv3sde92tswj/clase_3_transcriptomica_bi_2020.mp4?dl=0f">Video - Clase 3</a></li>
-<li><a href="02-assembly_denovo.html">Práctica</a><br />
-</li>
-</ul></li>
-<li>Alineamiento de lecturas a genomas y transcriptomas.
-<ul>
-<li><a href="https://www.dropbox.com/s/j3gilmjw1ldq650/clase_4_transcriptomica_bi_2020.mp4?dl=0">Video - Clase 4</a></li>
-<li><a href="03-mapping.html">Práctica</a></li>
-</ul></li>
-<li>Ensamble de transcriptomas guiado.
-<ul>
-<li><a href="https://www.dropbox.com/s/itlvtlhjaynns5a/clase_5_transcriptomica_bi_2020.mp4?dl=0">Video - Clase 5</a></li>
-<li><a href="05-assembly_guided.html">Práctica</a><br />
-</li>
-</ul></li>
-<li>Análisis de expresión diferencial.
-<ul>
-<li><a href="https://www.dropbox.com/s/fgzqwlzdlukpeoi/clase_6_transcriptomica_bi_2020.mp4?dl=0">Video - Clase 6</a></li>
-<li><a href="04-expression.html">Práctica</a></li>
-</ul></li>
-</ol>
-<p>Prácticas basadas en el curso <a href="https://github.com/trinityrnaseq/RNASeq_Trinity_Tuxedo_Workshop/wiki">Trinity RNA-Seq Analysis Workshop</a>.</p>
-<ul>
-<li><a href="file_upload.html">Archivos a enviar</a></li>
-</ul>
-<!---
+          <!---
+Estamos realizando un estudio transcriptómico para entender la expresion de genes
+en un microorganismo. Hemos logrado aislar RNA en distintas condiciones. Queremos 
+realizar un análisis completo de la expresión diferencial de estos transcritos. 
+
+Durante esta practica realizaremos el análisis desde identificar la calidad de las secuencias
+hasta medir si los cambios en expresión son significativos usando métodos estadísticos.
+
+Esta mañana recibimos un correo de nuestro colaborador:
+
+>
+>Dear collaborator,
+>
+>I have great news. All samples passed the QC and were successfully sequenced in 
+>our Hi-Seq 2000. You can download the data from the URL below. The md5sum files are also 
+>in the tar-ball.  
+>
+>[https://drive.google.com/open?id=0B9ZVSRlHL8cIbm5EUXczdzM4a2M](https://drive.google.com/open?id=0B9ZVSRlHL8cIbm5EUXczdzM4a2M)
+>
+>Can’t wait to see if there are indeed major changes to the transcriptome! 
+>
+>Happy data wranggling!
+>
+>Professor X
+
+
+> ## Conocimientos previos {.prereq}
+>
+> Se espera que los estudiantes tengan alguna experiencia con la terminal,
+> así con el uso del lenguaje de programación R. 
+
+
+### Temas
+
+1. Introducción a la transcriptómica y técnicas de secuenciación masiva. 
+    * [Video - Clase 1](https://www.dropbox.com/s/hljqrft9iycyim7/clase_1_transcriptomica_bi_2020.mp4?dl=0)
+2. Control de calidad de datos de secuenciación masiva.
+    * [Video - Clase 2](https://www.dropbox.com/s/26domcnmutxlcfy/Clase_2_Transcriptomica_BI_2020.mp4?dl=0)
+    * [Práctica](01-quality.html)
+3. Ensamble de transcriptomas *de novo*.
+    * [Video - Clase 3](https://www.dropbox.com/s/2ifbv3sde92tswj/clase_3_transcriptomica_bi_2020.mp4?dl=0f)
+    * [Práctica](02-assembly_denovo.html)   
+4. Alineamiento de lecturas a genomas y transcriptomas.
+    * [Video - Clase 4](https://www.dropbox.com/s/j3gilmjw1ldq650/clase_4_transcriptomica_bi_2020.mp4?dl=0)
+    * [Práctica](03-mapping.html)
+5. Ensamble de transcriptomas guiado.
+    * [Video - Clase 5](https://www.dropbox.com/s/itlvtlhjaynns5a/clase_5_transcriptomica_bi_2020.mp4?dl=0)
+    * [Práctica](05-assembly_guided.html)   
+6. Análisis de expresión diferencial.
+    * [Video - Clase 6](https://www.dropbox.com/s/fgzqwlzdlukpeoi/clase_6_transcriptomica_bi_2020.mp4?dl=0)
+    * [Práctica](04-expression.html)
+    
+Prácticas basadas en el curso [Trinity RNA-Seq Analysis Workshop](https://github.com/trinityrnaseq/RNASeq_Trinity_Tuxedo_Workshop/wiki).
+
+* [Archivos a enviar](file_upload.html)
+        
+
 
 
 ![Diagrama de ensamble de transcriptomas](SLIDES/Transcriptomics_Workflow.png)

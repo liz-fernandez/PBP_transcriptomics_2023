@@ -3,6 +3,7 @@ layout: page
 title: Análisis transcriptómicos
 ---
 
+<!---
 Estamos realizando un estudio transcriptómico para entender la expresion de genes
 en un microorganismo. Hemos logrado aislar RNA en distintas condiciones. Queremos 
 realizar un análisis completo de la expresión diferencial de estos transcritos. 
@@ -58,7 +59,7 @@ Prácticas basadas en el curso [Trinity RNA-Seq Analysis Workshop](https://githu
 
 * [Archivos a enviar](file_upload.html)
 		
-<!---
+
 
 
 ![Diagrama de ensamble de transcriptomas](SLIDES/Transcriptomics_Workflow.png)
