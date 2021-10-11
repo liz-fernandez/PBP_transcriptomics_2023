@@ -24,7 +24,7 @@ $ docker pull lizfernandez/pbi_transcriptomics
 La imagen de Docker que debemos usar se inicia de la siguiente manera en una terminal nueva:
 
 ~~~ {.bash}
-$ docker run -i -t pbi_cinvestav/transcriptomics /bin/bash
+$ docker run -i -t lizfernandez/pbi_transcriptomics /bin/bash
 ~~~
 
 ## Descargando los datos
@@ -46,12 +46,14 @@ Sp_ds.left.fq.gz     Sp_genes.gtf       Sp_hs.left.fq.gz  Sp_log.left.fq.gz  Sp_
 ~~~
 
 Vamos a generar un directorio de trabajo en el directorio '/usr/local'
+
 ~~~ {.bash}
 $ cd ..
 $ mkdir ANALYSIS
 ~~~
 
 Y copiaremos los datos para trabajar:
+
 ~~~ {.bash}
 $ cd ANALYSIS
 $ cp /usr/local/data/FastQC_Short.tar.gz .

@@ -45,7 +45,7 @@
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">docker</span> pull lizfernandez/pbi_transcriptomics</code></pre></div>
 <h2 id="iniciando-la-imagen-de-docker">Iniciando la imagen de Docker</h2>
 <p>La imagen de Docker que debemos usar se inicia de la siguiente manera en una terminal nueva:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">docker</span> run -i -t pbi_cinvestav/transcriptomics /bin/bash</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">docker</span> run -i -t lizfernandez/pbi_transcriptomics /bin/bash</code></pre></div>
 <h2 id="descargando-los-datos">Descargando los datos</h2>
 <p>Lo primero que hacemos al recibir nuestros datos es descargarlos. Generalmente están en un formato comprimido llamado tar. Para su conveniencia los datos están cargados en el directorio:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cd</span> /usr/local/data</code></pre></div>
@@ -53,8 +53,12 @@
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">ls</span></code></pre></div>
 <pre class="output"><code>FastQC_Short.tar.gz  Sp_ds.right.fq.gz  Sp_genome.fa.gz   Sp_hs.right.fq.gz  Sp_log.right.fq.gz  Sp_plat.right.fq.gz
 Sp_ds.left.fq.gz     Sp_genes.gtf       Sp_hs.left.fq.gz  Sp_log.left.fq.gz  Sp_plat.left.fq.gz</code></pre>
-<p>Vamos a generar un directorio de trabajo en el directorio ‘/usr/local’ <sub>~</sub> {.bash} $ cd .. $ mkdir ANALYSIS <sub>~</sub></p>
-<p>Y copiaremos los datos para trabajar: <sub>~</sub> {.bash} $ cd ANALYSIS $ cp /usr/local/data/FastQC_Short.tar.gz . <sub>~</sub></p>
+<p>Vamos a generar un directorio de trabajo en el directorio ‘/usr/local’</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cd</span> ..
+$ <span class="kw">mkdir</span> ANALYSIS</code></pre></div>
+<p>Y copiaremos los datos para trabajar:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cd</span> ANALYSIS
+$ <span class="kw">cp</span> /usr/local/data/FastQC_Short.tar.gz .</code></pre></div>
 <p>Podemos descomprimir los datos usando ese mismo comando:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">tar</span> -xvf FastQC_Short.tar.gz</code></pre></div>
 <p>Este comando descomprime un directorio llamado <code>FastQC_Short</code>. Entramos en ese directorio:</p>

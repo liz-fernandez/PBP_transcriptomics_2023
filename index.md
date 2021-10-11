@@ -3,7 +3,6 @@ layout: page
 title: Análisis transcriptómicos
 ---
 
-<!---
 Estamos realizando un estudio transcriptómico para entender la expresion de genes
 en un microorganismo. Hemos logrado aislar RNA en distintas condiciones. Queremos 
 realizar un análisis completo de la expresión diferencial de estos transcritos. 
@@ -38,39 +37,10 @@ Esta mañana recibimos un correo de nuestro colaborador:
 ### Temas
 
 1. Introducción a la transcriptómica y técnicas de secuenciación masiva. 
-	* [Video - Clase 1](https://www.dropbox.com/s/hljqrft9iycyim7/clase_1_transcriptomica_bi_2020.mp4?dl=0)
 2. Control de calidad de datos de secuenciación masiva.
-	* [Video - Clase 2](https://www.dropbox.com/s/26domcnmutxlcfy/Clase_2_Transcriptomica_BI_2020.mp4?dl=0)
-	* [Práctica](01-quality.html)
 3. Ensamble de transcriptomas *de novo*.
-	* [Video - Clase 3](https://www.dropbox.com/s/2ifbv3sde92tswj/clase_3_transcriptomica_bi_2020.mp4?dl=0f)
-	* [Práctica](02-assembly_denovo.html)	
 4. Alineamiento de lecturas a genomas y transcriptomas.
-	* [Video - Clase 4](https://www.dropbox.com/s/j3gilmjw1ldq650/clase_4_transcriptomica_bi_2020.mp4?dl=0)
-	* [Práctica](03-mapping.html)
 5. Ensamble de transcriptomas guiado.
-	* [Video - Clase 5](https://www.dropbox.com/s/itlvtlhjaynns5a/clase_5_transcriptomica_bi_2020.mp4?dl=0)
-	* [Práctica](05-assembly_guided.html)	
 6. Análisis de expresión diferencial.
-	* [Video - Clase 6](https://www.dropbox.com/s/fgzqwlzdlukpeoi/clase_6_transcriptomica_bi_2020.mp4?dl=0)
-	* [Práctica](04-expression.html)
-	
-Prácticas basadas en el curso [Trinity RNA-Seq Analysis Workshop](https://github.com/trinityrnaseq/RNASeq_Trinity_Tuxedo_Workshop/wiki).
-
-* [Archivos a enviar](file_upload.html)
-		
-
-
-
-![Diagrama de ensamble de transcriptomas](SLIDES/Transcriptomics_Workflow.png)
-
-
-* [Proyecto final](X.html)
-
-
---->
-
-
-
 
 
