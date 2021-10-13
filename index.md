@@ -37,8 +37,10 @@ Esta mañana recibimos un correo de nuestro colaborador:
 ### Temas
 
 1. Introducción a la transcriptómica y técnicas de secuenciación masiva. 
-        * [Video - Clase 1](https://www.dropbox.com/s/si9qwnqec5rsmrn/Clase_1_Transcriptomica_BI_2020.mp4?dl=0)
+	* [Video - Clase 1](https://www.dropbox.com/s/si9qwnqec5rsmrn/Clase_1_Transcriptomica_BI_2021.mp4?dl=0)
 2. Control de calidad de datos de secuenciación masiva.
+	* [Video - Clase 2](https://www.dropbox.com/s/1fdjnciue25o1dd/Clase_2_Transcriptomica_BI_2021.mp4?dl=0)
+	* [Practica](01-quality.html)
 3. Ensamble de transcriptomas *de novo*.
 4. Alineamiento de lecturas a genomas y transcriptomas.
 5. Ensamble de transcriptomas guiado.
