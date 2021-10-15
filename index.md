@@ -42,6 +42,8 @@ Esta mañana recibimos un correo de nuestro colaborador:
 	* [Video - Clase 2](https://www.dropbox.com/s/1fdjnciue25o1dd/Clase_2_Transcriptomica_BI_2021.mp4?dl=0)
 	* [Practica](01-quality.html)
 3. Ensamble de transcriptomas *de novo*.
+	* [Video - Clase 3](https://www.dropbox.com/s/8g6id88zkoomz6f/Clase_3_Transcriptomica_BI_2021.mp4?dl=0)
+	* [Practica](02-assembly_denovo.html)
 4. Alineamiento de lecturas a genomas y transcriptomas.
 5. Ensamble de transcriptomas guiado.
 6. Análisis de expresión diferencial.
