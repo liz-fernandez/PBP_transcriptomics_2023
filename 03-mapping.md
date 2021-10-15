@@ -447,7 +447,7 @@ $ samtools view Sp_log.bam | head
 > prácticas subsecuentes. 
 >
 
-> ## Tarea 2 - Alineando las lecturas filtradas al transcriptoma {.challenge}
+> ## Tarea 2 (Opcional) - Alineando las lecturas filtradas al transcriptoma {.challenge}
 >
 > Hemos alineado las lecturas al genoma pero queremos alinearlas también directamente
 > al transcriptoma. Revisa el manual de HISAT2 y usar las opciones

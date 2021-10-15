@@ -45,6 +45,8 @@ Esta mañana recibimos un correo de nuestro colaborador:
 	* [Video - Clase 3](https://www.dropbox.com/s/8g6id88zkoomz6f/Clase_3_Transcriptomica_BI_2021.mp4?dl=0)
 	* [Practica](02-assembly_denovo.html)
 4. Alineamiento de lecturas a genomas y transcriptomas.
+	* [Video - Clase 4](https://www.dropbox.com/s/clljr07subkdwnz/Clase_4_Transcriptomica_BI_2021.mp4?dl=0)
+	* [Practica](03-mapping.html)
 5. Ensamble de transcriptomas guiado.
 6. Análisis de expresión diferencial.
 
