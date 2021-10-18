@@ -48,6 +48,8 @@ Esta mañana recibimos un correo de nuestro colaborador:
 	* [Video - Clase 4](https://www.dropbox.com/s/clljr07subkdwnz/Clase_4_Transcriptomica_BI_2021.mp4?dl=0)
 	* [Practica](03-mapping.html)
 5. Ensamble de transcriptomas guiado.
+	* [Video - Clase 5](https://www.dropbox.com/s/c6rmzluwxck7x3g/Clase_5_Transcriptomica_BI_2021.mp4?dl=0)
+	* [Practica](05-assembly_guided.html)
 6. Análisis de expresión diferencial.
 
 
