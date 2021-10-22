@@ -57,7 +57,7 @@ $ <span class="kw">cd</span> DESEQ2/</code></pre></div>
 <h2 id="contando-lecturas">Contando lecturas</h2>
 <p>El primer paso es contar lecturas. Tanto DESeq2 como otros programas que usan la distribución negativa binomial utilizan conteos <strong>crudos</strong> (raw). Esto se refiere la número de lecturas que alinean a un transcrito específico sin sufrir ningún tipo de transformación. Como vieron en la clase pasada, esto se debe a que el programa estima un factor de normalización. Si usamos datos previamente normalizados estaremos violando los supuestos.</p>
 <p>Descargaremos la anotación de los de <em>Schizosaccharomyces pombe</em> genes de aquí:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">wget</span> https://liz-fernandez.github.io/PBI_transcriptomics_2020/DATA/Sp_genes.gtf</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">wget</span> https://liz-fernandez.github.io/PBI_transcriptomics_2021/DATA/Sp_genes.gtf</code></pre></div>
 <p>Usaremos el programa <a href="https://pypi.python.org/packages/source/H/HTSeq/">HTSeq</a>. Ya se encuentra instalado en Docker.</p>
 <p>Este programa cuenta el número de lecturas que alinean con cada gen anotado en un archivo de referencia. Nosotros le proporcionaremos nuestro archivo <code>Sp_genes.gtf</code>.</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">htseq-count</span> -f bam -s no -r pos Sp_ds_sorted.bam /usr/local/data/Sp_genes.gtf <span class="kw">&gt;</span> Sp_ds.counts 
@@ -177,7 +177,7 @@ Error in checkForExperimentalReplicates(object, modelMatrix) :
   as replicates was deprecated in v1.20 and no longer supported since v1.22.</code></pre>
 <p>Este error nos indica que DESeq2 no nos permite realizar el análisis debido a la falta de réplicas; no tiene manera de saber cuanta dispersión en los niveles de expresión se debe a variación biológica o a diferencia entre los distintos tratamientos. Por lo tanto no podemos hacer expresión diferencial con estos datos.</p>
 <p>Realizaremos el análisis con un set de datos distinto que descargaremos así:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">wget</span> https://liz-fernandez.github.io/PBI_transcriptomics_2020/DATA/Sp_counts_table_complete.txt
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">wget</span> https://liz-fernandez.github.io/PBI_transcriptomics_2021/DATA/Sp_counts_table_complete.txt
 $ <span class="kw">wget</span> https://liz-fernandez.github.io/PBI_transcriptomics_2020/DATA/Sp_sample_info.txt</code></pre></div>
 <p>Leemos las cuentas en R usando read.delim:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">&gt;<span class="st"> </span>countData &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="st">&quot;./Sp_counts_table_complete.txt&quot;</span>,<span class="dt">header=</span><span class="ot">FALSE</span>, <span class="dt">row.names=</span><span class="dv">1</span>)
