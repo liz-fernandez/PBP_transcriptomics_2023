@@ -54,7 +54,8 @@ Esta mañana recibimos un correo de nuestro colaborador:
 	* [Video - Clase 6](https://www.dropbox.com/s/uzk28uvse2bjblt/Clase_6_Transcriptomica_BI_2021.mp4?dl=0)
 	* [PrA!ctica](04-expression.html)
 
-PrA!cticas basadas en el curso [Trinity RNA-Seq Analysis Workshop](https://github.com/trinityrnaseq/RNASeq_Trinity_Tuxedo_Workshop/wiki).
+Prácticas basadas en el curso [Trinity RNA-Seq Analysis Workshop](https://github.com/trinityrnaseq/RNASeq_Trinity_Tuxedo_Workshop/wiki).
 
 ![Diagrama de ensamble de transcriptomas](SLIDES/Transcriptomics_Workflow.png)
 
+* [Archivos a enviar](file_upload.html)

@@ -17,6 +17,6 @@ Los archivos que necesito que me envíen son los siguientes:
 	
 Deberán subir todos estos archivos a OneDrive y enviarme el link a mi correo 
 selene.fernandez.valverde at gmail com antes del final del día 
-Viernes 6 de Noviembre. Les sugiero me envíen todo al menos un día antes, porque si su correo 
+Viernes 29 de Octubre. Les sugiero me envíen todo al menos un día antes, porque si su correo 
 llega con retraso, no se tomará en cuenta. 
 
