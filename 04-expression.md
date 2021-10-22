@@ -56,7 +56,7 @@ $ htseq-count -f bam -s no -r pos Sp_plat_sorted.bam /usr/local/data/Sp_genes.gt
 Veamos uno de los archivos de cuentas, primero las primeras 10 líneas:
 
 ~~~ {.bash}
-$ head Sp_ds.count
+$ head Sp_ds.counts
 ~~~
 
 ~~~ {.output}
@@ -75,7 +75,7 @@ SPAC12B10.14c	70
 Y las últimas 10 líneas:
 
 ~~~ {.bash}
-$ tail Sp_ds.count
+$ tail Sp_ds.counts
 ~~~
 
 ~~~ {.output}

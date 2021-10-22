@@ -40,19 +40,19 @@ Esta mañana recibimos un correo de nuestro colaborador:
 	* [Video - Clase 1](https://www.dropbox.com/s/si9qwnqec5rsmrn/Clase_1_Transcriptomica_BI_2021.mp4?dl=0)
 2. Control de calidad de datos de secuenciación masiva.
 	* [Video - Clase 2](https://www.dropbox.com/s/1fdjnciue25o1dd/Clase_2_Transcriptomica_BI_2021.mp4?dl=0)
-	* [Practica](01-quality.html)
+	* [Práctica](01-quality.html)
 3. Ensamble de transcriptomas *de novo*.
 	* [Video - Clase 3](https://www.dropbox.com/s/8g6id88zkoomz6f/Clase_3_Transcriptomica_BI_2021.mp4?dl=0)
-	* [Practica](02-assembly_denovo.html)
+	* [Práctica](02-assembly_denovo.html)
 4. Alineamiento de lecturas a genomas y transcriptomas.
 	* [Video - Clase 4](https://www.dropbox.com/s/clljr07subkdwnz/Clase_4_Transcriptomica_BI_2021.mp4?dl=0)
-	* [Practica](03-mapping.html)
+	* [Práctica](03-mapping.html)
 5. Ensamble de transcriptomas guiado.
 	* [Video - Clase 5](https://www.dropbox.com/s/c6rmzluwxck7x3g/Clase_5_Transcriptomica_BI_2021.mp4?dl=0)
-	* [Practica](05-assembly_guided.html)
+	* [Práctica](05-assembly_guided.html)
 6. Análisis de expresión diferencial.
 	* [Video - Clase 6](https://www.dropbox.com/s/uzk28uvse2bjblt/Clase_6_Transcriptomica_BI_2021.mp4?dl=0)
-	* [PrA!ctica](04-expression.html)
+	* [Práctica](04-expression.html)
 
 Prácticas basadas en el curso [Trinity RNA-Seq Analysis Workshop](https://github.com/trinityrnaseq/RNASeq_Trinity_Tuxedo_Workshop/wiki).
 
