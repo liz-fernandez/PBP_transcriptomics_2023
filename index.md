@@ -43,6 +43,8 @@ Esta mañana recibimos un correo de nuestro colaborador:
 	* [Práctica](02-assembly_denovo.html)
 4. Alineamiento de lecturas a genomas y transcriptomas.
 	* [Práctica](03-mapping.html)
+5. Ensamble de transcriptomas guiado.
+	* [Práctica](05-assembly_guided.html)
 
 <!--
 1. Introducción a la transcriptómica y técnicas de secuenciación masiva. 
