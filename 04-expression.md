@@ -37,7 +37,7 @@ previamente normalizados estaremos violando los supuestos.
 Descargaremos la anotación de los de *Schizosaccharomyces pombe* genes de aquí:
 
 ~~~ {.bash}
-$ wget https://liz-fernandez.github.io/PBI_transcriptomics_2021/DATA/Sp_genes.gtf
+$ wget https://liz-fernandez.github.io/PBI_transcriptomics_2022/DATA/Sp_genes.gtf
 ~~~
 
 Usaremos el programa [HTSeq](https://pypi.python.org/packages/source/H/HTSeq/). Ya se encuentra 
@@ -247,8 +247,8 @@ distintos tratamientos. Por lo tanto no podemos hacer expresión diferencial con
 Realizaremos el análisis con un set de datos distinto que descargaremos así:
 
 ~~~ {.bash}
-$ wget https://liz-fernandez.github.io/PBI_transcriptomics_2021/DATA/Sp_counts_table_complete.txt
-$ wget https://liz-fernandez.github.io/PBI_transcriptomics_2020/DATA/Sp_sample_info.txt
+$ wget https://liz-fernandez.github.io/PBI_transcriptomics_2022/DATA/Sp_counts_table_complete.txt
+$ wget https://liz-fernandez.github.io/PBI_transcriptomics_2022/DATA/Sp_sample_info.txt
 ~~~
 
 Leemos las cuentas en R usando read.delim:
