@@ -36,25 +36,6 @@ Esta mañana recibimos un correo de nuestro colaborador:
 
 ### Temas
 
-1. Introducción a la transcriptómica y técnicas de secuenciación masiva. 
-2. Control de calidad de datos de secuenciación masiva.
-	* [Práctica](01-quality.html)
-3. Ensamble de transcriptomas *de novo*.
-	* [Práctica](02-assembly_denovo.html)
-4. Alineamiento de lecturas a genomas y transcriptomas.
-	* [Práctica](03-mapping.html)
-5. Ensamble de transcriptomas guiado.
-	* [Práctica](05-assembly_guided.html)
-6. Análisis de expresión diferencial.
-	* [Video - Clase 6](https://www.dropbox.com/s/uzk28uvse2bjblt/Clase_6_Transcriptomica_BI_2021.mp4?dl=0)
-	* [Práctica](04-expression.html)
-
-[Proyecto Final](final_project.html)
-
-Prácticas basadas en el curso [Trinity RNA-Seq Analysis Workshop](https://github.com/trinityrnaseq/RNASeq_Trinity_Tuxedo_Workshop/wiki).
-
-![Diagrama de ensamble de transcriptomas](SLIDES/Transcriptomics_Workflow.png)
-
 
 <!--
 1. Introducción a la transcriptómica y técnicas de secuenciación masiva. 
@@ -80,5 +61,6 @@ Prácticas basadas en el curso [Trinity RNA-Seq Analysis Workshop](https://githu
 ![Diagrama de ensamble de transcriptomas](SLIDES/Transcriptomics_Workflow.png)
 
 * [Archivos a enviar](file_upload.html)
+[Proyecto Final](final_project.html)
 
 -->
