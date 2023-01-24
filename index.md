@@ -19,7 +19,7 @@ Esta mañana recibimos un correo de nuestro colaborador:
 >our Hi-Seq 2000. You can download the data from the URL below. The md5sum files are also 
 >in the tar-ball.  
 >
->[https://drive.google.com/open?id=0B9ZVSRlHL8cIbm5EUXczdzM4a2M](https://drive.google.com/open?id=0B9ZVSRlHL8cIbm5EUXczdzM4a2M)
+> LINK
 >
 >Can’t wait to see if there are indeed major changes to the transcriptome! 
 >
