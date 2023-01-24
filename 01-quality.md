@@ -444,7 +444,7 @@ Veamos como funciona. El software ya está instalado en el contenedor.
 Regresemos a la carpeta donde están nuestro archivos fastq ('/usr/local/ANALYSIS/FastQC_Short').
 
 ~~~ {.bash}
-$ cd ../..
+$ cd ..
 ~~~
 
 La calidad de nuestras secuencias de prueba es bastante buena, pero vimos que la calidad
