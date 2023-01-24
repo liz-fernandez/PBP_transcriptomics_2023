@@ -20,14 +20,14 @@ cd FASTQ_Complete
 Y descargaremos los siguientes archivos fastq usando wget (ya están en el directorio '/usr/local/data'):
 
 ~~~ {.bash}
-$ wget https://liz-fernandez.github.io/PBI_transcriptomics/datasets/Sp_ds.left.fq.gz 
-$ wget https://liz-fernandez.github.io/PBI_transcriptomics/datasets/Sp_ds.right.fq.gz
-$ wget https://liz-fernandez.github.io/PBI_transcriptomics/datasets/Sp_hs.right.fq.gz 
-$ wget https://liz-fernandez.github.io/PBI_transcriptomics/datasets/Sp_hs.left.fq.gz   
-$ wget https://liz-fernandez.github.io/PBI_transcriptomics/datasets/Sp_plat.left.fq.gz
-$ wget https://liz-fernandez.github.io/PBI_transcriptomics/datasets/Sp_plat.right.fq.gz
-$ wget https://liz-fernandez.github.io/PBI_transcriptomics/datasets/Sp_log.left.fq.gz  
-$ wget https://liz-fernandez.github.io/PBI_transcriptomics/datasets/Sp_log.right.fq.gz
+$ wget https://liz-fernandez.github.io/PBP_transcriptomics_2023/datasets/Sp_ds.left.fq.gz 
+$ wget https://liz-fernandez.github.io/PBP_transcriptomics_2023/datasets/Sp_ds.right.fq.gz
+$ wget https://liz-fernandez.github.io/PBP_transcriptomics_2023/datasets/Sp_hs.right.fq.gz 
+$ wget https://liz-fernandez.github.io/PBP_transcriptomics_2023/datasets/Sp_hs.left.fq.gz   
+$ wget https://liz-fernandez.github.io/PBP_transcriptomics_2023/datasets/Sp_plat.left.fq.gz
+$ wget https://liz-fernandez.github.io/PBP_transcriptomics_2023/datasets/Sp_plat.right.fq.gz
+$ wget https://liz-fernandez.github.io/PBP_transcriptomics_2023/datasets/Sp_log.left.fq.gz  
+$ wget https://liz-fernandez.github.io/PBP_transcriptomics_2023/datasets/Sp_log.right.fq.gz
 ~~~
 
 Exploremos las lecturas en cada archivo usando un ciclo for:
