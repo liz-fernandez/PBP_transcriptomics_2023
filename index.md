@@ -47,12 +47,12 @@ Esta mañana recibimos un correo de nuestro colaborador:
 4. Alineamiento de lecturas a genomas y transcriptomas.
 	* [Presentación](SLIDES/PBP_23_Clase_4.pdf)
 	* [Práctica](03-mapping.html)
+5. Ensamble de transcriptomas guiado.
+	* [Presentación](SLIDES/PBP_23_Clase_5.pdf)
+	* [Práctica](05-assembly_guided.html)
 
 
 <!--
-5. Ensamble de transcriptomas guiado.
-	* [Video - Clase 5](https://www.dropbox.com/s/c6rmzluwxck7x3g/Clase_5_Transcriptomica_BI_2021.mp4?dl=0)
-	* [Práctica](05-assembly_guided.html)
 6. Análisis de expresión diferencial.
 	* [Video - Clase 6](https://www.dropbox.com/s/uzk28uvse2bjblt/Clase_6_Transcriptomica_BI_2021.mp4?dl=0)
 	* [Práctica](04-expression.html)
