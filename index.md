@@ -37,15 +37,15 @@ Esta mañana recibimos un correo de nuestro colaborador:
 ### Temas
 
 1. Introducción a la transcriptómica y técnicas de secuenciación masiva. 
-	* [Presentación](/SLIDES/PBP_23_Clase_1.pdf)
+	* [Presentación](SLIDES/PBP_23_Clase_1.pdf)
 2. Control de calidad de datos de secuenciación masiva.
-	* [Presentación](/SLIDES/PBP_23_Clase_2.pdf)
+	* [Presentación](SLIDES/PBP_23_Clase_2.pdf)
 	* [Práctica](01-quality.html)
 3. Ensamble de transcriptomas *de novo*.
-	* [Presentación](/SLIDES/PBP_23_Clase_3.pdf)
+	* [Presentación](SLIDES/PBP_23_Clase_3.pdf)
 	* [Práctica](02-assembly_denovo.html)
 4. Alineamiento de lecturas a genomas y transcriptomas.
-	* [Presentación](/SLIDES/PBP_23_Clase_4.pdf)
+	* [Presentación](SLIDES/PBP_23_Clase_4.pdf)
 	* [Práctica](03-mapping.html)
 
 
