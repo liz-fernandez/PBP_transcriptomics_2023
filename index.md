@@ -44,12 +44,12 @@ Esta mañana recibimos un correo de nuestro colaborador:
 3. Ensamble de transcriptomas *de novo*.
 	* [Presentación](/SLIDES/PBP_23_Clase_3.pdf)
 	* [Práctica](02-assembly_denovo.html)
+4. Alineamiento de lecturas a genomas y transcriptomas.
+	* [Presentación](/SLIDES/PBP_23_Clase_4.pdf)
+	* [Práctica](03-mapping.html)
 
 
 <!--
-4. Alineamiento de lecturas a genomas y transcriptomas.
-	* [Video - Clase 4](https://www.dropbox.com/s/clljr07subkdwnz/Clase_4_Transcriptomica_BI_2021.mp4?dl=0)
-	* [Práctica](03-mapping.html)
 5. Ensamble de transcriptomas guiado.
 	* [Video - Clase 5](https://www.dropbox.com/s/c6rmzluwxck7x3g/Clase_5_Transcriptomica_BI_2021.mp4?dl=0)
 	* [Práctica](05-assembly_guided.html)
