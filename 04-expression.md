@@ -548,15 +548,15 @@ Realizamos una normalización (variance stabilizing normalization) para poder gr
 
 ~~~ {.r}
 vst <- varianceStabilizingTransformation(dds)
-sampleDistsRLD <- dist(t(assay(vst)))
+sampleDistsVST <- dist(t(assay(vst)))
 library("RColorBrewer")
-sampleDistMatrixVST <- as.matrix(sampleDistsRLD)
+sampleDistMatrixVST <- as.matrix(sampleDistsVST)
 rownames(sampleDistMatrixVST) <- paste(vst$condition, vst$type, sep="-")
 colnames(sampleDistMatrixVST) <- NULL
 
 colors <- colorRampPalette( rev(brewer.pal(9, "Blues")) )(255)
 pdf("Heatmap_vstTransformed.pdf",10,10)
-pheatmap(sampleDistMatrixRLD,
+pheatmap(sampleDistMatrixVST,
          clustering_distance_rows=sampleDistsRLD,
          clustering_distance_cols=sampleDistsRLD,
          col=colors)

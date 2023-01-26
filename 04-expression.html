@@ -361,15 +361,15 @@ low counts [2]     : 0, 0%
 <span class="kw">library</span>(pheatmap)</code></pre></div>
 <p>Realizamos una normalización (variance stabilizing normalization) para poder graficar los datos:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vst &lt;-<span class="st"> </span><span class="kw">varianceStabilizingTransformation</span>(dds)
-sampleDistsRLD &lt;-<span class="st"> </span><span class="kw">dist</span>(<span class="kw">t</span>(<span class="kw">assay</span>(vst)))
+sampleDistsVST &lt;-<span class="st"> </span><span class="kw">dist</span>(<span class="kw">t</span>(<span class="kw">assay</span>(vst)))
 <span class="kw">library</span>(<span class="st">&quot;RColorBrewer&quot;</span>)
-sampleDistMatrixVST &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(sampleDistsRLD)
+sampleDistMatrixVST &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(sampleDistsVST)
 <span class="kw">rownames</span>(sampleDistMatrixVST) &lt;-<span class="st"> </span><span class="kw">paste</span>(vst$condition, vst$type, <span class="dt">sep=</span><span class="st">&quot;-&quot;</span>)
 <span class="kw">colnames</span>(sampleDistMatrixVST) &lt;-<span class="st"> </span><span class="ot">NULL</span>
 
 colors &lt;-<span class="st"> </span><span class="kw">colorRampPalette</span>( <span class="kw">rev</span>(<span class="kw">brewer.pal</span>(<span class="dv">9</span>, <span class="st">&quot;Blues&quot;</span>)) )(<span class="dv">255</span>)
 <span class="kw">pdf</span>(<span class="st">&quot;Heatmap_vstTransformed.pdf&quot;</span>,<span class="dv">10</span>,<span class="dv">10</span>)
-<span class="kw">pheatmap</span>(sampleDistMatrixRLD,
+<span class="kw">pheatmap</span>(sampleDistMatrixVST,
          <span class="dt">clustering_distance_rows=</span>sampleDistsRLD,
          <span class="dt">clustering_distance_cols=</span>sampleDistsRLD,
          <span class="dt">col=</span>colors)
