@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap-theme.css" />
     <link rel="stylesheet" type="text/css" href="css/swc.css" />
-    <link rel="alternate" type="application/rss+xml" title="PBI - Transcriptomica" href="http://bi.ira.cinvestav.mx:8282/"/>
+    <link rel="alternate" type="application/rss+xml" title="PBP - Transcriptomica" href="http://bp.ira.cinvestav.mx/"/>
     <meta charset="UTF-8" />
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -59,7 +59,7 @@ $ <span class="kw">cd</span> DESEQ2/</code></pre></div>
 <p>El primer paso es contar lecturas. Tanto DESeq2 como otros programas que usan la distribución negativa binomial utilizan conteos <strong>crudos</strong> (raw). Esto se refiere la número de lecturas que alinean a un transcrito específico sin sufrir ningún tipo de transformación. Como vieron en la clase pasada, esto se debe a que el programa estima un factor de normalización. Si usamos datos previamente normalizados estaremos violando los supuestos.</p>
 <p>Descargaremos la anotación de los de <em>Schizosaccharomyces pombe</em> genes de aquí:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">wget</span> https://liz-fernandez.github.io/PBI_transcriptomics_2022/DATA/Sp_genes.gtf</code></pre></div>
-<p>Usaremos el programa <a href="https://pypi.python.org/packages/source/H/HTSeq/">HTSeq</a>. Ya se encuentra instalado en Docker.</p>
+<p>Usaremos el programa <a href="https://htseq.readthedocs.io/en/master/">HTSeq</a>. Ya se encuentra instalado en Docker.</p>
 <p>Este programa cuenta el número de lecturas que alinean con cada gen anotado en un archivo de referencia. Nosotros le proporcionaremos nuestro archivo <code>Sp_genes.gtf</code>.</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">htseq-count</span> -f bam -s no -r pos Sp_ds_sorted.bam /usr/local/data/Sp_genes.gtf <span class="kw">&gt;</span> Sp_ds.counts 
 $ <span class="kw">htseq-count</span> -f bam -s no -r pos Sp_hs_sorted.bam /usr/local/data/Sp_genes.gtf <span class="kw">&gt;</span> Sp_hs.counts 

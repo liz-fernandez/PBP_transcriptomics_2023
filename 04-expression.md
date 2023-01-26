@@ -40,7 +40,7 @@ Descargaremos la anotación de los de *Schizosaccharomyces pombe* genes de aquí
 $ wget https://liz-fernandez.github.io/PBI_transcriptomics_2022/DATA/Sp_genes.gtf
 ~~~
 
-Usaremos el programa [HTSeq](https://pypi.python.org/packages/source/H/HTSeq/). Ya se encuentra 
+Usaremos el programa [HTSeq](https://htseq.readthedocs.io/en/master/). Ya se encuentra 
 instalado en Docker.
 
 Este programa cuenta el número de lecturas que alinean con cada gen anotado en un archivo 
