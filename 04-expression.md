@@ -247,8 +247,8 @@ distintos tratamientos. Por lo tanto no podemos hacer expresión diferencial con
 Realizaremos el análisis con un set de datos distinto que descargaremos así:
 
 ~~~ {.bash}
-$ wget https://liz-fernandez.github.io/PBI_transcriptomics_2022/DATA/Sp_counts_table_complete.txt
-$ wget https://liz-fernandez.github.io/PBI_transcriptomics_2022/DATA/Sp_sample_info.txt
+$ wget https://liz-fernandez.github.io/PBP_transcriptomics_2023/DATA/Sp_counts_table_complete.txt
+$ wget https://liz-fernandez.github.io/PBP_transcriptomics_2023/DATA/Sp_sample_info.txt
 ~~~
 
 Leemos las cuentas en R usando read.delim:
