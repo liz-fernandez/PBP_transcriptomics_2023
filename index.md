@@ -51,15 +51,14 @@ Esta mañana recibimos un correo de nuestro colaborador:
 	* [Presentación](SLIDES/PBP_23_Clase_5.pdf)
 	* [Práctica](05-assembly_guided.html)
 6. Análisis de expresión diferencial.
+	* [Presentación](SLIDES/PBP_23_Clase_6.pdf)
 	* [Práctica](04-expression.html)
-
-
-<!--
 
 Prácticas basadas en el curso [Trinity RNA-Seq Analysis Workshop](https://github.com/trinityrnaseq/RNASeq_Trinity_Tuxedo_Workshop/wiki).
 
 ![Diagrama de ensamble de transcriptomas](SLIDES/Transcriptomics_Workflow.png)
 
+<!--
 * [Archivos a enviar](file_upload.html)
 [Proyecto Final](final_project.html)
 
